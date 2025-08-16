@@ -1,0 +1,2938 @@
+{
+  "phrases": [
+    {
+      "id": "social_001",
+      "darija": "كي دايرة معاك الحياة",
+      "darija_latin": "ki dayra m3ak lHayat",
+      "literal_english": "how is life going with you",
+      "translations": {
+        "lebanese": {
+          "phrase": "كيف الحياة معك",
+          "latin": "kif el hayat ma3ak",
+          "literal": "how is life with you",
+          "usage_note": "Casual life inquiry"
+        },
+        "syrian": {
+          "phrase": "كيف أمورك",
+          "latin": "kif umoorak",
+          "literal": "how are your affairs",
+          "usage_note": "Common greeting"
+        },
+        "emirati": {
+          "phrase": "شلونك مع الحياة",
+          "latin": "shlonak ma3 el hayat",
+          "literal": "how are you with life",
+          "usage_note": "Gulf style inquiry"
+        },
+        "saudi": {
+          "phrase": "كيف الأحوال",
+          "latin": "kayf al ahwal",
+          "literal": "how are conditions",
+          "usage_note": "Formal inquiry"
+        },
+        "formal_msa": {
+          "phrase": "كيف حال الحياة معك",
+          "latin": "kayfa hal al hayat ma3ak",
+          "literal": "how is the state of life with you",
+          "usage_note": "Very formal"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["greeting", "life", "inquiry"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["catching up", "friendly conversation"]
+      }
+    },
+    {
+      "id": "social_002",
+      "darija": "ما عندي ما ندير",
+      "darija_latin": "ma 3ndi ma ndir",
+      "literal_english": "I have nothing to do",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما عندي شي أعملو",
+          "latin": "ma 3andi shi a3mlo",
+          "literal": "I have nothing to do",
+          "usage_note": "Expressing boredom"
+        },
+        "syrian": {
+          "phrase": "مافي شي أسويه",
+          "latin": "mafi shi asawwih",
+          "literal": "there's nothing to do",
+          "usage_note": "Common boredom expression"
+        },
+        "emirati": {
+          "phrase": "ما عندي شي أسويه",
+          "latin": "ma 3indi shay asawwih",
+          "literal": "I have nothing to do",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ما عندي أي شيء أسويه",
+          "latin": "ma 3indi ayy shay' asawwih",
+          "literal": "I don't have anything to do",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "ليس لدي ما أفعله",
+          "latin": "laysa ladayya ma af3aluhu",
+          "literal": "I don't have what to do",
+          "usage_note": "Formal expression"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["boredom", "free time", "expression"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing boredom", "free time discussion"]
+      }
+    },
+    {
+      "id": "social_003",
+      "darija": "بغيت نهضر معاك",
+      "darija_latin": "bghit nehDer m3ak",
+      "literal_english": "I want to talk with you",
+      "translations": {
+        "lebanese": {
+          "phrase": "بدي احكي معك",
+          "latin": "baddi ehki ma3ak",
+          "literal": "I want to talk with you",
+          "usage_note": "Request for conversation"
+        },
+        "syrian": {
+          "phrase": "بدي احكي معك",
+          "latin": "baddi ehki ma3ak",
+          "literal": "I want to talk with you",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أبي أتكلم وياك",
+          "latin": "abi atkallam wiyyak",
+          "literal": "I want to talk with you",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أبغى أتكلم معاك",
+          "latin": "abgha atkallam ma3ak",
+          "literal": "I want to talk with you",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أريد أن أتحدث معك",
+          "latin": "urid an atahadath ma3ak",
+          "literal": "I want to speak with you",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["conversation", "request", "communication"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["initiating conversation", "serious talk"]
+      }
+    },
+    {
+      "id": "opinion_001",
+      "darija": "شنو رايك",
+      "darija_latin": "shnu rayk",
+      "literal_english": "what's your opinion",
+      "translations": {
+        "lebanese": {
+          "phrase": "شو رأيك",
+          "latin": "shu ra'yak",
+          "literal": "what's your opinion",
+          "usage_note": "Asking for opinion"
+        },
+        "syrian": {
+          "phrase": "شو رأيك",
+          "latin": "shu ra'yak",
+          "literal": "what's your opinion",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "شو رايك",
+          "latin": "shu rayik",
+          "literal": "what's your opinion",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "وش رايك",
+          "latin": "wesh rayk",
+          "literal": "what's your opinion",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "ما رأيك",
+          "latin": "ma ra'yuk",
+          "literal": "what's your opinion",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["opinion", "question", "discussion"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["asking opinion", "decision making", "discussion"]
+      }
+    },
+    {
+      "id": "opinion_002",
+      "darija": "معاك الحق",
+      "darija_latin": "m3ak lHaq",
+      "literal_english": "you have the right/you're right",
+      "translations": {
+        "lebanese": {
+          "phrase": "معك حق",
+          "latin": "ma3ak ha'",
+          "literal": "you're right",
+          "usage_note": "Agreement expression"
+        },
+        "syrian": {
+          "phrase": "معك حق",
+          "latin": "ma3ak ha'",
+          "literal": "you're right",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "صح كلامك",
+          "latin": "sah kalamik",
+          "literal": "your words are correct",
+          "usage_note": "Gulf agreement"
+        },
+        "saudi": {
+          "phrase": "كلامك صح",
+          "latin": "kalamak sah",
+          "literal": "your words are correct",
+          "usage_note": "Saudi agreement"
+        },
+        "formal_msa": {
+          "phrase": "أنت على حق",
+          "latin": "anta 3ala haqq",
+          "literal": "you are on right",
+          "usage_note": "Formal agreement"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["agreement", "opinion", "affirmation"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["agreeing", "confirming correctness"]
+      }
+    },
+    {
+      "id": "emotion_001",
+      "darija": "فرحان بزاف",
+      "darija_latin": "ferHan bezzaf",
+      "literal_english": "very happy",
+      "translations": {
+        "lebanese": {
+          "phrase": "كتير مبسوط",
+          "latin": "ktir mabsout",
+          "literal": "very happy",
+          "usage_note": "Common happiness expression"
+        },
+        "syrian": {
+          "phrase": "كتير مبسوط",
+          "latin": "ktir mabsout",
+          "literal": "very happy",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وايد فرحان",
+          "latin": "wayed farhan",
+          "literal": "very happy",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "مرة فرحان",
+          "latin": "marra farhan",
+          "literal": "very happy",
+          "usage_note": "Saudi intensifier"
+        },
+        "formal_msa": {
+          "phrase": "سعيد جداً",
+          "latin": "sa3id jiddan",
+          "literal": "very happy",
+          "usage_note": "Formal happiness"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["emotion", "happiness", "feeling"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["expressing joy", "sharing good news"]
+      },
+      "cultural_notes": "Note different intensifiers: bezzaf (Morocco), ktir (Levant), wayed (Gulf)"
+    },
+    {
+      "id": "emotion_002",
+      "darija": "زعفان عليك",
+      "darija_latin": "za3fan 3lik",
+      "literal_english": "angry at you",
+      "translations": {
+        "lebanese": {
+          "phrase": "زعلان منك",
+          "latin": "za3lan minnak",
+          "literal": "upset with you",
+          "usage_note": "Expressing anger/upset"
+        },
+        "syrian": {
+          "phrase": "زعلان منك",
+          "latin": "za3lan minnak",
+          "literal": "upset with you",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "متضايق منك",
+          "latin": "mitdhayeq minnak",
+          "literal": "annoyed with you",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "زعلان عليك",
+          "latin": "za3lan 3alayk",
+          "literal": "angry at you",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "غاضب منك",
+          "latin": "ghadhib mink",
+          "literal": "angry with you",
+          "usage_note": "Formal anger"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["emotion", "anger", "relationship"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing displeasure", "conflict"]
+      }
+    },
+    {
+      "id": "emotion_003",
+      "darija": "كنحماق عليه",
+      "darija_latin": "kanHmaq 3lih",
+      "literal_english": "I'm crazy about him/her",
+      "translations": {
+        "lebanese": {
+          "phrase": "بموت فيه",
+          "latin": "bmout fih",
+          "literal": "I die for him/her",
+          "usage_note": "Strong affection"
+        },
+        "syrian": {
+          "phrase": "بموت فيه",
+          "latin": "bmout fih",
+          "literal": "I die for him/her",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أموت فيه",
+          "latin": "amout fih",
+          "literal": "I die for him/her",
+          "usage_note": "Gulf love expression"
+        },
+        "saudi": {
+          "phrase": "أحبه موت",
+          "latin": "ahibbuh mout",
+          "literal": "I love him/her to death",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "أحبه كثيراً",
+          "latin": "uhibbuhu kathiran",
+          "literal": "I love him/her a lot",
+          "usage_note": "Formal affection"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["love", "affection", "strong emotion"],
+      "usage": {
+        "formality": "very_informal",
+        "frequency": "medium",
+        "context": ["expressing love", "strong affection"]
+      },
+      "cultural_notes": "Very informal, used among close friends/family about loved ones"
+    },
+    {
+      "id": "shopping_001",
+      "darija": "شحال هاد الشي",
+      "darija_latin": "shHal had shi",
+      "literal_english": "how much is this thing",
+      "translations": {
+        "lebanese": {
+          "phrase": "أديش هيدا",
+          "latin": "addaysh hayda",
+          "literal": "how much is this",
+          "usage_note": "Price inquiry"
+        },
+        "syrian": {
+          "phrase": "أديش هاد",
+          "latin": "addaysh had",
+          "literal": "how much is this",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "بكم هذا",
+          "latin": "bikam hatha",
+          "literal": "for how much is this",
+          "usage_note": "Gulf price inquiry"
+        },
+        "saudi": {
+          "phrase": "بكم ذا",
+          "latin": "bikam tha",
+          "literal": "how much is this",
+          "usage_note": "Saudi colloquial"
+        },
+        "formal_msa": {
+          "phrase": "كم سعر هذا",
+          "latin": "kam si3r hatha",
+          "literal": "what's the price of this",
+          "usage_note": "Formal price inquiry"
+        }
+      },
+      "category": "shopping",
+      "difficulty": "intermediate",
+      "tags": ["shopping", "price", "market"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["shopping", "market", "bargaining"]
+      }
+    },
+    {
+      "id": "shopping_002",
+      "darija": "غالي بزاف",
+      "darija_latin": "ghali bezzaf",
+      "literal_english": "very expensive",
+      "translations": {
+        "lebanese": {
+          "phrase": "كتير غالي",
+          "latin": "ktir ghali",
+          "literal": "very expensive",
+          "usage_note": "Price complaint"
+        },
+        "syrian": {
+          "phrase": "غالي كتير",
+          "latin": "ghali ktir",
+          "literal": "very expensive",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "غالي وايد",
+          "latin": "ghali wayed",
+          "literal": "very expensive",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "غالي مرة",
+          "latin": "ghali marra",
+          "literal": "very expensive",
+          "usage_note": "Saudi intensifier"
+        },
+        "formal_msa": {
+          "phrase": "غالٍ جداً",
+          "latin": "ghalin jiddan",
+          "literal": "very expensive",
+          "usage_note": "Formal price comment"
+        }
+      },
+      "category": "shopping",
+      "difficulty": "intermediate",
+      "tags": ["price", "expensive", "bargaining"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["bargaining", "price negotiation", "complaint"]
+      }
+    },
+    {
+      "id": "shopping_003",
+      "darija": "نقص شوية",
+      "darija_latin": "nqeS shwiya",
+      "literal_english": "reduce a little",
+      "translations": {
+        "lebanese": {
+          "phrase": "نزّل شوي",
+          "latin": "nazzil shway",
+          "literal": "lower a bit",
+          "usage_note": "Bargaining request"
+        },
+        "syrian": {
+          "phrase": "نزّل شوي",
+          "latin": "nazzil shway",
+          "literal": "lower a bit",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "نزّل شوي",
+          "latin": "nazzil shway",
+          "literal": "lower a bit",
+          "usage_note": "Gulf bargaining"
+        },
+        "saudi": {
+          "phrase": "خفض شوي",
+          "latin": "khaffidh shway",
+          "literal": "reduce a bit",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "اخفض السعر قليلاً",
+          "latin": "ikhfidh as-si3r qalilan",
+          "literal": "lower the price a little",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "shopping",
+      "difficulty": "intermediate",
+      "tags": ["bargaining", "negotiation", "market"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["bargaining", "market shopping", "negotiation"]
+      }
+    },
+    {
+      "id": "direction_001",
+      "darija": "سير نيشان",
+      "darija_latin": "sir nishan",
+      "literal_english": "go straight",
+      "translations": {
+        "lebanese": {
+          "phrase": "روح دغري",
+          "latin": "rouh dughri",
+          "literal": "go straight",
+          "usage_note": "Direction instruction"
+        },
+        "syrian": {
+          "phrase": "امشي دغري",
+          "latin": "imshi dughri",
+          "literal": "walk straight",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "سير سيدة",
+          "latin": "sir seeda",
+          "literal": "go straight",
+          "usage_note": "Gulf direction"
+        },
+        "saudi": {
+          "phrase": "امش على طول",
+          "latin": "imshi 3ala tool",
+          "literal": "walk along",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "اذهب مباشرة",
+          "latin": "ithhab mubasharatan",
+          "literal": "go directly",
+          "usage_note": "Formal direction"
+        }
+      },
+      "category": "directions",
+      "difficulty": "intermediate",
+      "tags": ["direction", "navigation", "instruction"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["giving directions", "navigation", "guidance"]
+      }
+    },
+    {
+      "id": "direction_002",
+      "darija": "دور على الليمن",
+      "darija_latin": "dur 3la limen",
+      "literal_english": "turn to the right",
+      "translations": {
+        "lebanese": {
+          "phrase": "لف عاليمين",
+          "latin": "liff 3al yameen",
+          "literal": "turn right",
+          "usage_note": "Direction instruction"
+        },
+        "syrian": {
+          "phrase": "لف عاليمين",
+          "latin": "liff 3al yameen",
+          "literal": "turn right",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "لف يمين",
+          "latin": "liff yameen",
+          "literal": "turn right",
+          "usage_note": "Gulf direction"
+        },
+        "saudi": {
+          "phrase": "خذ يمين",
+          "latin": "khuth yameen",
+          "literal": "take right",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "انعطف يميناً",
+          "latin": "in3atif yaminan",
+          "literal": "turn right",
+          "usage_note": "Formal direction"
+        }
+      },
+      "category": "directions",
+      "difficulty": "intermediate",
+      "tags": ["direction", "navigation", "right"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["giving directions", "navigation", "driving"]
+      }
+    },
+    {
+      "id": "direction_003",
+      "darija": "قريب من هنا",
+      "darija_latin": "qrib men hna",
+      "literal_english": "close from here",
+      "translations": {
+        "lebanese": {
+          "phrase": "قريب من هون",
+          "latin": "arib min hon",
+          "literal": "close from here",
+          "usage_note": "Distance description"
+        },
+        "syrian": {
+          "phrase": "قريب من هون",
+          "latin": "arib min hon",
+          "literal": "close from here",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "قريب من هني",
+          "latin": "garib min hini",
+          "literal": "close from here",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "قريب من هنا",
+          "latin": "garib min hina",
+          "literal": "close from here",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "قريب من هنا",
+          "latin": "qarib min huna",
+          "literal": "close from here",
+          "usage_note": "Formal distance"
+        }
+      },
+      "category": "directions",
+      "difficulty": "intermediate",
+      "tags": ["distance", "location", "proximity"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["describing distance", "location", "directions"]
+      }
+    },
+    {
+      "id": "food_003",
+      "darija": "جابلي قهوة عافاك",
+      "darija_latin": "jabli qehwa 3afak",
+      "literal_english": "bring me coffee please",
+      "translations": {
+        "lebanese": {
+          "phrase": "جيبلي قهوة لو سمحت",
+          "latin": "jibli ahwe law samaht",
+          "literal": "bring me coffee please",
+          "usage_note": "Polite request"
+        },
+        "syrian": {
+          "phrase": "جيبلي قهوة لو سمحت",
+          "latin": "jibli ahwe law samaht",
+          "literal": "bring me coffee please",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ييبلي قهوة لو سمحت",
+          "latin": "yibli gahwa law samaht",
+          "literal": "bring me coffee please",
+          "usage_note": "Gulf request"
+        },
+        "saudi": {
+          "phrase": "جيب لي قهوة من فضلك",
+          "latin": "jib li gahwa min fadhlik",
+          "literal": "bring me coffee please",
+          "usage_note": "Saudi polite request"
+        },
+        "formal_msa": {
+          "phrase": "أحضر لي قهوة من فضلك",
+          "latin": "ahdhir li qahwa min fadhlik",
+          "literal": "bring me coffee please",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "intermediate",
+      "tags": ["coffee", "request", "restaurant"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "high",
+        "context": ["cafe", "restaurant", "ordering"]
+      }
+    },
+    {
+      "id": "food_004",
+      "darija": "شبعت الحمد لله",
+      "darija_latin": "shbe3t lHamdullah",
+      "literal_english": "I'm full thank God",
+      "translations": {
+        "lebanese": {
+          "phrase": "شبعت الحمدلله",
+          "latin": "shbi3et el hamdilla",
+          "literal": "I'm full thank God",
+          "usage_note": "After meal expression"
+        },
+        "syrian": {
+          "phrase": "شبعت الحمدلله",
+          "latin": "shbi3et el hamdilla",
+          "literal": "I'm full thank God",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "شبعت الحمدلله",
+          "latin": "shaba3t el hamdilla",
+          "literal": "I'm full thank God",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "شبعت الحمد لله",
+          "latin": "shabi3t alhamdulillah",
+          "literal": "I'm full thank God",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "شبعت والحمد لله",
+          "latin": "shabi3tu walhamdulillah",
+          "literal": "I'm full and praise God",
+          "usage_note": "Formal gratitude"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "intermediate",
+      "tags": ["food", "gratitude", "meal"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["after eating", "expressing satisfaction"]
+      },
+      "cultural_notes": "Religious expression of gratitude after meals is universal"
+    },
+    {
+      "id": "work_002",
+      "darija": "خدام مشغول بزاف",
+      "darija_latin": "kheddam meshghul bezzaf",
+      "literal_english": "working very busy",
+      "translations": {
+        "lebanese": {
+          "phrase": "عم بشتغل كتير مشغول",
+          "latin": "3am bishtighil ktir mashghoul",
+          "literal": "I'm working very busy",
+          "usage_note": "Expressing busyness"
+        },
+        "syrian": {
+          "phrase": "مشغول كتير بالشغل",
+          "latin": "mashghoul ktir bil shughul",
+          "literal": "very busy with work",
+          "usage_note": "Syrian expression"
+        },
+        "emirati": {
+          "phrase": "مشغول وايد بالشغل",
+          "latin": "mashghoul wayed bil shughul",
+          "literal": "very busy with work",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "مشغول مرة بالشغل",
+          "latin": "mashghoul marra bil shughul",
+          "literal": "very busy with work",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "مشغول جداً بالعمل",
+          "latin": "mashghoul jiddan bil 3amal",
+          "literal": "very busy with work",
+          "usage_note": "Formal expression"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "intermediate",
+      "tags": ["work", "busy", "status"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["explaining availability", "work status"]
+      }
+    },
+    {
+      "id": "work_003",
+      "darija": "غادي نكمل الخدمة",
+      "darija_latin": "ghadi nkemmel lkhedma",
+      "literal_english": "I will finish the work",
+      "translations": {
+        "lebanese": {
+          "phrase": "رح خلص الشغل",
+          "latin": "rah khallis esh-shughul",
+          "literal": "I will finish the work",
+          "usage_note": "Future work completion"
+        },
+        "syrian": {
+          "phrase": "رح خلص الشغل",
+          "latin": "rah khallis esh-shughul",
+          "literal": "I will finish the work",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "بخلص الشغل",
+          "latin": "bakhallis esh-shughul",
+          "literal": "I will finish the work",
+          "usage_note": "Gulf future"
+        },
+        "saudi": {
+          "phrase": "بخلص الشغل",
+          "latin": "bakhallis ash-shughul",
+          "literal": "I will finish the work",
+          "usage_note": "Saudi future"
+        },
+        "formal_msa": {
+          "phrase": "سأنهي العمل",
+          "latin": "sa'unhi al-3amal",
+          "literal": "I will finish the work",
+          "usage_note": "Formal future"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "intermediate",
+      "tags": ["work", "future", "completion"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["work commitment", "deadline discussion"]
+      },
+      "cultural_notes": "Note future markers: ghadi (Morocco), rah (Levant), ba- (Gulf)"
+    },
+    {
+      "id": "transport_001",
+      "darija": "وقف هنا عافاك",
+      "darija_latin": "wqef hna 3afak",
+      "literal_english": "stop here please",
+      "translations": {
+        "lebanese": {
+          "phrase": "وقف هون لو سمحت",
+          "latin": "wa'if hon law samaht",
+          "literal": "stop here please",
+          "usage_note": "Taxi/bus request"
+        },
+        "syrian": {
+          "phrase": "وقف هون لو سمحت",
+          "latin": "wa'if hon law samaht",
+          "literal": "stop here please",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وقف هني لو سمحت",
+          "latin": "wagif hini law samaht",
+          "literal": "stop here please",
+          "usage_note": "Gulf request"
+        },
+        "saudi": {
+          "phrase": "وقف هنا من فضلك",
+          "latin": "wagif hina min fadhlik",
+          "literal": "stop here please",
+          "usage_note": "Saudi polite request"
+        },
+        "formal_msa": {
+          "phrase": "توقف هنا من فضلك",
+          "latin": "tawaqqaf huna min fadhlik",
+          "literal": "stop here please",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "transportation",
+      "difficulty": "intermediate",
+      "tags": ["transport", "taxi", "request"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "high",
+        "context": ["taxi ride", "bus ride", "transportation"]
+      }
+    },
+    {
+      "id": "transport_002",
+      "darija": "فين كاين الطاكسي",
+      "darija_latin": "fin kayn TTaksi",
+      "literal_english": "where is the taxi",
+      "translations": {
+        "lebanese": {
+          "phrase": "وين التاكسي",
+          "latin": "wayn et-taxi",
+          "literal": "where is the taxi",
+          "usage_note": "Location inquiry"
+        },
+        "syrian": {
+          "phrase": "وين التاكسي",
+          "latin": "wayn et-taxi",
+          "literal": "where is the taxi",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وين التاكسي",
+          "latin": "wayn et-taxi",
+          "literal": "where is the taxi",
+          "usage_note": "Gulf inquiry"
+        },
+        "saudi": {
+          "phrase": "فين التاكسي",
+          "latin": "fayn at-taxi",
+          "literal": "where is the taxi",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أين سيارة الأجرة",
+          "latin": "ayna sayyarat al-ujra",
+          "literal": "where is the taxi",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "transportation",
+      "difficulty": "intermediate",
+      "tags": ["transport", "taxi", "location"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["finding transportation", "travel"]
+      }
+    },
+    {
+      "id": "health_001",
+      "darija": "عندي الصداع",
+      "darija_latin": "3ndi SSda3",
+      "literal_english": "I have headache",
+      "translations": {
+        "lebanese": {
+          "phrase": "عندي وجع راس",
+          "latin": "3andi waja3 ras",
+          "literal": "I have head pain",
+          "usage_note": "Health complaint"
+        },
+        "syrian": {
+          "phrase": "راسي عم يوجعني",
+          "latin": "rasi 3am yowja3ni",
+          "literal": "my head is hurting me",
+          "usage_note": "Syrian expression"
+        },
+        "emirati": {
+          "phrase": "عندي صداع",
+          "latin": "3indi suda3",
+          "literal": "I have headache",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "راسي يألمني",
+          "latin": "rasi ya'limni",
+          "literal": "my head hurts me",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أعاني من صداع",
+          "latin": "u3ani min suda3",
+          "literal": "I suffer from headache",
+          "usage_note": "Formal medical"
+        }
+      },
+      "category": "health",
+      "difficulty": "intermediate",
+      "tags": ["health", "pain", "medical"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["health complaint", "seeking help", "medical"]
+      }
+    },
+    {
+      "id": "health_002",
+      "darija": "خاصني الطبيب",
+      "darija_latin": "khaSni TTbib",
+      "literal_english": "I need the doctor",
+      "translations": {
+        "lebanese": {
+          "phrase": "بدي دكتور",
+          "latin": "baddi doktor",
+          "literal": "I want a doctor",
+          "usage_note": "Medical need"
+        },
+        "syrian": {
+          "phrase": "بدي دكتور",
+          "latin": "baddi doktor",
+          "literal": "I want a doctor",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أبغي دكتور",
+          "latin": "abghi doktor",
+          "literal": "I want a doctor",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أحتاج دكتور",
+          "latin": "ahtaj doktor",
+          "literal": "I need a doctor",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أحتاج إلى طبيب",
+          "latin": "ahtaju ila tabib",
+          "literal": "I need a doctor",
+          "usage_note": "Formal medical"
+        }
+      },
+      "category": "health",
+      "difficulty": "intermediate",
+      "tags": ["health", "medical", "emergency"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["medical emergency", "health issue"]
+      }
+    },
+    {
+      "id": "time_003",
+      "darija": "من بعد شوية",
+      "darija_latin": "men be3d shwiya",
+      "literal_english": "after a little while",
+      "translations": {
+        "lebanese": {
+          "phrase": "بعد شوي",
+          "latin": "ba3d shway",
+          "literal": "after a bit",
+          "usage_note": "Near future time"
+        },
+        "syrian": {
+          "phrase": "بعد شوي",
+          "latin": "ba3d shway",
+          "literal": "after a bit",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "بعد شوي",
+          "latin": "ba3d shway",
+          "literal": "after a bit",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "بعد شوية",
+          "latin": "ba3d shwayya",
+          "literal": "after a little",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "بعد قليل",
+          "latin": "ba3da qalil",
+          "literal": "after a little",
+          "usage_note": "Formal time"
+        }
+      },
+      "category": "time_date",
+      "difficulty": "intermediate",
+      "tags": ["time", "future", "scheduling"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["scheduling", "timing", "planning"]
+      }
+    },
+    {
+      "id": "time_004",
+      "darija": "كل نهار",
+      "darija_latin": "kull nhar",
+      "literal_english": "every day",
+      "translations": {
+        "lebanese": {
+          "phrase": "كل يوم",
+          "latin": "kil yom",
+          "literal": "every day",
+          "usage_note": "Daily frequency"
+        },
+        "syrian": {
+          "phrase": "كل يوم",
+          "latin": "kil yom",
+          "literal": "every day",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "كل يوم",
+          "latin": "kil yom",
+          "literal": "every day",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "كل يوم",
+          "latin": "kull yom",
+          "literal": "every day",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "كل يوم",
+          "latin": "kulla yawm",
+          "literal": "every day",
+          "usage_note": "Formal frequency"
+        }
+      },
+      "category": "time_date",
+      "difficulty": "intermediate",
+      "tags": ["time", "frequency", "routine"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["routine", "habits", "frequency"]
+      },
+      "cultural_notes": "Morocco uses 'nhar' (day), others use 'yom'"
+    },
+    {
+      "id": "weather_001",
+      "darija": "الجو زوين اليوم",
+      "darija_latin": "ljow zwin lyoum",
+      "literal_english": "the weather is nice today",
+      "translations": {
+        "lebanese": {
+          "phrase": "الطقس حلو اليوم",
+          "latin": "et-ta's helo el yom",
+          "literal": "the weather is nice today",
+          "usage_note": "Weather comment"
+        },
+        "syrian": {
+          "phrase": "الجو حلو اليوم",
+          "latin": "el jaw helo el yom",
+          "literal": "the weather is nice today",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "الجو حلو اليوم",
+          "latin": "el jaw helo el yom",
+          "literal": "the weather is nice today",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "الجو جميل اليوم",
+          "latin": "al jaw jameel al yom",
+          "literal": "the weather is beautiful today",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "الطقس جميل اليوم",
+          "latin": "at-taqs jameel al yawm",
+          "literal": "the weather is beautiful today",
+          "usage_note": "Formal weather"
+        }
+      },
+      "category": "weather",
+      "difficulty": "intermediate",
+      "tags": ["weather", "observation", "small talk"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["small talk", "weather discussion"]
+      }
+    },
+    {
+      "id": "weather_002",
+      "darija": "كاين البرد بزاف",
+      "darija_latin": "kayn lberd bezzaf",
+      "literal_english": "there is cold a lot",
+      "translations": {
+        "lebanese": {
+          "phrase": "كتير برد",
+          "latin": "ktir bard",
+          "literal": "very cold",
+          "usage_note": "Cold weather"
+        },
+        "syrian": {
+          "phrase": "كتير برد",
+          "latin": "ktir bard",
+          "literal": "very cold",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "برد وايد",
+          "latin": "bard wayed",
+          "literal": "very cold",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "برد مرة",
+          "latin": "bard marra",
+          "literal": "very cold",
+          "usage_note": "Saudi intensifier"
+        },
+        "formal_msa": {
+          "phrase": "الجو بارد جداً",
+          "latin": "al jaw barid jiddan",
+          "literal": "the weather is very cold",
+          "usage_note": "Formal weather"
+        }
+      },
+      "category": "weather",
+      "difficulty": "intermediate",
+      "tags": ["weather", "cold", "temperature"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["weather complaint", "temperature"]
+      }
+    },
+    {
+      "id": "problem_001",
+      "darija": "ماشي مشكل",
+      "darija_latin": "mashi mushkil",
+      "literal_english": "not a problem",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما في مشكلة",
+          "latin": "ma fi mushkile",
+          "literal": "no problem",
+          "usage_note": "Reassurance"
+        },
+        "syrian": {
+          "phrase": "ما في مشكلة",
+          "latin": "ma fi mushkile",
+          "literal": "no problem",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ما في مشكلة",
+          "latin": "ma fi mushkila",
+          "literal": "no problem",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ما فيه مشكلة",
+          "latin": "ma fih mushkila",
+          "literal": "no problem",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "لا مشكلة",
+          "latin": "la mushkila",
+          "literal": "no problem",
+          "usage_note": "Formal reassurance"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["reassurance", "problem", "response"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["reassuring", "responding to apology"]
+      }
+    },
+    {
+      "id": "problem_002",
+      "darija": "واش فهمتيني",
+      "darija_latin": "wash fhemtini",
+      "literal_english": "did you understand me",
+      "translations": {
+        "lebanese": {
+          "phrase": "فهمت عليي",
+          "latin": "fhimet 3layyi",
+          "literal": "did you understand me",
+          "usage_note": "Comprehension check"
+        },
+        "syrian": {
+          "phrase": "فهمت عليي",
+          "latin": "fhimet 3layyi",
+          "literal": "did you understand me",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "فهمتني",
+          "latin": "fahamt-ni",
+          "literal": "did you understand me",
+          "usage_note": "Gulf inquiry"
+        },
+        "saudi": {
+          "phrase": "فهمت علي",
+          "latin": "fahamt 3alay",
+          "literal": "did you understand me",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "هل فهمتني",
+          "latin": "hal fahimtani",
+          "literal": "did you understand me",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["comprehension", "communication", "question"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["checking understanding", "clarification"]
+      }
+    },
+    {
+      "id": "excuse_001",
+      "darija": "معليش",
+      "darija_latin": "m3alish",
+      "literal_english": "never mind/it's okay",
+      "translations": {
+        "lebanese": {
+          "phrase": "معليش",
+          "latin": "ma3laysh",
+          "literal": "never mind",
+          "usage_note": "Universal expression"
+        },
+        "syrian": {
+          "phrase": "معليش",
+          "latin": "ma3laysh",
+          "literal": "never mind",
+          "usage_note": "Same everywhere"
+        },
+        "emirati": {
+          "phrase": "عادي",
+          "latin": "3adi",
+          "literal": "normal/okay",
+          "usage_note": "Gulf alternative"
+        },
+        "saudi": {
+          "phrase": "عادي",
+          "latin": "3adi",
+          "literal": "normal/okay",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "لا بأس",
+          "latin": "la ba's",
+          "literal": "no harm",
+          "usage_note": "Formal reassurance"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["forgiveness", "reassurance", "response"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["forgiving mistakes", "reassuring", "letting go"]
+      }
+    },
+    {
+      "id": "phone_001",
+      "darija": "عيط ليا",
+      "darija_latin": "3ayeT liya",
+      "literal_english": "call me",
+      "translations": {
+        "lebanese": {
+          "phrase": "اتصل فيي",
+          "latin": "ittasil fiyyi",
+          "literal": "call me",
+          "usage_note": "Phone request"
+        },
+        "syrian": {
+          "phrase": "اتصل فيي",
+          "latin": "ittasil fiyyi",
+          "literal": "call me",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اتصل عليي",
+          "latin": "ittasil 3alayy",
+          "literal": "call me",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "كلمني",
+          "latin": "kallimni",
+          "literal": "talk to me/call me",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "اتصل بي",
+          "latin": "ittasil bi",
+          "literal": "call me",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "technology",
+      "difficulty": "intermediate",
+      "tags": ["phone", "communication", "request"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["phone communication", "keeping in touch"]
+      }
+    },
+    {
+      "id": "phone_002",
+      "darija": "صيفط ليا ميساج",
+      "darija_latin": "SifeT liya message",
+      "literal_english": "send me a message",
+      "translations": {
+        "lebanese": {
+          "phrase": "ابعتلي رسالة",
+          "latin": "ib3atli risale",
+          "literal": "send me a message",
+          "usage_note": "Message request"
+        },
+        "syrian": {
+          "phrase": "ابعتلي رسالة",
+          "latin": "ib3atli risale",
+          "literal": "send me a message",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "رسلي رسالة",
+          "latin": "rassilli risala",
+          "literal": "send me a message",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أرسل لي رسالة",
+          "latin": "arsil li risala",
+          "literal": "send me a message",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أرسل لي رسالة",
+          "latin": "arsil li risala",
+          "literal": "send me a message",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "technology",
+      "difficulty": "intermediate",
+      "tags": ["message", "communication", "technology"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["digital communication", "texting"]
+      },
+      "cultural_notes": "Morocco uses French 'message', others use Arabic 'risala'"
+    },
+    {
+      "id": "meeting_001",
+      "darija": "نتلاقاو غدا",
+      "darija_latin": "netlaqaw ghda",
+      "literal_english": "we meet tomorrow",
+      "translations": {
+        "lebanese": {
+          "phrase": "منتلاقى بكرا",
+          "latin": "mnitla'a bukra",
+          "literal": "we meet tomorrow",
+          "usage_note": "Future meeting"
+        },
+        "syrian": {
+          "phrase": "منتلاقى بكرا",
+          "latin": "mnitla'a bukra",
+          "literal": "we meet tomorrow",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "نتلاقى باجر",
+          "latin": "nitlaga bachir",
+          "literal": "we meet tomorrow",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "نتقابل بكرة",
+          "latin": "nit'abal bukra",
+          "literal": "we meet tomorrow",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "سنلتقي غداً",
+          "latin": "sanaltaqi ghadan",
+          "literal": "we will meet tomorrow",
+          "usage_note": "Formal future"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["meeting", "planning", "future"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["scheduling", "planning meetings"]
+      }
+    },
+    {
+      "id": "meeting_002",
+      "darija": "فين غادي نتلاقاو",
+      "darija_latin": "fin ghadi netlaqaw",
+      "literal_english": "where will we meet",
+      "translations": {
+        "lebanese": {
+          "phrase": "وين رح نتلاقى",
+          "latin": "wayn rah nitla'a",
+          "literal": "where will we meet",
+          "usage_note": "Meeting location"
+        },
+        "syrian": {
+          "phrase": "وين رح نتلاقى",
+          "latin": "wayn rah nitla'a",
+          "literal": "where will we meet",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وين بنتلاقى",
+          "latin": "wayn binitlaga",
+          "literal": "where will we meet",
+          "usage_note": "Gulf inquiry"
+        },
+        "saudi": {
+          "phrase": "فين بنتقابل",
+          "latin": "fayn binit'abal",
+          "literal": "where will we meet",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أين سنلتقي",
+          "latin": "ayna sanaltaqi",
+          "literal": "where will we meet",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["meeting", "location", "planning"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["planning", "meeting arrangements"]
+      }
+    },
+    {
+      "id": "permission_001",
+      "darija": "واش يمكن ليا",
+      "darija_latin": "wash yemken liya",
+      "literal_english": "is it possible for me",
+      "translations": {
+        "lebanese": {
+          "phrase": "فيني",
+          "latin": "fiyyi",
+          "literal": "can I",
+          "usage_note": "Permission request"
+        },
+        "syrian": {
+          "phrase": "فيني",
+          "latin": "fiyyi",
+          "literal": "can I",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أقدر",
+          "latin": "agdar",
+          "literal": "can I",
+          "usage_note": "Gulf permission"
+        },
+        "saudi": {
+          "phrase": "أقدر",
+          "latin": "agdar",
+          "literal": "can I",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "هل يمكنني",
+          "latin": "hal yumkinuni",
+          "literal": "can I",
+          "usage_note": "Formal permission"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["permission", "request", "possibility"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "high",
+        "context": ["asking permission", "polite requests"]
+      }
+    },
+    {
+      "id": "suggestion_001",
+      "darija": "أجي نمشيو",
+      "darija_latin": "aji nemshiw",
+      "literal_english": "come let's go",
+      "translations": {
+        "lebanese": {
+          "phrase": "تعا نروح",
+          "latin": "ta3a nrouh",
+          "literal": "come let's go",
+          "usage_note": "Suggestion to leave"
+        },
+        "syrian": {
+          "phrase": "تعا نروح",
+          "latin": "ta3a nrouh",
+          "literal": "come let's go",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "تعال نروح",
+          "latin": "ta3al nrouh",
+          "literal": "come let's go",
+          "usage_note": "Gulf suggestion"
+        },
+        "saudi": {
+          "phrase": "يلا نروح",
+          "latin": "yalla nrouh",
+          "literal": "let's go",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "هيا بنا نذهب",
+          "latin": "hayya bina nathhab",
+          "literal": "let's go",
+          "usage_note": "Formal suggestion"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["suggestion", "movement", "invitation"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["suggesting to leave", "inviting to go"]
+      }
+    },
+    {
+      "id": "complaint_001",
+      "darija": "عييت",
+      "darija_latin": "3yit",
+      "literal_english": "I'm tired",
+      "translations": {
+        "lebanese": {
+          "phrase": "تعبان",
+          "latin": "ta3ban",
+          "literal": "tired",
+          "usage_note": "Fatigue expression"
+        },
+        "syrian": {
+          "phrase": "تعبان",
+          "latin": "ta3ban",
+          "literal": "tired",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "تعبان",
+          "latin": "ta3ban",
+          "literal": "tired",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "تعبان",
+          "latin": "ta3ban",
+          "literal": "tired",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "متعب",
+          "latin": "mut3ab",
+          "literal": "tired",
+          "usage_note": "Formal fatigue"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["fatigue", "complaint", "feeling"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["expressing tiredness", "needing rest"]
+      }
+    },
+    {
+      "id": "surprise_001",
+      "darija": "لا حول الله",
+      "darija_latin": "la Howl allah",
+      "literal_english": "oh my God (surprise)",
+      "translations": {
+        "lebanese": {
+          "phrase": "يا الله",
+          "latin": "ya allah",
+          "literal": "oh God",
+          "usage_note": "Surprise expression"
+        },
+        "syrian": {
+          "phrase": "يا الله",
+          "latin": "ya allah",
+          "literal": "oh God",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الله",
+          "latin": "allah",
+          "literal": "God",
+          "usage_note": "Gulf surprise"
+        },
+        "saudi": {
+          "phrase": "لا حول ولا قوة",
+          "latin": "la hawl wala quwwa",
+          "literal": "no power but God",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "يا للعجب",
+          "latin": "ya lil3ajab",
+          "literal": "oh wonder",
+          "usage_note": "Formal surprise"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["surprise", "exclamation", "religious"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing surprise", "shock", "disbelief"]
+      }
+    },
+    {
+      "id": "congrats_001",
+      "darija": "مبروك",
+      "darija_latin": "mabrouk",
+      "literal_english": "congratulations",
+      "translations": {
+        "lebanese": {
+          "phrase": "مبروك",
+          "latin": "mabrouk",
+          "literal": "congratulations",
+          "usage_note": "Universal congratulations"
+        },
+        "syrian": {
+          "phrase": "مبروك",
+          "latin": "mabrouk",
+          "literal": "congratulations",
+          "usage_note": "Same everywhere"
+        },
+        "emirati": {
+          "phrase": "مبروك",
+          "latin": "mabrouk",
+          "literal": "congratulations",
+          "usage_note": "Gulf standard"
+        },
+        "saudi": {
+          "phrase": "مبارك",
+          "latin": "mubarak",
+          "literal": "blessed",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "تهانينا",
+          "latin": "tahanina",
+          "literal": "our congratulations",
+          "usage_note": "Formal congratulations"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["congratulations", "celebration", "good wishes"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["celebrating success", "good news", "achievements"]
+      }
+    },
+    {
+      "id": "regret_001",
+      "darija": "ندمت",
+      "darija_latin": "ndemt",
+      "literal_english": "I regret",
+      "translations": {
+        "lebanese": {
+          "phrase": "ندمان",
+          "latin": "nadman",
+          "literal": "regretful",
+          "usage_note": "Expressing regret"
+        },
+        "syrian": {
+          "phrase": "ندمان",
+          "latin": "nadman",
+          "literal": "regretful",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ندمان",
+          "latin": "nadman",
+          "literal": "regretful",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ندمت",
+          "latin": "nadimt",
+          "literal": "I regretted",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أشعر بالندم",
+          "latin": "ash3ur bin-nadam",
+          "literal": "I feel regret",
+          "usage_note": "Formal regret"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "intermediate",
+      "tags": ["regret", "emotion", "mistake"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["expressing regret", "apologizing", "mistake acknowledgment"]
+      }
+    },
+    {
+      "id": "learning_001",
+      "darija": "كنتعلم العربية",
+      "darija_latin": "kant3allem l3arbiya",
+      "literal_english": "I'm learning Arabic",
+      "translations": {
+        "lebanese": {
+          "phrase": "عم بتعلم عربي",
+          "latin": "3am bit3allam 3arabi",
+          "literal": "I'm learning Arabic",
+          "usage_note": "Learning expression"
+        },
+        "syrian": {
+          "phrase": "عم بتعلم عربي",
+          "latin": "3am bit3allam 3arabi",
+          "literal": "I'm learning Arabic",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أتعلم عربي",
+          "latin": "at3allam 3arabi",
+          "literal": "I'm learning Arabic",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أتعلم العربية",
+          "latin": "ata3allam al-3arabiyya",
+          "literal": "I'm learning Arabic",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أتعلم اللغة العربية",
+          "latin": "ata3allam al-lugha al-3arabiyya",
+          "literal": "I'm learning the Arabic language",
+          "usage_note": "Formal learning"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "intermediate",
+      "tags": ["learning", "language", "education"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["language learning", "self-introduction", "education"]
+      }
+    },
+    {
+      "id": "preference_001",
+      "darija": "كنفضل",
+      "darija_latin": "kanfaDDel",
+      "literal_english": "I prefer",
+      "translations": {
+        "lebanese": {
+          "phrase": "بفضل",
+          "latin": "bfaddil",
+          "literal": "I prefer",
+          "usage_note": "Preference expression"
+        },
+        "syrian": {
+          "phrase": "بفضل",
+          "latin": "bfaddil",
+          "literal": "I prefer",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أفضل",
+          "latin": "afaddhil",
+          "literal": "I prefer",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أفضل",
+          "latin": "ufaddhil",
+          "literal": "I prefer",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أفضل",
+          "latin": "ufaddhilu",
+          "literal": "I prefer",
+          "usage_note": "Formal preference"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["preference", "choice", "opinion"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["expressing preference", "making choices", "opinions"]
+      }
+    },
+    {
+      "id": "ability_001",
+      "darija": "مكنقدرش",
+      "darija_latin": "makanqdersh",
+      "literal_english": "I can't",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما بقدر",
+          "latin": "ma be'dar",
+          "literal": "I can't",
+          "usage_note": "Inability expression"
+        },
+        "syrian": {
+          "phrase": "ما بقدر",
+          "latin": "ma be'dar",
+          "literal": "I can't",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ما أقدر",
+          "latin": "ma agdar",
+          "literal": "I can't",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ما أقدر",
+          "latin": "ma agdar",
+          "literal": "I can't",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "لا أستطيع",
+          "latin": "la astatee3",
+          "literal": "I cannot",
+          "usage_note": "Formal inability"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["ability", "inability", "limitation"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["expressing inability", "declining", "limitations"]
+      }
+    },
+    {
+      "id": "certainty_001",
+      "darija": "بالتأكيد",
+      "darija_latin": "betta'kid",
+      "literal_english": "certainly",
+      "translations": {
+        "lebanese": {
+          "phrase": "أكيد",
+          "latin": "akeed",
+          "literal": "sure",
+          "usage_note": "Certainty expression"
+        },
+        "syrian": {
+          "phrase": "أكيد",
+          "latin": "akeed",
+          "literal": "sure",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أكيد",
+          "latin": "akeed",
+          "literal": "sure",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أكيد",
+          "latin": "akeed",
+          "literal": "sure",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "بالتأكيد",
+          "latin": "bit-ta'keed",
+          "literal": "certainly",
+          "usage_note": "Formal certainty"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["certainty", "confirmation", "agreement"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["confirming", "expressing certainty", "strong agreement"]
+      }
+    },
+    {
+      "id": "doubt_001",
+      "darija": "ممكن",
+      "darija_latin": "momkin",
+      "literal_english": "maybe/possible",
+      "translations": {
+        "lebanese": {
+          "phrase": "يمكن",
+          "latin": "yimkin",
+          "literal": "maybe",
+          "usage_note": "Possibility expression"
+        },
+        "syrian": {
+          "phrase": "يمكن",
+          "latin": "yimkin",
+          "literal": "maybe",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "يمكن",
+          "latin": "yimkin",
+          "literal": "maybe",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "يمكن",
+          "latin": "yimkin",
+          "literal": "maybe",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "ربما",
+          "latin": "rubbama",
+          "literal": "perhaps",
+          "usage_note": "Formal possibility"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["possibility", "uncertainty", "maybe"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["expressing uncertainty", "possibility", "doubt"]
+      }
+    },
+    {
+      "id": "memory_001",
+      "darija": "نسيت",
+      "darija_latin": "nsit",
+      "literal_english": "I forgot",
+      "translations": {
+        "lebanese": {
+          "phrase": "نسيت",
+          "latin": "nseet",
+          "literal": "I forgot",
+          "usage_note": "Memory lapse"
+        },
+        "syrian": {
+          "phrase": "نسيت",
+          "latin": "nseet",
+          "literal": "I forgot",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "نسيت",
+          "latin": "naseet",
+          "literal": "I forgot",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "نسيت",
+          "latin": "naseet",
+          "literal": "I forgot",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "نسيت",
+          "latin": "naseetu",
+          "literal": "I forgot",
+          "usage_note": "Formal forgetting"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["memory", "forgetting", "mistake"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["admitting forgetfulness", "memory lapse", "excuse"]
+      }
+    },
+    {
+      "id": "memory_002",
+      "darija": "عقلت",
+      "darija_latin": "3qelt",
+      "literal_english": "I remembered",
+      "translations": {
+        "lebanese": {
+          "phrase": "تذكرت",
+          "latin": "tazakkart",
+          "literal": "I remembered",
+          "usage_note": "Memory recall"
+        },
+        "syrian": {
+          "phrase": "تذكرت",
+          "latin": "tazakkart",
+          "literal": "I remembered",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "تذكرت",
+          "latin": "tathakkart",
+          "literal": "I remembered",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "تذكرت",
+          "latin": "tathakkart",
+          "literal": "I remembered",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "تذكرت",
+          "latin": "tathakkartu",
+          "literal": "I remembered",
+          "usage_note": "Formal recall"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["memory", "remembering", "recall"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["recalling information", "remembering", "realization"]
+      }
+    },
+    {
+      "id": "finish_001",
+      "darija": "ساليت",
+      "darija_latin": "salit",
+      "literal_english": "I finished",
+      "translations": {
+        "lebanese": {
+          "phrase": "خلصت",
+          "latin": "khallast",
+          "literal": "I finished",
+          "usage_note": "Completion expression"
+        },
+        "syrian": {
+          "phrase": "خلصت",
+          "latin": "khallast",
+          "literal": "I finished",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "خلصت",
+          "latin": "khallast",
+          "literal": "I finished",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "خلصت",
+          "latin": "khallast",
+          "literal": "I finished",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "انتهيت",
+          "latin": "intahayt",
+          "literal": "I finished",
+          "usage_note": "Formal completion"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["completion", "finish", "done"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["completing tasks", "finishing work", "done eating"]
+      }
+    },
+    {
+      "id": "start_001",
+      "darija": "بديت",
+      "darija_latin": "bdit",
+      "literal_english": "I started",
+      "translations": {
+        "lebanese": {
+          "phrase": "بلشت",
+          "latin": "ballasht",
+          "literal": "I started",
+          "usage_note": "Beginning expression"
+        },
+        "syrian": {
+          "phrase": "بلشت",
+          "latin": "ballasht",
+          "literal": "I started",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "بديت",
+          "latin": "badayt",
+          "literal": "I started",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "بدأت",
+          "latin": "bada't",
+          "literal": "I started",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "بدأت",
+          "latin": "bada'tu",
+          "literal": "I started",
+          "usage_note": "Formal beginning"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["beginning", "start", "initiation"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["starting tasks", "beginning activities", "initiation"]
+      },
+      "cultural_notes": "Levantine uses 'ballash', others use 'bada'"
+    },
+    {
+      "id": "change_001",
+      "darija": "بدلت الرأي",
+      "darija_latin": "beddelt rray",
+      "literal_english": "I changed opinion",
+      "translations": {
+        "lebanese": {
+          "phrase": "غيرت رأيي",
+          "latin": "ghayyart ra'yi",
+          "literal": "I changed my opinion",
+          "usage_note": "Mind change"
+        },
+        "syrian": {
+          "phrase": "غيرت رأيي",
+          "latin": "ghayyart ra'yi",
+          "literal": "I changed my opinion",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "غيرت رايي",
+          "latin": "ghayyart rayi",
+          "literal": "I changed my opinion",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "غيرت رأيي",
+          "latin": "ghayyart ra'yi",
+          "literal": "I changed my opinion",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "غيرت رأيي",
+          "latin": "ghayyartu ra'yi",
+          "literal": "I changed my opinion",
+          "usage_note": "Formal change"
+        }
+      },
+      "category": "social",
+      "difficulty": "intermediate",
+      "tags": ["change", "opinion", "decision"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["changing mind", "decision reversal", "opinion change"]
+      }
+    },
+    {
+      "id": "search_001",
+      "darija": "كنقلب على",
+      "darija_latin": "kanqelleb 3la",
+      "literal_english": "I'm looking for",
+      "translations": {
+        "lebanese": {
+          "phrase": "عم بفتش على",
+          "latin": "3am bfattish 3ala",
+          "literal": "I'm searching for",
+          "usage_note": "Active searching"
+        },
+        "syrian": {
+          "phrase": "عم بدور على",
+          "latin": "3am bdawwir 3ala",
+          "literal": "I'm looking for",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "أدور على",
+          "latin": "adawwir 3ala",
+          "literal": "I'm looking for",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أدور على",
+          "latin": "adawwir 3ala",
+          "literal": "I'm looking for",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أبحث عن",
+          "latin": "abhath 3an",
+          "literal": "I search for",
+          "usage_note": "Formal searching"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["searching", "looking", "finding"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["looking for items", "searching", "seeking help"]
+      }
+    },
+    {
+      "id": "find_001",
+      "darija": "لقيت",
+      "darija_latin": "lqit",
+      "literal_english": "I found",
+      "translations": {
+        "lebanese": {
+          "phrase": "لقيت",
+          "latin": "la'eet",
+          "literal": "I found",
+          "usage_note": "Discovery expression"
+        },
+        "syrian": {
+          "phrase": "لقيت",
+          "latin": "la'eet",
+          "literal": "I found",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "لقيت",
+          "latin": "ligeet",
+          "literal": "I found",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "لقيت",
+          "latin": "ligeet",
+          "literal": "I found",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "وجدت",
+          "latin": "wajadtu",
+          "literal": "I found",
+          "usage_note": "Formal discovery"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["finding", "discovery", "success"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["finding things", "discovery", "success in searching"]
+      }
+    },
+    {
+      "id": "lose_001",
+      "darija": "ضيعت",
+      "darija_latin": "Deyye3t",
+      "literal_english": "I lost",
+      "translations": {
+        "lebanese": {
+          "phrase": "ضيعت",
+          "latin": "dayya3et",
+          "literal": "I lost",
+          "usage_note": "Loss expression"
+        },
+        "syrian": {
+          "phrase": "ضيعت",
+          "latin": "dayya3et",
+          "literal": "I lost",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ضيعت",
+          "latin": "dhayya3t",
+          "literal": "I lost",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ضيعت",
+          "latin": "dhayya3t",
+          "literal": "I lost",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "فقدت",
+          "latin": "faqadtu",
+          "literal": "I lost",
+          "usage_note": "Formal loss"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["loss", "misplacement", "problem"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["losing items", "misplacement", "loss"]
+      }
+    },
+    {
+      "id": "bring_001",
+      "darija": "جيب معاك",
+      "darija_latin": "jib m3ak",
+      "literal_english": "bring with you",
+      "translations": {
+        "lebanese": {
+          "phrase": "جيب معك",
+          "latin": "jib ma3ak",
+          "literal": "bring with you",
+          "usage_note": "Request to bring"
+        },
+        "syrian": {
+          "phrase": "جيب معك",
+          "latin": "jib ma3ak",
+          "literal": "bring with you",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ييب وياك",
+          "latin": "yib wiyyak",
+          "literal": "bring with you",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "جيب معاك",
+          "latin": "jib ma3ak",
+          "literal": "bring with you",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أحضر معك",
+          "latin": "ahdhir ma3ak",
+          "literal": "bring with you",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["request", "bring", "command"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["asking to bring items", "preparation", "requests"]
+      }
+    },
+    {
+      "id": "take_001",
+      "darija": "خود",
+      "darija_latin": "khud",
+      "literal_english": "take",
+      "translations": {
+        "lebanese": {
+          "phrase": "خود",
+          "latin": "khud",
+          "literal": "take",
+          "usage_note": "Command to take"
+        },
+        "syrian": {
+          "phrase": "خود",
+          "latin": "khud",
+          "literal": "take",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "خذ",
+          "latin": "khuth",
+          "literal": "take",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "خذ",
+          "latin": "khuth",
+          "literal": "take",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "خذ",
+          "latin": "khuth",
+          "literal": "take",
+          "usage_note": "Formal command"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "take", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["offering items", "commands", "giving"]
+      }
+    },
+    {
+      "id": "give_001",
+      "darija": "عطيني",
+      "darija_latin": "3Tini",
+      "literal_english": "give me",
+      "translations": {
+        "lebanese": {
+          "phrase": "عطيني",
+          "latin": "3atini",
+          "literal": "give me",
+          "usage_note": "Request for giving"
+        },
+        "syrian": {
+          "phrase": "عطيني",
+          "latin": "3atini",
+          "literal": "give me",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "عطني",
+          "latin": "3atni",
+          "literal": "give me",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "أعطني",
+          "latin": "a3tini",
+          "literal": "give me",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أعطني",
+          "latin": "a3tini",
+          "literal": "give me",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["request", "give", "command"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["requesting items", "asking for things", "commands"]
+      }
+    },
+    {
+      "id": "put_001",
+      "darija": "حط",
+      "darija_latin": "HeTT",
+      "literal_english": "put",
+      "translations": {
+        "lebanese": {
+          "phrase": "حط",
+          "latin": "hott",
+          "literal": "put",
+          "usage_note": "Placement command"
+        },
+        "syrian": {
+          "phrase": "حط",
+          "latin": "hott",
+          "literal": "put",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "حط",
+          "latin": "hott",
+          "literal": "put",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "حط",
+          "latin": "hott",
+          "literal": "put",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "ضع",
+          "latin": "dha3",
+          "literal": "put/place",
+          "usage_note": "Formal placement"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "placement", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["placing items", "commands", "instructions"]
+      }
+    },
+    {
+      "id": "remove_001",
+      "darija": "حيد",
+      "darija_latin": "Heyyed",
+      "literal_english": "remove",
+      "translations": {
+        "lebanese": {
+          "phrase": "شيل",
+          "latin": "sheel",
+          "literal": "remove",
+          "usage_note": "Removal command"
+        },
+        "syrian": {
+          "phrase": "شيل",
+          "latin": "sheel",
+          "literal": "remove",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "شيل",
+          "latin": "sheel",
+          "literal": "remove",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "شيل",
+          "latin": "sheel",
+          "literal": "remove",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أزل",
+          "latin": "azil",
+          "literal": "remove",
+          "usage_note": "Formal removal"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "removal", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["removing items", "clearing", "commands"]
+      },
+      "cultural_notes": "Morocco uses 'Heyyed', others use 'sheel'"
+    },
+    {
+      "id": "open_001",
+      "darija": "حل",
+      "darija_latin": "Hell",
+      "literal_english": "open",
+      "translations": {
+        "lebanese": {
+          "phrase": "افتح",
+          "latin": "iftah",
+          "literal": "open",
+          "usage_note": "Opening command"
+        },
+        "syrian": {
+          "phrase": "افتح",
+          "latin": "iftah",
+          "literal": "open",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "افتح",
+          "latin": "iftah",
+          "literal": "open",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "افتح",
+          "latin": "iftah",
+          "literal": "open",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "افتح",
+          "latin": "iftah",
+          "literal": "open",
+          "usage_note": "Formal opening"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "opening", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["opening doors", "opening items", "commands"]
+      },
+      "cultural_notes": "Morocco uses 'Hell', others use 'iftah'"
+    },
+    {
+      "id": "close_001",
+      "darija": "سد",
+      "darija_latin": "sedd",
+      "literal_english": "close",
+      "translations": {
+        "lebanese": {
+          "phrase": "سكّر",
+          "latin": "sakkir",
+          "literal": "close",
+          "usage_note": "Closing command"
+        },
+        "syrian": {
+          "phrase": "سكّر",
+          "latin": "sakkir",
+          "literal": "close",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "سكّر",
+          "latin": "sakkir",
+          "literal": "close",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "سكّر",
+          "latin": "sakkir",
+          "literal": "close",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أغلق",
+          "latin": "aghliq",
+          "literal": "close",
+          "usage_note": "Formal closing"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "closing", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["closing doors", "closing items", "commands"]
+      },
+      "cultural_notes": "Morocco uses 'sedd', others use 'sakkir'"
+    },
+    {
+      "id": "enter_001",
+      "darija": "دخل",
+      "darija_latin": "dkhol",
+      "literal_english": "enter",
+      "translations": {
+        "lebanese": {
+          "phrase": "فوت",
+          "latin": "foot",
+          "literal": "enter",
+          "usage_note": "Entry command"
+        },
+        "syrian": {
+          "phrase": "فوت",
+          "latin": "foot",
+          "literal": "enter",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ادخل",
+          "latin": "udkhul",
+          "literal": "enter",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ادخل",
+          "latin": "udkhul",
+          "literal": "enter",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "ادخل",
+          "latin": "udkhul",
+          "literal": "enter",
+          "usage_note": "Formal entry"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "entry", "movement"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["entering places", "invitation", "commands"]
+      },
+      "cultural_notes": "Levantine uses 'foot', others use 'udkhul'"
+    },
+    {
+      "id": "exit_001",
+      "darija": "خرج",
+      "darija_latin": "khroj",
+      "literal_english": "exit/go out",
+      "translations": {
+        "lebanese": {
+          "phrase": "اطلع",
+          "latin": "itla3",
+          "literal": "go out",
+          "usage_note": "Exit command"
+        },
+        "syrian": {
+          "phrase": "اطلع",
+          "latin": "itla3",
+          "literal": "go out",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اطلع",
+          "latin": "itla3",
+          "literal": "go out",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "اطلع",
+          "latin": "itla3",
+          "literal": "go out",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "اخرج",
+          "latin": "ukhruj",
+          "literal": "exit",
+          "usage_note": "Formal exit"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "exit", "movement"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["leaving places", "going out", "commands"]
+      }
+    },
+    {
+      "id": "stay_001",
+      "darija": "بقا",
+      "darija_latin": "bqa",
+      "literal_english": "stay",
+      "translations": {
+        "lebanese": {
+          "phrase": "ضل",
+          "latin": "dall",
+          "literal": "stay",
+          "usage_note": "Remaining command"
+        },
+        "syrian": {
+          "phrase": "ضل",
+          "latin": "dall",
+          "literal": "stay",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ابقى",
+          "latin": "ibga",
+          "literal": "stay",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ابقى",
+          "latin": "ibga",
+          "literal": "stay",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "ابق",
+          "latin": "ibqa",
+          "literal": "stay",
+          "usage_note": "Formal staying"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "staying", "remaining"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["asking to stay", "remaining", "not leaving"]
+      },
+      "cultural_notes": "Levantine uses 'dall', others use 'ibqa'"
+    },
+    {
+      "id": "return_001",
+      "darija": "رجع",
+      "darija_latin": "rje3",
+      "literal_english": "return",
+      "translations": {
+        "lebanese": {
+          "phrase": "ارجع",
+          "latin": "irja3",
+          "literal": "return",
+          "usage_note": "Return command"
+        },
+        "syrian": {
+          "phrase": "ارجع",
+          "latin": "irja3",
+          "literal": "return",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ارجع",
+          "latin": "irja3",
+          "literal": "return",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "ارجع",
+          "latin": "irja3",
+          "literal": "return",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "عد",
+          "latin": "3ud",
+          "literal": "return",
+          "usage_note": "Formal return"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "intermediate",
+      "tags": ["command", "return", "movement"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["returning", "coming back", "commands"]
+      }
+    }
+  ],
+  "metadata": {
+    "total_count": 100,
+    "categories": {
+      "social": 25,
+      "emotions": 8,
+      "shopping": 3,
+      "directions": 3,
+      "food_dining": 2,
+      "workplace": 4,
+      "transportation": 2,
+      "health": 2,
+      "time_date": 2,
+      "weather": 2,
+      "technology": 2,
+      "daily_essentials": 45
+    },
+    "difficulty_distribution": {
+      "beginner": 0,
+      "intermediate": 100,
+      "advanced": 0
+    },
+    "last_updated": "2025-08-15",
+    "version": "1.0.0"
+  }
+}

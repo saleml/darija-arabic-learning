@@ -1,0 +1,2127 @@
+{
+  "phrases": [
+    {
+      "id": "greet_001",
+      "darija": "السلام عليكم",
+      "darija_latin": "ssalamu 3alaykum",
+      "literal_english": "peace be upon you",
+      "translations": {
+        "lebanese": {
+          "phrase": "مرحبا",
+          "latin": "marhaba",
+          "literal": "hello",
+          "usage_note": "More common than religious greeting in casual settings",
+          "alternatives": ["هاي", "كيفك"]
+        },
+        "syrian": {
+          "phrase": "مرحبا",
+          "latin": "marhaba", 
+          "literal": "hello",
+          "usage_note": "Same as Lebanese, very common"
+        },
+        "emirati": {
+          "phrase": "السلام عليكم",
+          "latin": "as-salāmu ʿalaykum",
+          "literal": "peace be upon you",
+          "usage_note": "Standard greeting, very common"
+        },
+        "saudi": {
+          "phrase": "السلام عليكم",
+          "latin": "as-salāmu ʿalaykum",
+          "literal": "peace be upon you",
+          "usage_note": "Universal greeting"
+        },
+        "formal_msa": {
+          "phrase": "السلام عليكم",
+          "latin": "as-salāmu ʿalaykum",
+          "literal": "peace be upon you",
+          "usage_note": "Formal standard greeting"
+        }
+      },
+      "category": "greetings",
+      "difficulty": "beginner",
+      "tags": ["essential", "religious", "universal"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["meeting someone", "entering a room", "phone calls"]
+      },
+      "cultural_notes": "In Morocco universal regardless of religiosity. In Lebanon/Syria, 'marhaba' more common in casual settings."
+    },
+    {
+      "id": "greet_002",
+      "darija": "صباح الخير",
+      "darija_latin": "SbaH lkhir",
+      "literal_english": "morning of goodness",
+      "translations": {
+        "lebanese": {
+          "phrase": "صباح الخير",
+          "latin": "sabah el kheir",
+          "literal": "good morning",
+          "usage_note": "Universal morning greeting"
+        },
+        "syrian": {
+          "phrase": "صباح الخير",
+          "latin": "sabah el kheir",
+          "literal": "good morning",
+          "usage_note": "Same across Levant"
+        },
+        "emirati": {
+          "phrase": "صباح الخير",
+          "latin": "sabah al khair",
+          "literal": "good morning",
+          "usage_note": "Universal"
+        },
+        "saudi": {
+          "phrase": "صباح الخير",
+          "latin": "sabah al khair",
+          "literal": "good morning",
+          "usage_note": "Standard morning greeting"
+        },
+        "formal_msa": {
+          "phrase": "صباح الخير",
+          "latin": "sabah al khayr",
+          "literal": "good morning",
+          "usage_note": "Formal standard"
+        }
+      },
+      "category": "greetings",
+      "difficulty": "beginner",
+      "tags": ["essential", "time-specific"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["morning greeting", "before noon"]
+      },
+      "cultural_notes": "Response is 'صباح النور' (morning of light) across all dialects"
+    },
+    {
+      "id": "greet_003",
+      "darija": "لاباس",
+      "darija_latin": "labas",
+      "literal_english": "no harm/fine",
+      "translations": {
+        "lebanese": {
+          "phrase": "كيفك",
+          "latin": "kifak/kifik",
+          "literal": "how are you",
+          "usage_note": "kifak (to male), kifik (to female)",
+          "alternatives": ["شو أخبارك"]
+        },
+        "syrian": {
+          "phrase": "كيفك",
+          "latin": "kifak/kifik",
+          "literal": "how are you",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "شحالك",
+          "latin": "shhalik/shhalich",
+          "literal": "how are you",
+          "usage_note": "Common informal greeting"
+        },
+        "saudi": {
+          "phrase": "كيف حالك",
+          "latin": "kayf halik",
+          "literal": "how is your condition",
+          "usage_note": "More formal than Gulf"
+        },
+        "formal_msa": {
+          "phrase": "كيف حالك",
+          "latin": "kayfa haluka",
+          "literal": "how is your state",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "greetings",
+      "difficulty": "beginner",
+      "tags": ["essential", "inquiry"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "essential",
+        "context": ["checking on someone", "casual greeting"]
+      },
+      "cultural_notes": "In Darija, 'labas' both asks and answers 'how are you'. Very versatile."
+    },
+    {
+      "id": "basic_001",
+      "darija": "آه",
+      "darija_latin": "ah",
+      "literal_english": "yes",
+      "translations": {
+        "lebanese": {
+          "phrase": "إيه",
+          "latin": "eh",
+          "literal": "yes",
+          "usage_note": "Casual yes",
+          "alternatives": ["نعم"]
+        },
+        "syrian": {
+          "phrase": "إيه",
+          "latin": "eh",
+          "literal": "yes",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "هيه",
+          "latin": "heh",
+          "literal": "yes",
+          "usage_note": "Informal yes",
+          "alternatives": ["نعم"]
+        },
+        "saudi": {
+          "phrase": "إيوا",
+          "latin": "aywa",
+          "literal": "yes",
+          "usage_note": "Common informal"
+        },
+        "formal_msa": {
+          "phrase": "نعم",
+          "latin": "na'am",
+          "literal": "yes",
+          "usage_note": "Formal affirmative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "response"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "essential",
+        "context": ["agreement", "confirmation"]
+      }
+    },
+    {
+      "id": "basic_002",
+      "darija": "لا",
+      "darija_latin": "la",
+      "literal_english": "no",
+      "translations": {
+        "lebanese": {
+          "phrase": "لأ",
+          "latin": "la'",
+          "literal": "no",
+          "usage_note": "Standard no"
+        },
+        "syrian": {
+          "phrase": "لأ",
+          "latin": "la'",
+          "literal": "no",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "لا",
+          "latin": "la",
+          "literal": "no",
+          "usage_note": "Standard negation"
+        },
+        "saudi": {
+          "phrase": "لا",
+          "latin": "la",
+          "literal": "no",
+          "usage_note": "Universal no"
+        },
+        "formal_msa": {
+          "phrase": "لا",
+          "latin": "la",
+          "literal": "no",
+          "usage_note": "Standard negation"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "response"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["disagreement", "refusal"]
+      }
+    },
+    {
+      "id": "basic_003",
+      "darija": "شكرا",
+      "darija_latin": "shukran",
+      "literal_english": "thanks",
+      "translations": {
+        "lebanese": {
+          "phrase": "مرسي",
+          "latin": "merci",
+          "literal": "thanks (French origin)",
+          "usage_note": "Very common, French influence",
+          "alternatives": ["شكرا", "يسلمو"]
+        },
+        "syrian": {
+          "phrase": "شكرا",
+          "latin": "shukran",
+          "literal": "thanks",
+          "usage_note": "Standard thanks"
+        },
+        "emirati": {
+          "phrase": "مشكور",
+          "latin": "mashkoor",
+          "literal": "thanked one",
+          "usage_note": "Common alternative to shukran"
+        },
+        "saudi": {
+          "phrase": "شكرا",
+          "latin": "shukran",
+          "literal": "thanks",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "شكرا",
+          "latin": "shukran",
+          "literal": "thanks",
+          "usage_note": "Standard gratitude"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "politeness"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["expressing gratitude"]
+      },
+      "cultural_notes": "Lebanese often use 'merci' due to French influence"
+    },
+    {
+      "id": "basic_004",
+      "darija": "عافاك",
+      "darija_latin": "3afak",
+      "literal_english": "may God give you strength (please)",
+      "translations": {
+        "lebanese": {
+          "phrase": "من فضلك",
+          "latin": "min fadlak",
+          "literal": "from your favor",
+          "usage_note": "Formal please",
+          "alternatives": ["لو سمحت", "بليز"]
+        },
+        "syrian": {
+          "phrase": "لو سمحت",
+          "latin": "law samaht",
+          "literal": "if you permit",
+          "usage_note": "Common polite request"
+        },
+        "emirati": {
+          "phrase": "لو سمحت",
+          "latin": "law samaht",
+          "literal": "if you permit",
+          "usage_note": "Standard please"
+        },
+        "saudi": {
+          "phrase": "من فضلك",
+          "latin": "min fadlik",
+          "literal": "from your favor",
+          "usage_note": "Formal please"
+        },
+        "formal_msa": {
+          "phrase": "من فضلك",
+          "latin": "min fadlik",
+          "literal": "from your favor",
+          "usage_note": "Standard polite request"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "politeness"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "essential",
+        "context": ["making requests", "asking for help"]
+      }
+    },
+    {
+      "id": "basic_005",
+      "darija": "سمح ليا",
+      "darija_latin": "smaH liya",
+      "literal_english": "forgive me (excuse me/sorry)",
+      "translations": {
+        "lebanese": {
+          "phrase": "عفوا",
+          "latin": "afwan",
+          "literal": "pardon",
+          "usage_note": "Multi-purpose: excuse me/sorry",
+          "alternatives": ["سوري", "إكسكيوزيه"]
+        },
+        "syrian": {
+          "phrase": "عفوا",
+          "latin": "afwan",
+          "literal": "pardon",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "السموحة",
+          "latin": "es-smooha",
+          "literal": "forgiveness",
+          "usage_note": "Common apology"
+        },
+        "saudi": {
+          "phrase": "آسف",
+          "latin": "aasif",
+          "literal": "sorry",
+          "usage_note": "Standard apology"
+        },
+        "formal_msa": {
+          "phrase": "عذرا",
+          "latin": "udhran",
+          "literal": "excuse",
+          "usage_note": "Formal apology"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "politeness", "apology"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "essential",
+        "context": ["apologizing", "getting attention", "passing by"]
+      }
+    },
+    {
+      "id": "question_001",
+      "darija": "شنو",
+      "darija_latin": "shnu",
+      "literal_english": "what",
+      "translations": {
+        "lebanese": {
+          "phrase": "شو",
+          "latin": "shu",
+          "literal": "what",
+          "usage_note": "Standard what"
+        },
+        "syrian": {
+          "phrase": "شو",
+          "latin": "shu",
+          "literal": "what",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "شو",
+          "latin": "shu",
+          "literal": "what",
+          "usage_note": "Common interrogative",
+          "alternatives": ["ويش"]
+        },
+        "saudi": {
+          "phrase": "ايش",
+          "latin": "aysh",
+          "literal": "what",
+          "usage_note": "Western Saudi variant",
+          "alternatives": ["وش"]
+        },
+        "formal_msa": {
+          "phrase": "ما/ماذا",
+          "latin": "ma/madha",
+          "literal": "what",
+          "usage_note": "Formal interrogative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "question"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking about things", "clarification"]
+      }
+    },
+    {
+      "id": "question_002",
+      "darija": "فين",
+      "darija_latin": "fin",
+      "literal_english": "where",
+      "translations": {
+        "lebanese": {
+          "phrase": "وين",
+          "latin": "wayn",
+          "literal": "where",
+          "usage_note": "Standard where"
+        },
+        "syrian": {
+          "phrase": "وين",
+          "latin": "wayn",
+          "literal": "where",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وين",
+          "latin": "wayn",
+          "literal": "where",
+          "usage_note": "Universal in Gulf"
+        },
+        "saudi": {
+          "phrase": "فين/وين",
+          "latin": "fayn/wayn",
+          "literal": "where",
+          "usage_note": "Both used"
+        },
+        "formal_msa": {
+          "phrase": "أين",
+          "latin": "ayna",
+          "literal": "where",
+          "usage_note": "Formal interrogative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "question", "location"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking location", "directions"]
+      }
+    },
+    {
+      "id": "question_003",
+      "darija": "كيفاش",
+      "darija_latin": "kifash",
+      "literal_english": "how",
+      "translations": {
+        "lebanese": {
+          "phrase": "كيف",
+          "latin": "kif",
+          "literal": "how",
+          "usage_note": "Standard how"
+        },
+        "syrian": {
+          "phrase": "كيف",
+          "latin": "kif",
+          "literal": "how",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "جيف/كيف",
+          "latin": "cheef/kayf",
+          "literal": "how",
+          "usage_note": "J sound common in UAE"
+        },
+        "saudi": {
+          "phrase": "كيف",
+          "latin": "kayf",
+          "literal": "how",
+          "usage_note": "Standard interrogative"
+        },
+        "formal_msa": {
+          "phrase": "كيف",
+          "latin": "kayfa",
+          "literal": "how",
+          "usage_note": "Formal interrogative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "question"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking method", "asking condition"]
+      }
+    },
+    {
+      "id": "question_004",
+      "darija": "علاش",
+      "darija_latin": "3lash",
+      "literal_english": "why",
+      "translations": {
+        "lebanese": {
+          "phrase": "ليش",
+          "latin": "laysh",
+          "literal": "why",
+          "usage_note": "Common why"
+        },
+        "syrian": {
+          "phrase": "ليش",
+          "latin": "laysh",
+          "literal": "why",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ليش",
+          "latin": "laysh",
+          "literal": "why",
+          "usage_note": "Universal in Gulf"
+        },
+        "saudi": {
+          "phrase": "ليش/ليه",
+          "latin": "laysh/layh",
+          "literal": "why",
+          "usage_note": "Both variants used"
+        },
+        "formal_msa": {
+          "phrase": "لماذا",
+          "latin": "limadha",
+          "literal": "why",
+          "usage_note": "Formal interrogative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "question", "reason"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking reason", "questioning"]
+      }
+    },
+    {
+      "id": "question_005",
+      "darija": "شكون",
+      "darija_latin": "shkun",
+      "literal_english": "who",
+      "translations": {
+        "lebanese": {
+          "phrase": "مين",
+          "latin": "meen",
+          "literal": "who",
+          "usage_note": "Standard who"
+        },
+        "syrian": {
+          "phrase": "مين",
+          "latin": "meen",
+          "literal": "who",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "منو",
+          "latin": "minu",
+          "literal": "who",
+          "usage_note": "Gulf variant"
+        },
+        "saudi": {
+          "phrase": "مين",
+          "latin": "meen",
+          "literal": "who",
+          "usage_note": "Standard interrogative"
+        },
+        "formal_msa": {
+          "phrase": "من",
+          "latin": "man",
+          "literal": "who",
+          "usage_note": "Formal interrogative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "question", "person"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking identity", "inquiring about people"]
+      }
+    },
+    {
+      "id": "number_001",
+      "darija": "واحد",
+      "darija_latin": "waHed",
+      "literal_english": "one",
+      "translations": {
+        "lebanese": {
+          "phrase": "واحد",
+          "latin": "wahad",
+          "literal": "one",
+          "usage_note": "Standard one"
+        },
+        "syrian": {
+          "phrase": "واحد",
+          "latin": "wahad",
+          "literal": "one",
+          "usage_note": "Same pronunciation"
+        },
+        "emirati": {
+          "phrase": "واحد",
+          "latin": "wahid",
+          "literal": "one",
+          "usage_note": "Standard number"
+        },
+        "saudi": {
+          "phrase": "واحد",
+          "latin": "wahid",
+          "literal": "one",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "واحد",
+          "latin": "wahid",
+          "literal": "one",
+          "usage_note": "Standard number"
+        }
+      },
+      "category": "numbers",
+      "difficulty": "beginner",
+      "tags": ["essential", "counting"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["counting", "quantity"]
+      }
+    },
+    {
+      "id": "number_002",
+      "darija": "جوج",
+      "darija_latin": "juj",
+      "literal_english": "two",
+      "translations": {
+        "lebanese": {
+          "phrase": "تنين",
+          "latin": "tnayn",
+          "literal": "two",
+          "usage_note": "Levantine form"
+        },
+        "syrian": {
+          "phrase": "تنين",
+          "latin": "tnayn",
+          "literal": "two",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اثنين",
+          "latin": "ithnayn",
+          "literal": "two",
+          "usage_note": "Gulf/MSA form"
+        },
+        "saudi": {
+          "phrase": "اثنين",
+          "latin": "ithnayn",
+          "literal": "two",
+          "usage_note": "Standard form"
+        },
+        "formal_msa": {
+          "phrase": "اثنان",
+          "latin": "ithnan",
+          "literal": "two",
+          "usage_note": "Formal dual"
+        }
+      },
+      "category": "numbers",
+      "difficulty": "beginner",
+      "tags": ["essential", "counting"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["counting", "quantity"]
+      },
+      "cultural_notes": "Darija 'juj' is unique - very different from other dialects"
+    },
+    {
+      "id": "time_001",
+      "darija": "دابا",
+      "darija_latin": "daba",
+      "literal_english": "now",
+      "translations": {
+        "lebanese": {
+          "phrase": "هلأ",
+          "latin": "halla'",
+          "literal": "now",
+          "usage_note": "Common present time"
+        },
+        "syrian": {
+          "phrase": "هلأ",
+          "latin": "halla'",
+          "literal": "now",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الحين",
+          "latin": "el-heen",
+          "literal": "now",
+          "usage_note": "Gulf standard"
+        },
+        "saudi": {
+          "phrase": "الحين",
+          "latin": "al-heen",
+          "literal": "now",
+          "usage_note": "Universal in Saudi"
+        },
+        "formal_msa": {
+          "phrase": "الآن",
+          "latin": "al-aan",
+          "literal": "now",
+          "usage_note": "Formal present"
+        }
+      },
+      "category": "time_date",
+      "difficulty": "beginner",
+      "tags": ["essential", "time"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["present time", "immediacy"]
+      }
+    },
+    {
+      "id": "time_002",
+      "darija": "غدا",
+      "darija_latin": "ghda",
+      "literal_english": "tomorrow",
+      "translations": {
+        "lebanese": {
+          "phrase": "بكرا",
+          "latin": "bukra",
+          "literal": "tomorrow",
+          "usage_note": "Standard tomorrow"
+        },
+        "syrian": {
+          "phrase": "بكرا",
+          "latin": "bukra",
+          "literal": "tomorrow",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "باجر",
+          "latin": "bachir",
+          "literal": "tomorrow",
+          "usage_note": "Gulf variant"
+        },
+        "saudi": {
+          "phrase": "بكرة",
+          "latin": "bukra",
+          "literal": "tomorrow",
+          "usage_note": "Common form"
+        },
+        "formal_msa": {
+          "phrase": "غدا",
+          "latin": "ghadan",
+          "literal": "tomorrow",
+          "usage_note": "Formal future"
+        }
+      },
+      "category": "time_date",
+      "difficulty": "beginner",
+      "tags": ["essential", "time", "future"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["future planning", "scheduling"]
+      }
+    },
+    {
+      "id": "family_001",
+      "darija": "الواليد",
+      "darija_latin": "lwalid",
+      "literal_english": "the father",
+      "translations": {
+        "lebanese": {
+          "phrase": "البيّ",
+          "latin": "el-bayy",
+          "literal": "the dad",
+          "usage_note": "Informal dad",
+          "alternatives": ["الوالد", "بابا"]
+        },
+        "syrian": {
+          "phrase": "البابا",
+          "latin": "el-baba",
+          "literal": "the dad",
+          "usage_note": "Common informal"
+        },
+        "emirati": {
+          "phrase": "الوالد",
+          "latin": "el-walid",
+          "literal": "the father",
+          "usage_note": "Respectful term",
+          "alternatives": ["بابا", "أبوي"]
+        },
+        "saudi": {
+          "phrase": "الوالد",
+          "latin": "al-walid",
+          "literal": "the father",
+          "usage_note": "Formal/respectful"
+        },
+        "formal_msa": {
+          "phrase": "الأب",
+          "latin": "al-ab",
+          "literal": "the father",
+          "usage_note": "Formal term"
+        }
+      },
+      "category": "family",
+      "difficulty": "beginner",
+      "tags": ["essential", "family", "relationships"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["family reference", "speaking about father"]
+      }
+    },
+    {
+      "id": "family_002",
+      "darija": "الواليدة",
+      "darija_latin": "lwalida",
+      "literal_english": "the mother",
+      "translations": {
+        "lebanese": {
+          "phrase": "الإم",
+          "latin": "el-emm",
+          "literal": "the mom",
+          "usage_note": "Common term",
+          "alternatives": ["ماما", "الوالدة"]
+        },
+        "syrian": {
+          "phrase": "الماما",
+          "latin": "el-mama",
+          "literal": "the mom",
+          "usage_note": "Informal common"
+        },
+        "emirati": {
+          "phrase": "الوالدة",
+          "latin": "el-walda",
+          "literal": "the mother",
+          "usage_note": "Respectful term",
+          "alternatives": ["ماما", "أمي"]
+        },
+        "saudi": {
+          "phrase": "الوالدة",
+          "latin": "al-walida",
+          "literal": "the mother",
+          "usage_note": "Formal/respectful"
+        },
+        "formal_msa": {
+          "phrase": "الأم",
+          "latin": "al-umm",
+          "literal": "the mother",
+          "usage_note": "Formal term"
+        }
+      },
+      "category": "family",
+      "difficulty": "beginner",
+      "tags": ["essential", "family", "relationships"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["family reference", "speaking about mother"]
+      }
+    },
+    {
+      "id": "food_001",
+      "darija": "الخبز",
+      "darija_latin": "lkhobz",
+      "literal_english": "bread",
+      "translations": {
+        "lebanese": {
+          "phrase": "الخبز",
+          "latin": "el-khebez",
+          "literal": "bread",
+          "usage_note": "Standard term"
+        },
+        "syrian": {
+          "phrase": "الخبز",
+          "latin": "el-khebez",
+          "literal": "bread",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الخبز",
+          "latin": "el-khubz",
+          "literal": "bread",
+          "usage_note": "Standard term",
+          "alternatives": ["العيش"]
+        },
+        "saudi": {
+          "phrase": "الخبز",
+          "latin": "al-khubz",
+          "literal": "bread",
+          "usage_note": "Universal term"
+        },
+        "formal_msa": {
+          "phrase": "الخبز",
+          "latin": "al-khubz",
+          "literal": "bread",
+          "usage_note": "Standard term"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "beginner",
+      "tags": ["essential", "food", "basic"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["food", "meals", "shopping"]
+      }
+    },
+    {
+      "id": "food_002",
+      "darija": "الما",
+      "darija_latin": "lma",
+      "literal_english": "water",
+      "translations": {
+        "lebanese": {
+          "phrase": "المي",
+          "latin": "el-mayy",
+          "literal": "water",
+          "usage_note": "Levantine pronunciation"
+        },
+        "syrian": {
+          "phrase": "المي",
+          "latin": "el-mayy",
+          "literal": "water",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الماي",
+          "latin": "el-may",
+          "literal": "water",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "الموية",
+          "latin": "al-moya",
+          "literal": "water",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "الماء",
+          "latin": "al-maa'",
+          "literal": "water",
+          "usage_note": "Formal term"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "beginner",
+      "tags": ["essential", "drink", "basic"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["drinking", "ordering", "basic needs"]
+      }
+    },
+    {
+      "id": "want_001",
+      "darija": "بغيت",
+      "darija_latin": "bghit",
+      "literal_english": "I want",
+      "translations": {
+        "lebanese": {
+          "phrase": "بدي",
+          "latin": "baddi",
+          "literal": "I want",
+          "usage_note": "Very common expression"
+        },
+        "syrian": {
+          "phrase": "بدي",
+          "latin": "baddi",
+          "literal": "I want",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أبغي",
+          "latin": "abghi",
+          "literal": "I want",
+          "usage_note": "Gulf form"
+        },
+        "saudi": {
+          "phrase": "أبغى",
+          "latin": "abgha",
+          "literal": "I want",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "أريد",
+          "latin": "urid",
+          "literal": "I want",
+          "usage_note": "Formal expression"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "desire", "request"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["expressing wants", "making requests", "ordering"]
+      },
+      "cultural_notes": "Very important phrase - different in each dialect"
+    },
+    {
+      "id": "have_001",
+      "darija": "عندي",
+      "darija_latin": "3ndi",
+      "literal_english": "I have",
+      "translations": {
+        "lebanese": {
+          "phrase": "عندي",
+          "latin": "3andi",
+          "literal": "I have",
+          "usage_note": "Universal possession"
+        },
+        "syrian": {
+          "phrase": "عندي",
+          "latin": "3andi",
+          "literal": "I have",
+          "usage_note": "Same across Levant"
+        },
+        "emirati": {
+          "phrase": "عندي",
+          "latin": "3indi",
+          "literal": "I have",
+          "usage_note": "Standard possession"
+        },
+        "saudi": {
+          "phrase": "عندي",
+          "latin": "3indi",
+          "literal": "I have",
+          "usage_note": "Universal form"
+        },
+        "formal_msa": {
+          "phrase": "لدي",
+          "latin": "ladayya",
+          "literal": "I have",
+          "usage_note": "Formal possession"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "possession"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["stating possession", "having something"]
+      }
+    },
+    {
+      "id": "go_001",
+      "darija": "مشيت",
+      "darija_latin": "mshit",
+      "literal_english": "I went/I go",
+      "translations": {
+        "lebanese": {
+          "phrase": "رحت",
+          "latin": "rehet",
+          "literal": "I went",
+          "usage_note": "Past tense common"
+        },
+        "syrian": {
+          "phrase": "رحت",
+          "latin": "rehet",
+          "literal": "I went",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "رحت",
+          "latin": "reht",
+          "literal": "I went",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "رحت",
+          "latin": "ruht",
+          "literal": "I went",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "ذهبت",
+          "latin": "dhahabtu",
+          "literal": "I went",
+          "usage_note": "Formal past"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "movement", "verb"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["movement", "going places", "leaving"]
+      },
+      "cultural_notes": "Darija uses 'msha' for go/walk, others use 'rah' (went)"
+    },
+    {
+      "id": "come_001",
+      "darija": "جيت",
+      "darija_latin": "jit",
+      "literal_english": "I came",
+      "translations": {
+        "lebanese": {
+          "phrase": "إجيت",
+          "latin": "ijit",
+          "literal": "I came",
+          "usage_note": "Standard form"
+        },
+        "syrian": {
+          "phrase": "إجيت",
+          "latin": "ijit",
+          "literal": "I came",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ييت",
+          "latin": "yeet",
+          "literal": "I came",
+          "usage_note": "Gulf variant"
+        },
+        "saudi": {
+          "phrase": "جيت",
+          "latin": "jeet",
+          "literal": "I came",
+          "usage_note": "Saudi form"
+        },
+        "formal_msa": {
+          "phrase": "أتيت",
+          "latin": "ataytu",
+          "literal": "I came",
+          "usage_note": "Formal past"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "movement", "verb"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["arrival", "coming to places"]
+      }
+    },
+    {
+      "id": "good_001",
+      "darija": "مزيان",
+      "darija_latin": "mezyan",
+      "literal_english": "good/fine",
+      "translations": {
+        "lebanese": {
+          "phrase": "منيح",
+          "latin": "mnih",
+          "literal": "good",
+          "usage_note": "Very common",
+          "alternatives": ["تمام", "كويس"]
+        },
+        "syrian": {
+          "phrase": "منيح",
+          "latin": "mnih",
+          "literal": "good",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "زين",
+          "latin": "zayn",
+          "literal": "good",
+          "usage_note": "Gulf standard"
+        },
+        "saudi": {
+          "phrase": "تمام",
+          "latin": "tamam",
+          "literal": "perfect/good",
+          "usage_note": "Common approval"
+        },
+        "formal_msa": {
+          "phrase": "جيد",
+          "latin": "jayyid",
+          "literal": "good",
+          "usage_note": "Formal quality"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "quality", "approval"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["describing quality", "approval", "state"]
+      }
+    },
+    {
+      "id": "bad_001",
+      "darija": "خايب",
+      "darija_latin": "khayeb",
+      "literal_english": "bad",
+      "translations": {
+        "lebanese": {
+          "phrase": "مش منيح",
+          "latin": "mesh mnih",
+          "literal": "not good",
+          "usage_note": "Common negative",
+          "alternatives": ["سيء", "زفت"]
+        },
+        "syrian": {
+          "phrase": "مش منيح",
+          "latin": "mesh mnih",
+          "literal": "not good",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "مب زين",
+          "latin": "mub zayn",
+          "literal": "not good",
+          "usage_note": "Gulf negative"
+        },
+        "saudi": {
+          "phrase": "مو زين",
+          "latin": "mu zayn",
+          "literal": "not good",
+          "usage_note": "Saudi negative"
+        },
+        "formal_msa": {
+          "phrase": "سيء",
+          "latin": "sayyi'",
+          "literal": "bad",
+          "usage_note": "Formal negative"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "quality", "negative"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["describing poor quality", "disapproval"]
+      }
+    },
+    {
+      "id": "big_001",
+      "darija": "كبير",
+      "darija_latin": "kbir",
+      "literal_english": "big",
+      "translations": {
+        "lebanese": {
+          "phrase": "كبير",
+          "latin": "kbir",
+          "literal": "big",
+          "usage_note": "Standard size"
+        },
+        "syrian": {
+          "phrase": "كبير",
+          "latin": "kbir",
+          "literal": "big",
+          "usage_note": "Same pronunciation"
+        },
+        "emirati": {
+          "phrase": "جبير",
+          "latin": "chabir",
+          "literal": "big",
+          "usage_note": "J sound in Gulf"
+        },
+        "saudi": {
+          "phrase": "كبير",
+          "latin": "kabir",
+          "literal": "big",
+          "usage_note": "Standard form"
+        },
+        "formal_msa": {
+          "phrase": "كبير",
+          "latin": "kabir",
+          "literal": "big",
+          "usage_note": "Formal size"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "size", "description"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["describing size", "age (elder)"]
+      }
+    },
+    {
+      "id": "small_001",
+      "darija": "صغير",
+      "darija_latin": "Sghir",
+      "literal_english": "small",
+      "translations": {
+        "lebanese": {
+          "phrase": "زغير",
+          "latin": "zghir",
+          "literal": "small",
+          "usage_note": "Levantine pronunciation"
+        },
+        "syrian": {
+          "phrase": "زغير",
+          "latin": "zghir",
+          "literal": "small",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "صغير",
+          "latin": "saghir",
+          "literal": "small",
+          "usage_note": "Standard form"
+        },
+        "saudi": {
+          "phrase": "صغير",
+          "latin": "saghir",
+          "literal": "small",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "صغير",
+          "latin": "saghir",
+          "literal": "small",
+          "usage_note": "Formal size"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "size", "description"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["describing size", "age (young)"]
+      }
+    },
+    {
+      "id": "money_001",
+      "darija": "الفلوس",
+      "darija_latin": "lflus",
+      "literal_english": "money",
+      "translations": {
+        "lebanese": {
+          "phrase": "المصاري",
+          "latin": "el-masari",
+          "literal": "money",
+          "usage_note": "Common term for money"
+        },
+        "syrian": {
+          "phrase": "المصاري",
+          "latin": "el-masari",
+          "literal": "money",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الفلوس",
+          "latin": "el-floos",
+          "literal": "money",
+          "usage_note": "Gulf standard"
+        },
+        "saudi": {
+          "phrase": "الفلوس",
+          "latin": "al-fuloos",
+          "literal": "money",
+          "usage_note": "Common term"
+        },
+        "formal_msa": {
+          "phrase": "المال/النقود",
+          "latin": "al-mal/an-nuqud",
+          "literal": "money",
+          "usage_note": "Formal terms"
+        }
+      },
+      "category": "shopping",
+      "difficulty": "beginner",
+      "tags": ["essential", "money", "commerce"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["shopping", "payment", "discussing money"]
+      },
+      "cultural_notes": "Levantine uses 'masari', Gulf/Morocco use 'flus'"
+    },
+    {
+      "id": "price_001",
+      "darija": "بشحال",
+      "darija_latin": "bshHal",
+      "literal_english": "how much",
+      "translations": {
+        "lebanese": {
+          "phrase": "بكم",
+          "latin": "bikam",
+          "literal": "for how much",
+          "usage_note": "Asking price",
+          "alternatives": ["أديش"]
+        },
+        "syrian": {
+          "phrase": "بكم",
+          "latin": "bikam",
+          "literal": "for how much",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "بكم",
+          "latin": "bikam",
+          "literal": "how much",
+          "usage_note": "Standard price inquiry"
+        },
+        "saudi": {
+          "phrase": "بكم",
+          "latin": "bikam",
+          "literal": "how much",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "بكم",
+          "latin": "bikam",
+          "literal": "for how much",
+          "usage_note": "Formal price inquiry"
+        }
+      },
+      "category": "shopping",
+      "difficulty": "beginner",
+      "tags": ["essential", "price", "shopping"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["asking price", "shopping", "bargaining"]
+      }
+    },
+    {
+      "id": "understand_001",
+      "darija": "فهمت",
+      "darija_latin": "fhemt",
+      "literal_english": "I understood",
+      "translations": {
+        "lebanese": {
+          "phrase": "فهمت",
+          "latin": "fhimet",
+          "literal": "I understood",
+          "usage_note": "Standard comprehension"
+        },
+        "syrian": {
+          "phrase": "فهمت",
+          "latin": "fhimet",
+          "literal": "I understood",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "فهمت",
+          "latin": "fahamt",
+          "literal": "I understood",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "فهمت",
+          "latin": "fahamt",
+          "literal": "I understood",
+          "usage_note": "Standard form"
+        },
+        "formal_msa": {
+          "phrase": "فهمت",
+          "latin": "fahimtu",
+          "literal": "I understood",
+          "usage_note": "Formal comprehension"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "comprehension", "communication"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["confirming understanding", "learning", "conversation"]
+      }
+    },
+    {
+      "id": "speak_001",
+      "darija": "تكلم",
+      "darija_latin": "tkellm",
+      "literal_english": "speak",
+      "translations": {
+        "lebanese": {
+          "phrase": "احكي",
+          "latin": "ehki",
+          "literal": "speak",
+          "usage_note": "Common verb for speaking"
+        },
+        "syrian": {
+          "phrase": "احكي",
+          "latin": "ehki",
+          "literal": "speak",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "تكلم",
+          "latin": "tkallam",
+          "literal": "speak",
+          "usage_note": "Standard verb"
+        },
+        "saudi": {
+          "phrase": "تكلم",
+          "latin": "takallam",
+          "literal": "speak",
+          "usage_note": "Universal form"
+        },
+        "formal_msa": {
+          "phrase": "تحدث",
+          "latin": "tahadath",
+          "literal": "speak",
+          "usage_note": "Formal speech"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "communication", "verb"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["requesting to speak", "language learning", "communication"]
+      },
+      "cultural_notes": "Levantine uses 'haka/ehki', others use 'takallam'"
+    },
+    {
+      "id": "help_001",
+      "darija": "عاونّي",
+      "darija_latin": "3awenni",
+      "literal_english": "help me",
+      "translations": {
+        "lebanese": {
+          "phrase": "ساعدني",
+          "latin": "sa3edni",
+          "literal": "help me",
+          "usage_note": "Standard help request"
+        },
+        "syrian": {
+          "phrase": "ساعدني",
+          "latin": "sa3edni",
+          "literal": "help me",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ساعدني",
+          "latin": "sa3idni",
+          "literal": "help me",
+          "usage_note": "Standard request"
+        },
+        "saudi": {
+          "phrase": "ساعدني",
+          "latin": "sa3idni",
+          "literal": "help me",
+          "usage_note": "Universal help"
+        },
+        "formal_msa": {
+          "phrase": "ساعدني",
+          "latin": "sa3idni",
+          "literal": "help me",
+          "usage_note": "Formal assistance"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "help", "request"],
+      "usage": {
+        "formality": "polite",
+        "frequency": "high",
+        "context": ["asking for help", "assistance", "emergency"]
+      }
+    },
+    {
+      "id": "stop_001",
+      "darija": "حبس",
+      "darija_latin": "Hbes",
+      "literal_english": "stop",
+      "translations": {
+        "lebanese": {
+          "phrase": "وقف",
+          "latin": "wa'if",
+          "literal": "stop",
+          "usage_note": "Command to stop"
+        },
+        "syrian": {
+          "phrase": "وقف",
+          "latin": "wa'if",
+          "literal": "stop",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "وقف",
+          "latin": "wagif",
+          "literal": "stop",
+          "usage_note": "Standard command"
+        },
+        "saudi": {
+          "phrase": "وقف",
+          "latin": "wagif",
+          "literal": "stop",
+          "usage_note": "Universal stop"
+        },
+        "formal_msa": {
+          "phrase": "توقف",
+          "latin": "tawaqqaf",
+          "literal": "stop",
+          "usage_note": "Formal cessation"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "command", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["stopping action", "transportation", "commands"]
+      },
+      "cultural_notes": "Darija 'Hbes' unique, others use 'waqif'"
+    },
+    {
+      "id": "wait_001",
+      "darija": "تسنّا",
+      "darija_latin": "tsenna",
+      "literal_english": "wait",
+      "translations": {
+        "lebanese": {
+          "phrase": "انطر",
+          "latin": "ntor",
+          "literal": "wait",
+          "usage_note": "Common waiting"
+        },
+        "syrian": {
+          "phrase": "انطر",
+          "latin": "ntor",
+          "literal": "wait",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "انتظر",
+          "latin": "intithir",
+          "literal": "wait",
+          "usage_note": "Standard waiting"
+        },
+        "saudi": {
+          "phrase": "انتظر",
+          "latin": "intathir",
+          "literal": "wait",
+          "usage_note": "Universal form"
+        },
+        "formal_msa": {
+          "phrase": "انتظر",
+          "latin": "intathir",
+          "literal": "wait",
+          "usage_note": "Formal waiting"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "patience", "command"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["asking to wait", "patience", "timing"]
+      }
+    },
+    {
+      "id": "look_001",
+      "darija": "شوف",
+      "darija_latin": "shuf",
+      "literal_english": "look/see",
+      "translations": {
+        "lebanese": {
+          "phrase": "شوف",
+          "latin": "shuf",
+          "literal": "look",
+          "usage_note": "Universal across dialects"
+        },
+        "syrian": {
+          "phrase": "شوف",
+          "latin": "shuf",
+          "literal": "look",
+          "usage_note": "Same everywhere"
+        },
+        "emirati": {
+          "phrase": "شوف",
+          "latin": "shuf",
+          "literal": "look",
+          "usage_note": "Standard verb"
+        },
+        "saudi": {
+          "phrase": "شوف",
+          "latin": "shuf",
+          "literal": "look",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "انظر",
+          "latin": "unthur",
+          "literal": "look",
+          "usage_note": "Formal viewing"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "perception", "verb"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["looking", "seeing", "checking"]
+      }
+    },
+    {
+      "id": "listen_001",
+      "darija": "سمع",
+      "darija_latin": "sme3",
+      "literal_english": "listen/hear",
+      "translations": {
+        "lebanese": {
+          "phrase": "اسمع",
+          "latin": "isma3",
+          "literal": "listen",
+          "usage_note": "Command to listen"
+        },
+        "syrian": {
+          "phrase": "اسمع",
+          "latin": "isma3",
+          "literal": "listen",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اسمع",
+          "latin": "isma3",
+          "literal": "listen",
+          "usage_note": "Standard command"
+        },
+        "saudi": {
+          "phrase": "اسمع",
+          "latin": "isma3",
+          "literal": "listen",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "استمع",
+          "latin": "istami3",
+          "literal": "listen",
+          "usage_note": "Formal listening"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "perception", "verb"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["listening", "hearing", "attention"]
+      }
+    },
+    {
+      "id": "eat_001",
+      "darija": "كلا",
+      "darija_latin": "kla",
+      "literal_english": "eat",
+      "translations": {
+        "lebanese": {
+          "phrase": "كل",
+          "latin": "kol",
+          "literal": "eat",
+          "usage_note": "Imperative eat"
+        },
+        "syrian": {
+          "phrase": "كل",
+          "latin": "kol",
+          "literal": "eat",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "كل",
+          "latin": "kul",
+          "literal": "eat",
+          "usage_note": "Standard verb"
+        },
+        "saudi": {
+          "phrase": "كل",
+          "latin": "kul",
+          "literal": "eat",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "كُل",
+          "latin": "kul",
+          "literal": "eat",
+          "usage_note": "Formal eating"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "beginner",
+      "tags": ["essential", "food", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["eating", "meals", "food"]
+      }
+    },
+    {
+      "id": "drink_001",
+      "darija": "شرب",
+      "darija_latin": "shreb",
+      "literal_english": "drink",
+      "translations": {
+        "lebanese": {
+          "phrase": "اشرب",
+          "latin": "ishrab",
+          "literal": "drink",
+          "usage_note": "Command to drink"
+        },
+        "syrian": {
+          "phrase": "اشرب",
+          "latin": "ishrab",
+          "literal": "drink",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اشرب",
+          "latin": "ishrab",
+          "literal": "drink",
+          "usage_note": "Standard verb"
+        },
+        "saudi": {
+          "phrase": "اشرب",
+          "latin": "ishrab",
+          "literal": "drink",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "اشرب",
+          "latin": "ishrab",
+          "literal": "drink",
+          "usage_note": "Formal drinking"
+        }
+      },
+      "category": "food_dining",
+      "difficulty": "beginner",
+      "tags": ["essential", "drink", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["drinking", "beverages", "hydration"]
+      }
+    },
+    {
+      "id": "sleep_001",
+      "darija": "نعس",
+      "darija_latin": "n3es",
+      "literal_english": "sleep",
+      "translations": {
+        "lebanese": {
+          "phrase": "نام",
+          "latin": "nam",
+          "literal": "sleep",
+          "usage_note": "Standard sleep verb"
+        },
+        "syrian": {
+          "phrase": "نام",
+          "latin": "nam",
+          "literal": "sleep",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "نام",
+          "latin": "nam",
+          "literal": "sleep",
+          "usage_note": "Universal verb"
+        },
+        "saudi": {
+          "phrase": "نام",
+          "latin": "nam",
+          "literal": "sleep",
+          "usage_note": "Standard form"
+        },
+        "formal_msa": {
+          "phrase": "نام",
+          "latin": "nam",
+          "literal": "sleep",
+          "usage_note": "Formal sleeping"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "rest", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["sleeping", "rest", "bedtime"]
+      }
+    },
+    {
+      "id": "work_001",
+      "darija": "خدم",
+      "darija_latin": "khdem",
+      "literal_english": "work",
+      "translations": {
+        "lebanese": {
+          "phrase": "اشتغل",
+          "latin": "ishteghel",
+          "literal": "work",
+          "usage_note": "Standard work verb"
+        },
+        "syrian": {
+          "phrase": "اشتغل",
+          "latin": "ishteghel",
+          "literal": "work",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اشتغل",
+          "latin": "ishteghal",
+          "literal": "work",
+          "usage_note": "Gulf pronunciation"
+        },
+        "saudi": {
+          "phrase": "اشتغل",
+          "latin": "ishtaghal",
+          "literal": "work",
+          "usage_note": "Standard form"
+        },
+        "formal_msa": {
+          "phrase": "عمل",
+          "latin": "3amal",
+          "literal": "work",
+          "usage_note": "Formal work"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "beginner",
+      "tags": ["essential", "employment", "action"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["working", "employment", "tasks"]
+      },
+      "cultural_notes": "Darija 'khdem' unique, others use 'ishtaghal'"
+    },
+    {
+      "id": "house_001",
+      "darija": "الدار",
+      "darija_latin": "ddar",
+      "literal_english": "the house",
+      "translations": {
+        "lebanese": {
+          "phrase": "البيت",
+          "latin": "el-bayt",
+          "literal": "the house",
+          "usage_note": "Standard home"
+        },
+        "syrian": {
+          "phrase": "البيت",
+          "latin": "el-bayt",
+          "literal": "the house",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "البيت",
+          "latin": "el-bait",
+          "literal": "the house",
+          "usage_note": "Standard home"
+        },
+        "saudi": {
+          "phrase": "البيت",
+          "latin": "al-bayt",
+          "literal": "the house",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "المنزل",
+          "latin": "al-manzil",
+          "literal": "the house",
+          "usage_note": "Formal residence"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "beginner",
+      "tags": ["essential", "location", "home"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "essential",
+        "context": ["home", "residence", "location"]
+      },
+      "cultural_notes": "Darija uses 'dar', most others use 'bayt'"
+    },
+    {
+      "id": "street_001",
+      "darija": "الزنقة",
+      "darija_latin": "zzenqa",
+      "literal_english": "the street",
+      "translations": {
+        "lebanese": {
+          "phrase": "الشارع",
+          "latin": "esh-shara3",
+          "literal": "the street",
+          "usage_note": "Standard street"
+        },
+        "syrian": {
+          "phrase": "الشارع",
+          "latin": "esh-shara3",
+          "literal": "the street",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الشارع",
+          "latin": "esh-shara3",
+          "literal": "the street",
+          "usage_note": "Standard term"
+        },
+        "saudi": {
+          "phrase": "الشارع",
+          "latin": "ash-shari3",
+          "literal": "the street",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "الشارع",
+          "latin": "ash-shari3",
+          "literal": "the street",
+          "usage_note": "Formal street"
+        }
+      },
+      "category": "directions",
+      "difficulty": "beginner",
+      "tags": ["essential", "location", "navigation"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["directions", "location", "address"]
+      },
+      "cultural_notes": "Darija 'zenqa' is unique, from Spanish 'zanca'"
+    },
+    {
+      "id": "car_001",
+      "darija": "طوموبيل",
+      "darija_latin": "Tomobil",
+      "literal_english": "car",
+      "translations": {
+        "lebanese": {
+          "phrase": "سيارة",
+          "latin": "sayyara",
+          "literal": "car",
+          "usage_note": "Standard car"
+        },
+        "syrian": {
+          "phrase": "سيارة",
+          "latin": "sayyara",
+          "literal": "car",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "سيارة",
+          "latin": "sayyara",
+          "literal": "car",
+          "usage_note": "Standard vehicle"
+        },
+        "saudi": {
+          "phrase": "سيارة",
+          "latin": "sayyara",
+          "literal": "car",
+          "usage_note": "Universal"
+        },
+        "formal_msa": {
+          "phrase": "سيارة",
+          "latin": "sayyara",
+          "literal": "car",
+          "usage_note": "Formal vehicle"
+        }
+      },
+      "category": "transportation",
+      "difficulty": "beginner",
+      "tags": ["essential", "transport", "vehicle"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["transportation", "travel", "vehicles"]
+      },
+      "cultural_notes": "Darija uses French 'automobile', others use 'sayyara'"
+    }
+  ],
+  "metadata": {
+    "total_count": 50,
+    "categories": {
+      "greetings": 3,
+      "daily_essentials": 25,
+      "numbers": 2,
+      "time_date": 2,
+      "family": 2,
+      "food_dining": 4,
+      "shopping": 2,
+      "workplace": 1,
+      "directions": 1,
+      "transportation": 1
+    },
+    "difficulty_distribution": {
+      "beginner": 50,
+      "intermediate": 0,
+      "advanced": 0
+    },
+    "last_updated": "2025-08-15",
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "sent_201",
+    "darija": "شكون قال ليك هادشي؟",
+    "darija_latin": "shkun 'al lik hadshi?",
+    "english": "Who told you this?",
+    "translations": {
+      "lebanese": {"phrase": "مين قلك هيدا؟", "latin": "min 'allak hayda?"},
+      "syrian": {"phrase": "مين قلك هاد؟", "latin": "min 'allak had?"},
+      "emirati": {"phrase": "منو قالك هذا؟", "latin": "minu galak hadha?"},
+      "saudi": {"phrase": "مين قالك هذا؟", "latin": "meen galak hadha?"},
+      "msa": {"phrase": "من قال لك هذا؟", "latin": "man qala laka hadha?"}
+    },
+    "context": "inquiry_source",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_202",
+    "darija": "بغيت نهضر معاك ف واحد الموضوع",
+    "darija_latin": "bghit nehder m3ak f wahed lmawdu3",
+    "english": "I want to talk to you about something",
+    "translations": {
+      "lebanese": {"phrase": "بدي احكي معك بموضوع", "latin": "baddi ihki ma3ak bmawdu3"},
+      "syrian": {"phrase": "بدي احكي معك بموضوع", "latin": "baddi ihki ma3ak bmawdu3"},
+      "emirati": {"phrase": "أبا أكلمك في موضوع", "latin": "aba akallimak fi mawdhu3"},
+      "saudi": {"phrase": "أبي أكلمك في موضوع", "latin": "abi akallimak fi mawdhu3"},
+      "msa": {"phrase": "أريد أن أتحدث معك في موضوع", "latin": "urid an atahadath ma3ak fi mawdu3"}
+    },
+    "context": "serious_conversation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_203",
+    "darija": "علاش ماجيتيش البارح؟",
+    "darija_latin": "3lash majitish lbareh?",
+    "english": "Why didn't you come yesterday?",
+    "translations": {
+      "lebanese": {"phrase": "ليش ما إجيت مبارح؟", "latin": "laysh ma ijit mberih?"},
+      "syrian": {"phrase": "ليش ما إجيت مبارح؟", "latin": "laysh ma ijit mberih?"},
+      "emirati": {"phrase": "ليش ما ييت أمس؟", "latin": "laysh ma yeet ams?"},
+      "saudi": {"phrase": "ليش ما جيت أمس؟", "latin": "laysh ma jeet ams?"},
+      "msa": {"phrase": "لماذا لم تأتِ بالأمس؟", "latin": "limatha lam ta'ti bil'ams?"}
+    },
+    "context": "past_absence",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_204",
+    "darija": "خاصك تاخد الدوا",
+    "darija_latin": "khasek takhod ddwa",
+    "english": "You need to take the medicine",
+    "translations": {
+      "lebanese": {"phrase": "لازم تاخد الدوا", "latin": "lazem tekhod iddawa"},
+      "syrian": {"phrase": "لازم تاخد الدوا", "latin": "lazem tekhod iddawa"},
+      "emirati": {"phrase": "لازم تاخذ الدوا", "latin": "lazim takhith addawa"},
+      "saudi": {"phrase": "لازم تاخذ الدواء", "latin": "lazim takhuth addawa'"},
+      "msa": {"phrase": "يجب أن تأخذ الدواء", "latin": "yajibu an ta'khuth addawa'"}
+    },
+    "context": "health_advice",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_205",
+    "darija": "ماتبقاش تسنى",
+    "darija_latin": "matb'ash tsenna",
+    "english": "Don't keep waiting",
+    "translations": {
+      "lebanese": {"phrase": "ما تضل تنطر", "latin": "ma tdall tintor"},
+      "syrian": {"phrase": "ما تضل تنطر", "latin": "ma tdall tintor"},
+      "emirati": {"phrase": "لا تضل تنتظر", "latin": "la tathall tantathir"},
+      "saudi": {"phrase": "لا تضل تنتظر", "latin": "la tathall tantathir"},
+      "msa": {"phrase": "لا تبقَ تنتظر", "latin": "la tabqa tantathir"}
+    },
+    "context": "advice",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_206",
+    "darija": "شحال د الناس كانو؟",
+    "darija_latin": "shHal d nnas kanu?",
+    "english": "How many people were there?",
+    "translations": {
+      "lebanese": {"phrase": "قديش كان في ناس؟", "latin": "'addaysh ken fi nas?"},
+      "syrian": {"phrase": "كم كان في ناس؟", "latin": "kam ken fi nas?"},
+      "emirati": {"phrase": "كم كان في ناس؟", "latin": "kam kan fi nas?"},
+      "saudi": {"phrase": "كم كان في ناس؟", "latin": "kam kan fi nas?"},
+      "msa": {"phrase": "كم كان عدد الناس؟", "latin": "kam kana 3adad annas?"}
+    },
+    "context": "quantity_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_207",
+    "darija": "واش نتا مريض؟",
+    "darija_latin": "wash nta mrid?",
+    "english": "Are you sick?",
+    "translations": {
+      "lebanese": {"phrase": "انت مريض؟", "latin": "inta marid?"},
+      "syrian": {"phrase": "انت مريض؟", "latin": "inta marid?"},
+      "emirati": {"phrase": "انت مريض؟", "latin": "inta maridh?"},
+      "saudi": {"phrase": "انت مريض؟", "latin": "inta maridh?"},
+      "msa": {"phrase": "هل أنت مريض؟", "latin": "hal anta marid?"}
+    },
+    "context": "health_concern",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_208",
+    "darija": "كيفاش غادي نديرو؟",
+    "darija_latin": "kifash ghadi ndiru?",
+    "english": "How are we going to do it?",
+    "translations": {
+      "lebanese": {"phrase": "كيف رح نعمل؟", "latin": "kif rah na3mel?"},
+      "syrian": {"phrase": "كيف رح نعمل؟", "latin": "kif rah na3mel?"},
+      "emirati": {"phrase": "كيف بنسوي؟", "latin": "kaif binsawwi?"},
+      "saudi": {"phrase": "كيف بنسوي؟", "latin": "kaif binsawwi?"},
+      "msa": {"phrase": "كيف سنفعل؟", "latin": "kayfa sanaf3al?"}
+    },
+    "context": "planning",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_209",
+    "darija": "نتا عارف شنو كاين",
+    "darija_latin": "nta 3aref shnu kayn",
+    "english": "You know what's up",
+    "translations": {
+      "lebanese": {"phrase": "انت بتعرف شو في", "latin": "inta bta3ref shu fi"},
+      "syrian": {"phrase": "انت بتعرف شو في", "latin": "inta bta3ref shu fi"},
+      "emirati": {"phrase": "انت تدري شو في", "latin": "inta tadri shu fi"},
+      "saudi": {"phrase": "انت تدري وش في", "latin": "inta tadri wesh fi"},
+      "msa": {"phrase": "أنت تعرف ما يحدث", "latin": "anta ta3rif ma yahduth"}
+    },
+    "context": "awareness",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_210",
+    "darija": "مازال باقي شوية",
+    "darija_latin": "mazal ba'i shwiya",
+    "english": "There's still a little left",
+    "translations": {
+      "lebanese": {"phrase": "لسا باقي شوي", "latin": "lissa ba'i shway"},
+      "syrian": {"phrase": "لسا باقي شوي", "latin": "lissa ba'i shway"},
+      "emirati": {"phrase": "باقي شوي", "latin": "baqi shway"},
+      "saudi": {"phrase": "باقي شوي", "latin": "baqi shway"},
+      "msa": {"phrase": "ما زال باقٍ قليل", "latin": "ma zala baqin qalil"}
+    },
+    "context": "remainder",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_211",
+    "darija": "غادي نخليك تختار",
+    "darija_latin": "ghadi nkhallik tekhtar",
+    "english": "I'll let you choose",
+    "translations": {
+      "lebanese": {"phrase": "رح خليك تختار", "latin": "rah khallik tikhtar"},
+      "syrian": {"phrase": "رح خليك تختار", "latin": "rah khallik tikhtar"},
+      "emirati": {"phrase": "بخليك تختار", "latin": "bakhallik tikhtar"},
+      "saudi": {"phrase": "بخليك تختار", "latin": "bakhallik tikhtar"},
+      "msa": {"phrase": "سأدعك تختار", "latin": "sa'ada3uka takhtar"}
+    },
+    "context": "decision_making",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_212",
+    "darija": "هادي غير البداية",
+    "darija_latin": "hadi ghir lbidaya",
+    "english": "This is just the beginning",
+    "translations": {
+      "lebanese": {"phrase": "هيدي بس البداية", "latin": "haydi bas ilbidaye"},
+      "syrian": {"phrase": "هادي بس البداية", "latin": "hadi bas ilbidaye"},
+      "emirati": {"phrase": "هاي بس البداية", "latin": "hay bas albidaya"},
+      "saudi": {"phrase": "هذي بس البداية", "latin": "hathi bas albidaya"},
+      "msa": {"phrase": "هذه مجرد البداية", "latin": "hathihi mujarrad albidaya"}
+    },
+    "context": "starting_point",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_213",
+    "darija": "كيداير مع الخدمة؟",
+    "darija_latin": "kidayr m3a lkhedma?",
+    "english": "How's work going?",
+    "translations": {
+      "lebanese": {"phrase": "كيف الشغل معك؟", "latin": "kif ishighil ma3ak?"},
+      "syrian": {"phrase": "كيف الشغل معك؟", "latin": "kif ishighil ma3ak?"},
+      "emirati": {"phrase": "كيف الشغل وياك؟", "latin": "kaif ashughul wiyyak?"},
+      "saudi": {"phrase": "كيف الشغل معاك؟", "latin": "kaif ashughul ma3ak?"},
+      "msa": {"phrase": "كيف العمل معك؟", "latin": "kayfa al3amal ma3ak?"}
+    },
+    "context": "work_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_214",
+    "darija": "ماعمرني شفت بحال هاكا",
+    "darija_latin": "ma3omrni sheft bHal hakka",
+    "english": "I've never seen like this",
+    "translations": {
+      "lebanese": {"phrase": "عمري ما شفت متل هيك", "latin": "3omri ma sheft mitil hayk"},
+      "syrian": {"phrase": "عمري ما شفت متل هيك", "latin": "3omri ma sheft mitil hayk"},
+      "emirati": {"phrase": "عمري ما شفت جذي", "latin": "3umri ma shift chidhi"},
+      "saudi": {"phrase": "عمري ما شفت كذا", "latin": "3umri ma shift kitha"},
+      "msa": {"phrase": "لم أرَ مثل هذا قط", "latin": "lam ara mithl hadha qatt"}
+    },
+    "context": "amazement",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_215",
+    "darija": "خليها على الله",
+    "darija_latin": "khalliha 3la llah",
+    "english": "Leave it to God",
+    "translations": {
+      "lebanese": {"phrase": "خليها على الله", "latin": "khalliha 3allah"},
+      "syrian": {"phrase": "خليها على الله", "latin": "khalliha 3allah"},
+      "emirati": {"phrase": "خلها على الله", "latin": "khalha 3allah"},
+      "saudi": {"phrase": "خلها على الله", "latin": "khalha 3allah"},
+      "msa": {"phrase": "اتركها على الله", "latin": "utrukha 3ala allah"}
+    },
+    "context": "faith_expression",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_216",
+    "darija": "واش كاتفهم العربية؟",
+    "darija_latin": "wash katfhem l3arbiya?",
+    "english": "Do you understand Arabic?",
+    "translations": {
+      "lebanese": {"phrase": "بتفهم عربي؟", "latin": "btifham 3arabi?"},
+      "syrian": {"phrase": "بتفهم عربي؟", "latin": "btifham 3arabi?"},
+      "emirati": {"phrase": "تفهم عربي؟", "latin": "tafham 3arabi?"},
+      "saudi": {"phrase": "تفهم عربي؟", "latin": "tafham 3arabi?"},
+      "msa": {"phrase": "هل تفهم العربية؟", "latin": "hal tafham al3arabiyya?"}
+    },
+    "context": "language_ability",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_217",
+    "darija": "راني جيت نعتادر",
+    "darija_latin": "rani jit n3tader",
+    "english": "I came to apologize",
+    "translations": {
+      "lebanese": {"phrase": "إجيت اعتذر", "latin": "ijit i3tizer"},
+      "syrian": {"phrase": "إجيت اعتذر", "latin": "ijit i3tizer"},
+      "emirati": {"phrase": "ييت أعتذر", "latin": "yeet a3tathir"},
+      "saudi": {"phrase": "جيت أعتذر", "latin": "jeet a3tathir"},
+      "msa": {"phrase": "جئت لأعتذر", "latin": "ji'tu li'a3tathir"}
+    },
+    "context": "apology",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_218",
+    "darija": "هادشي كان خاصو يوقع",
+    "darija_latin": "hadshi kan khaso ywe'3",
+    "english": "This had to happen",
+    "translations": {
+      "lebanese": {"phrase": "هيدا كان لازم يصير", "latin": "hayda ken lazem ysir"},
+      "syrian": {"phrase": "هاد كان لازم يصير", "latin": "had ken lazem ysir"},
+      "emirati": {"phrase": "هذا كان لازم يصير", "latin": "hadha kan lazim ysir"},
+      "saudi": {"phrase": "هذا كان لازم يصير", "latin": "hadha kan lazim ysir"},
+      "msa": {"phrase": "كان هذا لا بد أن يحدث", "latin": "kana hadha la budda an yahduth"}
+    },
+    "context": "inevitability",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_219",
+    "darija": "بغيت نعرف رايك",
+    "darija_latin": "bghit n3ref rayek",
+    "english": "I want to know your opinion",
+    "translations": {
+      "lebanese": {"phrase": "بدي اعرف رأيك", "latin": "baddi i3ref ra'yak"},
+      "syrian": {"phrase": "بدي اعرف رأيك", "latin": "baddi i3ref ra'yak"},
+      "emirati": {"phrase": "أبا أعرف رايك", "latin": "aba a3rif rayik"},
+      "saudi": {"phrase": "أبي أعرف رايك", "latin": "abi a3rif rayik"},
+      "msa": {"phrase": "أريد أن أعرف رأيك", "latin": "urid an a3rif ra'yak"}
+    },
+    "context": "opinion_seeking",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_220",
+    "darija": "مافيا مايدار",
+    "darija_latin": "mafiya maydar",
+    "english": "Nothing can be done",
+    "translations": {
+      "lebanese": {"phrase": "ما في شي ينعمل", "latin": "ma fi shi yin3amal"},
+      "syrian": {"phrase": "ما في شي ينعمل", "latin": "ma fi shi yin3amal"},
+      "emirati": {"phrase": "ما في شي ينسوى", "latin": "ma fi shay yinsawa"},
+      "saudi": {"phrase": "ما في شي ينسوى", "latin": "ma fi shay yinsawa"},
+      "msa": {"phrase": "لا يمكن فعل شيء", "latin": "la yumkin fi3l shay'"}
+    },
+    "context": "helplessness",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_221",
+    "darija": "واش كاتعرف تسوق؟",
+    "darija_latin": "wash kat3ref tsu'?",
+    "english": "Do you know how to drive?",
+    "translations": {
+      "lebanese": {"phrase": "بتعرف تسوق؟", "latin": "bta3ref tsu'?"},
+      "syrian": {"phrase": "بتعرف تسوق؟", "latin": "bta3ref tsu'?"},
+      "emirati": {"phrase": "تعرف تسوق؟", "latin": "ta3rif tsuq?"},
+      "saudi": {"phrase": "تعرف تسوق؟", "latin": "ta3rif tsuq?"},
+      "msa": {"phrase": "هل تعرف القيادة؟", "latin": "hal ta3rif alqiyada?"}
+    },
+    "context": "skill_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_222",
+    "darija": "شحال بقا من الوقت؟",
+    "darija_latin": "shHal b'a men lwe't?",
+    "english": "How much time is left?",
+    "translations": {
+      "lebanese": {"phrase": "قديش ضل وقت؟", "latin": "'addaysh dall wa't?"},
+      "syrian": {"phrase": "كم ضل وقت؟", "latin": "kam dall wa't?"},
+      "emirati": {"phrase": "كم باقي وقت؟", "latin": "kam baqi wagt?"},
+      "saudi": {"phrase": "كم باقي وقت؟", "latin": "kam baqi wagt?"},
+      "msa": {"phrase": "كم بقي من الوقت؟", "latin": "kam baqiya min alwaqt?"}
+    },
+    "context": "time_remaining",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_223",
+    "darija": "مابقيتش قادر نستحمل",
+    "darija_latin": "mab'itsh 'ader nesteHmel",
+    "english": "I can't bear it anymore",
+    "translations": {
+      "lebanese": {"phrase": "ما عدت قادر اتحمل", "latin": "ma 3edet 'ader ithammal"},
+      "syrian": {"phrase": "ما عدت قادر اتحمل", "latin": "ma 3edet 'ader ithammal"},
+      "emirati": {"phrase": "ما عدت أقدر أتحمل", "latin": "ma 3idt agdar atahammil"},
+      "saudi": {"phrase": "ما عدت أقدر أتحمل", "latin": "ma 3udt agdar atahammil"},
+      "msa": {"phrase": "لم أعد أستطيع التحمل", "latin": "lam a3ud astatee3 attahammul"}
+    },
+    "context": "frustration",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_224",
+    "darija": "راه كلشي تبدل",
+    "darija_latin": "rah kolshi tbeddel",
+    "english": "Everything has changed",
+    "translations": {
+      "lebanese": {"phrase": "كلشي تغير", "latin": "kellshi tghayyer"},
+      "syrian": {"phrase": "كلشي تغير", "latin": "kellshi tghayyer"},
+      "emirati": {"phrase": "كلشي تغير", "latin": "killshay taghayyar"},
+      "saudi": {"phrase": "كلشي تغير", "latin": "killshay taghayyar"},
+      "msa": {"phrase": "كل شيء تغير", "latin": "kullu shay' taghayyar"}
+    },
+    "context": "change_observation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_225",
+    "darija": "عطيني فرصة أخرى",
+    "darija_latin": "3tini forsa okhra",
+    "english": "Give me another chance",
+    "translations": {
+      "lebanese": {"phrase": "عطيني فرصة تانية", "latin": "3atini forsa tenye"},
+      "syrian": {"phrase": "عطيني فرصة تانية", "latin": "3atini forsa tenye"},
+      "emirati": {"phrase": "عطني فرصة ثانية", "latin": "3atni fursa thanya"},
+      "saudi": {"phrase": "عطني فرصة ثانية", "latin": "3atni fursa thanya"},
+      "msa": {"phrase": "أعطني فرصة أخرى", "latin": "a3tini fursa ukhra"}
+    },
+    "context": "second_chance",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_226",
+    "darija": "هادشي ماشي معقول",
+    "darija_latin": "hadshi mashi ma3'ul",
+    "english": "This is unbelievable",
+    "translations": {
+      "lebanese": {"phrase": "هيدا مش معقول", "latin": "hayda mish ma3'ul"},
+      "syrian": {"phrase": "هاد مو معقول", "latin": "had mu ma3'ul"},
+      "emirati": {"phrase": "هذا مب معقول", "latin": "hadha mub ma3gul"},
+      "saudi": {"phrase": "هذا مو معقول", "latin": "hadha mu ma3gul"},
+      "msa": {"phrase": "هذا غير معقول", "latin": "hadha ghayr ma3qul"}
+    },
+    "context": "disbelief",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_227",
+    "darija": "خرجت من الدار بكري",
+    "darija_latin": "khrejt men ddar bekri",
+    "english": "I left home early",
+    "translations": {
+      "lebanese": {"phrase": "طلعت من البيت بكير", "latin": "tla3et min ilbayt bakkir"},
+      "syrian": {"phrase": "طلعت من البيت بكير", "latin": "tla3et min ilbayt bakkir"},
+      "emirati": {"phrase": "طلعت من البيت بدري", "latin": "tla3t min albayt badri"},
+      "saudi": {"phrase": "طلعت من البيت بدري", "latin": "tla3t min albayt badri"},
+      "msa": {"phrase": "خرجت من البيت مبكراً", "latin": "kharajtu min albayt mubakkiran"}
+    },
+    "context": "daily_routine",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_228",
+    "darija": "واش عندك شي خبر عليه؟",
+    "darija_latin": "wash 3ndek shi khbar 3lih?",
+    "english": "Do you have any news about him?",
+    "translations": {
+      "lebanese": {"phrase": "عندك خبر عنو؟", "latin": "3indak khabar 3anno?"},
+      "syrian": {"phrase": "عندك خبر عنو؟", "latin": "3indak khabar 3anno?"},
+      "emirati": {"phrase": "عندك خبر عنه؟", "latin": "3indak khabar 3anah?"},
+      "saudi": {"phrase": "عندك خبر عنه؟", "latin": "3indak khabar 3anah?"},
+      "msa": {"phrase": "هل لديك أي خبر عنه؟", "latin": "hal ladayka ayy khabar 3anhu?"}
+    },
+    "context": "news_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_229",
+    "darija": "كنت باغي نقول ليك",
+    "darija_latin": "kont baghi n'ul lik",
+    "english": "I wanted to tell you",
+    "translations": {
+      "lebanese": {"phrase": "كنت بدي قلك", "latin": "kent baddi 'ellak"},
+      "syrian": {"phrase": "كنت بدي قلك", "latin": "kent baddi 'ellak"},
+      "emirati": {"phrase": "كنت أبا أقولك", "latin": "kunt aba agulak"},
+      "saudi": {"phrase": "كنت أبي أقولك", "latin": "kunt abi agulak"},
+      "msa": {"phrase": "كنت أريد أن أقول لك", "latin": "kuntu urid an aqul lak"}
+    },
+    "context": "past_intention",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_230",
+    "darija": "واش هادا هو السعر اللخر؟",
+    "darija_latin": "wash hada howa ssa3r llekher?",
+    "english": "Is this the final price?",
+    "translations": {
+      "lebanese": {"phrase": "هيدا آخر سعر؟", "latin": "hayda akhir si3r?"},
+      "syrian": {"phrase": "هاد آخر سعر؟", "latin": "had akhir si3r?"},
+      "emirati": {"phrase": "هذا آخر سعر؟", "latin": "hadha akhir si3r?"},
+      "saudi": {"phrase": "هذا آخر سعر؟", "latin": "hadha akhir si3r?"},
+      "msa": {"phrase": "هل هذا السعر النهائي؟", "latin": "hal hadha assi3r anniha'i?"}
+    },
+    "context": "negotiation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_231",
+    "darija": "ماعنديش الحق ندير هاكا",
+    "darija_latin": "ma3ndish lHa' ndir hakka",
+    "english": "I don't have the right to do that",
+    "translations": {
+      "lebanese": {"phrase": "ما عندي الحق اعمل هيك", "latin": "ma 3indi ilha' i3mel hayk"},
+      "syrian": {"phrase": "ما عندي الحق اعمل هيك", "latin": "ma 3indi ilha' i3mel hayk"},
+      "emirati": {"phrase": "ما عندي الحق أسوي جذي", "latin": "ma 3indi alha' asawwi chidhi"},
+      "saudi": {"phrase": "ما عندي الحق أسوي كذا", "latin": "ma 3indi alha' asawwi kitha"},
+      "msa": {"phrase": "ليس لي الحق في فعل ذلك", "latin": "laysa li alha' fi fi3l thalik"}
+    },
+    "context": "limitation",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_232",
+    "darija": "شكون اللي عطاك الإذن؟",
+    "darija_latin": "shkun lli 3tak l'ithn?",
+    "english": "Who gave you permission?",
+    "translations": {
+      "lebanese": {"phrase": "مين عطاك الإذن؟", "latin": "min 3atak il'ithn?"},
+      "syrian": {"phrase": "مين عطاك الإذن؟", "latin": "min 3atak il'ithn?"},
+      "emirati": {"phrase": "منو عطاك الإذن؟", "latin": "minu 3atak al'ithn?"},
+      "saudi": {"phrase": "مين عطاك الإذن؟", "latin": "meen 3atak al'ithn?"},
+      "msa": {"phrase": "من أعطاك الإذن؟", "latin": "man a3tak al'ithn?"}
+    },
+    "context": "authority_question",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_233",
+    "darija": "ماشي وقتو دابا",
+    "darija_latin": "mashi we'to daba",
+    "english": "It's not the time now",
+    "translations": {
+      "lebanese": {"phrase": "مش وقتو هلأ", "latin": "mish wa'to halla'"},
+      "syrian": {"phrase": "مو وقتو هلأ", "latin": "mu wa'to halla'"},
+      "emirati": {"phrase": "مب وقته الحين", "latin": "mub wagta alheen"},
+      "saudi": {"phrase": "مو وقته الحين", "latin": "mu wagta alheen"},
+      "msa": {"phrase": "ليس وقته الآن", "latin": "laysa waqtuhu al'an"}
+    },
+    "context": "timing",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_234",
+    "darija": "راني فرحان بزاف",
+    "darija_latin": "rani ferHan bezzaf",
+    "english": "I'm very happy",
+    "translations": {
+      "lebanese": {"phrase": "أنا مبسوط كتير", "latin": "ana mabsut ktir"},
+      "syrian": {"phrase": "أنا مبسوط كتير", "latin": "ana mabsut ktir"},
+      "emirati": {"phrase": "أنا فرحان وايد", "latin": "ana farhan wayed"},
+      "saudi": {"phrase": "أنا فرحان مرة", "latin": "ana farhan marra"},
+      "msa": {"phrase": "أنا سعيد جداً", "latin": "ana sa3id jiddan"}
+    },
+    "context": "happiness",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_235",
+    "darija": "كيفاش نشرح ليك؟",
+    "darija_latin": "kifash nshreH lik?",
+    "english": "How do I explain to you?",
+    "translations": {
+      "lebanese": {"phrase": "كيف بدي اشرحلك؟", "latin": "kif baddi ishrahlak?"},
+      "syrian": {"phrase": "كيف بدي اشرحلك؟", "latin": "kif baddi ishrahlak?"},
+      "emirati": {"phrase": "كيف أشرحلك؟", "latin": "kaif ashrahlak?"},
+      "saudi": {"phrase": "كيف أشرحلك؟", "latin": "kaif ashrahlak?"},
+      "msa": {"phrase": "كيف أشرح لك؟", "latin": "kayfa ashrahu lak?"}
+    },
+    "context": "explanation_difficulty",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_236",
+    "darija": "واش غادي تبقى معانا؟",
+    "darija_latin": "wash ghadi teb'a m3ana?",
+    "english": "Will you stay with us?",
+    "translations": {
+      "lebanese": {"phrase": "رح تضل معنا؟", "latin": "rah tdall ma3na?"},
+      "syrian": {"phrase": "رح تضل معنا؟", "latin": "rah tdall ma3na?"},
+      "emirati": {"phrase": "بتبقى ويانا؟", "latin": "bitabga wiyyana?"},
+      "saudi": {"phrase": "بتبقى معانا؟", "latin": "bitabga ma3ana?"},
+      "msa": {"phrase": "هل ستبقى معنا؟", "latin": "hal satabqa ma3ana?"}
+    },
+    "context": "future_presence",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_237",
+    "darija": "مايمكنش يكون",
+    "darija_latin": "mayemkensh ykon",
+    "english": "It can't be",
+    "translations": {
+      "lebanese": {"phrase": "ما بيمكن يكون", "latin": "ma byemken ykon"},
+      "syrian": {"phrase": "ما بيمكن يكون", "latin": "ma byemken ykon"},
+      "emirati": {"phrase": "ما يمكن يكون", "latin": "ma yimkin yakun"},
+      "saudi": {"phrase": "ما يمكن يكون", "latin": "ma yimkin yakun"},
+      "msa": {"phrase": "لا يمكن أن يكون", "latin": "la yumkin an yakun"}
+    },
+    "context": "impossibility",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_238",
+    "darija": "كنت كانتسناك من زمان",
+    "darija_latin": "kont kantsnnak men zman",
+    "english": "I've been waiting for you for a long time",
+    "translations": {
+      "lebanese": {"phrase": "كنت عم انطرك من زمان", "latin": "kent 3am intrak min zaman"},
+      "syrian": {"phrase": "كنت عم انطرك من زمان", "latin": "kent 3am intrak min zaman"},
+      "emirati": {"phrase": "كنت انتظرك من زمان", "latin": "kunt antathirak min zaman"},
+      "saudi": {"phrase": "كنت انتظرك من زمان", "latin": "kunt antathirak min zaman"},
+      "msa": {"phrase": "كنت أنتظرك منذ زمن طويل", "latin": "kuntu antathiruka munthu zamanin tawil"}
+    },
+    "context": "long_wait",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_239",
+    "darija": "خليني نشوف معاك",
+    "darija_latin": "khallini nshuf m3ak",
+    "english": "Let me check with you",
+    "translations": {
+      "lebanese": {"phrase": "خليني شوف معك", "latin": "khallini shuf ma3ak"},
+      "syrian": {"phrase": "خليني شوف معك", "latin": "khallini shuf ma3ak"},
+      "emirati": {"phrase": "خلني أشوف وياك", "latin": "khalni ashuf wiyyak"},
+      "saudi": {"phrase": "خلني أشوف معاك", "latin": "khalni ashuf ma3ak"},
+      "msa": {"phrase": "دعني أرى معك", "latin": "da3ni ara ma3ak"}
+    },
+    "context": "collaboration",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_240",
+    "darija": "درت اللي قدرت عليه",
+    "darija_latin": "dert lli 'dert 3lih",
+    "english": "I did what I could",
+    "translations": {
+      "lebanese": {"phrase": "عملت يلي قدرت عليه", "latin": "3melt yalli 'edert 3aleyh"},
+      "syrian": {"phrase": "عملت يلي قدرت عليه", "latin": "3melt yalli 'edert 3aleyh"},
+      "emirati": {"phrase": "سويت اللي قدرت عليه", "latin": "sawwayt illi gidart 3alayh"},
+      "saudi": {"phrase": "سويت اللي قدرت عليه", "latin": "sawwayt illi gidart 3alayh"},
+      "msa": {"phrase": "فعلت ما استطعت", "latin": "fa3altu ma istata3tu"}
+    },
+    "context": "effort_limitation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_241",
+    "darija": "واش بغيتي تزيد؟",
+    "darija_latin": "wash bghiti tzid?",
+    "english": "Do you want more?",
+    "translations": {
+      "lebanese": {"phrase": "بدك تزيد؟", "latin": "baddak tzid?"},
+      "syrian": {"phrase": "بدك تزيد؟", "latin": "baddak tzid?"},
+      "emirati": {"phrase": "تبا تزيد؟", "latin": "tiba tizid?"},
+      "saudi": {"phrase": "تبي تزيد؟", "latin": "tibi tizid?"},
+      "msa": {"phrase": "هل تريد المزيد؟", "latin": "hal turid almazid?"}
+    },
+    "context": "offering_more",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_242",
+    "darija": "ماكاينش حتا واحد",
+    "darija_latin": "makaynsh Htta waHed",
+    "english": "There's no one",
+    "translations": {
+      "lebanese": {"phrase": "ما في حدا", "latin": "ma fi hada"},
+      "syrian": {"phrase": "ما في حدا", "latin": "ma fi hada"},
+      "emirati": {"phrase": "ما في أحد", "latin": "ma fi ahad"},
+      "saudi": {"phrase": "ما في أحد", "latin": "ma fi ahad"},
+      "msa": {"phrase": "لا يوجد أحد", "latin": "la yujad ahad"}
+    },
+    "context": "absence",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_243",
+    "darija": "شريت هادشي ليك",
+    "darija_latin": "shrit hadshi lik",
+    "english": "I bought this for you",
+    "translations": {
+      "lebanese": {"phrase": "اشتريت هيدا إلك", "latin": "ishtarayt hayda ilak"},
+      "syrian": {"phrase": "اشتريت هاد إلك", "latin": "ishtarayt had ilak"},
+      "emirati": {"phrase": "اشتريت هذا لك", "latin": "ishtarayt hadha lak"},
+      "saudi": {"phrase": "اشتريت هذا لك", "latin": "ishtarayt hadha lak"},
+      "msa": {"phrase": "اشتريت هذا لك", "latin": "ishtaraytu hadha lak"}
+    },
+    "context": "gift",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_244",
+    "darija": "غادي نمشيو كاملين",
+    "darija_latin": "ghadi nemshiw kamlin",
+    "english": "We'll all go",
+    "translations": {
+      "lebanese": {"phrase": "رح نروح كلنا", "latin": "rah nruh kellna"},
+      "syrian": {"phrase": "رح نروح كلنا", "latin": "rah nruh kellna"},
+      "emirati": {"phrase": "بنروح كلنا", "latin": "binruh kullna"},
+      "saudi": {"phrase": "بنروح كلنا", "latin": "binruh kullna"},
+      "msa": {"phrase": "سنذهب جميعاً", "latin": "sanathhab jami3an"}
+    },
+    "context": "group_plan",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_245",
+    "darija": "واش كاتعرفو؟",
+    "darija_latin": "wash kat3erfo?",
+    "english": "Do you know him?",
+    "translations": {
+      "lebanese": {"phrase": "بتعرفو؟", "latin": "bta3rfo?"},
+      "syrian": {"phrase": "بتعرفو؟", "latin": "bta3rfo?"},
+      "emirati": {"phrase": "تعرفه؟", "latin": "ta3rifah?"},
+      "saudi": {"phrase": "تعرفه؟", "latin": "ta3rifah?"},
+      "msa": {"phrase": "هل تعرفه؟", "latin": "hal ta3rifuhu?"}
+    },
+    "context": "acquaintance",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_246",
+    "darija": "ماعرفتش كيفاش نتعامل معاه",
+    "darija_latin": "ma3reftsh kifash net3amel m3ah",
+    "english": "I don't know how to deal with him",
+    "translations": {
+      "lebanese": {"phrase": "ما بعرف كيف اتعامل معو", "latin": "ma ba3ref kif it3amal ma3o"},
+      "syrian": {"phrase": "ما بعرف كيف اتعامل معو", "latin": "ma ba3ref kif it3amal ma3o"},
+      "emirati": {"phrase": "ما أدري كيف أتعامل وياه", "latin": "ma adri kaif at3amal wiyyah"},
+      "saudi": {"phrase": "ما أدري كيف أتعامل معاه", "latin": "ma adri kaif at3amal ma3ah"},
+      "msa": {"phrase": "لا أعرف كيف أتعامل معه", "latin": "la a3rif kayfa ata3amal ma3ahu"}
+    },
+    "context": "relationship_difficulty",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_247",
+    "darija": "هادشي اللي كنت كانتسنى",
+    "darija_latin": "hadshi lli kont kantsenna",
+    "english": "This is what I was waiting for",
+    "translations": {
+      "lebanese": {"phrase": "هيدا يلي كنت عم انطرو", "latin": "hayda yalli kent 3am intro"},
+      "syrian": {"phrase": "هاد يلي كنت عم انطرو", "latin": "had yalli kent 3am intro"},
+      "emirati": {"phrase": "هذا اللي كنت انتظره", "latin": "hadha illi kunt antathirah"},
+      "saudi": {"phrase": "هذا اللي كنت انتظره", "latin": "hadha illi kunt antathirah"},
+      "msa": {"phrase": "هذا ما كنت أنتظره", "latin": "hadha ma kuntu antathiruhu"}
+    },
+    "context": "expectation_met",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_248",
+    "darija": "كانظن بلي راك فاهم",
+    "darija_latin": "kandhen belli rak fahem",
+    "english": "I think you understand",
+    "translations": {
+      "lebanese": {"phrase": "بظن إنك فاهم", "latin": "bdhenn innak fahim"},
+      "syrian": {"phrase": "بظن إنك فاهم", "latin": "bdhenn innak fahim"},
+      "emirati": {"phrase": "أظن إنك فاهم", "latin": "athun innak fahim"},
+      "saudi": {"phrase": "أظن إنك فاهم", "latin": "athun innak fahim"},
+      "msa": {"phrase": "أظن أنك تفهم", "latin": "athunnu annaka tafham"}
+    },
+    "context": "assumption",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_249",
+    "darija": "مابغيتش نخسر وقتي",
+    "darija_latin": "mabghitsh nkhser we'ti",
+    "english": "I don't want to waste my time",
+    "translations": {
+      "lebanese": {"phrase": "ما بدي ضيع وقتي", "latin": "ma baddi dayyi3 wa'ti"},
+      "syrian": {"phrase": "ما بدي ضيع وقتي", "latin": "ma baddi dayyi3 wa'ti"},
+      "emirati": {"phrase": "ما أبا أضيع وقتي", "latin": "ma aba adhayyi3 wagti"},
+      "saudi": {"phrase": "ما أبي أضيع وقتي", "latin": "ma abi adhayyi3 wagti"},
+      "msa": {"phrase": "لا أريد إضاعة وقتي", "latin": "la urid ida3at waqti"}
+    },
+    "context": "time_value",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_250",
+    "darija": "واش كاين شي تغيير؟",
+    "darija_latin": "wash kayn shi tghyir?",
+    "english": "Is there any change?",
+    "translations": {
+      "lebanese": {"phrase": "في شي تغيير؟", "latin": "fi shi taghyir?"},
+      "syrian": {"phrase": "في شي تغيير؟", "latin": "fi shi taghyir?"},
+      "emirati": {"phrase": "في أي تغيير؟", "latin": "fi ayy taghyir?"},
+      "saudi": {"phrase": "في أي تغيير؟", "latin": "fi ayy taghyir?"},
+      "msa": {"phrase": "هل هناك أي تغيير؟", "latin": "hal hunaka ayy taghyir?"}
+    },
+    "context": "change_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_251",
+    "darija": "خاصني نفكر مزيان",
+    "darija_latin": "khasni nfekker mezyan",
+    "english": "I need to think carefully",
+    "translations": {
+      "lebanese": {"phrase": "لازم فكر منيح", "latin": "lazem fakker mnih"},
+      "syrian": {"phrase": "لازم فكر منيح", "latin": "lazem fakker mnih"},
+      "emirati": {"phrase": "لازم أفكر زين", "latin": "lazim afakkir zayn"},
+      "saudi": {"phrase": "لازم أفكر زين", "latin": "lazim afakkir zayn"},
+      "msa": {"phrase": "يجب أن أفكر جيداً", "latin": "yajibu an ufakkir jayyidan"}
+    },
+    "context": "deliberation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_252",
+    "darija": "راه كاين واحد برا كايتسناك",
+    "darija_latin": "rah kayn waHed berra kaytsnak",
+    "english": "Someone is waiting for you outside",
+    "translations": {
+      "lebanese": {"phrase": "في حدا برا عم ينطرك", "latin": "fi hada barra 3am yintrak"},
+      "syrian": {"phrase": "في حدا برا عم ينطرك", "latin": "fi hada barra 3am yintrak"},
+      "emirati": {"phrase": "في حد برا ينتظرك", "latin": "fi had barra yintathirak"},
+      "saudi": {"phrase": "في أحد برا ينتظرك", "latin": "fi ahad barra yintathirak"},
+      "msa": {"phrase": "هناك شخص بالخارج ينتظرك", "latin": "hunaka shakhs bilkharij yantathiruk"}
+    },
+    "context": "visitor_announcement",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_253",
+    "darija": "ماتخليش هادشي يأثر عليك",
+    "darija_latin": "matkhallish hadshi y'atter 3lik",
+    "english": "Don't let this affect you",
+    "translations": {
+      "lebanese": {"phrase": "ما تخلي هيدا يأثر عليك", "latin": "ma tkhalli hayda y'atter 3aleyk"},
+      "syrian": {"phrase": "ما تخلي هاد يأثر عليك", "latin": "ma tkhalli had y'atter 3aleyk"},
+      "emirati": {"phrase": "لا تخلي هذا يأثر عليك", "latin": "la tkhalli hadha yu'aththir 3aleek"},
+      "saudi": {"phrase": "لا تخلي هذا يأثر عليك", "latin": "la tkhalli hadha yu'aththir 3aleek"},
+      "msa": {"phrase": "لا تدع هذا يؤثر عليك", "latin": "la tada3 hadha yu'aththir 3alayk"}
+    },
+    "context": "emotional_support",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_254",
+    "darija": "عطاني واحد النصيحة مزيانة",
+    "darija_latin": "3tani waHed nnsiHa mezyana",
+    "english": "He gave me good advice",
+    "translations": {
+      "lebanese": {"phrase": "عطاني نصيحة منيحة", "latin": "3atani nasiha mniha"},
+      "syrian": {"phrase": "عطاني نصيحة منيحة", "latin": "3atani nasiha mniha"},
+      "emirati": {"phrase": "عطاني نصيحة زينة", "latin": "3atani nasiha zayna"},
+      "saudi": {"phrase": "عطاني نصيحة زينة", "latin": "3atani nasiha zayna"},
+      "msa": {"phrase": "أعطاني نصيحة جيدة", "latin": "a3tani nasiha jayyida"}
+    },
+    "context": "advice_received",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_255",
+    "darija": "واش كاتقرا شي حاجة دابا؟",
+    "darija_latin": "wash kat'ra shi haja daba?",
+    "english": "Are you reading something now?",
+    "translations": {
+      "lebanese": {"phrase": "عم بتقرا شي هلأ؟", "latin": "3am bti'ra shi halla'?"},
+      "syrian": {"phrase": "عم بتقرا شي هلأ؟", "latin": "3am bti'ra shi halla'?"},
+      "emirati": {"phrase": "قاعد تقرا شي الحين؟", "latin": "ga3id tigra shay alheen?"},
+      "saudi": {"phrase": "قاعد تقرا شي الحين؟", "latin": "ga3id tigra shay alheen?"},
+      "msa": {"phrase": "هل تقرأ شيئاً الآن؟", "latin": "hal taqra' shay'an al'an?"}
+    },
+    "context": "current_activity",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_256",
+    "darija": "كنت خايف نكون تأخرت",
+    "darija_latin": "kont khayef nkon t'akhkhert",
+    "english": "I was afraid I was late",
+    "translations": {
+      "lebanese": {"phrase": "كنت خايف كون تأخرت", "latin": "kent khayef kun t'akhkhart"},
+      "syrian": {"phrase": "كنت خايف كون تأخرت", "latin": "kent khayef kun t'akhkhart"},
+      "emirati": {"phrase": "كنت خايف أكون تأخرت", "latin": "kunt khayif akun ta'akhkhart"},
+      "saudi": {"phrase": "كنت خايف أكون تأخرت", "latin": "kunt khayif akun ta'akhkhart"},
+      "msa": {"phrase": "كنت خائفاً أن أكون قد تأخرت", "latin": "kuntu kha'ifan an akun qad ta'akhkhart"}
+    },
+    "context": "worry_past",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_257",
+    "darija": "بغيت نبدل الموضوع",
+    "darija_latin": "bghit nbeddel lmawdu3",
+    "english": "I want to change the subject",
+    "translations": {
+      "lebanese": {"phrase": "بدي غير الموضوع", "latin": "baddi ghayyir ilmawdu3"},
+      "syrian": {"phrase": "بدي غير الموضوع", "latin": "baddi ghayyir ilmawdu3"},
+      "emirati": {"phrase": "أبا أغير الموضوع", "latin": "aba aghayyir almawdhu3"},
+      "saudi": {"phrase": "أبي أغير الموضوع", "latin": "abi aghayyir almawdhu3"},
+      "msa": {"phrase": "أريد تغيير الموضوع", "latin": "urid taghyir almawdu3"}
+    },
+    "context": "conversation_redirect",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_258",
+    "darija": "واش سمعتي الأخبار؟",
+    "darija_latin": "wash sme3ti l'akhbar?",
+    "english": "Did you hear the news?",
+    "translations": {
+      "lebanese": {"phrase": "سمعت الأخبار؟", "latin": "smi3t il'akhbar?"},
+      "syrian": {"phrase": "سمعت الأخبار؟", "latin": "smi3t il'akhbar?"},
+      "emirati": {"phrase": "سمعت الأخبار؟", "latin": "sima3t al'akhbar?"},
+      "saudi": {"phrase": "سمعت الأخبار؟", "latin": "sima3t al'akhbar?"},
+      "msa": {"phrase": "هل سمعت الأخبار؟", "latin": "hal sami3ta al'akhbar?"}
+    },
+    "context": "news_sharing",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_259",
+    "darija": "راك عارف أشنو كانقصد",
+    "darija_latin": "rak 3aref ashnu kan'sed",
+    "english": "You know what I mean",
+    "translations": {
+      "lebanese": {"phrase": "بتعرف شو قصدي", "latin": "bta3ref shu 'asdi"},
+      "syrian": {"phrase": "بتعرف شو قصدي", "latin": "bta3ref shu 'asdi"},
+      "emirati": {"phrase": "تدري شو أقصد", "latin": "tadri shu agsid"},
+      "saudi": {"phrase": "تدري وش أقصد", "latin": "tadri wesh agsid"},
+      "msa": {"phrase": "أنت تعرف ما أقصد", "latin": "anta ta3rif ma aqsid"}
+    },
+    "context": "understanding_check",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_260",
+    "darija": "ماشي هاكاك خاصو يكون",
+    "darija_latin": "mashi hakkak khaso ykon",
+    "english": "That's not how it should be",
+    "translations": {
+      "lebanese": {"phrase": "مش هيك لازم يكون", "latin": "mish heyk lazem ykon"},
+      "syrian": {"phrase": "مو هيك لازم يكون", "latin": "mu heyk lazem ykon"},
+      "emirati": {"phrase": "مب جذي المفروض يكون", "latin": "mub chidhi almafrudh yakun"},
+      "saudi": {"phrase": "مو كذا المفروض يكون", "latin": "mu kitha almafrudh yakun"},
+      "msa": {"phrase": "ليس هكذا يجب أن يكون", "latin": "laysa hakatha yajibu an yakun"}
+    },
+    "context": "correction",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_261",
+    "darija": "مازال عندي بزاف ديال الخدمة",
+    "darija_latin": "mazal 3ndi bezzaf dyal lkhedma",
+    "english": "I still have a lot of work",
+    "translations": {
+      "lebanese": {"phrase": "لسا عندي كتير شغل", "latin": "lissa 3indi ktir shighil"},
+      "syrian": {"phrase": "لسا عندي كتير شغل", "latin": "lissa 3indi ktir shighil"},
+      "emirati": {"phrase": "باقي عندي وايد شغل", "latin": "baqi 3indi wayed shughul"},
+      "saudi": {"phrase": "باقي عندي كثير شغل", "latin": "baqi 3indi kathir shughul"},
+      "msa": {"phrase": "ما زال لدي الكثير من العمل", "latin": "ma zala ladayya alkathir min al3amal"}
+    },
+    "context": "workload",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_262",
+    "darija": "غادي نحتاج مساعدتك",
+    "darija_latin": "ghadi neHtaj musa3adtek",
+    "english": "I will need your help",
+    "translations": {
+      "lebanese": {"phrase": "رح احتاج مساعدتك", "latin": "rah ihtaj muse3dtak"},
+      "syrian": {"phrase": "رح احتاج مساعدتك", "latin": "rah ihtaj muse3dtak"},
+      "emirati": {"phrase": "بحتاج مساعدتك", "latin": "bahtaj musa3adtak"},
+      "saudi": {"phrase": "بحتاج مساعدتك", "latin": "bahtaj musa3adtak"},
+      "msa": {"phrase": "سأحتاج مساعدتك", "latin": "sa'ahtaj musa3adatuk"}
+    },
+    "context": "future_help",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_263",
+    "darija": "واش هادا كلو ليا؟",
+    "darija_latin": "wash hada kollo liya?",
+    "english": "Is all this for me?",
+    "translations": {
+      "lebanese": {"phrase": "كل هيدا إلي؟", "latin": "kell hayda ili?"},
+      "syrian": {"phrase": "كل هاد إلي؟", "latin": "kell had ili?"},
+      "emirati": {"phrase": "كل هذا لي؟", "latin": "kull hadha li?"},
+      "saudi": {"phrase": "كل هذا لي؟", "latin": "kull hadha li?"},
+      "msa": {"phrase": "هل كل هذا لي؟", "latin": "hal kullu hadha li?"}
+    },
+    "context": "surprise_gift",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_264",
+    "darija": "كيفاش تعلمتي هادشي؟",
+    "darija_latin": "kifash t3allemti hadshi?",
+    "english": "How did you learn this?",
+    "translations": {
+      "lebanese": {"phrase": "كيف تعلمت هيدا؟", "latin": "kif t3allamt hayda?"},
+      "syrian": {"phrase": "كيف تعلمت هاد؟", "latin": "kif t3allamt had?"},
+      "emirati": {"phrase": "كيف تعلمت هذا؟", "latin": "kaif ta3allamta hadha?"},
+      "saudi": {"phrase": "كيف تعلمت هذا؟", "latin": "kaif ta3allamta hadha?"},
+      "msa": {"phrase": "كيف تعلمت هذا؟", "latin": "kayfa ta3allamta hadha?"}
+    },
+    "context": "learning_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_265",
+    "darija": "خاصك تكون صبور",
+    "darija_latin": "khasek tkon sbor",
+    "english": "You need to be patient",
+    "translations": {
+      "lebanese": {"phrase": "لازم تكون صبور", "latin": "lazem tkun sabur"},
+      "syrian": {"phrase": "لازم تكون صبور", "latin": "lazem tkun sabur"},
+      "emirati": {"phrase": "لازم تكون صبور", "latin": "lazim takun sabur"},
+      "saudi": {"phrase": "لازم تكون صبور", "latin": "lazim takun sabur"},
+      "msa": {"phrase": "يجب أن تكون صبوراً", "latin": "yajibu an takun saburan"}
+    },
+    "context": "advice_patience",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_266",
+    "darija": "مابقيتش كانشوفو",
+    "darija_latin": "mab'itsh kanshufo",
+    "english": "I don't see him anymore",
+    "translations": {
+      "lebanese": {"phrase": "ما عدت شوفو", "latin": "ma 3edet shufo"},
+      "syrian": {"phrase": "ما عدت شوفو", "latin": "ma 3edet shufo"},
+      "emirati": {"phrase": "ما عدت أشوفه", "latin": "ma 3idt ashufah"},
+      "saudi": {"phrase": "ما عدت أشوفه", "latin": "ma 3udt ashufah"},
+      "msa": {"phrase": "لم أعد أراه", "latin": "lam a3ud arahu"}
+    },
+    "context": "lost_contact",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_267",
+    "darija": "واش غادي تجي معايا؟",
+    "darija_latin": "wash ghadi tji m3aya?",
+    "english": "Will you come with me?",
+    "translations": {
+      "lebanese": {"phrase": "رح تجي معي؟", "latin": "rah tiji ma3i?"},
+      "syrian": {"phrase": "رح تجي معي؟", "latin": "rah tiji ma3i?"},
+      "emirati": {"phrase": "بتيي وياي؟", "latin": "bityy wiyyay?"},
+      "saudi": {"phrase": "بتجي معاي؟", "latin": "bitji ma3ay?"},
+      "msa": {"phrase": "هل ستأتي معي؟", "latin": "hal sata'ti ma3i?"}
+    },
+    "context": "invitation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_268",
+    "darija": "هادا أحسن حل",
+    "darija_latin": "hada aHsen Hall",
+    "english": "This is the best solution",
+    "translations": {
+      "lebanese": {"phrase": "هيدا أحسن حل", "latin": "hayda ahsan hall"},
+      "syrian": {"phrase": "هاد أحسن حل", "latin": "had ahsan hall"},
+      "emirati": {"phrase": "هذا أحسن حل", "latin": "hadha ahsan hall"},
+      "saudi": {"phrase": "هذا أحسن حل", "latin": "hadha ahsan hall"},
+      "msa": {"phrase": "هذا أفضل حل", "latin": "hadha afdal hall"}
+    },
+    "context": "problem_solving",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_269",
+    "darija": "ماعنديش شك فيك",
+    "darija_latin": "ma3ndish shek fik",
+    "english": "I have no doubt in you",
+    "translations": {
+      "lebanese": {"phrase": "ما عندي شك فيك", "latin": "ma 3indi shakk fik"},
+      "syrian": {"phrase": "ما عندي شك فيك", "latin": "ma 3indi shakk fik"},
+      "emirati": {"phrase": "ما عندي شك فيك", "latin": "ma 3indi shakk fik"},
+      "saudi": {"phrase": "ما عندي شك فيك", "latin": "ma 3indi shakk fik"},
+      "msa": {"phrase": "ليس لدي شك فيك", "latin": "laysa ladayya shakk fik"}
+    },
+    "context": "trust",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_270",
+    "darija": "كلشي واضح دابا",
+    "darija_latin": "kolshi wadeH daba",
+    "english": "Everything is clear now",
+    "translations": {
+      "lebanese": {"phrase": "كلشي واضح هلأ", "latin": "kellshi wadih halla'"},
+      "syrian": {"phrase": "كلشي واضح هلأ", "latin": "kellshi wadih halla'"},
+      "emirati": {"phrase": "كلشي واضح الحين", "latin": "killshay wadhih alheen"},
+      "saudi": {"phrase": "كلشي واضح الحين", "latin": "killshay wadhih alheen"},
+      "msa": {"phrase": "كل شيء واضح الآن", "latin": "kullu shay' wadhih al'an"}
+    },
+    "context": "understanding",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_271",
+    "darija": "خليني نوريك",
+    "darija_latin": "khallini nwerrik",
+    "english": "Let me show you",
+    "translations": {
+      "lebanese": {"phrase": "خليني فرجيك", "latin": "khallini farjik"},
+      "syrian": {"phrase": "خليني فرجيك", "latin": "khallini farjik"},
+      "emirati": {"phrase": "خلني أوريك", "latin": "khalni awarik"},
+      "saudi": {"phrase": "خلني أوريك", "latin": "khalni awarik"},
+      "msa": {"phrase": "دعني أريك", "latin": "da3ni urik"}
+    },
+    "context": "demonstration",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_272",
+    "darija": "واش جبتي معاك الفلوس؟",
+    "darija_latin": "wash jebti m3ak lflus?",
+    "english": "Did you bring money with you?",
+    "translations": {
+      "lebanese": {"phrase": "جبت معك مصاري؟", "latin": "jebet ma3ak masari?"},
+      "syrian": {"phrase": "جبت معك مصاري؟", "latin": "jebet ma3ak masari?"},
+      "emirati": {"phrase": "يبت وياك فلوس؟", "latin": "yabt wiyyak flus?"},
+      "saudi": {"phrase": "جبت معاك فلوس؟", "latin": "jibt ma3ak flus?"},
+      "msa": {"phrase": "هل أحضرت معك نقوداً؟", "latin": "hal ahdarta ma3ak nuqudan?"}
+    },
+    "context": "money_check",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_273",
+    "darija": "هادي مسألة وقت",
+    "darija_latin": "hadi mas'alat we't",
+    "english": "It's a matter of time",
+    "translations": {
+      "lebanese": {"phrase": "هيدي مسألة وقت", "latin": "haydi mas'alit wa't"},
+      "syrian": {"phrase": "هادي مسألة وقت", "latin": "hadi mas'alit wa't"},
+      "emirati": {"phrase": "هاي مسألة وقت", "latin": "hay mas'alat wagt"},
+      "saudi": {"phrase": "هذي مسألة وقت", "latin": "hathi mas'alat wagt"},
+      "msa": {"phrase": "إنها مسألة وقت", "latin": "innaha mas'alat waqt"}
+    },
+    "context": "inevitability",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_274",
+    "darija": "غادي ندير جهدي",
+    "darija_latin": "ghadi ndir jehdi",
+    "english": "I will do my best",
+    "translations": {
+      "lebanese": {"phrase": "رح اعمل جهدي", "latin": "rah i3mel jehdi"},
+      "syrian": {"phrase": "رح اعمل جهدي", "latin": "rah i3mel jehdi"},
+      "emirati": {"phrase": "بسوي جهدي", "latin": "basawwi juhdi"},
+      "saudi": {"phrase": "بسوي جهدي", "latin": "basawwi juhdi"},
+      "msa": {"phrase": "سأبذل قصارى جهدي", "latin": "sa'abthul qusara juhdi"}
+    },
+    "context": "commitment",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_275",
+    "darija": "ماشي بعيد من هنا",
+    "darija_latin": "mashi b3id men hna",
+    "english": "It's not far from here",
+    "translations": {
+      "lebanese": {"phrase": "مش بعيد من هون", "latin": "mish b3id min hon"},
+      "syrian": {"phrase": "مو بعيد من هون", "latin": "mu b3id min hon"},
+      "emirati": {"phrase": "مب بعيد من هني", "latin": "mub ba3id min hini"},
+      "saudi": {"phrase": "مو بعيد من هنا", "latin": "mu ba3id min hina"},
+      "msa": {"phrase": "ليس بعيداً من هنا", "latin": "laysa ba3idan min huna"}
+    },
+    "context": "distance",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_276",
+    "darija": "كان خاصني نقول ليك",
+    "darija_latin": "kan khasni n'ul lik",
+    "english": "I should have told you",
+    "translations": {
+      "lebanese": {"phrase": "كان لازم قلك", "latin": "ken lazem 'ellak"},
+      "syrian": {"phrase": "كان لازم قلك", "latin": "ken lazem 'ellak"},
+      "emirati": {"phrase": "كان لازم أقولك", "latin": "kan lazim agulak"},
+      "saudi": {"phrase": "كان لازم أقولك", "latin": "kan lazim agulak"},
+      "msa": {"phrase": "كان يجب أن أقول لك", "latin": "kana yajibu an aqul lak"}
+    },
+    "context": "regret",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_277",
+    "darija": "واش كاتظن بلي غادي ينجح؟",
+    "darija_latin": "wash katdhen belli ghadi yenjeH?",
+    "english": "Do you think he will succeed?",
+    "translations": {
+      "lebanese": {"phrase": "بتظن رح ينجح؟", "latin": "btdhenn rah yinjah?"},
+      "syrian": {"phrase": "بتظن رح ينجح؟", "latin": "btdhenn rah yinjah?"},
+      "emirati": {"phrase": "تظن بينجح؟", "latin": "tathun bayinjah?"},
+      "saudi": {"phrase": "تظن بينجح؟", "latin": "tathun bayinjah?"},
+      "msa": {"phrase": "هل تظن أنه سينجح؟", "latin": "hal tathunnu annahu sayanjah?"}
+    },
+    "context": "opinion_future",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_278",
+    "darija": "عندك شي سؤال آخر؟",
+    "darija_latin": "3ndek shi su'al akhor?",
+    "english": "Do you have any other question?",
+    "translations": {
+      "lebanese": {"phrase": "عندك سؤال تاني؟", "latin": "3indak su'al teni?"},
+      "syrian": {"phrase": "عندك سؤال تاني؟", "latin": "3indak su'al teni?"},
+      "emirati": {"phrase": "عندك سؤال ثاني؟", "latin": "3indak su'al thani?"},
+      "saudi": {"phrase": "عندك سؤال ثاني؟", "latin": "3indak su'al thani?"},
+      "msa": {"phrase": "هل لديك سؤال آخر؟", "latin": "hal ladayka su'al akhar?"}
+    },
+    "context": "additional_inquiry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_279",
+    "darija": "ماعمري درت هادشي",
+    "darija_latin": "ma3omri dert hadshi",
+    "english": "I've never done this",
+    "translations": {
+      "lebanese": {"phrase": "عمري ما عملت هيدا", "latin": "3omri ma 3melt hayda"},
+      "syrian": {"phrase": "عمري ما عملت هاد", "latin": "3omri ma 3melt had"},
+      "emirati": {"phrase": "عمري ما سويت هذا", "latin": "3umri ma sawwayt hadha"},
+      "saudi": {"phrase": "عمري ما سويت هذا", "latin": "3umri ma sawwayt hadha"},
+      "msa": {"phrase": "لم أفعل هذا قط", "latin": "lam af3al hadha qatt"}
+    },
+    "context": "inexperience",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_280",
+    "darija": "كنت كانحاول نفهم",
+    "darija_latin": "kont kanHawel nfhem",
+    "english": "I was trying to understand",
+    "translations": {
+      "lebanese": {"phrase": "كنت عم حاول افهم", "latin": "kent 3am hawil ifham"},
+      "syrian": {"phrase": "كنت عم حاول افهم", "latin": "kent 3am hawil ifham"},
+      "emirati": {"phrase": "كنت أحاول أفهم", "latin": "kunt uhawil afham"},
+      "saudi": {"phrase": "كنت أحاول أفهم", "latin": "kunt uhawil afham"},
+      "msa": {"phrase": "كنت أحاول أن أفهم", "latin": "kuntu uhawilu an afham"}
+    },
+    "context": "past_effort",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_281",
+    "darija": "واش باقي عاقل عليا؟",
+    "darija_latin": "wash ba'i 3a'el 3liya?",
+    "english": "Do you still remember me?",
+    "translations": {
+      "lebanese": {"phrase": "لسا متذكرني؟", "latin": "lissa mitzakkirni?"},
+      "syrian": {"phrase": "لسا متذكرني؟", "latin": "lissa mitzakkirni?"},
+      "emirati": {"phrase": "باقي متذكرني؟", "latin": "baqi mitthakkirni?"},
+      "saudi": {"phrase": "باقي متذكرني؟", "latin": "baqi mitthakkirni?"},
+      "msa": {"phrase": "هل ما زلت تتذكرني؟", "latin": "hal ma zilta tatathakkaruni?"}
+    },
+    "context": "memory_check",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_282",
+    "darija": "هادا راه مهم بزاف",
+    "darija_latin": "hada rah mohim bezzaf",
+    "english": "This is very important",
+    "translations": {
+      "lebanese": {"phrase": "هيدا مهم كتير", "latin": "hayda mhim ktir"},
+      "syrian": {"phrase": "هاد مهم كتير", "latin": "had mhim ktir"},
+      "emirati": {"phrase": "هذا مهم وايد", "latin": "hadha muhim wayed"},
+      "saudi": {"phrase": "هذا مهم مرة", "latin": "hadha muhim marra"},
+      "msa": {"phrase": "هذا مهم جداً", "latin": "hadha muhim jiddan"}
+    },
+    "context": "importance",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_283",
+    "darija": "ماخاصكش تخاف",
+    "darija_latin": "makhaseksh tkhaf",
+    "english": "You shouldn't be afraid",
+    "translations": {
+      "lebanese": {"phrase": "ما لازم تخاف", "latin": "ma lazem tkhaf"},
+      "syrian": {"phrase": "ما لازم تخاف", "latin": "ma lazem tkhaf"},
+      "emirati": {"phrase": "ما لازم تخاف", "latin": "ma lazim takhaf"},
+      "saudi": {"phrase": "ما لازم تخاف", "latin": "ma lazim takhaf"},
+      "msa": {"phrase": "لا يجب أن تخاف", "latin": "la yajibu an takhaf"}
+    },
+    "context": "encouragement",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_284",
+    "darija": "فين كنتي ساكن قبل؟",
+    "darija_latin": "fin konti saken 'bel?",
+    "english": "Where did you live before?",
+    "translations": {
+      "lebanese": {"phrase": "وين كنت ساكن قبل؟", "latin": "wayn kent sekin 'abel?"},
+      "syrian": {"phrase": "وين كنت ساكن قبل؟", "latin": "wayn kent sekin 'abel?"},
+      "emirati": {"phrase": "وين كنت ساكن قبل؟", "latin": "wayn kunt sakin gabl?"},
+      "saudi": {"phrase": "وين كنت ساكن قبل؟", "latin": "wayn kunt sakin gabl?"},
+      "msa": {"phrase": "أين كنت تسكن من قبل؟", "latin": "ayna kunta taskun min qabl?"}
+    },
+    "context": "past_residence",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_285",
+    "darija": "غادي نستنا حتى ترجع",
+    "darija_latin": "ghadi nestna Hetta terje3",
+    "english": "I'll wait until you come back",
+    "translations": {
+      "lebanese": {"phrase": "رح انطر لحتى ترجع", "latin": "rah intor lahatta tirja3"},
+      "syrian": {"phrase": "رح انطر لحتى ترجع", "latin": "rah intor lahatta tirja3"},
+      "emirati": {"phrase": "بانتظر لين ترجع", "latin": "bantathir leen tirja3"},
+      "saudi": {"phrase": "بانتظر لين ترجع", "latin": "bantathir leen tirja3"},
+      "msa": {"phrase": "سأنتظر حتى تعود", "latin": "sa'antathir hatta ta3ud"}
+    },
+    "context": "waiting_promise",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_286",
+    "darija": "ماتقولش هاكاك",
+    "darija_latin": "mat'ulsh hakkak",
+    "english": "Don't say that",
+    "translations": {
+      "lebanese": {"phrase": "ما تقول هيك", "latin": "ma t'ul heyk"},
+      "syrian": {"phrase": "ما تقول هيك", "latin": "ma t'ul heyk"},
+      "emirati": {"phrase": "لا تقول جذي", "latin": "la tgul chidhi"},
+      "saudi": {"phrase": "لا تقول كذا", "latin": "la tgul kitha"},
+      "msa": {"phrase": "لا تقل ذلك", "latin": "la taqul thalik"}
+    },
+    "context": "disagreement",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_287",
+    "darija": "كاين شي حاجة خاصة؟",
+    "darija_latin": "kayn shi haja khassa?",
+    "english": "Is there something special?",
+    "translations": {
+      "lebanese": {"phrase": "في شي خاص؟", "latin": "fi shi khas?"},
+      "syrian": {"phrase": "في شي خاص؟", "latin": "fi shi khas?"},
+      "emirati": {"phrase": "في شي خاص؟", "latin": "fi shay khas?"},
+      "saudi": {"phrase": "في شي خاص؟", "latin": "fi shay khas?"},
+      "msa": {"phrase": "هل هناك شيء خاص؟", "latin": "hal hunaka shay' khas?"}
+    },
+    "context": "special_occasion",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_288",
+    "darija": "بديت كانفهم شوية",
+    "darija_latin": "bdit kanfhem shwiya",
+    "english": "I'm starting to understand a bit",
+    "translations": {
+      "lebanese": {"phrase": "بلشت افهم شوي", "latin": "balashet ifham shway"},
+      "syrian": {"phrase": "بلشت افهم شوي", "latin": "balashet ifham shway"},
+      "emirati": {"phrase": "بديت أفهم شوي", "latin": "badayt afham shway"},
+      "saudi": {"phrase": "بديت أفهم شوي", "latin": "badayt afham shway"},
+      "msa": {"phrase": "بدأت أفهم قليلاً", "latin": "bada'tu afham qalilan"}
+    },
+    "context": "gradual_understanding",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_289",
+    "darija": "واش نقدر نتكل عليك؟",
+    "darija_latin": "wash n'der netkel 3lik?",
+    "english": "Can I count on you?",
+    "translations": {
+      "lebanese": {"phrase": "فيني اتكل عليك؟", "latin": "fini ittikel 3aleyk?"},
+      "syrian": {"phrase": "فيني اتكل عليك؟", "latin": "fini ittikel 3aleyk?"},
+      "emirati": {"phrase": "أقدر اتكل عليك؟", "latin": "agdar attakel 3aleek?"},
+      "saudi": {"phrase": "أقدر اتكل عليك؟", "latin": "agdar attakel 3aleek?"},
+      "msa": {"phrase": "هل يمكنني الاعتماد عليك؟", "latin": "hal yumkinuni ali3timad 3alayk?"}
+    },
+    "context": "reliability",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_290",
+    "darija": "هادا خطأ ديالي",
+    "darija_latin": "hada khata' dyali",
+    "english": "This is my mistake",
+    "translations": {
+      "lebanese": {"phrase": "هيدا غلطي", "latin": "hayda ghalti"},
+      "syrian": {"phrase": "هاد غلطي", "latin": "had ghalti"},
+      "emirati": {"phrase": "هذا غلطي", "latin": "hadha ghalti"},
+      "saudi": {"phrase": "هذا غلطي", "latin": "hadha ghalti"},
+      "msa": {"phrase": "هذا خطئي", "latin": "hadha khata'i"}
+    },
+    "context": "admission_fault",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_291",
+    "darija": "كيفاش غادي نوصلو؟",
+    "darija_latin": "kifash ghadi nweslo?",
+    "english": "How will we get there?",
+    "translations": {
+      "lebanese": {"phrase": "كيف رح نوصل؟", "latin": "kif rah nusal?"},
+      "syrian": {"phrase": "كيف رح نوصل؟", "latin": "kif rah nusal?"},
+      "emirati": {"phrase": "كيف بنوصل؟", "latin": "kaif binusal?"},
+      "saudi": {"phrase": "كيف بنوصل؟", "latin": "kaif binusal?"},
+      "msa": {"phrase": "كيف سنصل؟", "latin": "kayfa sanasil?"}
+    },
+    "context": "transportation_planning",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_292",
+    "darija": "ماكنتش كانتوقع هادشي",
+    "darija_latin": "makontsh kantwe'3 hadshi",
+    "english": "I wasn't expecting this",
+    "translations": {
+      "lebanese": {"phrase": "ما كنت متوقع هيدا", "latin": "ma kent mitwaqi3 hayda"},
+      "syrian": {"phrase": "ما كنت متوقع هاد", "latin": "ma kent mitwaqi3 had"},
+      "emirati": {"phrase": "ما كنت متوقع هذا", "latin": "ma kunt mutawaqqi3 hadha"},
+      "saudi": {"phrase": "ما كنت متوقع هذا", "latin": "ma kunt mutawaqqi3 hadha"},
+      "msa": {"phrase": "لم أكن أتوقع هذا", "latin": "lam akun atawaqqa3 hadha"}
+    },
+    "context": "surprise",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_293",
+    "darija": "عطيه فرصة أخرى",
+    "darija_latin": "3tih forsa okhra",
+    "english": "Give him another chance",
+    "translations": {
+      "lebanese": {"phrase": "عطيه فرصة تانية", "latin": "3atih forsa tenye"},
+      "syrian": {"phrase": "عطيه فرصة تانية", "latin": "3atih forsa tenye"},
+      "emirati": {"phrase": "عطه فرصة ثانية", "latin": "3ath fursa thanya"},
+      "saudi": {"phrase": "عطه فرصة ثانية", "latin": "3ath fursa thanya"},
+      "msa": {"phrase": "أعطه فرصة أخرى", "latin": "a3tih fursa ukhra"}
+    },
+    "context": "second_chance_request",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_294",
+    "darija": "راني مشغول دابا",
+    "darija_latin": "rani meshghul daba",
+    "english": "I'm busy now",
+    "translations": {
+      "lebanese": {"phrase": "أنا مشغول هلأ", "latin": "ana mashghul halla'"},
+      "syrian": {"phrase": "أنا مشغول هلأ", "latin": "ana mashghul halla'"},
+      "emirati": {"phrase": "أنا مشغول الحين", "latin": "ana mashghul alheen"},
+      "saudi": {"phrase": "أنا مشغول الحين", "latin": "ana mashghul alheen"},
+      "msa": {"phrase": "أنا مشغول الآن", "latin": "ana mashghul al'an"}
+    },
+    "context": "busy_status",
+    "difficulty": "beginner"
+  },
+  {
+    "id": "sent_295",
+    "darija": "شحال من مرة قلت ليك؟",
+    "darija_latin": "shHal men merra 'elt lik?",
+    "english": "How many times did I tell you?",
+    "translations": {
+      "lebanese": {"phrase": "كم مرة قلتلك؟", "latin": "kam marra 'eltellak?"},
+      "syrian": {"phrase": "كم مرة قلتلك؟", "latin": "kam marra 'eltellak?"},
+      "emirati": {"phrase": "كم مرة قلتلك؟", "latin": "kam marra geltlak?"},
+      "saudi": {"phrase": "كم مرة قلتلك؟", "latin": "kam marra gultlak?"},
+      "msa": {"phrase": "كم مرة قلت لك؟", "latin": "kam marratin qultu lak?"}
+    },
+    "context": "frustration_repetition",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_296",
+    "darija": "واش كاتعرف تطيب؟",
+    "darija_latin": "wash kat3ref tteyeb?",
+    "english": "Do you know how to cook?",
+    "translations": {
+      "lebanese": {"phrase": "بتعرف تطبخ؟", "latin": "bta3ref tetbokh?"},
+      "syrian": {"phrase": "بتعرف تطبخ؟", "latin": "bta3ref tetbokh?"},
+      "emirati": {"phrase": "تعرف تطبخ؟", "latin": "ta3rif tatbukh?"},
+      "saudi": {"phrase": "تعرف تطبخ؟", "latin": "ta3rif tatbukh?"},
+      "msa": {"phrase": "هل تعرف الطبخ؟", "latin": "hal ta3rif attabkh?"}
+    },
+    "context": "cooking_skill",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_297",
+    "darija": "ماتنساش تدير هادشي",
+    "darija_latin": "matnsash tdir hadshi",
+    "english": "Don't forget to do this",
+    "translations": {
+      "lebanese": {"phrase": "ما تنسى تعمل هيدا", "latin": "ma tensa ta3mel hayda"},
+      "syrian": {"phrase": "ما تنسى تعمل هاد", "latin": "ma tensa ta3mel had"},
+      "emirati": {"phrase": "لا تنسى تسوي هذا", "latin": "la tansa tisawwi hadha"},
+      "saudi": {"phrase": "لا تنسى تسوي هذا", "latin": "la tansa tisawwi hadha"},
+      "msa": {"phrase": "لا تنسَ أن تفعل هذا", "latin": "la tansa an taf3al hadha"}
+    },
+    "context": "reminder",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_298",
+    "darija": "كان يمكن ليا نساعدك",
+    "darija_latin": "kan yemken liya nsa3dek",
+    "english": "I could have helped you",
+    "translations": {
+      "lebanese": {"phrase": "كان فيني ساعدك", "latin": "ken fini se3dak"},
+      "syrian": {"phrase": "كان فيني ساعدك", "latin": "ken fini se3dak"},
+      "emirati": {"phrase": "كان أقدر أساعدك", "latin": "kan agdar asa3dik"},
+      "saudi": {"phrase": "كان أقدر أساعدك", "latin": "kan agdar asa3dik"},
+      "msa": {"phrase": "كان بإمكاني مساعدتك", "latin": "kana bi'imkani musa3adatuk"}
+    },
+    "context": "missed_opportunity",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sent_299",
+    "darija": "بقيت وحدي ف الدار",
+    "darija_latin": "b'it weHdi f ddar",
+    "english": "I stayed alone at home",
+    "translations": {
+      "lebanese": {"phrase": "ضليت لوحدي بالبيت", "latin": "dallayt lawahdi bilbayt"},
+      "syrian": {"phrase": "ضليت لوحدي بالبيت", "latin": "dallayt lawahdi bilbayt"},
+      "emirati": {"phrase": "بقيت وحدي في البيت", "latin": "bagayt wahdi fil bayt"},
+      "saudi": {"phrase": "بقيت وحدي في البيت", "latin": "bagayt wahdi fil bayt"},
+      "msa": {"phrase": "بقيت وحدي في البيت", "latin": "baqaytu wahdi fil bayt"}
+    },
+    "context": "solitude",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sent_300",
+    "darija": "الحمد لله على كلشي",
+    "darija_latin": "lHamdulillah 3la kolshi",
+    "english": "Thank God for everything",
+    "translations": {
+      "lebanese": {"phrase": "الحمد لله على كلشي", "latin": "ilhamdulillah 3ala kellshi"},
+      "syrian": {"phrase": "الحمد لله على كلشي", "latin": "ilhamdulillah 3ala kellshi"},
+      "emirati": {"phrase": "الحمد لله على كلشي", "latin": "alhamdulillah 3ala killshay"},
+      "saudi": {"phrase": "الحمد لله على كلشي", "latin": "alhamdulillah 3ala killshay"},
+      "msa": {"phrase": "الحمد لله على كل شيء", "latin": "alhamdulillah 3ala kulli shay'"}
+    },
+    "context": "gratitude",
+    "difficulty": "intermediate"
+  }
+]

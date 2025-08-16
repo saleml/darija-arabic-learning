@@ -1,0 +1,2081 @@
+{
+  "phrases": [
+    {
+      "id": "idiom_001",
+      "darija": "اللي فات مات",
+      "darija_latin": "lli fat mat",
+      "literal_english": "what passed died",
+      "translations": {
+        "lebanese": {
+          "phrase": "اللي راح راح",
+          "latin": "yalli rah rah",
+          "literal": "what went went",
+          "usage_note": "Let bygones be bygones"
+        },
+        "syrian": {
+          "phrase": "اللي فات مات",
+          "latin": "yalli fat mat",
+          "literal": "what passed died",
+          "usage_note": "Same idiom used"
+        },
+        "emirati": {
+          "phrase": "اللي طاف طاف",
+          "latin": "illi taf taf",
+          "literal": "what passed passed",
+          "usage_note": "Gulf variant"
+        },
+        "saudi": {
+          "phrase": "اللي راح راح",
+          "latin": "illi rah rah",
+          "literal": "what went went",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "ما مضى قد مضى",
+          "latin": "ma madha qad madha",
+          "literal": "what passed has passed",
+          "usage_note": "Formal equivalent"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "past", "philosophy", "forgiveness"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["letting go of past", "forgiveness", "moving on"]
+      },
+      "cultural_notes": "Common idiom about not dwelling on the past"
+    },
+    {
+      "id": "idiom_002",
+      "darija": "دير الخير و نساه",
+      "darija_latin": "dir lkhir w nsah",
+      "literal_english": "do good and forget it",
+      "translations": {
+        "lebanese": {
+          "phrase": "اعمل الخير وارميه بالبحر",
+          "latin": "i3mal el khayr w irmih bil baher",
+          "literal": "do good and throw it in the sea",
+          "usage_note": "Do good without expecting return"
+        },
+        "syrian": {
+          "phrase": "اعمل المعروف وانساه",
+          "latin": "i3mal el ma3rouf w insah",
+          "literal": "do the favor and forget it",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "سوي الخير وانساه",
+          "latin": "sawwi el khair w insah",
+          "literal": "do good and forget it",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "اعمل الخير وارمه في البحر",
+          "latin": "i3mal al khair w irmih fil bahr",
+          "literal": "do good and throw it in the sea",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "افعل الخير ولا تنتظر الجزاء",
+          "latin": "if3al al khayr wala tantathir al jaza'",
+          "literal": "do good and don't expect reward",
+          "usage_note": "Formal moral teaching"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "morality", "charity", "wisdom"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["moral advice", "teaching generosity", "wisdom sharing"]
+      },
+      "cultural_notes": "Universal Arab wisdom about selfless good deeds"
+    },
+    {
+      "id": "idiom_003",
+      "darija": "العين بصيرة واليد قصيرة",
+      "darija_latin": "l3ayn bSira w lyed qSira",
+      "literal_english": "the eye sees but the hand is short",
+      "translations": {
+        "lebanese": {
+          "phrase": "العين بتشوف بس الإيد قصيرة",
+          "latin": "el 3ayn btshuf bass el id asira",
+          "literal": "the eye sees but the hand is short",
+          "usage_note": "Want but can't afford"
+        },
+        "syrian": {
+          "phrase": "العين بصيرة والإيد قصيرة",
+          "latin": "el 3ayn basira w el id asira",
+          "literal": "the eye sees but the hand is short",
+          "usage_note": "Same meaning"
+        },
+        "emirati": {
+          "phrase": "العين تشوف والإيد قصيرة",
+          "latin": "el 3ain tshuf w el eed gasira",
+          "literal": "the eye sees but the hand is short",
+          "usage_note": "Gulf variant"
+        },
+        "saudi": {
+          "phrase": "العين تطمع واليد قصيرة",
+          "latin": "al 3ayn tatma3 w al yad qasira",
+          "literal": "the eye covets but the hand is short",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "العين بصيرة واليد قصيرة",
+          "latin": "al 3ayn basira w al yad qasira",
+          "literal": "the eye sees but the hand is short",
+          "usage_note": "Formal proverb"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "limitation", "desire", "inability"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing financial limitation", "wanting but unable"]
+      },
+      "cultural_notes": "Expresses desire without means to achieve it"
+    },
+    {
+      "id": "idiom_004",
+      "darija": "كل شي بوقتو زوين",
+      "darija_latin": "kull shi bweqto zwin",
+      "literal_english": "everything in its time is beautiful",
+      "translations": {
+        "lebanese": {
+          "phrase": "كل شي بوقتو حلو",
+          "latin": "kill shi b wa'to helo",
+          "literal": "everything in its time is nice",
+          "usage_note": "Patience and timing"
+        },
+        "syrian": {
+          "phrase": "كل شي بوقتو حلو",
+          "latin": "kill shi b wa'to helo",
+          "literal": "everything in its time is nice",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "كل شي في وقته حلو",
+          "latin": "kil shay fi wagta helo",
+          "literal": "everything in its time is nice",
+          "usage_note": "Gulf wisdom"
+        },
+        "saudi": {
+          "phrase": "لكل شيء أوان",
+          "latin": "likull shay' awan",
+          "literal": "everything has its time",
+          "usage_note": "Saudi proverb"
+        },
+        "formal_msa": {
+          "phrase": "لكل شيء أوان",
+          "latin": "likulli shay'in awan",
+          "literal": "everything has its time",
+          "usage_note": "Classical proverb"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "patience", "timing", "wisdom"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["advising patience", "timing wisdom", "life philosophy"]
+      }
+    },
+    {
+      "id": "idiom_005",
+      "darija": "الصبر مفتاح الفرج",
+      "darija_latin": "SSber meftaH lfaraj",
+      "literal_english": "patience is the key to relief",
+      "translations": {
+        "lebanese": {
+          "phrase": "الصبر مفتاح الفرج",
+          "latin": "es-saber meftah el faraj",
+          "literal": "patience is the key to relief",
+          "usage_note": "Universal proverb"
+        },
+        "syrian": {
+          "phrase": "الصبر مفتاح الفرج",
+          "latin": "es-saber meftah el faraj",
+          "literal": "patience is the key to relief",
+          "usage_note": "Same everywhere"
+        },
+        "emirati": {
+          "phrase": "الصبر مفتاح الفرج",
+          "latin": "es-saber meftah el faraj",
+          "literal": "patience is the key to relief",
+          "usage_note": "Gulf wisdom"
+        },
+        "saudi": {
+          "phrase": "الصبر مفتاح الفرج",
+          "latin": "as-sabr miftah al faraj",
+          "literal": "patience is the key to relief",
+          "usage_note": "Saudi proverb"
+        },
+        "formal_msa": {
+          "phrase": "الصبر مفتاح الفرج",
+          "latin": "as-sabru miftah al faraj",
+          "literal": "patience is the key to relief",
+          "usage_note": "Classical wisdom"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "patience", "relief", "religious"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["encouraging patience", "difficult times", "religious advice"]
+      },
+      "cultural_notes": "Islamic proverb used across all Arab countries"
+    },
+    {
+      "id": "idiom_006",
+      "darija": "اللسان ما فيه عظم",
+      "darija_latin": "llsan ma fih 3Dem",
+      "literal_english": "the tongue has no bones",
+      "translations": {
+        "lebanese": {
+          "phrase": "اللسان ما فيه عضم",
+          "latin": "el lsan ma fi 3adem",
+          "literal": "the tongue has no bones",
+          "usage_note": "Words can hurt"
+        },
+        "syrian": {
+          "phrase": "اللسان ما فيه عضم",
+          "latin": "el lsan ma fi 3adem",
+          "literal": "the tongue has no bones",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "اللسان ما فيه عظم",
+          "latin": "el lsan ma fih 3atham",
+          "literal": "the tongue has no bones",
+          "usage_note": "Gulf warning"
+        },
+        "saudi": {
+          "phrase": "اللسان سيف قاطع",
+          "latin": "al lisan sayfun qati3",
+          "literal": "the tongue is a cutting sword",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "اللسان أمضى من السيف",
+          "latin": "al lisan amdha min as-sayf",
+          "literal": "the tongue is sharper than the sword",
+          "usage_note": "Classical warning"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "speech", "warning", "wisdom"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["warning about speech", "gossip", "harmful words"]
+      },
+      "cultural_notes": "Warning about the power and danger of words"
+    },
+    {
+      "id": "idiom_007",
+      "darija": "يد وحدة ما تصفقش",
+      "darija_latin": "yed weHda ma tSfeqsh",
+      "literal_english": "one hand doesn't clap",
+      "translations": {
+        "lebanese": {
+          "phrase": "إيد وحدة ما بتزقف",
+          "latin": "id wahde ma bitza'if",
+          "literal": "one hand doesn't clap",
+          "usage_note": "Need cooperation"
+        },
+        "syrian": {
+          "phrase": "إيد وحدة ما بتزقف",
+          "latin": "id wahde ma bitza'if",
+          "literal": "one hand doesn't clap",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "يد وحدة ما تصفق",
+          "latin": "yad wahda ma tsaffig",
+          "literal": "one hand doesn't clap",
+          "usage_note": "Gulf proverb"
+        },
+        "saudi": {
+          "phrase": "اليد الواحدة ما تصفق",
+          "latin": "al yad al wahida ma tusaffiq",
+          "literal": "the one hand doesn't clap",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "اليد الواحدة لا تصفق",
+          "latin": "al yad al wahida la tusaffiq",
+          "literal": "the one hand doesn't clap",
+          "usage_note": "Formal proverb"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["idiom", "cooperation", "teamwork", "unity"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["need for cooperation", "teamwork", "partnership"]
+      },
+      "cultural_notes": "Emphasizes need for cooperation and partnership"
+    },
+    {
+      "id": "formal_001",
+      "darija": "تشرفنا بمعرفتك",
+      "darija_latin": "tsherrefna bma3riftek",
+      "literal_english": "we're honored to know you",
+      "translations": {
+        "lebanese": {
+          "phrase": "تشرفنا بمعرفتك",
+          "latin": "tsharrafna bma3riftak",
+          "literal": "honored to know you",
+          "usage_note": "Formal introduction"
+        },
+        "syrian": {
+          "phrase": "تشرفنا فيك",
+          "latin": "tsharrafna fik",
+          "literal": "honored by you",
+          "usage_note": "Syrian formal"
+        },
+        "emirati": {
+          "phrase": "تشرفنا بمعرفتك",
+          "latin": "tsharrafna bma3riftak",
+          "literal": "honored to know you",
+          "usage_note": "Gulf formality"
+        },
+        "saudi": {
+          "phrase": "تشرفت بمعرفتك",
+          "latin": "tasharraft bima3rifatik",
+          "literal": "I'm honored to know you",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "يسعدني التعرف عليك",
+          "latin": "yus3iduni at-ta3arruf 3alayk",
+          "literal": "pleased to meet you",
+          "usage_note": "Standard formal"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "advanced",
+      "tags": ["formal", "introduction", "professional", "polite"],
+      "usage": {
+        "formality": "very_formal",
+        "frequency": "medium",
+        "context": ["formal introductions", "business meetings", "official events"]
+      }
+    },
+    {
+      "id": "formal_002",
+      "darija": "نتمنى لكم التوفيق والنجاح",
+      "darija_latin": "netmennaw lkom ttawfiq w nnajaH",
+      "literal_english": "we wish you success and prosperity",
+      "translations": {
+        "lebanese": {
+          "phrase": "بتمنى إلك التوفيق والنجاح",
+          "latin": "bitmanna ilak et-tawfi' w en-najah",
+          "literal": "I wish you success",
+          "usage_note": "Formal wishes"
+        },
+        "syrian": {
+          "phrase": "بتمنى لك كل التوفيق",
+          "latin": "bitmanna lak kil et-tawfi'",
+          "literal": "wish you all success",
+          "usage_note": "Syrian formal"
+        },
+        "emirati": {
+          "phrase": "نتمنى لك التوفيق والنجاح",
+          "latin": "nitmanna lak et-tawfeeq w en-najah",
+          "literal": "we wish you success",
+          "usage_note": "Gulf wishes"
+        },
+        "saudi": {
+          "phrase": "أتمنى لك التوفيق والسداد",
+          "latin": "atamanna lak at-tawfiq w as-sadad",
+          "literal": "wish you success and rightness",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "نتمنى لكم دوام التوفيق والنجاح",
+          "latin": "natamanna lakum dawam at-tawfiq w an-najah",
+          "literal": "we wish you continued success",
+          "usage_note": "Very formal"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "advanced",
+      "tags": ["formal", "wishes", "professional", "success"],
+      "usage": {
+        "formality": "very_formal",
+        "frequency": "medium",
+        "context": ["business correspondence", "formal farewells", "congratulations"]
+      }
+    },
+    {
+      "id": "formal_003",
+      "darija": "بعد إذنك",
+      "darija_latin": "ba3d idnek",
+      "literal_english": "with your permission",
+      "translations": {
+        "lebanese": {
+          "phrase": "بعد إذنك",
+          "latin": "ba3d iznak",
+          "literal": "with your permission",
+          "usage_note": "Polite interruption"
+        },
+        "syrian": {
+          "phrase": "بعد إذنك",
+          "latin": "ba3d iznak",
+          "literal": "with your permission",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "عن إذنك",
+          "latin": "3an ithnak",
+          "literal": "with your permission",
+          "usage_note": "Gulf politeness"
+        },
+        "saudi": {
+          "phrase": "بإذنك",
+          "latin": "bi'ithnik",
+          "literal": "with your permission",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "بعد إذنك",
+          "latin": "ba3da ithnik",
+          "literal": "with your permission",
+          "usage_note": "Standard formal"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "advanced",
+      "tags": ["formal", "permission", "polite", "interruption"],
+      "usage": {
+        "formality": "formal",
+        "frequency": "high",
+        "context": ["polite interruption", "asking to pass", "formal requests"]
+      }
+    },
+    {
+      "id": "cultural_001",
+      "darija": "الله يعطيك الصحة",
+      "darija_latin": "allah y3Tik SSHa",
+      "literal_english": "God give you health",
+      "translations": {
+        "lebanese": {
+          "phrase": "الله يعطيك العافية",
+          "latin": "allah ya3tik el 3afye",
+          "literal": "God give you wellness",
+          "usage_note": "Thanks/blessing"
+        },
+        "syrian": {
+          "phrase": "يعطيك العافية",
+          "latin": "ya3tik el 3afye",
+          "literal": "give you wellness",
+          "usage_note": "Common blessing"
+        },
+        "emirati": {
+          "phrase": "الله يعطيك العافية",
+          "latin": "allah ya3teek el 3afya",
+          "literal": "God give you wellness",
+          "usage_note": "Gulf blessing"
+        },
+        "saudi": {
+          "phrase": "الله يعطيك العافية",
+          "latin": "allah yu3tik al-3afiya",
+          "literal": "God give you wellness",
+          "usage_note": "Saudi blessing"
+        },
+        "formal_msa": {
+          "phrase": "أدامك الله بالصحة والعافية",
+          "latin": "adamak allah bis-sihha w al-3afiya",
+          "literal": "may God keep you in health",
+          "usage_note": "Formal blessing"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["blessing", "religious", "gratitude", "cultural"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "very_high",
+        "context": ["thanking", "blessing someone", "after work"]
+      },
+      "cultural_notes": "Very common blessing, especially after someone works or helps"
+    },
+    {
+      "id": "cultural_002",
+      "darija": "بالصحة والراحة",
+      "darija_latin": "beSSHa w rraHa",
+      "literal_english": "with health and comfort",
+      "translations": {
+        "lebanese": {
+          "phrase": "صحتين وعافية",
+          "latin": "sahten w 3afye",
+          "literal": "double health and wellness",
+          "usage_note": "Enjoy your meal"
+        },
+        "syrian": {
+          "phrase": "صحة وهنا",
+          "latin": "sahha w hana",
+          "literal": "health and pleasure",
+          "usage_note": "Syrian meal blessing"
+        },
+        "emirati": {
+          "phrase": "بالعافية",
+          "latin": "bil3afya",
+          "literal": "with wellness",
+          "usage_note": "Gulf meal blessing"
+        },
+        "saudi": {
+          "phrase": "بالهنا والشفا",
+          "latin": "bilhana w ash-shifa",
+          "literal": "with pleasure and healing",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "بالهناء والشفاء",
+          "latin": "bilhana' w ash-shifa'",
+          "literal": "with pleasure and healing",
+          "usage_note": "Formal meal blessing"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["food", "blessing", "cultural", "meal"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "very_high",
+        "context": ["before/after meals", "wishing enjoyment", "food blessing"]
+      },
+      "cultural_notes": "Said when someone is eating or has new clothes/items"
+    },
+    {
+      "id": "cultural_003",
+      "darija": "عقبال ليك",
+      "darija_latin": "3eqbal lik",
+      "literal_english": "may it be your turn next",
+      "translations": {
+        "lebanese": {
+          "phrase": "عقبالك",
+          "latin": "3a'balek",
+          "literal": "your turn next",
+          "usage_note": "Wishing same joy"
+        },
+        "syrian": {
+          "phrase": "عقبالك",
+          "latin": "3a'balek",
+          "literal": "your turn next",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "عقبالك",
+          "latin": "3ugbalek",
+          "literal": "your turn next",
+          "usage_note": "Gulf wish"
+        },
+        "saudi": {
+          "phrase": "عقبالك",
+          "latin": "3uqbalek",
+          "literal": "your turn next",
+          "usage_note": "Saudi wish"
+        },
+        "formal_msa": {
+          "phrase": "جعله الله من نصيبك",
+          "latin": "ja3alahu allah min nasibik",
+          "literal": "may God make it your share",
+          "usage_note": "Formal equivalent"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["wedding", "celebration", "wishes", "cultural"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["weddings", "engagements", "happy occasions"]
+      },
+      "cultural_notes": "Said at weddings to unmarried people, wishing them similar happiness"
+    },
+    {
+      "id": "cultural_004",
+      "darija": "الله يخليك ليا",
+      "darija_latin": "allah ykhlik liya",
+      "literal_english": "may God keep you for me",
+      "translations": {
+        "lebanese": {
+          "phrase": "الله يخليلي ياك",
+          "latin": "allah ykhallili yak",
+          "literal": "God keep you for me",
+          "usage_note": "Deep affection"
+        },
+        "syrian": {
+          "phrase": "الله يخليك",
+          "latin": "allah ykhallik",
+          "literal": "God keep you",
+          "usage_note": "Syrian affection"
+        },
+        "emirati": {
+          "phrase": "الله يطول بعمرك",
+          "latin": "allah yitwwil b3umrik",
+          "literal": "God lengthen your life",
+          "usage_note": "Gulf blessing"
+        },
+        "saudi": {
+          "phrase": "الله يطول عمرك",
+          "latin": "allah yutawwil 3umrak",
+          "literal": "God lengthen your life",
+          "usage_note": "Saudi blessing"
+        },
+        "formal_msa": {
+          "phrase": "أطال الله في عمرك",
+          "latin": "atala allah fi 3umrik",
+          "literal": "may God lengthen your life",
+          "usage_note": "Formal blessing"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["blessing", "love", "family", "religious"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["expressing love", "family blessing", "deep affection"]
+      },
+      "cultural_notes": "Deep expression of love, usually for family members"
+    },
+    {
+      "id": "slang_001",
+      "darija": "زعما",
+      "darija_latin": "za3ma",
+      "literal_english": "supposedly/as if",
+      "translations": {
+        "lebanese": {
+          "phrase": "يعني",
+          "latin": "ya3ni",
+          "literal": "like/means",
+          "usage_note": "Sarcastic doubt"
+        },
+        "syrian": {
+          "phrase": "يعني",
+          "latin": "ya3ni",
+          "literal": "like/means",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "يعني",
+          "latin": "ya3ni",
+          "literal": "means",
+          "usage_note": "Gulf sarcasm"
+        },
+        "saudi": {
+          "phrase": "كأنه",
+          "latin": "ka'annahu",
+          "literal": "as if",
+          "usage_note": "Saudi sarcasm"
+        },
+        "formal_msa": {
+          "phrase": "كأن",
+          "latin": "ka'anna",
+          "literal": "as if",
+          "usage_note": "Formal doubt"
+        }
+      },
+      "category": "slang",
+      "difficulty": "advanced",
+      "tags": ["slang", "sarcasm", "doubt", "youth"],
+      "usage": {
+        "formality": "very_informal",
+        "frequency": "high",
+        "context": ["expressing doubt", "sarcasm", "disbelief"]
+      },
+      "cultural_notes": "Youth slang expressing sarcastic doubt"
+    },
+    {
+      "id": "slang_002",
+      "darija": "واش كاتفهم راسك",
+      "darija_latin": "wash katfhem rasek",
+      "literal_english": "do you understand yourself",
+      "translations": {
+        "lebanese": {
+          "phrase": "فاهم حالك",
+          "latin": "fahim halak",
+          "literal": "understanding yourself",
+          "usage_note": "Are you serious?"
+        },
+        "syrian": {
+          "phrase": "شو فاهم حالك",
+          "latin": "shu fahim halak",
+          "literal": "what do you think of yourself",
+          "usage_note": "Syrian challenge"
+        },
+        "emirati": {
+          "phrase": "شو فاهم",
+          "latin": "shu fahim",
+          "literal": "what do you understand",
+          "usage_note": "Gulf confrontation"
+        },
+        "saudi": {
+          "phrase": "وش فاهم",
+          "latin": "wesh fahim",
+          "literal": "what do you understand",
+          "usage_note": "Saudi challenge"
+        },
+        "formal_msa": {
+          "phrase": "هل تعي ما تقول",
+          "latin": "hal ta3i ma taqul",
+          "literal": "do you realize what you say",
+          "usage_note": "Formal challenge"
+        }
+      },
+      "category": "slang",
+      "difficulty": "advanced",
+      "tags": ["slang", "confrontation", "challenge", "informal"],
+      "usage": {
+        "formality": "very_informal",
+        "frequency": "medium",
+        "context": ["confrontation", "challenging someone", "disbelief"]
+      },
+      "cultural_notes": "Confrontational phrase questioning someone's logic"
+    },
+    {
+      "id": "business_001",
+      "darija": "خاصنا نديرو اجتماع",
+      "darija_latin": "khaSna ndiro ijtima3",
+      "literal_english": "we need to have a meeting",
+      "translations": {
+        "lebanese": {
+          "phrase": "لازم نعمل اجتماع",
+          "latin": "lazim na3mil ijtima3",
+          "literal": "we must make a meeting",
+          "usage_note": "Business necessity"
+        },
+        "syrian": {
+          "phrase": "لازم نعمل اجتماع",
+          "latin": "lazim na3mil ijtima3",
+          "literal": "we must make a meeting",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "لازم نسوي اجتماع",
+          "latin": "lazim nsawwi ijtima3",
+          "literal": "we must make a meeting",
+          "usage_note": "Gulf business"
+        },
+        "saudi": {
+          "phrase": "نحتاج نعقد اجتماع",
+          "latin": "nahtaj na3qid ijtima3",
+          "literal": "we need to hold a meeting",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "يجب أن نعقد اجتماعاً",
+          "latin": "yajib an na3qida ijtima3an",
+          "literal": "we must hold a meeting",
+          "usage_note": "Very formal"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "advanced",
+      "tags": ["business", "meeting", "professional", "planning"],
+      "usage": {
+        "formality": "formal",
+        "frequency": "high",
+        "context": ["business planning", "work discussions", "scheduling"]
+      }
+    },
+    {
+      "id": "business_002",
+      "darija": "المشروع غادي يسالي",
+      "darija_latin": "lmashrou3 ghadi ysali",
+      "literal_english": "the project will finish",
+      "translations": {
+        "lebanese": {
+          "phrase": "المشروع رح يخلص",
+          "latin": "el mashrou3 rah yikhlas",
+          "literal": "the project will finish",
+          "usage_note": "Project completion"
+        },
+        "syrian": {
+          "phrase": "المشروع رح يخلص",
+          "latin": "el mashrou3 rah yikhlas",
+          "literal": "the project will finish",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "المشروع بيخلص",
+          "latin": "el mashrou3 baykhallas",
+          "literal": "the project will finish",
+          "usage_note": "Gulf future"
+        },
+        "saudi": {
+          "phrase": "المشروع بينتهي",
+          "latin": "al mashrou3 bayantahi",
+          "literal": "the project will end",
+          "usage_note": "Saudi business"
+        },
+        "formal_msa": {
+          "phrase": "سينتهي المشروع",
+          "latin": "sayantahi al mashrou3",
+          "literal": "the project will end",
+          "usage_note": "Formal future"
+        }
+      },
+      "category": "workplace",
+      "difficulty": "advanced",
+      "tags": ["business", "project", "completion", "future"],
+      "usage": {
+        "formality": "formal",
+        "frequency": "high",
+        "context": ["project updates", "timeline discussions", "planning"]
+      }
+    },
+    {
+      "id": "emotion_004",
+      "darija": "قلبي تقطع",
+      "darija_latin": "qelbi tqeTTe3",
+      "literal_english": "my heart is torn",
+      "translations": {
+        "lebanese": {
+          "phrase": "قلبي انكسر",
+          "latin": "albi inkasar",
+          "literal": "my heart broke",
+          "usage_note": "Deep sadness"
+        },
+        "syrian": {
+          "phrase": "قلبي انكسر",
+          "latin": "albi inkasar",
+          "literal": "my heart broke",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "قلبي انكسر",
+          "latin": "galbi inkasar",
+          "literal": "my heart broke",
+          "usage_note": "Gulf sadness"
+        },
+        "saudi": {
+          "phrase": "قلبي انفطر",
+          "latin": "qalbi infatar",
+          "literal": "my heart split",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "انفطر قلبي",
+          "latin": "infatara qalbi",
+          "literal": "my heart split",
+          "usage_note": "Formal sadness"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "advanced",
+      "tags": ["emotion", "sadness", "heartbreak", "intense"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing deep sadness", "heartbreak", "empathy"]
+      },
+      "cultural_notes": "Intense emotional expression for deep sadness or sympathy"
+    },
+    {
+      "id": "emotion_005",
+      "darija": "فرحة ما كتوصفش",
+      "darija_latin": "farHa ma katwSefsh",
+      "literal_english": "indescribable joy",
+      "translations": {
+        "lebanese": {
+          "phrase": "فرحة ما بتوصف",
+          "latin": "farha ma btowsaf",
+          "literal": "indescribable joy",
+          "usage_note": "Extreme happiness"
+        },
+        "syrian": {
+          "phrase": "فرحة ما بتوصف",
+          "latin": "farha ma btowsaf",
+          "literal": "indescribable joy",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "فرحة ما توصف",
+          "latin": "farha ma towsaf",
+          "literal": "indescribable joy",
+          "usage_note": "Gulf joy"
+        },
+        "saudi": {
+          "phrase": "فرح لا يوصف",
+          "latin": "farah la yuwsaf",
+          "literal": "indescribable joy",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "فرح لا يوصف",
+          "latin": "farahun la yuwsaf",
+          "literal": "indescribable joy",
+          "usage_note": "Formal joy"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "advanced",
+      "tags": ["emotion", "joy", "happiness", "intense"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["extreme happiness", "celebrations", "good news"]
+      }
+    },
+    {
+      "id": "complex_001",
+      "darija": "ما عرفت راسي منين نبدا",
+      "darija_latin": "ma 3reft rasi mnin nebda",
+      "literal_english": "I don't know where to start",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما بعرف من وين ببلش",
+          "latin": "ma ba3rif min wayn biballish",
+          "literal": "I don't know where to start",
+          "usage_note": "Confusion/overwhelm"
+        },
+        "syrian": {
+          "phrase": "ما بعرف من وين ببلش",
+          "latin": "ma ba3rif min wayn biballish",
+          "literal": "I don't know where to start",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ما أدري من وين أبدي",
+          "latin": "ma adri min wayn abdi",
+          "literal": "I don't know where to begin",
+          "usage_note": "Gulf confusion"
+        },
+        "saudi": {
+          "phrase": "ما أدري من فين أبدأ",
+          "latin": "ma adri min fayn abda",
+          "literal": "I don't know where to start",
+          "usage_note": "Saudi expression"
+        },
+        "formal_msa": {
+          "phrase": "لا أعرف من أين أبدأ",
+          "latin": "la a3rif min ayna abda'",
+          "literal": "I don't know where to start",
+          "usage_note": "Formal confusion"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "advanced",
+      "tags": ["confusion", "overwhelm", "complex", "beginning"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["feeling overwhelmed", "complex situations", "confusion"]
+      }
+    },
+    {
+      "id": "complex_002",
+      "darija": "هادشي فوق طاقتي",
+      "darija_latin": "hadshi fouq Taqti",
+      "literal_english": "this is beyond my capacity",
+      "translations": {
+        "lebanese": {
+          "phrase": "هيدا فوق طاقتي",
+          "latin": "hayda fou' ta'ti",
+          "literal": "this is beyond my capacity",
+          "usage_note": "Beyond ability"
+        },
+        "syrian": {
+          "phrase": "هاد فوق طاقتي",
+          "latin": "had fou' ta'ti",
+          "literal": "this is beyond my capacity",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "هذا فوق طاقتي",
+          "latin": "hatha foug ta'ti",
+          "literal": "this is beyond my capacity",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "هذا فوق قدرتي",
+          "latin": "hatha fawqa qudrati",
+          "literal": "this is beyond my ability",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "هذا يفوق قدرتي",
+          "latin": "hatha yafuqu qudrati",
+          "literal": "this exceeds my ability",
+          "usage_note": "Formal limitation"
+        }
+      },
+      "category": "daily_essentials",
+      "difficulty": "advanced",
+      "tags": ["limitation", "inability", "overwhelm", "capacity"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["expressing limitation", "overwhelm", "inability"]
+      }
+    },
+    {
+      "id": "complex_003",
+      "darija": "خاصني وقت باش نفكر",
+      "darija_latin": "khaSni weqt bash nfekker",
+      "literal_english": "I need time to think",
+      "translations": {
+        "lebanese": {
+          "phrase": "بدي وقت لفكر",
+          "latin": "baddi wa't la fakker",
+          "literal": "I want time to think",
+          "usage_note": "Need contemplation"
+        },
+        "syrian": {
+          "phrase": "بدي وقت لفكر",
+          "latin": "baddi wa't la fakker",
+          "literal": "I want time to think",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أحتاج وقت عشان أفكر",
+          "latin": "ahtaj wagt 3ashan afakkir",
+          "literal": "I need time to think",
+          "usage_note": "Gulf request"
+        },
+        "saudi": {
+          "phrase": "أحتاج وقت للتفكير",
+          "latin": "ahtaj waqt lit-tafkir",
+          "literal": "I need time for thinking",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "أحتاج وقتاً للتفكير",
+          "latin": "ahtaju waqtan lit-tafkir",
+          "literal": "I need time for thinking",
+          "usage_note": "Formal request"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["decision", "time", "thinking", "contemplation"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["decision making", "important choices", "requesting time"]
+      }
+    },
+    {
+      "id": "argument_001",
+      "darija": "ماشي هكاك",
+      "darija_latin": "mashi hkak",
+      "literal_english": "not like that",
+      "translations": {
+        "lebanese": {
+          "phrase": "مش هيك",
+          "latin": "mesh hayk",
+          "literal": "not like this",
+          "usage_note": "Disagreement"
+        },
+        "syrian": {
+          "phrase": "مش هيك",
+          "latin": "mesh hayk",
+          "literal": "not like this",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "مب جذي",
+          "latin": "mub chidhi",
+          "literal": "not like this",
+          "usage_note": "Gulf disagreement"
+        },
+        "saudi": {
+          "phrase": "مو كذا",
+          "latin": "mu kidha",
+          "literal": "not like this",
+          "usage_note": "Saudi disagreement"
+        },
+        "formal_msa": {
+          "phrase": "ليس كذلك",
+          "latin": "laysa kadhalik",
+          "literal": "not like that",
+          "usage_note": "Formal disagreement"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["disagreement", "correction", "argument"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["correcting someone", "disagreement", "clarification"]
+      }
+    },
+    {
+      "id": "argument_002",
+      "darija": "راه كاتغلط",
+      "darija_latin": "rah katghleT",
+      "literal_english": "you're making a mistake",
+      "translations": {
+        "lebanese": {
+          "phrase": "عم بتغلط",
+          "latin": "3am btighlit",
+          "literal": "you're mistaken",
+          "usage_note": "Pointing out error"
+        },
+        "syrian": {
+          "phrase": "عم بتغلط",
+          "latin": "3am btighlit",
+          "literal": "you're mistaken",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أنت غلطان",
+          "latin": "inta ghaltan",
+          "literal": "you're wrong",
+          "usage_note": "Gulf correction"
+        },
+        "saudi": {
+          "phrase": "أنت مخطئ",
+          "latin": "anta mukhti'",
+          "literal": "you're mistaken",
+          "usage_note": "Saudi formal"
+        },
+        "formal_msa": {
+          "phrase": "أنت مخطئ",
+          "latin": "anta mukhti'",
+          "literal": "you are mistaken",
+          "usage_note": "Formal correction"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["correction", "mistake", "argument", "disagreement"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["correcting mistakes", "arguments", "disagreements"]
+      }
+    },
+    {
+      "id": "negotiation_001",
+      "darija": "نتفاهمو",
+      "darija_latin": "netfahmo",
+      "literal_english": "let's understand each other",
+      "translations": {
+        "lebanese": {
+          "phrase": "خلينا نتفاهم",
+          "latin": "khallina nitfaham",
+          "literal": "let's understand each other",
+          "usage_note": "Negotiation start"
+        },
+        "syrian": {
+          "phrase": "خلينا نتفاهم",
+          "latin": "khallina nitfaham",
+          "literal": "let's understand each other",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "خل نتفاهم",
+          "latin": "khal nitfaham",
+          "literal": "let's understand",
+          "usage_note": "Gulf negotiation"
+        },
+        "saudi": {
+          "phrase": "خلنا نتفاهم",
+          "latin": "khallina nitafaham",
+          "literal": "let's understand",
+          "usage_note": "Saudi negotiation"
+        },
+        "formal_msa": {
+          "phrase": "دعنا نتفاهم",
+          "latin": "da3na natafaham",
+          "literal": "let us understand",
+          "usage_note": "Formal negotiation"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["negotiation", "agreement", "discussion", "compromise"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["negotiations", "resolving conflicts", "reaching agreement"]
+      }
+    },
+    {
+      "id": "philosophy_001",
+      "darija": "الدنيا دوارة",
+      "darija_latin": "ddunya dawwara",
+      "literal_english": "the world turns",
+      "translations": {
+        "lebanese": {
+          "phrase": "الدنيا دوارة",
+          "latin": "ed-denye dawwara",
+          "literal": "the world turns",
+          "usage_note": "Life changes"
+        },
+        "syrian": {
+          "phrase": "الدنيا دولاب",
+          "latin": "ed-denye dulab",
+          "literal": "the world is a wheel",
+          "usage_note": "Syrian variant"
+        },
+        "emirati": {
+          "phrase": "الدنيا دوارة",
+          "latin": "ed-dinya dawwara",
+          "literal": "the world turns",
+          "usage_note": "Gulf philosophy"
+        },
+        "saudi": {
+          "phrase": "الدنيا دوارة",
+          "latin": "ad-dunya dawwara",
+          "literal": "the world turns",
+          "usage_note": "Saudi wisdom"
+        },
+        "formal_msa": {
+          "phrase": "الدهر دول",
+          "latin": "ad-dahr duwal",
+          "literal": "time has turns",
+          "usage_note": "Classical wisdom"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["philosophy", "life", "change", "wisdom"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["life philosophy", "consolation", "wisdom sharing"]
+      },
+      "cultural_notes": "Philosophy about life's ups and downs, karma concept"
+    },
+    {
+      "id": "philosophy_002",
+      "darija": "كلشي مكتوب",
+      "darija_latin": "kullshi mektub",
+      "literal_english": "everything is written",
+      "translations": {
+        "lebanese": {
+          "phrase": "كلشي مكتوب",
+          "latin": "killshi maktub",
+          "literal": "everything is written",
+          "usage_note": "Fate/destiny"
+        },
+        "syrian": {
+          "phrase": "كلشي مكتوب",
+          "latin": "killshi maktub",
+          "literal": "everything is written",
+          "usage_note": "Same belief"
+        },
+        "emirati": {
+          "phrase": "كل شي مكتوب",
+          "latin": "kil shay maktub",
+          "literal": "everything is written",
+          "usage_note": "Gulf fatalism"
+        },
+        "saudi": {
+          "phrase": "كل شيء مقدر",
+          "latin": "kull shay' muqaddar",
+          "literal": "everything is destined",
+          "usage_note": "Saudi religious"
+        },
+        "formal_msa": {
+          "phrase": "كل شيء بقدر",
+          "latin": "kullu shay'in biqadar",
+          "literal": "everything by destiny",
+          "usage_note": "Religious concept"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["fate", "destiny", "religious", "philosophy"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["accepting fate", "consolation", "religious context"]
+      },
+      "cultural_notes": "Islamic concept of predestination, very common across cultures"
+    },
+    {
+      "id": "respect_001",
+      "darija": "تبارك الله عليك",
+      "darija_latin": "tbarak allah 3lik",
+      "literal_english": "blessed be God upon you",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما شاء الله عليك",
+          "latin": "ma sha' allah 3alayk",
+          "literal": "what God willed upon you",
+          "usage_note": "Admiration/protection"
+        },
+        "syrian": {
+          "phrase": "ما شاء الله",
+          "latin": "ma sha' allah",
+          "literal": "what God willed",
+          "usage_note": "Same meaning"
+        },
+        "emirati": {
+          "phrase": "ما شاء الله عليك",
+          "latin": "ma sha' allah 3alayk",
+          "literal": "what God willed upon you",
+          "usage_note": "Gulf blessing"
+        },
+        "saudi": {
+          "phrase": "تبارك الله",
+          "latin": "tabarak allah",
+          "literal": "blessed be God",
+          "usage_note": "Saudi blessing"
+        },
+        "formal_msa": {
+          "phrase": "ما شاء الله",
+          "latin": "ma sha' allah",
+          "literal": "what God willed",
+          "usage_note": "Universal Islamic"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["blessing", "admiration", "religious", "protection"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "very_high",
+        "context": ["admiring success", "protecting from evil eye", "complimenting"]
+      },
+      "cultural_notes": "Said to ward off evil eye when admiring something/someone"
+    },
+    {
+      "id": "advice_001",
+      "darija": "دير نصيحتي",
+      "darija_latin": "dir nSiHti",
+      "literal_english": "take my advice",
+      "translations": {
+        "lebanese": {
+          "phrase": "خود نصيحتي",
+          "latin": "khud nasiht",
+          "literal": "take my advice",
+          "usage_note": "Giving advice"
+        },
+        "syrian": {
+          "phrase": "اسمع نصيحتي",
+          "latin": "isma3 nasihti",
+          "literal": "hear my advice",
+          "usage_note": "Syrian advice"
+        },
+        "emirati": {
+          "phrase": "اسمع نصيحتي",
+          "latin": "isma3 nasihti",
+          "literal": "hear my advice",
+          "usage_note": "Gulf advice"
+        },
+        "saudi": {
+          "phrase": "خذ نصيحتي",
+          "latin": "khuth nasihati",
+          "literal": "take my advice",
+          "usage_note": "Saudi advice"
+        },
+        "formal_msa": {
+          "phrase": "اقبل نصيحتي",
+          "latin": "iqbal nasihati",
+          "literal": "accept my advice",
+          "usage_note": "Formal advice"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["advice", "wisdom", "guidance", "suggestion"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["giving advice", "elder wisdom", "guidance"]
+      }
+    },
+    {
+      "id": "advice_002",
+      "darija": "خليك على بالك",
+      "darija_latin": "khallik 3la balek",
+      "literal_english": "keep yourself on your mind",
+      "translations": {
+        "lebanese": {
+          "phrase": "خلي بالك",
+          "latin": "khalli balak",
+          "literal": "keep your mind",
+          "usage_note": "Be careful"
+        },
+        "syrian": {
+          "phrase": "انتبه على حالك",
+          "latin": "intabih 3ala halak",
+          "literal": "watch yourself",
+          "usage_note": "Syrian warning"
+        },
+        "emirati": {
+          "phrase": "انتبه لنفسك",
+          "latin": "intabih linafsak",
+          "literal": "watch yourself",
+          "usage_note": "Gulf caution"
+        },
+        "saudi": {
+          "phrase": "انتبه لنفسك",
+          "latin": "intabih linafsik",
+          "literal": "watch yourself",
+          "usage_note": "Saudi warning"
+        },
+        "formal_msa": {
+          "phrase": "كن حذراً",
+          "latin": "kun hathiran",
+          "literal": "be careful",
+          "usage_note": "Formal warning"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["warning", "caution", "advice", "care"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["warning someone", "expressing concern", "safety advice"]
+      }
+    },
+    {
+      "id": "complaint_002",
+      "darija": "ما بقاش فيا الحال",
+      "darija_latin": "ma bqash fiya lHal",
+      "literal_english": "I can't take it anymore",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما عاد فيي",
+          "latin": "ma 3ad fiyyi",
+          "literal": "I can't anymore",
+          "usage_note": "Exhaustion"
+        },
+        "syrian": {
+          "phrase": "ما عاد فيي",
+          "latin": "ma 3ad fiyyi",
+          "literal": "I can't anymore",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ما عاد أقدر",
+          "latin": "ma 3ad agdar",
+          "literal": "I can't anymore",
+          "usage_note": "Gulf exhaustion"
+        },
+        "saudi": {
+          "phrase": "ما عاد قادر",
+          "latin": "ma 3ad gadir",
+          "literal": "no longer able",
+          "usage_note": "Saudi exhaustion"
+        },
+        "formal_msa": {
+          "phrase": "لم أعد أحتمل",
+          "latin": "lam a3ud ahtamil",
+          "literal": "I can no longer bear",
+          "usage_note": "Formal exhaustion"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "advanced",
+      "tags": ["exhaustion", "complaint", "limit", "frustration"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["expressing exhaustion", "reaching limit", "frustration"]
+      }
+    },
+    {
+      "id": "complaint_003",
+      "darija": "طفح الكيل",
+      "darija_latin": "TfeH lkil",
+      "literal_english": "the measure overflowed",
+      "translations": {
+        "lebanese": {
+          "phrase": "طفح الكيل",
+          "latin": "tafah el kayl",
+          "literal": "the measure overflowed",
+          "usage_note": "Had enough"
+        },
+        "syrian": {
+          "phrase": "طفح الكيل",
+          "latin": "tafah el kayl",
+          "literal": "the measure overflowed",
+          "usage_note": "Same expression"
+        },
+        "emirati": {
+          "phrase": "طفح الكيل",
+          "latin": "tafah el kail",
+          "literal": "the measure overflowed",
+          "usage_note": "Gulf limit"
+        },
+        "saudi": {
+          "phrase": "فاض الكيل",
+          "latin": "fadh al kayl",
+          "literal": "the measure overflowed",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "بلغ السيل الزبى",
+          "latin": "balagha as-sayl az-zuba",
+          "literal": "the flood reached the hills",
+          "usage_note": "Classical expression"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "advanced",
+      "tags": ["frustration", "limit", "anger", "enough"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["reaching breaking point", "had enough", "frustration"]
+      },
+      "cultural_notes": "Universal Arabic expression for reaching one's limit"
+    },
+    {
+      "id": "promise_001",
+      "darija": "نعطيك الكلمة",
+      "darija_latin": "n3Tik lkelma",
+      "literal_english": "I give you the word",
+      "translations": {
+        "lebanese": {
+          "phrase": "بعطيك كلمة",
+          "latin": "ba3tik kilme",
+          "literal": "I give you word",
+          "usage_note": "Promise"
+        },
+        "syrian": {
+          "phrase": "بعطيك كلمة",
+          "latin": "ba3tik kilme",
+          "literal": "I give you word",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "أعطيك كلمة",
+          "latin": "a3tik kilma",
+          "literal": "I give you word",
+          "usage_note": "Gulf promise"
+        },
+        "saudi": {
+          "phrase": "أعطيك وعد",
+          "latin": "u3tik wa3d",
+          "literal": "I give you promise",
+          "usage_note": "Saudi promise"
+        },
+        "formal_msa": {
+          "phrase": "أعدك",
+          "latin": "u3iduk",
+          "literal": "I promise you",
+          "usage_note": "Formal promise"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["promise", "commitment", "trust", "word"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["making promises", "giving word", "commitment"]
+      }
+    },
+    {
+      "id": "threat_001",
+      "darija": "غادي تشوف",
+      "darija_latin": "ghadi tshuf",
+      "literal_english": "you will see",
+      "translations": {
+        "lebanese": {
+          "phrase": "رح تشوف",
+          "latin": "rah tshuf",
+          "literal": "you will see",
+          "usage_note": "Warning/threat"
+        },
+        "syrian": {
+          "phrase": "رح تشوف",
+          "latin": "rah tshuf",
+          "literal": "you will see",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "بتشوف",
+          "latin": "batshuf",
+          "literal": "you will see",
+          "usage_note": "Gulf warning"
+        },
+        "saudi": {
+          "phrase": "بتشوف",
+          "latin": "batshuf",
+          "literal": "you will see",
+          "usage_note": "Saudi warning"
+        },
+        "formal_msa": {
+          "phrase": "سترى",
+          "latin": "satara",
+          "literal": "you will see",
+          "usage_note": "Formal warning"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["threat", "warning", "consequence", "future"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "medium",
+        "context": ["mild threat", "warning of consequences", "prediction"]
+      },
+      "cultural_notes": "Can be threatening or simply predictive depending on tone"
+    },
+    {
+      "id": "surprise_002",
+      "darija": "واش بصح",
+      "darija_latin": "wash beSSaH",
+      "literal_english": "is it true",
+      "translations": {
+        "lebanese": {
+          "phrase": "عن جد",
+          "latin": "3an jadd",
+          "literal": "seriously",
+          "usage_note": "Disbelief"
+        },
+        "syrian": {
+          "phrase": "عن جد",
+          "latin": "3an jadd",
+          "literal": "seriously",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "صدق",
+          "latin": "sidj",
+          "literal": "really",
+          "usage_note": "Gulf surprise"
+        },
+        "saudi": {
+          "phrase": "صحيح",
+          "latin": "sahih",
+          "literal": "true",
+          "usage_note": "Saudi surprise"
+        },
+        "formal_msa": {
+          "phrase": "أحقاً",
+          "latin": "ahaqqan",
+          "literal": "truly",
+          "usage_note": "Formal surprise"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["surprise", "disbelief", "confirmation", "shock"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["expressing surprise", "seeking confirmation", "disbelief"]
+      }
+    },
+    {
+      "id": "excuse_002",
+      "darija": "ما كانش عندي الوقت",
+      "darija_latin": "ma kansh 3ndi lweqt",
+      "literal_english": "I didn't have time",
+      "translations": {
+        "lebanese": {
+          "phrase": "ما كان عندي وقت",
+          "latin": "ma kan 3andi wa't",
+          "literal": "I didn't have time",
+          "usage_note": "Time excuse"
+        },
+        "syrian": {
+          "phrase": "ما كان عندي وقت",
+          "latin": "ma kan 3andi wa't",
+          "literal": "I didn't have time",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "ما كان عندي وقت",
+          "latin": "ma kan 3indi wagt",
+          "literal": "I didn't have time",
+          "usage_note": "Gulf excuse"
+        },
+        "saudi": {
+          "phrase": "ما كان عندي وقت",
+          "latin": "ma kan 3indi waqt",
+          "literal": "I didn't have time",
+          "usage_note": "Saudi excuse"
+        },
+        "formal_msa": {
+          "phrase": "لم يكن لدي وقت",
+          "latin": "lam yakun ladayya waqt",
+          "literal": "I didn't have time",
+          "usage_note": "Formal excuse"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["excuse", "time", "explanation", "apology"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["making excuses", "explaining delay", "apologizing"]
+      }
+    },
+    {
+      "id": "gossip_001",
+      "darija": "سمعتي الخبار",
+      "darija_latin": "sme3ti lkhbar",
+      "literal_english": "did you hear the news",
+      "translations": {
+        "lebanese": {
+          "phrase": "سمعت الخبر",
+          "latin": "smi3et el khabar",
+          "literal": "did you hear the news",
+          "usage_note": "Gossip starter"
+        },
+        "syrian": {
+          "phrase": "سمعت الخبر",
+          "latin": "smi3et el khabar",
+          "literal": "did you hear the news",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "سمعت الخبر",
+          "latin": "sma3t el khabar",
+          "literal": "did you hear the news",
+          "usage_note": "Gulf gossip"
+        },
+        "saudi": {
+          "phrase": "سمعت الخبر",
+          "latin": "sami3t al khabar",
+          "literal": "did you hear the news",
+          "usage_note": "Saudi gossip"
+        },
+        "formal_msa": {
+          "phrase": "هل سمعت الخبر",
+          "latin": "hal sami3ta al khabar",
+          "literal": "did you hear the news",
+          "usage_note": "Formal inquiry"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["gossip", "news", "social", "conversation"],
+      "usage": {
+        "formality": "informal",
+        "frequency": "high",
+        "context": ["sharing news", "gossip", "social conversation"]
+      }
+    },
+    {
+      "id": "hospitality_001",
+      "darija": "الدار دارك",
+      "darija_latin": "ddar darek",
+      "literal_english": "the house is your house",
+      "translations": {
+        "lebanese": {
+          "phrase": "البيت بيتك",
+          "latin": "el bayt baytak",
+          "literal": "the house is your house",
+          "usage_note": "Welcome expression"
+        },
+        "syrian": {
+          "phrase": "البيت بيتك",
+          "latin": "el bayt baytak",
+          "literal": "the house is your house",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "البيت بيتك",
+          "latin": "el bait baitak",
+          "literal": "the house is your house",
+          "usage_note": "Gulf hospitality"
+        },
+        "saudi": {
+          "phrase": "البيت بيتك",
+          "latin": "al bayt baytak",
+          "literal": "the house is your house",
+          "usage_note": "Saudi welcome"
+        },
+        "formal_msa": {
+          "phrase": "البيت بيتك",
+          "latin": "al bayt baytuk",
+          "literal": "the house is your house",
+          "usage_note": "Formal hospitality"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["hospitality", "welcome", "cultural", "home"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["welcoming guests", "hospitality", "making comfortable"]
+      },
+      "cultural_notes": "Traditional Arab hospitality expression, makes guest feel at home"
+    },
+    {
+      "id": "farewell_001",
+      "darija": "الله يسهل عليك",
+      "darija_latin": "allah ysehel 3lik",
+      "literal_english": "God make it easy for you",
+      "translations": {
+        "lebanese": {
+          "phrase": "الله يوفقك",
+          "latin": "allah ywaf'ak",
+          "literal": "God grant you success",
+          "usage_note": "Farewell blessing"
+        },
+        "syrian": {
+          "phrase": "الله يوفقك",
+          "latin": "allah ywaf'ak",
+          "literal": "God grant you success",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الله يوفقك",
+          "latin": "allah ywaffgak",
+          "literal": "God grant you success",
+          "usage_note": "Gulf blessing"
+        },
+        "saudi": {
+          "phrase": "الله يسهل عليك",
+          "latin": "allah yusahhil 3alayk",
+          "literal": "God make it easy for you",
+          "usage_note": "Saudi farewell"
+        },
+        "formal_msa": {
+          "phrase": "وفقك الله",
+          "latin": "waffaqak allah",
+          "literal": "may God grant you success",
+          "usage_note": "Formal blessing"
+        }
+      },
+      "category": "greetings",
+      "difficulty": "advanced",
+      "tags": ["farewell", "blessing", "religious", "good wishes"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["saying goodbye", "wishing success", "journey blessing"]
+      }
+    },
+    {
+      "id": "sympathy_001",
+      "darija": "الله يصبرك",
+      "darija_latin": "allah ySebrek",
+      "literal_english": "God give you patience",
+      "translations": {
+        "lebanese": {
+          "phrase": "الله يصبرك",
+          "latin": "allah ysabbirak",
+          "literal": "God give you patience",
+          "usage_note": "Condolence"
+        },
+        "syrian": {
+          "phrase": "الله يصبرك",
+          "latin": "allah ysabbirak",
+          "literal": "God give you patience",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "الله يصبرك",
+          "latin": "allah ysabbirak",
+          "literal": "God give you patience",
+          "usage_note": "Gulf condolence"
+        },
+        "saudi": {
+          "phrase": "الله يصبرك",
+          "latin": "allah yusabbirak",
+          "literal": "God give you patience",
+          "usage_note": "Saudi sympathy"
+        },
+        "formal_msa": {
+          "phrase": "ألهمك الله الصبر",
+          "latin": "alhamak allah as-sabr",
+          "literal": "may God inspire you with patience",
+          "usage_note": "Formal condolence"
+        }
+      },
+      "category": "cultural",
+      "difficulty": "advanced",
+      "tags": ["sympathy", "condolence", "religious", "support"],
+      "usage": {
+        "formality": "formal",
+        "frequency": "medium",
+        "context": ["offering condolences", "supporting in difficulty", "sympathy"]
+      },
+      "cultural_notes": "Standard condolence expression across Arab world"
+    },
+    {
+      "id": "celebration_001",
+      "darija": "ألف مبروك",
+      "darija_latin": "alf mabrouk",
+      "literal_english": "thousand congratulations",
+      "translations": {
+        "lebanese": {
+          "phrase": "ألف مبروك",
+          "latin": "alf mabrouk",
+          "literal": "thousand congratulations",
+          "usage_note": "Big congratulations"
+        },
+        "syrian": {
+          "phrase": "ألف مبروك",
+          "latin": "alf mabrouk",
+          "literal": "thousand congratulations",
+          "usage_note": "Same everywhere"
+        },
+        "emirati": {
+          "phrase": "ألف مبروك",
+          "latin": "alf mabrouk",
+          "literal": "thousand congratulations",
+          "usage_note": "Gulf celebration"
+        },
+        "saudi": {
+          "phrase": "ألف مبروك",
+          "latin": "alf mabrouk",
+          "literal": "thousand congratulations",
+          "usage_note": "Saudi celebration"
+        },
+        "formal_msa": {
+          "phrase": "ألف مبارك",
+          "latin": "alf mubarak",
+          "literal": "thousand blessings",
+          "usage_note": "Formal congratulations"
+        }
+      },
+      "category": "social",
+      "difficulty": "advanced",
+      "tags": ["celebration", "congratulations", "joy", "achievement"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "high",
+        "context": ["big achievements", "weddings", "graduation", "success"]
+      },
+      "cultural_notes": "Intensified congratulations for major life events"
+    },
+    {
+      "id": "intensity_001",
+      "darija": "موت ديال الضحك",
+      "darija_latin": "mut dyal DDeHk",
+      "literal_english": "death of laughter",
+      "translations": {
+        "lebanese": {
+          "phrase": "موت من الضحك",
+          "latin": "mut min ed-dehek",
+          "literal": "dying from laughter",
+          "usage_note": "Very funny"
+        },
+        "syrian": {
+          "phrase": "موت من الضحك",
+          "latin": "mut min ed-dehek",
+          "literal": "dying from laughter",
+          "usage_note": "Same as Lebanese"
+        },
+        "emirati": {
+          "phrase": "موت من الضحك",
+          "latin": "mut min edh-dhihik",
+          "literal": "dying from laughter",
+          "usage_note": "Gulf expression"
+        },
+        "saudi": {
+          "phrase": "مت من الضحك",
+          "latin": "mitt min adh-dhihk",
+          "literal": "died from laughter",
+          "usage_note": "Saudi variant"
+        },
+        "formal_msa": {
+          "phrase": "مضحك جداً",
+          "latin": "mudhik jiddan",
+          "literal": "very funny",
+          "usage_note": "Formal expression"
+        }
+      },
+      "category": "emotions",
+      "difficulty": "advanced",
+      "tags": ["humor", "laughter", "intensity", "funny"],
+      "usage": {
+        "formality": "very_informal",
+        "frequency": "high",
+        "context": ["extreme humor", "very funny situations", "laughter"]
+      }
+    },
+    {
+      "id": "wisdom_001",
+      "darija": "العقل زينة",
+      "darija_latin": "l3qel zina",
+      "literal_english": "mind is decoration",
+      "translations": {
+        "lebanese": {
+          "phrase": "العقل زينة",
+          "latin": "el 3a'el zine",
+          "literal": "mind is decoration",
+          "usage_note": "Wisdom valued"
+        },
+        "syrian": {
+          "phrase": "العقل زينة",
+          "latin": "el 3a'el zine",
+          "literal": "mind is decoration",
+          "usage_note": "Same meaning"
+        },
+        "emirati": {
+          "phrase": "العقل زينة",
+          "latin": "el 3agil zeena",
+          "literal": "mind is decoration",
+          "usage_note": "Gulf wisdom"
+        },
+        "saudi": {
+          "phrase": "العقل زينة",
+          "latin": "al 3aql zina",
+          "literal": "mind is decoration",
+          "usage_note": "Saudi proverb"
+        },
+        "formal_msa": {
+          "phrase": "العقل زينة الإنسان",
+          "latin": "al 3aql zinat al insan",
+          "literal": "mind is human's decoration",
+          "usage_note": "Formal wisdom"
+        }
+      },
+      "category": "idioms",
+      "difficulty": "advanced",
+      "tags": ["wisdom", "intelligence", "proverb", "value"],
+      "usage": {
+        "formality": "neutral",
+        "frequency": "medium",
+        "context": ["valuing intelligence", "wisdom teaching", "advice"]
+      },
+      "cultural_notes": "Proverb emphasizing intelligence over appearance"
+    }
+  ],
+  "metadata": {
+    "total_count": 100,
+    "categories": {
+      "idioms": 15,
+      "cultural": 12,
+      "workplace": 6,
+      "emotions": 8,
+      "social": 25,
+      "slang": 2,
+      "daily_essentials": 6,
+      "greetings": 1,
+      "formal": 25
+    },
+    "difficulty_distribution": {
+      "beginner": 0,
+      "intermediate": 0,
+      "advanced": 100
+    },
+    "features": {
+      "idioms_and_proverbs": true,
+      "formal_language": true,
+      "cultural_expressions": true,
+      "slang_youth_language": true,
+      "business_professional": true,
+      "religious_expressions": true,
+      "emotional_intensity": true,
+      "philosophical_wisdom": true
+    },
+    "last_updated": "2025-08-15",
+    "version": "1.0.0"
+  }
+}
