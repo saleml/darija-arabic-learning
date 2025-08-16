@@ -62,26 +62,6 @@ export default function AuthForm({ onLogin, onSignup, onClose }: AuthFormProps) 
     setError('');
   };
 
-  // Demo accounts for easy testing
-  const useDemoAccount = async () => {
-    setEmail('demo@example.com');
-    setPassword('demo123');
-    setIsLoading(true);
-    setError('');
-    
-    try {
-      const success = await onLogin('demo@example.com', 'demo123');
-      if (!success) {
-        setError('Demo account not available');
-      } else if (onClose) {
-        onClose();
-      }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -188,17 +168,6 @@ export default function AuthForm({ onLogin, onSignup, onClose }: AuthFormProps) 
           </p>
         </div>
 
-        {mode === 'login' && (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <button
-              onClick={useDemoAccount}
-              disabled={isLoading}
-              className="w-full py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm disabled:opacity-50"
-            >
-              {isLoading ? 'Loading...' : 'Use Demo Account'}
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

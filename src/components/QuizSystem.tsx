@@ -47,7 +47,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   const [quizType, setQuizType] = useState<QuizType>('multiple-choice');
   const [quizMode, setQuizMode] = useState<QuizMode>('practice');
   const [difficulty, setDifficulty] = useState<string>('all');
-  const [targetDialect, setTargetDialect] = useState<string>('all');
+  const [targetDialect, setTargetDialect] = useState<string>('lebanese');
   const [currentQuiz, setCurrentQuiz] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -67,12 +67,8 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   }, [phrases, difficulty]);
 
   const getDueForReview = (): Phrase[] => {
-    console.log('[getDueForReview] Starting...');
-    console.log('[getDueForReview] User progress exists?', !!userProgress);
-    console.log('[getDueForReview] Total phrases available:', phrases.length);
     
     if (!userProgress) {
-      console.log('[getDueForReview] No user progress, returning empty array');
       return [];
     }
     
@@ -82,7 +78,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
       .map(item => phrases.find(p => p.id === item.phraseId))
       .filter(Boolean) as Phrase[];
     
-    console.log('[getDueForReview] Due items count:', dueItems.length);
     
     // If we have due items, return them
     if (dueItems.length > 0) {
@@ -91,7 +86,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     
     // For new users to spaced repetition, return some starter phrases
     if (userProgress.spacedRepetition.length === 0) {
-      console.log('[getDueForReview] First time user, getting starter phrases');
       
       // Filter phrases based on difficulty if needed
       const filteredPhrases = difficulty === 'all' 
@@ -99,13 +93,10 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         : phrases.filter(p => p.difficulty === difficulty);
       
       const starterPhrases = filteredPhrases.slice(0, 10);
-      console.log('[getDueForReview] Filtered phrases:', filteredPhrases.length);
-      console.log('[getDueForReview] Returning', starterPhrases.length, 'starter phrases');
       
       return starterPhrases;
     }
     
-    console.log('[getDueForReview] User has history but nothing due');
     return [];
   };
 
@@ -276,7 +267,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   const generateSmartDistractors = (correctPhrase: Phrase, targetDialectKey: string, allPhrases: Phrase[]): string[] => {
     const translation = correctPhrase.translations?.[targetDialectKey as keyof typeof correctPhrase.translations];
     if (!translation) {
-      console.warn('[QuizSystem] No translation found for dialect:', targetDialectKey);
       return [];
     }
     
@@ -288,9 +278,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   };
 
   const generateQuizQuestions = (count: number = 10): QuizQuestion[] => {
-    console.log('[QuizSystem] Generating quiz questions...');
-    console.log('[QuizSystem] Quiz type:', quizType);
-    console.log('[QuizSystem] Total phrases passed to component:', phrases.length);
     const questions: QuizQuestion[] = [];
     
     // For spaced repetition, use a simplified approach
@@ -298,11 +285,9 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     if (quizType === 'spaced') {
       // For spaced repetition, just use the first 10 phrases if we're starting fresh
       const spacedRepetitionHistory = userProgress?.spacedRepetition || [];
-      console.log('[QuizSystem] Spaced repetition history length:', spacedRepetitionHistory.length);
       
       if (spacedRepetitionHistory.length === 0) {
         // New user - just use first 10 phrases that match filters
-        console.log('[QuizSystem] New to spaced repetition, using starter phrases');
         availablePhrases = phrases.slice(0, 10);
       } else {
         // Check for due items
@@ -315,19 +300,12 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         availablePhrases = dueItems.length > 0 ? dueItems : phrases.slice(0, 10);
       }
       
-      console.log('[QuizSystem] Spaced repetition using:', availablePhrases.length, 'phrases');
     } else {
       availablePhrases = eligiblePhrases;
     }
     
-    console.log('[QuizSystem] Available phrases for quiz:', availablePhrases.length);
     
     if (availablePhrases.length === 0) {
-      console.warn('[QuizSystem] No available phrases for quiz!');
-      console.warn('[QuizSystem] Total phrases:', phrases.length);
-      console.warn('[QuizSystem] Eligible phrases:', eligiblePhrases.length);
-      console.warn('[QuizSystem] Quiz type was:', quizType);
-      console.warn('[QuizSystem] First phrase in phrases array:', phrases[0]);
       return [];
     }
 
@@ -335,7 +313,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     const selectedPhrases = shuffled.slice(0, Math.min(count, shuffled.length));
 
     selectedPhrases.forEach((phrase, index) => {
-      console.log(`[QuizSystem] Processing phrase ${index + 1}/${selectedPhrases.length}:`, phrase.id);
       
       if (quizType === 'multiple-choice') {
         const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
@@ -343,18 +320,15 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
         
-        console.log('[QuizSystem] Target dialect for question:', targetDialectKey);
         
         const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
         if (!translation) {
-          console.warn(`[QuizSystem] No translation found for ${targetDialectKey} in phrase ${phrase.id}, skipping...`);
           return;
         }
         
         // Always use Arabic text (phrase), not latin
         const correct = typeof translation === 'string' ? translation : translation?.phrase || '';
         if (!correct) {
-          console.warn(`[QuizSystem] Empty correct answer for phrase ${phrase.id}, skipping...`);
           return;
         }
         
@@ -381,7 +355,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         
         const options = [correct, ...distractors].filter(Boolean);
         
-        console.log('[QuizSystem] Question created with', options.length, 'options');
         
         questions.push({
           phrase,
@@ -438,18 +411,10 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   };
 
   const startQuiz = () => {
-    console.log('[QuizSystem] Start Quiz clicked');
-    console.log('[QuizSystem] Quiz type:', quizType);
-    console.log('[QuizSystem] Difficulty:', difficulty);
-    console.log('[QuizSystem] Target dialect:', targetDialect);
-    console.log('[QuizSystem] Total phrases available:', phrases.length);
-    console.log('[QuizSystem] First 3 phrases:', phrases.slice(0, 3));
-    console.log('[QuizSystem] Eligible phrases count:', eligiblePhrases.length);
     
     // For spaced repetition, check if we have phrases to review
     if (quizType === 'spaced') {
       const dueForReview = getDueForReview();
-      console.log('[QuizSystem] Phrases due for review:', dueForReview.length);
       if (dueForReview.length === 0 && phrases.length === 0) {
         alert('No phrases loaded. Please refresh the page.');
         return;
@@ -457,12 +422,10 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     }
     
     const questions = generateQuizQuestions();
-    console.log('[QuizSystem] Generated questions:', questions.length);
     
     if (questions.length === 0) {
       // For spaced repetition with no questions, force use the first 10 available phrases
       if (quizType === 'spaced' && phrases.length > 0) {
-        console.log('[QuizSystem] Forcing spaced repetition with available phrases');
         
         // Directly create questions from first 10 phrases
         const forcedQuestions: QuizQuestion[] = [];
@@ -514,7 +477,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         });
         
         if (forcedQuestions.length > 0) {
-          console.log('[QuizSystem] Created', forcedQuestions.length, 'forced questions');
           setCurrentQuiz(forcedQuestions);
           setCurrentQuestionIndex(0);
           setScore(0);
@@ -542,7 +504,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
       setAvailableWords(questions[0].options || []);
     }
     
-    console.log('[QuizSystem] Quiz started successfully');
   };
 
   const handleAnswer = (answer: string) => {
@@ -736,16 +697,42 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Quiz Type</label>
-              <select
-                value={quizType}
-                onChange={(e) => setQuizType(e.target.value as QuizType)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="multiple-choice">Multiple Choice</option>
-                <option value="word-order">Word Ordering</option>
-                <option value="spaced">Spaced Repetition (Smart Review)</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Quiz Type</label>
+              <div className="space-y-2">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizType"
+                    value="multiple-choice"
+                    checked={quizType === 'multiple-choice'}
+                    onChange={(e) => setQuizType(e.target.value as QuizType)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Multiple Choice</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizType"
+                    value="word-order"
+                    checked={quizType === 'word-order'}
+                    onChange={(e) => setQuizType(e.target.value as QuizType)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Word Ordering</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizType"
+                    value="spaced"
+                    checked={quizType === 'spaced'}
+                    onChange={(e) => setQuizType(e.target.value as QuizType)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Spaced Repetition (Smart Review)</span>
+                </label>
+              </div>
               {quizType === 'spaced' && userProgress?.spacedRepetition.length === 0 && (
                 <p className="mt-2 text-sm text-blue-600">
                   ✨ Spaced repetition reviews phrases at optimal intervals for long-term memory!
@@ -764,44 +751,142 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Difficulty</label>
-              <select
-                value={difficulty}
-                onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">All Levels</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Difficulty</label>
+              <div className="space-y-2">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="difficulty"
+                    value="all"
+                    checked={difficulty === 'all'}
+                    onChange={(e) => setDifficulty(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>All Levels</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="difficulty"
+                    value="beginner"
+                    checked={difficulty === 'beginner'}
+                    onChange={(e) => setDifficulty(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Beginner</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="difficulty"
+                    value="intermediate"
+                    checked={difficulty === 'intermediate'}
+                    onChange={(e) => setDifficulty(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Intermediate</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="difficulty"
+                    value="advanced"
+                    checked={difficulty === 'advanced'}
+                    onChange={(e) => setDifficulty(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Advanced</span>
+                </label>
+              </div>
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Target Dialect</label>
-              <select
-                value={targetDialect}
-                onChange={(e) => setTargetDialect(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">Random Mix</option>
-                <option value="lebanese">Lebanese</option>
-                <option value="syrian">Syrian</option>
-                <option value="emirati">Emirati</option>
-                <option value="saudi">Saudi</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Target Dialect</label>
+              <div className="space-y-2">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="targetDialect"
+                    value="all"
+                    checked={targetDialect === 'all'}
+                    onChange={(e) => setTargetDialect(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Random Mix</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="targetDialect"
+                    value="lebanese"
+                    checked={targetDialect === 'lebanese'}
+                    onChange={(e) => setTargetDialect(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Lebanese</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="targetDialect"
+                    value="syrian"
+                    checked={targetDialect === 'syrian'}
+                    onChange={(e) => setTargetDialect(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Syrian</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="targetDialect"
+                    value="emirati"
+                    checked={targetDialect === 'emirati'}
+                    onChange={(e) => setTargetDialect(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Emirati</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="targetDialect"
+                    value="saudi"
+                    checked={targetDialect === 'saudi'}
+                    onChange={(e) => setTargetDialect(e.target.value)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Saudi</span>
+                </label>
+              </div>
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Mode</label>
-              <select
-                value={quizMode}
-                onChange={(e) => setQuizMode(e.target.value as QuizMode)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="practice">Practice (with hints)</option>
-                <option value="test">Test (no hints)</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Mode</label>
+              <div className="space-y-2">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizMode"
+                    value="practice"
+                    checked={quizMode === 'practice'}
+                    onChange={(e) => setQuizMode(e.target.value as QuizMode)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Practice (with hints)</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizMode"
+                    value="test"
+                    checked={quizMode === 'test'}
+                    onChange={(e) => setQuizMode(e.target.value as QuizMode)}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Test (no hints)</span>
+                </label>
+              </div>
             </div>
           </div>
           
@@ -814,23 +899,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
               Start Quiz
             </button>
             
-            {/* Debug button - remove after testing */}
-            <button
-              onClick={() => {
-                console.log('=== DEBUG INFO ===');
-                console.log('Phrases array:', phrases);
-                console.log('Phrases length:', phrases.length);
-                console.log('Eligible phrases:', eligiblePhrases);
-                console.log('Eligible length:', eligiblePhrases.length);
-                console.log('User progress:', userProgress);
-                console.log('Quiz type:', quizType);
-                console.log('First phrase:', phrases[0]);
-                alert(`Phrases loaded: ${phrases.length}\nEligible: ${eligiblePhrases.length}\nQuiz type: ${quizType}`);
-              }}
-              className="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-            >
-              Debug Info
-            </button>
             
             {quizType === 'spaced' && (
               <div className="flex items-center gap-2 text-gray-600">
@@ -872,6 +940,22 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
               </div>
             </div>
             <div className="flex items-center gap-4">
+              <button
+                onClick={() => {
+                  if (confirm('Are you sure you want to restart the quiz? Your current progress will be lost.')) {
+                    setCurrentQuiz([]);
+                    setCurrentQuestionIndex(0);
+                    setScore(0);
+                    setQuizComplete(false);
+                    setShowAnswer(false);
+                    setSelectedWords([]);
+                    setAvailableWords([]);
+                  }
+                }}
+                className="px-3 py-1 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Restart Quiz
+              </button>
               {streak > 2 && (
                 <div className="flex items-center gap-1 text-orange-500">
                   <Flame className="h-5 w-5 animate-pulse" />
@@ -927,13 +1011,24 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                             <span className="text-xl arabic-text rtl block">{option}</span>
                             {/* Find and show the Latin transliteration for this option */}
                             {(() => {
-                              // First check if it's the current target dialect
+                              // Try to find transliteration for this option
+                              // First check the current question's phrase
+                              const currentPhrase = currentQuestion.phrase;
+                              const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
                               
-                              // Try to find which phrase this option belongs to
-                              const allPhrases = [...phrases]; // Use all phrases, not just eligible
-                              for (const p of allPhrases) {
-                                // Check each dialect's translation
-                                const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
+                              // Check if this option matches the current phrase's translation
+                              for (const dialect of dialects) {
+                                const trans = currentPhrase.translations?.[dialect as keyof typeof currentPhrase.translations];
+                                if (trans) {
+                                  const arabicText = typeof trans === 'string' ? trans : trans?.phrase;
+                                  if (arabicText === option && typeof trans === 'object' && trans.latin) {
+                                    return <span className="text-sm text-gray-600 mt-1 block">({trans.latin})</span>;
+                                  }
+                                }
+                              }
+                              
+                              // Check other phrases for matching options (distractors)
+                              for (const p of phrases) {
                                 for (const dialect of dialects) {
                                   const trans = p.translations?.[dialect as keyof typeof p.translations];
                                   if (trans) {
@@ -944,8 +1039,26 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                                   }
                                 }
                               }
-                              // If no match found, return empty parentheses as placeholder
-                              return <span className="text-sm text-gray-500 mt-1 block">(transliteration unavailable)</span>;
+                              
+                              // If no exact match, try to find partial matches or similar words
+                              const optionWords = option.split(' ');
+                              for (const p of phrases) {
+                                for (const dialect of dialects) {
+                                  const trans = p.translations?.[dialect as keyof typeof p.translations];
+                                  if (trans && typeof trans === 'object' && trans.latin) {
+                                    const arabicText = trans.phrase || '';
+                                    const arabicWords = arabicText.split(' ');
+                                    
+                                    // Check if most words match
+                                    const matchingWords = optionWords.filter(word => arabicWords.includes(word));
+                                    if (matchingWords.length >= Math.max(1, optionWords.length - 1)) {
+                                      return <span className="text-sm text-gray-600 mt-1 block">({trans.latin})</span>;
+                                    }
+                                  }
+                                }
+                              }
+                              
+                              return null;
                             })()}
                           </div>
                           {showResult && isCorrect && <Check className="h-5 w-5 text-green-500" />}
