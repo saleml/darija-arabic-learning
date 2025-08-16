@@ -1,4 +1,4 @@
-import { supabase, QuizAttempt, StudySession } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 
 export interface QuizAnalytics {
   totalAttempts: number;
@@ -98,26 +98,26 @@ export class AnalyticsService {
       // Calculate analytics
       const totalAttempts = quizData?.length || 0;
       const averageScore = totalAttempts > 0 
-        ? (quizData?.reduce((sum, q) => sum + (q.score / q.total_questions * 100), 0) || 0) / totalAttempts
+        ? (quizData?.reduce((sum: number, q: any) => sum + (q.score / q.total_questions * 100), 0) || 0) / totalAttempts
         : 0;
 
       // Calculate dialect preference
       const dialectCounts: Record<string, number> = {};
-      quizData?.forEach(q => {
+      quizData?.forEach((q: any) => {
         dialectCounts[q.target_dialect] = (dialectCounts[q.target_dialect] || 0) + 1;
       });
       const favoriteDialect = Object.keys(dialectCounts).reduce((a, b) => 
         dialectCounts[a] > dialectCounts[b] ? a : b, 'all');
 
       // Total study time from sessions
-      const totalStudyTime = sessionData?.reduce((sum, s) => sum + s.duration_minutes, 0) || 0;
+      const totalStudyTime = sessionData?.reduce((sum: number, s: any) => sum + s.duration_minutes, 0) || 0;
 
       // Progress this week (sessions in last 7 days)
       const weekAgo = new Date();
       weekAgo.setDate(weekAgo.getDate() - 7);
-      const progressThisWeek = sessionData?.filter(s => 
+      const progressThisWeek = sessionData?.filter((s: any) => 
         new Date(s.created_at) > weekAgo
-      ).reduce((sum, s) => sum + s.phrases_studied, 0) || 0;
+      ).reduce((sum: number, s: any) => sum + s.phrases_studied, 0) || 0;
 
       return {
         totalAttempts,
@@ -135,7 +135,7 @@ export class AnalyticsService {
   }
 
   // Get leaderboard data
-  static async getLeaderboard(limit = 10): Promise<Array<{
+  static async getLeaderboard(limit: number = 10): Promise<Array<{
     userId: string;
     userName: string;
     averageScore: number;

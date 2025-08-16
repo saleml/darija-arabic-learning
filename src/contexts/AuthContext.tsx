@@ -137,7 +137,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initializeAuth();
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
       console.log('[AuthContext] Auth state changed:', event);
       
       if (event === 'SIGNED_IN' && session?.user) {
@@ -199,7 +199,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         .limit(20);
 
       // Convert to UserProgress format (maintaining compatibility with existing code)
-      const spacedRepetition = phraseProgressData?.map(p => ({
+      const spacedRepetition = phraseProgressData?.map((p: any) => ({
         phraseId: p.phrase_id,
         interval: p.interval_days,
         repetitions: p.correct_attempts,
@@ -208,7 +208,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         lastReviewDate: p.last_reviewed
       })) || [];
 
-      const quizScores = quizScoresData?.map(q => ({
+      const quizScores = quizScoresData?.map((q: any) => ({
         date: q.created_at,
         score: q.score,
         total: q.total_questions,
@@ -217,8 +217,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       })) || [];
 
       // Count learned phrases (those marked as mastered)
-      const learnedPhrases = phraseProgressData?.filter(p => p.status === 'mastered').map(p => p.phrase_id) || [];
-      const inProgressPhrases = phraseProgressData?.filter(p => p.status === 'learning' || p.status === 'practicing').map(p => p.phrase_id) || [];
+      const learnedPhrases = phraseProgressData?.filter((p: any) => p.status === 'mastered').map((p: any) => p.phrase_id) || [];
+      const inProgressPhrases = phraseProgressData?.filter((p: any) => p.status === 'learning' || p.status === 'practicing').map((p: any) => p.phrase_id) || [];
 
       const userProgress: UserProgress = {
         userId,

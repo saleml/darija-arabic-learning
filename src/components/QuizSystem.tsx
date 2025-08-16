@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Brain, Check, X, Trophy, Target, Clock, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame } from 'lucide-react';
 import { Phrase, UserProgress, QuizScore, SpacedRepetitionItem } from '../types';
-import { getDialectWordBank, getSimilarWords, getWordsByCategory } from '../data/dialectDictionary';
+import { getDialectWordBank, getSimilarWords } from '../data/dialectDictionary';
 import { AnalyticsService } from '../services/analytics';
 
 interface Props {
@@ -10,11 +10,6 @@ interface Props {
   onUpdateProgress: (progress: UserProgress) => void;
 }
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
 
 type QuizType = 'multiple-choice' | 'word-order' | 'spaced';
 type QuizMode = 'practice' | 'test';
@@ -404,7 +399,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         const arabicText = typeof translation === 'string' 
           ? translation 
           : translation?.phrase || '';
-        const latinText = typeof translation === 'object' 
+        const _latinText = typeof translation === 'object' 
           ? translation?.latin || '' 
           : '';
         
@@ -848,7 +843,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                     ? `${Math.min(10, phrases.length)} phrases ready to start learning`
                     : (() => {
                         const now = new Date().toISOString();
-                        const dueCount = userProgress.spacedRepetition
+                        const dueCount = userProgress!.spacedRepetition
                           .filter(item => item.nextReviewDate <= now).length;
                         return dueCount > 0 
                           ? `${dueCount} phrases due for review`
@@ -936,7 +931,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                             {/* Find and show the Latin transliteration for this option */}
                             {(() => {
                               // First check if it's the current target dialect
-                              const targetDialectKey = targetDialect === 'all' 
+                              const _targetDialectKey = targetDialect === 'all' 
                                 ? ['lebanese', 'syrian', 'emirati', 'saudi'][Math.floor(Math.random() * 4)]
                                 : targetDialect;
                               

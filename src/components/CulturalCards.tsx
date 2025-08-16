@@ -22,7 +22,7 @@ interface CulturalCard {
   }[];
 }
 
-export default function CulturalCards({ phrases, userProgress, onUpdateProgress }: Props) {
+export default function CulturalCards({ phrases }: Props) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [expandedExample, setExpandedExample] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>('all');
