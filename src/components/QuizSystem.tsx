@@ -16,7 +16,7 @@ interface User {
   name: string;
 }
 
-type QuizType = 'multiple-choice' | 'word-order' | 'match' | 'spaced';
+type QuizType = 'multiple-choice' | 'word-order' | 'spaced';
 type QuizMode = 'practice' | 'test';
 
 interface QuizQuestion {
