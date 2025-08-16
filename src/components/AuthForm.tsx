@@ -171,6 +171,8 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder={mode === 'signup' ? 'At least 8 characters with uppercase, lowercase, number & special char' : 'Enter your password'}
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                  inputMode="text"
                   required
                 />
               </div>

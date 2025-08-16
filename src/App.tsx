@@ -92,8 +92,8 @@ function App() {
     }
   }, [user]);
 
-  // Keyboard shortcuts
-  useKeyboardShortcuts({
+  // Keyboard shortcuts (disabled when auth form is open)
+  useKeyboardShortcuts(!user && showAuthForm ? {} : {
     '1': () => setActiveTab('hub'),
     '2': () => setActiveTab('quiz'),
     '3': () => setActiveTab('progress'),
@@ -106,6 +106,7 @@ function App() {
     'escape': () => {
       setMobileMenuOpen(false);
       setShowKeyboardHelp(false);
+      if (showAuthForm) setShowAuthForm(false);
     }
   });
 
