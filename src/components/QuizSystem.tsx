@@ -399,9 +399,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         const arabicText = typeof translation === 'string' 
           ? translation 
           : translation?.phrase || '';
-        const _latinText = typeof translation === 'object' 
-          ? translation?.latin || '' 
-          : '';
         
         if (arabicText) {
           // Split the Arabic phrase into words and shuffle them
@@ -931,9 +928,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                             {/* Find and show the Latin transliteration for this option */}
                             {(() => {
                               // First check if it's the current target dialect
-                              const _targetDialectKey = targetDialect === 'all' 
-                                ? ['lebanese', 'syrian', 'emirati', 'saudi'][Math.floor(Math.random() * 4)]
-                                : targetDialect;
                               
                               // Try to find which phrase this option belongs to
                               const allPhrases = [...phrases]; // Use all phrases, not just eligible

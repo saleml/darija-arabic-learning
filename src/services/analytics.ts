@@ -135,7 +135,7 @@ export class AnalyticsService {
   }
 
   // Get leaderboard data
-  static async getLeaderboard(limit: number = 10): Promise<Array<{
+  static async getLeaderboard(_limit: number = 10): Promise<Array<{
     userId: string;
     userName: string;
     averageScore: number;
