@@ -17,7 +17,7 @@ import sentencesData from '../database/sentences_daily_conversations.json';
 type TabType = 'hub' | 'quiz' | 'progress' | 'culture';
 
 function App() {
-  const { user, logout, login, signup, isLoading } = useAuth();
+  const { user, logout, login, signup, resetPassword, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
@@ -151,7 +151,7 @@ function App() {
     console.log('[App] No user, showing landing page');
     
     if (showAuthForm) {
-      return <AuthForm onLogin={login} onSignup={signup} onClose={() => setShowAuthForm(false)} />;
+      return <AuthForm onLogin={login} onSignup={signup} onPasswordReset={resetPassword} onClose={() => setShowAuthForm(false)} />;
     }
     
     return (

@@ -77,7 +77,7 @@ function AppDebug() {
   if (!user) {
     return (
       <div>
-        <AuthForm onLogin={handleLogin} onSignup={handleSignup} />
+        <AuthForm onLogin={handleLogin} onSignup={handleSignup} onPasswordReset={async () => false} />
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-black text-white text-xs max-h-48 overflow-y-auto">
           <h3 className="font-bold mb-2">Debug Console:</h3>
           <pre>{debugInfo.join('\n')}</pre>
