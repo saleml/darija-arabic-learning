@@ -24,6 +24,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
   const [notification, setNotification] = useState<Notification | null>(null);
+  const [showAuthForm, setShowAuthForm] = useState(false);
 
   // Load phrases once on mount, independent of user
   useEffect(() => {
@@ -147,8 +148,287 @@ function App() {
   }
 
   if (!user) {
-    console.log('[App] No user, showing auth form');
-    return <AuthForm onLogin={login} onSignup={signup} />;
+    console.log('[App] No user, showing landing page');
+    
+    if (showAuthForm) {
+      return <AuthForm onLogin={login} onSignup={signup} onClose={() => setShowAuthForm(false)} />;
+    }
+    
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        {/* Hero Section */}
+        <div className="relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%239C92AC%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+          </div>
+          
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+            <div className="text-center">
+              {/* Logo and Title */}
+              <div className="flex justify-center items-center mb-8">
+                <div className="bg-gradient-to-r from-red-600 to-red-700 p-4 rounded-2xl shadow-xl">
+                  <Globe className="h-12 w-12 text-white" />
+                </div>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
+                Master Arabic
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  Dialects
+                </span>
+              </h1>
+              
+              <p className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Transform your Moroccan Darija into fluent <strong>Lebanese</strong>, <strong>Syrian</strong>, <strong>Emirati</strong>, and <strong>Saudi</strong> Arabic. 
+                Learn naturally with AI-powered spaced repetition and cultural context.
+              </p>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <button
+                  onClick={() => setShowAuthForm(true)}
+                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+                >
+                  <Star className="h-5 w-5" />
+                  Start Learning Free
+                </button>
+                <button
+                  onClick={() => {
+                    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="px-8 py-4 bg-white text-gray-700 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-blue-300 transform hover:scale-105 transition-all duration-200"
+                >
+                  Learn More
+                </button>
+              </div>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">400+</div>
+                  <div className="text-gray-600">Authentic Phrases</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600 mb-2">4</div>
+                  <div className="text-gray-600">Arabic Dialects</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-green-600 mb-2">AI</div>
+                  <div className="text-gray-600">Smart Learning</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Features Section */}
+        <div id="features" className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Why Choose Our Platform?
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Built specifically for Moroccan Darija speakers who want to communicate across the Arab world
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-blue-600 p-3 rounded-xl w-fit mb-4">
+                  <Brain className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Smart Quizzes</h3>
+                <p className="text-gray-600">
+                  AI-powered multiple choice and word ordering exercises that adapt to your learning pace
+                </p>
+              </div>
+              
+              {/* Feature 2 */}
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-purple-600 p-3 rounded-xl w-fit mb-4">
+                  <TrendingUp className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Spaced Repetition</h3>
+                <p className="text-gray-600">
+                  Review phrases at optimal intervals for long-term memory retention and fluency
+                </p>
+              </div>
+              
+              {/* Feature 3 */}
+              <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-green-600 p-3 rounded-xl w-fit mb-4">
+                  <Globe className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Cultural Context</h3>
+                <p className="text-gray-600">
+                  Learn not just words, but cultural nuances and appropriate usage in different situations
+                </p>
+              </div>
+              
+              {/* Feature 4 */}
+              <div className="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-red-600 p-3 rounded-xl w-fit mb-4">
+                  <Book className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Translation Hub</h3>
+                <p className="text-gray-600">
+                  Instant translation between Darija and 4 major Arabic dialects with pronunciation guides
+                </p>
+              </div>
+              
+              {/* Feature 5 */}
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-yellow-600 p-3 rounded-xl w-fit mb-4">
+                  <Trophy className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Progress Tracking</h3>
+                <p className="text-gray-600">
+                  Monitor your learning journey with detailed analytics and achievement milestones
+                </p>
+              </div>
+              
+              {/* Feature 6 */}
+              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-indigo-600 p-3 rounded-xl w-fit mb-4">
+                  <Star className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Daily Streaks</h3>
+                <p className="text-gray-600">
+                  Build consistent learning habits with daily goals and streak tracking for motivation
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Testimonials Section */}
+        <div className="py-16 lg:py-24 bg-gradient-to-r from-blue-50 to-purple-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                What Learners Say
+              </h2>
+              <p className="text-xl text-gray-600">
+                Join thousands of Moroccans mastering Arabic dialects
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-2xl shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "Finally! As a Moroccan working in Dubai, this app helped me communicate naturally with my Emirati colleagues."
+                </p>
+                <div className="font-semibold text-gray-900">Ahmed M.</div>
+                <div className="text-sm text-gray-500">Business Professional</div>
+              </div>
+              
+              <div className="bg-white p-8 rounded-2xl shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "The cultural context notes are incredible. I now understand when to use formal vs casual expressions in Lebanese."
+                </p>
+                <div className="font-semibold text-gray-900">Fatima Z.</div>
+                <div className="text-sm text-gray-500">University Student</div>
+              </div>
+              
+              <div className="bg-white p-8 rounded-2xl shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "The spaced repetition system works perfectly. I'm retaining phrases much better than traditional study methods."
+                </p>
+                <div className="font-semibold text-gray-900">Youssef K.</div>
+                <div className="text-sm text-gray-500">Language Enthusiast</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* CTA Section */}
+        <div className="py-16 lg:py-24 bg-gradient-to-r from-blue-600 to-purple-600">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+              Ready to Connect Across the Arab World?
+            </h2>
+            <p className="text-xl text-blue-100 mb-8">
+              Join thousands of Moroccans who've expanded their Arabic fluency
+            </p>
+            <button
+              onClick={() => setShowAuthForm(true)}
+              className="px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto"
+            >
+              <Star className="h-5 w-5" />
+              Start Your Journey Now
+            </button>
+          </div>
+        </div>
+        
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="bg-red-600 p-2 rounded-lg">
+                    <Globe className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="text-xl font-bold">Darija → Arabic</span>
+                </div>
+                <p className="text-gray-400">
+                  Empowering Moroccan speakers to communicate across the Arab world with confidence and cultural awareness.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Features</h3>
+                <ul className="text-gray-400 space-y-2">
+                  <li>• 400+ Authentic Phrases</li>
+                  <li>• 4 Arabic Dialects</li>
+                  <li>• AI-Powered Learning</li>
+                  <li>• Cultural Context</li>
+                  <li>• Progress Tracking</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Dialects Covered</h3>
+                <ul className="text-gray-400 space-y-2">
+                  <li>🇱🇧 Lebanese Arabic</li>
+                  <li>🇸🇾 Syrian Arabic</li>
+                  <li>🇦🇪 Emirati Arabic</li>
+                  <li>🇸🇦 Saudi Arabic</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+              <p>© 2025 Darija-Arabic Learning Platform. Built with ❤️ for language learners.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
   }
 
   console.log('[App] Rendering main app for user:', user.email);

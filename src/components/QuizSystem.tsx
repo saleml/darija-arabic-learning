@@ -312,7 +312,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     const shuffled = [...availablePhrases].sort(() => Math.random() - 0.5);
     const selectedPhrases = shuffled.slice(0, Math.min(count, shuffled.length));
 
-    selectedPhrases.forEach((phrase, index) => {
+    selectedPhrases.forEach((phrase) => {
       
       if (quizType === 'multiple-choice') {
         const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
