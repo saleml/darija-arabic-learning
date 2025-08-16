@@ -165,6 +165,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
       }
 
+      // If profile doesn't exist, create it
+      if (!profile) {
+        console.log('[AuthContext] No profile found, creating one...');
+        const { error: createError } = await supabase
+          .from('user_profiles')
+          .insert({
+            id: supabaseUser.id,
+            email: supabaseUser.email,
+            full_name: supabaseUser.user_metadata?.full_name || '',
+            preferred_dialect: 'lebanese',
+            daily_goal: 10,
+            streak_days: 0,
+            total_study_time: 0
+          });
+
+        if (createError) {
+          console.error('[AuthContext] Error creating profile on login:', createError);
+        } else {
+          console.log('[AuthContext] Profile created successfully on login');
+        }
+      }
+
       // Create user object
       const userData: User = {
         id: supabaseUser.id,
@@ -374,6 +396,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (profileError) {
           console.error('[AuthContext] Error creating profile:', profileError);
+          console.error('[AuthContext] Profile error details:', JSON.stringify(profileError, null, 2));
+        } else {
+          console.log('[AuthContext] User profile created successfully');
         }
 
         return true;
