@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Book, Brain, Trophy, Globe, Star, TrendingUp, Menu, X, LogOut, Keyboard } from 'lucide-react';
+import { Book, Brain, Trophy, Globe, Star, TrendingUp, Menu, X, LogOut, Keyboard, User } from 'lucide-react';
 import TranslationHub from './components/TranslationHub';
 import QuizSystem from './components/QuizSystem';
 import ProgressTracker from './components/ProgressTracker';
@@ -7,10 +7,12 @@ import CulturalCards from './components/CulturalCards';
 import AuthForm from './components/AuthForm';
 import LanguageSetup from './components/LanguageSetup';
 import LanguageSelector from './components/LanguageSelector';
+import AvatarSelector from './components/AvatarSelector';
 import { useAuth } from './contexts/AuthContext';
 import { Phrase, UserProgress } from './types';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import NotificationToast, { Notification } from './components/NotificationToast';
+import { supabase } from './lib/supabase';
 import beginnerPhrases from '../database/beginner_phrases.json';
 import intermediatePhrases from '../database/intermediate_phrases.json';
 import advancedPhrases from '../database/advanced_phrases.json';
@@ -307,7 +309,7 @@ function App() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Translation Hub</h3>
                 <p className="text-gray-600">
-                  Instant translation between Darija and 4 major Arabic dialects with pronunciation guides
+                  Instant translation between 5 major Arabic dialects with pronunciation guides
                 </p>
               </div>
               
@@ -344,7 +346,7 @@ function App() {
                 What Learners Say
               </h2>
               <p className="text-xl text-gray-600">
-                Join thousands of Moroccans mastering Arabic dialects
+                Join thousands of Arabic speakers mastering new dialects
               </p>
             </div>
             
@@ -404,7 +406,7 @@ function App() {
               Ready to Connect Across the Arab World?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Join thousands of Moroccans who've expanded their Arabic fluency
+              Join thousands of Arabic speakers expanding their dialect fluency
             </p>
             <button
               onClick={() => setShowAuthForm(true)}
@@ -436,7 +438,7 @@ function App() {
                 <h3 className="text-lg font-semibold mb-4">Features</h3>
                 <ul className="text-gray-400 space-y-2">
                   <li>• 400+ Authentic Phrases</li>
-                  <li>• 4 Arabic Dialects</li>
+                  <li>• 5 Arabic Dialects</li>
                   <li>• AI-Powered Learning</li>
                   <li>• Cultural Context</li>
                   <li>• Progress Tracking</li>
@@ -606,7 +608,24 @@ function App() {
                 </div>
               </div>
               <div className="flex items-center space-x-4 border-l pl-4">
-                <span className="text-sm text-gray-600">Welcome, {user?.email || 'User'}</span>
+                <div className="flex items-center gap-2">
+                  <AvatarSelector
+                    selectedAvatar={user?.avatarUrl || ''}
+                    onSelectAvatar={async (newAvatar) => {
+                      // Update avatar in database
+                      if (user?.id) {
+                        await supabase
+                          .from('user_profiles')
+                          .update({ avatar_url: newAvatar })
+                          .eq('id', user.id);
+                        // Update local state
+                        window.location.reload();
+                      }
+                    }}
+                    size="small"
+                  />
+                  <span className="text-sm text-gray-600">Welcome, {user?.name || user?.email || 'User'}</span>
+                </div>
                 <button
                   onClick={logout}
                   className="flex items-center space-x-1 text-red-600 hover:text-red-700"

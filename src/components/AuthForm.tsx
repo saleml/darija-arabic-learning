@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { User, Mail, Lock, LogIn, UserPlus, X } from 'lucide-react';
+import AvatarSelector, { getRandomAvatar } from './AvatarSelector';
 
 interface AuthFormProps {
   onLogin: (email: string, password: string) => Promise<boolean>;
-  onSignup: (email: string, password: string, name: string) => Promise<boolean>;
+  onSignup: (email: string, password: string, name: string, avatarUrl?: string) => Promise<boolean>;
   onPasswordReset: (email: string) => Promise<boolean>;
   onClose?: () => void;
 }
@@ -13,6 +14,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState(getRandomAvatar());
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +68,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           return;
         }
         
-        success = await onSignup(email, password, name);
+        success = await onSignup(email, password, name, avatarUrl);
         
         if (success) {
           setSuccess('Account created successfully!');
@@ -126,25 +128,34 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
 
         <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="javascript:void(0)" autoComplete="on">
           {mode === 'signup' && (
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Your name"
-                  autoComplete="name"
-                  required={mode === 'signup'}
+            <>
+              <div className="flex items-center gap-4">
+                <AvatarSelector 
+                  selectedAvatar={avatarUrl}
+                  onSelectAvatar={setAvatarUrl}
+                  size="large"
                 />
+                <div className="flex-1">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Name
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Your name"
+                      autoComplete="name"
+                      required={mode === 'signup'}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
+            </>
           )}
 
           <div>

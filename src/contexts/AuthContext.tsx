@@ -2,11 +2,13 @@ import React, { createContext, useState, useContext, useEffect, ReactNode } from
 import { User as SupabaseUser } from '@supabase/supabase-js';
 import { supabase, UserProfile } from '../lib/supabase';
 import { UserProgress } from '../types';
+import { getRandomAvatar } from '../components/AvatarSelector';
 
 interface User {
   id: string;
   email: string;
   name: string;
+  avatarUrl?: string;
   createdAt: string;
   lastLogin: string;
 }
@@ -17,7 +19,7 @@ interface AuthContextType {
   sourceLanguage: string;
   targetLanguage: string;
   login: (email: string, password: string) => Promise<boolean>;
-  signup: (email: string, password: string, name: string) => Promise<boolean>;
+  signup: (email: string, password: string, name: string, avatarUrl?: string) => Promise<boolean>;
   resetPassword: (email: string) => Promise<boolean>;
   deleteAccount: () => Promise<boolean>;
   logout: () => Promise<void>;
@@ -238,6 +240,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             id: supabaseUser.id,
             email: supabaseUser.email,
             full_name: supabaseUser.user_metadata?.full_name || '',
+            avatar_url: supabaseUser.user_metadata?.avatar_url || getRandomAvatar(),
             source_language: 'darija',  // Default source language
             target_language: 'lebanese', // Default target language
             preferred_dialect: 'lebanese', // Keep for backward compatibility
@@ -258,6 +261,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         id: supabaseUser.id,
         email: supabaseUser.email || '',
         name: profile?.full_name || supabaseUser.user_metadata?.full_name || 'User',
+        avatarUrl: profile?.avatar_url || getRandomAvatar(),
         createdAt: supabaseUser.created_at,
         lastLogin: new Date().toISOString()
       };
@@ -432,7 +436,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return false;
   };
 
-  const signup = async (email: string, password: string, name: string): Promise<boolean> => {
+  const signup = async (email: string, password: string, name: string, avatarUrl?: string): Promise<boolean> => {
     console.log('[AuthContext] Signup attempt for:', email, name);
     
     try {
@@ -441,7 +445,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         password,
         options: {
           data: {
-            full_name: name
+            full_name: name,
+            avatar_url: avatarUrl || getRandomAvatar()
           }
         }
       });
@@ -449,7 +454,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (error && error.message?.includes('Please set up Supabase')) {
         // Fallback to localStorage
         console.log('[AuthContext] Supabase not configured, using localStorage');
-        return signupLocal(email, password, name);
+        return signupLocal(email, password, name, avatarUrl);
       }
 
       if (error) {
@@ -481,6 +486,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               id: data.user.id,
               email: data.user.email,
               full_name: name,
+              avatar_url: avatarUrl || getRandomAvatar(),
               preferred_dialect: 'all',
               daily_goal: 10,
               streak_days: 0,
@@ -501,11 +507,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return false;
     } catch (error) {
       console.error('[AuthContext] Signup error:', error);
-      return signupLocal(email, password, name);
+      return signupLocal(email, password, name, avatarUrl);
     }
   };
 
-  const signupLocal = async (email: string, password: string, name: string): Promise<boolean> => {
+  const signupLocal = async (email: string, password: string, name: string, avatarUrl?: string): Promise<boolean> => {
     console.log('[AuthContext] Local signup attempt for:', email, name);
     
     // Get existing users
@@ -526,6 +532,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       email,
       password: hashedPassword,
       name,
+      avatarUrl: avatarUrl || getRandomAvatar(),
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString()
     };
