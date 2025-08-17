@@ -59,6 +59,14 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
       logger.log('Data:', { name, avatar, source, target });
       
       // Update database directly - no need to fetch first
+      console.log('Attempting to update profile with:', {
+        full_name: name,
+        avatar_url: avatar,
+        source_language: source,
+        target_language: target,
+        id: user.id
+      });
+      
       const { data, error } = await supabase
         .from('user_profiles')
         .update({
@@ -73,13 +81,14 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         .single();
 
       if (error) {
-        logger.error('Error updating profile:', error);
+        console.error('❌ Error updating profile:', error);
+        console.error('Error details:', JSON.stringify(error, null, 2));
         alert('Failed to save profile: ' + error.message);
         setSaving(false);
         return;
       }
       
-      logger.log('Profile updated successfully:', data);
+      console.log('✅ Profile updated successfully:', data);
       
       // Update auth context if function provided
       if (onLanguageChange) {
