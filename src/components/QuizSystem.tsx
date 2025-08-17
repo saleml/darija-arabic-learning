@@ -919,7 +919,10 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                     onChange={(e) => setQuizMode(e.target.value as QuizMode)}
                     className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                   />
-                  <span>Practice (with hints)</span>
+                  <span className="flex flex-col">
+                    <span className="font-medium">Practice Mode</span>
+                    <span className="text-xs text-gray-500">Shows correct answer immediately, good for learning</span>
+                  </span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -930,7 +933,10 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                     onChange={(e) => setQuizMode(e.target.value as QuizMode)}
                     className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                   />
-                  <span>Test (no hints)</span>
+                  <span className="flex flex-col">
+                    <span className="font-medium">Test Mode</span>
+                    <span className="text-xs text-gray-500">Answer all questions first, then see results</span>
+                  </span>
                 </label>
               </div>
             </div>

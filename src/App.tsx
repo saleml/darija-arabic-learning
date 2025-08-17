@@ -162,6 +162,7 @@ function App() {
     totalPhrases: allPhrases.length,
     learned: userProgress?.phrasesLearned.length || 0,
     inProgress: userProgress?.phrasesInProgress.length || 0,
+    seen: (userProgress?.phrasesLearned.length || 0) + (userProgress?.phrasesInProgress.length || 0),
     streak: userProgress?.streakDays || 0
   };
 
@@ -575,17 +576,33 @@ function App() {
               >
                 <Keyboard className="h-5 w-5 text-gray-600" />
               </button>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 group relative">
                 <Trophy className="h-5 w-5 text-yellow-500" />
                 <span className="font-semibold">{stats.streak} day streak</span>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                  Consecutive days of practice
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 group relative">
                 <Star className="h-5 w-5 text-blue-500" />
                 <span className="font-semibold">{stats.learned}/{stats.totalPhrases} mastered</span>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                  Phrases you've correctly answered 3+ times
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 group relative">
+                <TrendingUp className="h-5 w-5 text-purple-500" />
+                <span className="font-semibold">{stats.seen}/{stats.totalPhrases} seen</span>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                  Total phrases you've practiced at least once
+                </div>
+              </div>
+              <div className="flex items-center space-x-2 group relative">
                 <TrendingUp className="h-5 w-5 text-green-500" />
-                <span className="font-semibold">{stats.totalPhrases > 0 ? Math.round((stats.learned / stats.totalPhrases) * 100) : 0}% progress</span>
+                <span className="font-semibold">{stats.totalPhrases > 0 ? Math.round((stats.learned / stats.totalPhrases) * 100) : 0}% complete</span>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                  Percentage of all phrases mastered
+                </div>
               </div>
               <div className="flex items-center space-x-4 border-l pl-4">
                 <span className="text-sm text-gray-600">Welcome, {user?.email || 'User'}</span>
@@ -636,8 +653,12 @@ function App() {
                   <span className="font-semibold">{stats.learned}/{stats.totalPhrases} mastered</span>
                 </div>
                 <div className="flex items-center space-x-2">
+                  <TrendingUp className="h-5 w-5 text-purple-500" />
+                  <span className="font-semibold">{stats.seen}/{stats.totalPhrases} seen</span>
+                </div>
+                <div className="flex items-center space-x-2">
                   <TrendingUp className="h-5 w-5 text-green-500" />
-                  <span className="font-semibold">{stats.totalPhrases > 0 ? Math.round((stats.learned / stats.totalPhrases) * 100) : 0}% progress</span>
+                  <span className="font-semibold">{stats.totalPhrases > 0 ? Math.round((stats.learned / stats.totalPhrases) * 100) : 0}% complete</span>
                 </div>
               </div>
             </div>
