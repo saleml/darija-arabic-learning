@@ -35,18 +35,28 @@ export default function TranslationDisplay({ translation, dialectName, flag }: T
     return '';
   };
 
+  const phraseText = getPhrase();
+  const latinText = getLatin();
+  const usageText = getUsageNote();
+  
+  // Safety check
+  if (typeof phraseText === 'object') {
+    console.error('TranslationDisplay trying to render object:', phraseText, 'for', dialectName);
+    return null;
+  }
+  
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <span className="font-semibold text-blue-600">{flag} {dialectName}:</span>
       </div>
       <div className="pl-6">
-        <div className="arabic-text rtl text-lg">{getPhrase()}</div>
-        {getLatin() && (
-          <div className="text-gray-600">{getLatin()}</div>
+        <div className="arabic-text rtl text-lg">{phraseText}</div>
+        {latinText && typeof latinText !== 'object' && (
+          <div className="text-gray-600">{latinText}</div>
         )}
-        {getUsageNote() && (
-          <div className="text-sm text-gray-500 mt-1">{getUsageNote()}</div>
+        {usageText && typeof usageText !== 'object' && (
+          <div className="text-sm text-gray-500 mt-1">{usageText}</div>
         )}
       </div>
     </div>

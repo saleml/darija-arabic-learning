@@ -286,27 +286,33 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-xl font-bold arabic-text rtl">{(() => {
-                          const value = sourceLanguage === 'darija' ? phrase.darija :
-                            sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
-                              (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : 
-                               (phrase.translations.lebanese?.phrase || '')) :
-                            sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
-                              (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : 
-                               (phrase.translations.syrian?.phrase || '')) :
-                            sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
-                              (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : 
-                               (phrase.translations.emirati?.phrase || '')) :
-                            sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
-                              (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : 
-                               (phrase.translations.saudi?.phrase || '')) :
-                            phrase.darija;
+                          let value = '';
+                          
+                          if (sourceLanguage === 'darija') {
+                            value = phrase.darija;
+                          } else {
+                            const translation = phrase.translations?.[sourceLanguage as keyof typeof phrase.translations];
+                            if (translation) {
+                              if (typeof translation === 'string') {
+                                value = translation;
+                              } else if (translation && typeof translation === 'object' && 'phrase' in translation) {
+                                value = translation.phrase || '';
+                              }
+                            } else {
+                              // Fallback to darija if translation not found
+                              value = phrase.darija;
+                            }
+                          }
                           
                           // Debug check
-                          if (typeof value === 'object') {
-                            console.error('Object being rendered in span:', value, 'for phrase:', phrase.id);
-                            return '';
+                          if (!value) {
+                            console.warn('Empty value for phrase:', phrase.id, 'sourceLanguage:', sourceLanguage);
                           }
-                          return value || '';
+                          if (typeof value === 'object') {
+                            console.error('Object being rendered:', value, 'for phrase:', phrase.id);
+                            return phrase.darija || 'Error';
+                          }
+                          return value || phrase.darija || '';
                         })()}</span>
                         <button
                           onClick={(e) => {
@@ -338,23 +344,27 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         </button>
                         <span className="text-gray-500">•</span>
                         <span className="text-lg text-gray-700">{(() => {
-                          const value = sourceLanguage === 'darija' ? (phrase.darija_latin || '') :
-                            sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
-                              (typeof phrase.translations.lebanese === 'object' ? (phrase.translations.lebanese.latin || '') : '') :
-                            sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
-                              (typeof phrase.translations.syrian === 'object' ? (phrase.translations.syrian.latin || '') : '') :
-                            sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
-                              (typeof phrase.translations.emirati === 'object' ? (phrase.translations.emirati.latin || '') : '') :
-                            sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
-                              (typeof phrase.translations.saudi === 'object' ? (phrase.translations.saudi.latin || '') : '') :
-                            (phrase.darija_latin || '');
+                          let value = '';
                           
-                          // Debug check
+                          if (sourceLanguage === 'darija') {
+                            value = phrase.darija_latin || '';
+                          } else {
+                            const translation = phrase.translations?.[sourceLanguage as keyof typeof phrase.translations];
+                            if (translation && typeof translation === 'object' && 'latin' in translation) {
+                              value = translation.latin || '';
+                            }
+                          }
+                          
+                          // Always fallback to darija_latin if no latin found
+                          if (!value) {
+                            value = phrase.darija_latin || '';
+                          }
+                          
                           if (typeof value === 'object') {
-                            console.error('Object being rendered in latin span:', value, 'for phrase:', phrase.id);
+                            console.error('Object in latin:', value, 'for phrase:', phrase.id);
                             return '';
                           }
-                          return value || '';
+                          return value;
                         })()}</span>
                         {isLearned && (
                           <div className="flex items-center gap-1" title="Mastered by answering correctly in quiz">
