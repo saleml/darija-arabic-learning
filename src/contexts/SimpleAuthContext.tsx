@@ -33,24 +33,35 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!isLoaded) return;
+    console.log('SimpleAuthContext - isLoaded:', isLoaded, 'clerkUser:', clerkUser?.id);
+    
+    if (!isLoaded) {
+      console.log('Clerk not loaded yet...');
+      return;
+    }
 
     if (clerkUser) {
+      console.log('User signed in, loading profile...');
       loadOrCreateProfile(clerkUser.id, clerkUser.primaryEmailAddress?.emailAddress || '');
     } else {
+      console.log('No user signed in');
       setUser(null);
       setIsLoading(false);
     }
   }, [clerkUser, isLoaded]);
 
   const loadOrCreateProfile = async (userId: string, email: string) => {
+    console.log('loadOrCreateProfile called for:', userId, email);
     try {
       // Try to load existing profile from Supabase
+      console.log('Fetching profile from Supabase...');
       let { data: profile, error } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
         .single();
+      
+      console.log('Supabase response - profile:', profile, 'error:', error);
 
       if (error || !profile) {
         // Create new profile if doesn't exist
