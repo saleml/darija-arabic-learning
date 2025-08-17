@@ -98,11 +98,11 @@ export default function DashboardPage() {
     logger.log('[Dashboard] Total phrases loaded:', phrases.length);
     
     // Check for duplicate IDs
-    const idCounts = {};
+    const idCounts: Record<string, number> = {};
     phrases.forEach(p => {
       idCounts[p.id] = (idCounts[p.id] || 0) + 1;
     });
-    const duplicateIds = Object.entries(idCounts).filter(([id, count]) => count > 1);
+    const duplicateIds = Object.entries(idCounts).filter(([id, count]: [string, number]) => count > 1);
     if (duplicateIds.length > 0) {
       logger.error('[Dashboard] ⚠️ DUPLICATE IDS FOUND:', duplicateIds);
     }
@@ -332,7 +332,7 @@ export default function DashboardPage() {
 
         {/* Tab Content */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          {activeTab === 'hub' && userProgress && (
+          {activeTab === 'hub' && (
             <TranslationHub 
               phrases={allPhrases} 
               userProgress={userProgress}
