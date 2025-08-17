@@ -18,21 +18,10 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
   const [isLoading, setIsLoading] = useState(false);
 
   const validatePassword = (password: string): string | null => {
-    if (password.length < 8) {
-      return 'Password must be at least 8 characters long';
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters long';
     }
-    if (!/[A-Z]/.test(password)) {
-      return 'Password must contain at least one uppercase letter';
-    }
-    if (!/[a-z]/.test(password)) {
-      return 'Password must contain at least one lowercase letter';
-    }
-    if (!/[0-9]/.test(password)) {
-      return 'Password must contain at least one number';
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      return 'Password must contain at least one special character';
-    }
+    // Simplified - no special requirements
     return null;
   };
 
@@ -78,9 +67,11 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         }
         
         success = await onSignup(email, password, name);
+        
         if (success) {
           setSuccess('Account created successfully!');
           setError('');
+          setIsLoading(false);
           
           // Close form after successful signup to show language setup
           setTimeout(() => {
@@ -88,15 +79,19 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           }, 500);
         } else {
           setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
+          setIsLoading(false);
         }
       }
       
       if (success && onClose && mode === 'login') {
+        setIsLoading(false);
         setTimeout(() => onClose(), 500);
+      } else if (mode === 'login' || mode === 'reset') {
+        setIsLoading(false);
       }
     } catch (err) {
+      console.error('[AuthForm] Unexpected error:', err);
       setError('An error occurred. Please try again.');
-    } finally {
       setIsLoading(false);
     }
   };
@@ -186,21 +181,14 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder={mode === 'signup' ? 'At least 8 characters with uppercase, lowercase, number & special char' : 'Enter your password'}
+                  placeholder={mode === 'signup' ? 'At least 6 characters' : 'Enter your password'}
                   autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                   required
                 />
               </div>
               {mode === 'signup' && (
                 <div className="mt-2 text-sm text-gray-600">
-                  <p>Password must contain:</p>
-                  <ul className="list-disc list-inside ml-2">
-                    <li>At least 8 characters</li>
-                    <li>One uppercase letter (A-Z)</li>
-                    <li>One lowercase letter (a-z)</li>
-                    <li>One number (0-9)</li>
-                    <li>One special character (!@#$%^&*)</li>
-                  </ul>
+                  <p>Password must be at least 6 characters</p>
                 </div>
               )}
             </div>
