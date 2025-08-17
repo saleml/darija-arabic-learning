@@ -60,18 +60,13 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
       // Login Mode
       if (mode === 'login') {
         try {
-          // Add a timeout to prevent infinite loading
-          const loginPromise = onLogin(email, password);
-          const timeoutPromise = new Promise<boolean>((_, reject) => 
-            setTimeout(() => reject(new Error('Login timeout')), 10000)
-          );
-          
-          const success = await Promise.race([loginPromise, timeoutPromise]);
+          // Just call login without timeout - it handles its own timeouts now
+          const success = await onLogin(email, password);
           setIsLoading(false);
           
           if (success) {
             if (onClose) {
-              onClose(); // Remove setTimeout, close immediately
+              onClose(); // Close immediately on success
             }
           } else {
             setError('Invalid email or password.');
@@ -79,7 +74,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         } catch (error) {
           console.error('[AuthForm] Login error:', error);
           setIsLoading(false);
-          setError('Login failed. Please check your connection and try again.');
+          setError('Login failed. Please try again.');
         }
         return;
       }
@@ -101,13 +96,8 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         }
         
         try {
-          // Create account with timeout
-          const signupPromise = onSignup(email, password, name, avatarUrl);
-          const timeoutPromise = new Promise<boolean>((_, reject) => 
-            setTimeout(() => reject(new Error('Signup timeout')), 10000)
-          );
-          
-          const signupSuccess = await Promise.race([signupPromise, timeoutPromise]);
+          // Create account
+          const signupSuccess = await onSignup(email, password, name, avatarUrl);
           
           if (!signupSuccess) {
             setError('Email already exists or signup failed.');
@@ -117,13 +107,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           
           // Auto-login after successful signup
           setSuccess('Account created! Logging you in...');
-          
-          const loginPromise = onLogin(email, password);
-          const loginTimeoutPromise = new Promise<boolean>((_, reject) => 
-            setTimeout(() => reject(new Error('Login timeout')), 10000)
-          );
-          
-          const loginSuccess = await Promise.race([loginPromise, loginTimeoutPromise]);
+          const loginSuccess = await onLogin(email, password);
           setIsLoading(false);
           
           if (loginSuccess && onClose) {
@@ -135,7 +119,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         } catch (error) {
           console.error('[AuthForm] Signup/Login error:', error);
           setIsLoading(false);
-          setError('Operation timed out. Please try again.');
+          setError('An error occurred. Please try again.');
         }
       }
     } catch (err) {
