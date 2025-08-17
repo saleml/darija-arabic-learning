@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/ClerkAuthContext';
 import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
 import ProgressTracker from '../components/ProgressTracker';
 import CulturalCards from '../components/CulturalCards';
-import ProfileDropdown from '../components/ProfileDropdown';
+import ClerkProfileDropdown from '../components/ClerkProfileDropdown';
 import { Phrase } from '../types';
 import { logger } from '../utils/logger';
 import beginnerPhrases from '../../database/beginner_phrases.json';
@@ -19,7 +19,30 @@ type TabType = 'hub' | 'quiz' | 'progress' | 'culture';
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { tab } = useParams<{ tab?: string }>();
-  const { user, userProgress, logout, sourceLanguage, targetLanguage, updateLanguagePreferences, updateUserProgress } = useAuth();
+  const { user, sourceLanguage, targetLanguage, signOut } = useAuth();
+  const userProgress = { 
+    userId: user?.id || '',
+    wordsLearned: 0, 
+    streakDays: 0, 
+    totalStudyTime: 0,
+    phrasesLearned: [] as string[],
+    phrasesInProgress: [] as string[],
+    quizScores: [],
+    lastActiveDate: new Date().toISOString(),
+    achievements: [],
+    dailyGoal: 10,
+    spacedRepetition: [],
+    preferences: {
+      dailyGoal: 10,
+      notificationsEnabled: false,
+      soundEnabled: true,
+      targetDialect: (targetLanguage === 'darija' ? 'lebanese' : targetLanguage) as "lebanese" | "syrian" | "emirati" | "saudi" | "all",
+      theme: 'light' as const
+    }
+  }; // Placeholder for now
+  const updateUserProgress = (updates: any) => {
+    console.log('Progress update:', updates);
+  };
   
   const [activeTab, setActiveTab] = useState<TabType>((tab as TabType) || 'hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
@@ -76,7 +99,7 @@ export default function DashboardPage() {
   }, []);
 
   const handleLogout = async () => {
-    await logout();
+    await signOut();
     navigate('/');
   };
 
@@ -88,9 +111,9 @@ export default function DashboardPage() {
 
   const stats = {
     totalPhrases: allPhrases.length,
-    learned: userProgress?.phrasesLearned.length || 0,
-    inProgress: userProgress?.phrasesInProgress.length || 0,
-    seen: (userProgress?.phrasesLearned.length || 0) + (userProgress?.phrasesInProgress.length || 0),
+    learned: userProgress?.phrasesLearned?.length || 0,
+    inProgress: userProgress?.phrasesInProgress?.length || 0,
+    seen: (userProgress?.phrasesLearned?.length || 0) + (userProgress?.phrasesInProgress?.length || 0),
     streak: userProgress?.streakDays || 0
   };
 
@@ -159,13 +182,7 @@ export default function DashboardPage() {
 
             {/* User Menu */}
             <div className="flex items-center gap-2">
-              <ProfileDropdown
-                user={user}
-                sourceLanguage={sourceLanguage}
-                targetLanguage={targetLanguage}
-                onLogout={handleLogout}
-                onLanguageChange={updateLanguagePreferences}
-              />
+              <ClerkProfileDropdown />
 
               {/* Mobile menu button */}
               <button

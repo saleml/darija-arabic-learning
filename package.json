@@ -10,6 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.42.1",
     "@supabase/supabase-js": "^2.55.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.263.1",

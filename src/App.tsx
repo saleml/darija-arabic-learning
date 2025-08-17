@@ -1,16 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
+import { SignIn, SignUp } from '@clerk/clerk-react';
+import { useAuth } from './contexts/ClerkAuthContext';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import ResetPasswordPage from './pages/ResetPasswordPage';
 import LanguageSetup from './components/LanguageSetup';
 
 function App() {
-  const { user, sourceLanguage, targetLanguage, updateLanguagePreferences } = useAuth();
-
-  // Don't show loading screen - render immediately
-  // The auth will resolve quickly in the background
+  const { user, sourceLanguage, targetLanguage, updateProfile } = useAuth();
 
   // Show language setup for new users
   if (user && (!sourceLanguage || !targetLanguage || sourceLanguage === targetLanguage)) {
@@ -19,7 +15,7 @@ function App() {
         initialSource={sourceLanguage || 'darija'}
         initialTarget={targetLanguage || 'lebanese'}
         onComplete={(source, target) => {
-          updateLanguagePreferences(source, target);
+          updateProfile({ sourceLanguage: source, targetLanguage: target });
         }}
       />
     );
@@ -30,8 +26,44 @@ function App() {
       {/* Public routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/home" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      
+      {/* Clerk sign-in/up routes */}
+      <Route 
+        path="/login" 
+        element={
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+            <SignIn 
+              routing="path" 
+              path="/login"
+              afterSignInUrl="/dashboard"
+              appearance={{
+                elements: {
+                  rootBox: "mx-auto",
+                  card: "shadow-2xl"
+                }
+              }}
+            />
+          </div>
+        } 
+      />
+      <Route 
+        path="/signup" 
+        element={
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+            <SignUp 
+              routing="path" 
+              path="/signup"
+              afterSignUpUrl="/dashboard"
+              appearance={{
+                elements: {
+                  rootBox: "mx-auto",
+                  card: "shadow-2xl"
+                }
+              }}
+            />
+          </div>
+        } 
+      />
       
       {/* Protected routes */}
       <Route 
