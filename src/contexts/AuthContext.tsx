@@ -318,6 +318,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (error) {
         console.error('[AuthContext] Login error:', error.message);
+        // Check if it's an email confirmation issue
+        if (error.message?.includes('Email not confirmed')) {
+          console.log('[AuthContext] User needs to confirm email before logging in');
+        }
         return false;
       }
 
@@ -400,26 +404,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (data.user) {
         console.log('[AuthContext] Signup successful for:', data.user.email);
+        console.log('[AuthContext] Email confirmation required:', data.user.email_confirmed_at === null);
         
-        // Create user profile (will be handled by the database trigger)
-        // But let's also create it manually to ensure it exists
-        const { error: profileError } = await supabase
-          .from('user_profiles')
-          .upsert({
-            id: data.user.id,
-            email: data.user.email,
-            full_name: name,
-            preferred_dialect: 'all',
-            daily_goal: 10,
-            streak_days: 0,
-            total_study_time: 0
-          });
-
-        if (profileError) {
-          console.error('[AuthContext] Error creating profile:', profileError);
-          console.error('[AuthContext] Profile error details:', JSON.stringify(profileError, null, 2));
+        // Note: Profile creation will fail if email is not confirmed due to RLS policies
+        // The profile will be created automatically when the user confirms their email
+        // and logs in for the first time
+        
+        if (data.user.email_confirmed_at === null) {
+          console.log('[AuthContext] User needs to confirm email before profile can be created');
         } else {
-          console.log('[AuthContext] User profile created successfully');
+          // Try to create profile if email is already confirmed (shouldn't happen on signup)
+          const { error: profileError } = await supabase
+            .from('user_profiles')
+            .upsert({
+              id: data.user.id,
+              email: data.user.email,
+              full_name: name,
+              preferred_dialect: 'all',
+              daily_goal: 10,
+              streak_days: 0,
+              total_study_time: 0
+            });
+
+          if (profileError) {
+            console.error('[AuthContext] Error creating profile:', profileError);
+            console.error('[AuthContext] This is expected if email is not confirmed');
+          } else {
+            console.log('[AuthContext] User profile created successfully');
+          }
         }
 
         return true;

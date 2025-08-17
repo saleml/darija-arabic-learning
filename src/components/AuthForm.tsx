@@ -61,7 +61,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
       } else if (mode === 'login') {
         success = await onLogin(email, password);
         if (!success) {
-          setError('Invalid email or password');
+          setError('Invalid email or password. If you just signed up, please check your email for confirmation first.');
         }
       } else {
         if (!name.trim()) {
@@ -78,12 +78,16 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         }
         
         success = await onSignup(email, password, name);
-        if (!success) {
-          setError('Email already exists or signup failed');
+        if (success) {
+          setSuccess('Account created! Please check your email to confirm your account before logging in.');
+          setError('');
+          // Don't close the form, show success message
+        } else {
+          setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
         }
       }
       
-      if (success && onClose && mode !== 'reset') {
+      if (success && onClose && mode === 'login') {
         onClose();
       }
     } catch (err) {
@@ -149,10 +153,13 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
               <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
               <input
                 type="email"
+                id="email"
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="you@example.com"
+                autoComplete="email"
                 required
               />
             </div>
@@ -167,12 +174,13 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
                   type="password"
+                  id="password"
+                  name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder={mode === 'signup' ? 'At least 8 characters with uppercase, lowercase, number & special char' : 'Enter your password'}
                   autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
-                  inputMode="text"
                   required
                 />
               </div>
