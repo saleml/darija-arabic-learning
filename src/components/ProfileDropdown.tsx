@@ -3,6 +3,7 @@ import { Settings, LogOut, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { avatarOptions } from './AvatarSelector';
 import { logger } from '../utils/logger';
+import { directUpdateProfile } from '../utils/directSupabase';
 
 interface ProfileDropdownProps {
   user: {
@@ -125,19 +126,37 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         });
         
         // Race between update and timeout
-        const result = await Promise.race([
-          updateQuery.then(result => {
-            console.log('📨 Supabase response received');
-            return result;
-          }),
-          timeoutPromise
-        ]);
-        
-        const { data, error } = result as any;
-        
-        if (error) {
-          console.error('❌ Supabase error:', error);
-          throw error;
+        let data, error;
+        try {
+          const result = await Promise.race([
+            updateQuery.then(result => {
+              console.log('📨 Supabase response received');
+              return result;
+            }),
+            timeoutPromise
+          ]);
+          
+          ({ data, error } = result as any);
+          
+          if (error) {
+            console.error('❌ Supabase error:', error);
+            throw error;
+          }
+        } catch (timeoutError: any) {
+          // If timeout, try direct API call
+          console.log('🔄 Supabase client timed out, trying direct API call...');
+          
+          const directResult = await directUpdateProfile(
+            user.id,
+            updatePayload,
+            session.access_token
+          );
+          
+          if (directResult.error) {
+            throw directResult.error;
+          }
+          
+          data = directResult.data;
         }
         
         console.log('✅ Profile updated successfully:', data);
