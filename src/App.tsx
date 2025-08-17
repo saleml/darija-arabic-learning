@@ -1,15 +1,25 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { SignIn, SignUp } from '@clerk/clerk-react';
+import { SignIn, SignUp, useUser } from '@clerk/clerk-react';
 import { useAuth } from './contexts/ClerkAuthContext';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import LanguageSetup from './components/LanguageSetup';
 
 function App() {
-  const { user, sourceLanguage, targetLanguage, updateProfile } = useAuth();
+  const { isLoaded, isSignedIn } = useUser();
+  const { user, sourceLanguage, targetLanguage, updateProfile, isLoading } = useAuth();
+  
+  // Show loading state while Clerk is initializing
+  if (!isLoaded || isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   // Show language setup for new users
-  if (user && (!sourceLanguage || !targetLanguage || sourceLanguage === targetLanguage)) {
+  if (isSignedIn && user && (!sourceLanguage || !targetLanguage || sourceLanguage === targetLanguage)) {
     return (
       <LanguageSetup
         initialSource={sourceLanguage || 'darija'}
@@ -68,23 +78,23 @@ function App() {
       {/* Protected routes */}
       <Route 
         path="/dashboard" 
-        element={user ? <DashboardPage /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <DashboardPage /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/dashboard/:tab" 
-        element={user ? <DashboardPage /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <DashboardPage /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/quiz" 
-        element={user ? <Navigate to="/dashboard/quiz" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <Navigate to="/dashboard/quiz" replace /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/progress" 
-        element={user ? <Navigate to="/dashboard/progress" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <Navigate to="/dashboard/progress" replace /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/culture" 
-        element={user ? <Navigate to="/dashboard/culture" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <Navigate to="/dashboard/culture" replace /> : <Navigate to="/login" replace />} 
       />
       
       {/* Catch all - redirect to home */}
