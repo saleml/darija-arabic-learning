@@ -189,12 +189,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         profile = newProfile; // Use the newly created profile regardless
       }
 
-      // Create user object
+      // Create user object - always use profile data if available
       const userData: User = {
         id: supabaseUser.id,
         email: supabaseUser.email || '',
         name: profile?.full_name || supabaseUser.user_metadata?.full_name || 'User',
-        avatarUrl: profile?.avatar_url || getRandomAvatar(),
+        avatarUrl: profile?.avatar_url || supabaseUser.user_metadata?.avatar_url || getRandomAvatar(),
         createdAt: supabaseUser.created_at,
         lastLogin: new Date().toISOString()
       };

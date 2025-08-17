@@ -58,20 +58,7 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
       logger.log('Saving profile for user:', user.id);
       logger.log('Data:', { name, avatar, source, target });
       
-      // First check if we can access the profile
-      const { data: existingProfile, error: fetchError } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-      
-      if (fetchError) {
-        logger.log('Profile fetch issue - creating new one');
-      }
-      
-      logger.log('Existing profile:', existingProfile);
-      
-      // Update database
+      // Update database directly - no need to fetch first
       const { data, error } = await supabase
         .from('user_profiles')
         .update({
