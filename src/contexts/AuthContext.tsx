@@ -217,7 +217,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             id: supabaseUser.id,
             email: supabaseUser.email,
             full_name: supabaseUser.user_metadata?.full_name || '',
-            preferred_dialect: 'lebanese',
+            source_language: 'darija',  // Default source language
+            target_language: 'lebanese', // Default target language
+            preferred_dialect: 'lebanese', // Keep for backward compatibility
             daily_goal: 10,
             streak_days: 0,
             total_study_time: 0
@@ -733,7 +735,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setTargetLanguage(target);
       
       // Update in database
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('user_profiles')
         .update({
           source_language: source,
@@ -741,12 +743,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           preferred_dialect: target, // Keep for backward compatibility
           updated_at: new Date().toISOString()
         })
-        .eq('id', user.id);
+        .eq('id', user.id)
+        .select();
 
-      if (error && !error.message?.includes('Please set up Supabase')) {
-        console.error('[AuthContext] Error updating language preferences:', error);
+      if (error) {
+        if (error.message?.includes('Please set up Supabase')) {
+          console.log('[AuthContext] Using localStorage fallback for language preferences');
+        } else {
+          console.error('[AuthContext] Error updating language preferences:', error);
+          console.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
+        }
       } else {
-        console.log('[AuthContext] Language preferences updated successfully');
+        console.log('[AuthContext] Language preferences updated successfully:', data);
       }
       
       // Update localStorage fallback
