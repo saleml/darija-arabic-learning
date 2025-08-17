@@ -32,12 +32,16 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
 
   // Get unmastered and mastered phrases
   const unmasteredPhrases = useMemo(() => {
-    if (!phrases || !userProgress) return [];
+    if (!phrases) return [];
+    // If no userProgress yet (new user), all phrases are unmastered
+    if (!userProgress) return phrases;
     return phrases.filter(p => !userProgress.phrasesLearned.includes(p.id));
   }, [phrases, userProgress]);
 
   const masteredPhrases = useMemo(() => {
-    if (!phrases || !userProgress) return [];
+    if (!phrases) return [];
+    // If no userProgress yet (new user), no phrases are mastered
+    if (!userProgress) return [];
     // Only return phrases that actually exist in the current phrase list
     return phrases.filter(p => userProgress.phrasesLearned.includes(p.id));
   }, [phrases, userProgress]);
