@@ -113,7 +113,8 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         setTimeout(() => reject(new Error('Profile update timed out after 10 seconds. Please try again.')), 10000)
       );
       
-      const { data, error } = await Promise.race([updatePromise, timeoutPromise]);
+      const result = await Promise.race([updatePromise, timeoutPromise]) as any;
+      const { data, error } = result;
 
       if (error) {
         console.error('❌ Error updating profile:', error);
