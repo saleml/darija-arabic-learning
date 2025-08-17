@@ -178,7 +178,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleUserSession = async (supabaseUser: SupabaseUser) => {
     try {
       // Get user profile from database
-      const { data: profile, error: profileError } = await supabase
+      let { data: profile, error: profileError } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', supabaseUser.id)
@@ -192,25 +192,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // If profile doesn't exist, create it
       if (!profile) {
         console.log('[AuthContext] No profile found, creating one...');
+        const newProfile = {
+          id: supabaseUser.id,
+          email: supabaseUser.email,
+          full_name: supabaseUser.user_metadata?.full_name || '',
+          avatar_url: supabaseUser.user_metadata?.avatar_url || getRandomAvatar(),
+          source_language: 'darija',  // Default source language
+          target_language: 'lebanese', // Default target language
+          preferred_dialect: 'lebanese', // Keep for backward compatibility
+          daily_goal: 10,
+          streak_days: 0,
+          total_study_time: 0
+        };
+        
         const { error: createError } = await supabase
           .from('user_profiles')
-          .insert({
-            id: supabaseUser.id,
-            email: supabaseUser.email,
-            full_name: supabaseUser.user_metadata?.full_name || '',
-            avatar_url: supabaseUser.user_metadata?.avatar_url || getRandomAvatar(),
-            source_language: 'darija',  // Default source language
-            target_language: 'lebanese', // Default target language
-            preferred_dialect: 'lebanese', // Keep for backward compatibility
-            daily_goal: 10,
-            streak_days: 0,
-            total_study_time: 0
-          });
+          .insert(newProfile);
 
         if (createError) {
           console.error('[AuthContext] Error creating profile on login:', createError);
         } else {
           console.log('[AuthContext] Profile created successfully on login');
+          profile = newProfile; // Use the newly created profile
         }
       }
 
@@ -504,16 +507,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = async (): Promise<void> => {
     try {
+      console.log('[AuthContext] Logging out...');
+      
+      // Clear local state first
+      setUser(null);
+      setUserProgress(null);
+      setSourceLanguage('darija');
+      setTargetLanguage('lebanese');
+      localStorage.removeItem('currentUser');
+      
+      // Then sign out from Supabase
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error('[AuthContext] Logout error:', error);
+      } else {
+        console.log('[AuthContext] Logout successful');
       }
       
-      setUser(null);
-      setUserProgress(null);
-      localStorage.removeItem('currentUser');
+      // Force reload to clear any cached state
+      window.location.href = '/';
     } catch (error) {
       console.error('[AuthContext] Logout error:', error);
+      // Even if error, clear local state
+      setUser(null);
+      setUserProgress(null);
+      window.location.href = '/';
     }
   };
 
