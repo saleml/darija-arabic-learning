@@ -82,41 +82,16 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           setSuccess('Account created successfully!');
           setError('');
           
-          // Give browsers time to detect the successful form submission for password manager
-          // Create a hidden form submission to help trigger password save prompt
-          const hiddenForm = document.createElement('form');
-          hiddenForm.style.display = 'none';
-          hiddenForm.method = 'POST';
-          hiddenForm.action = '#';
-          
-          const emailInput = document.createElement('input');
-          emailInput.type = 'email';
-          emailInput.name = 'email';
-          emailInput.value = email;
-          
-          const passwordInput = document.createElement('input');
-          passwordInput.type = 'password';
-          passwordInput.name = 'password';
-          passwordInput.value = password;
-          
-          hiddenForm.appendChild(emailInput);
-          hiddenForm.appendChild(passwordInput);
-          document.body.appendChild(hiddenForm);
-          
-          // Submit and immediately remove the hidden form
+          // Close form after successful signup to show language setup
           setTimeout(() => {
-            hiddenForm.submit();
-            setTimeout(() => {
-              document.body.removeChild(hiddenForm);
-              if (onClose) onClose();
-            }, 100);
-          }, 200);
+            if (onClose) onClose();
+          }, 500);
         } else {
           setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
         }
       }
       
-      if (success && onClose && (mode === 'login' || mode === 'signup')) {
+      if (success && onClose && mode === 'login') {
         setTimeout(() => onClose(), 500);
       }
     } catch (err) {
@@ -154,7 +129,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="#" autoComplete="on">
+        <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="javascript:void(0)" autoComplete="on">
           {mode === 'signup' && (
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">

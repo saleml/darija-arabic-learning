@@ -1,8 +1,8 @@
 # Persistent Issues - Arabic Dialects Hub
 
 **Date Created:** August 17, 2025 - 10:47 AM  
-**Last Updated:** August 17, 2025 - 10:47 AM  
-**Status:** UNRESOLVED
+**Last Updated:** August 17, 2025 - 11:15 AM  
+**Status:** PARTIALLY RESOLVED - Debugging in progress
 
 ## Overview
 This document tracks persistent issues that remain after deployment, despite multiple attempts to fix them. These issues affect the user experience and need to be addressed.
@@ -117,10 +117,44 @@ After successful signup, new users do not see the welcome screen for selecting s
 - ✅ Fixed React Router conflicts and deployment issues
 
 ### What Still Needs Investigation
-- ❌ Supabase environment configuration in production
-- ❌ Password manager detection in production environment
-- ❌ Language setup screen triggering logic
-- ❌ User creation flow debugging
+- ❌ Supabase environment configuration in production (IDENTIFIED: No real Supabase project set up)
+- 🔄 Password manager detection in production environment (IMPROVED: Added hidden form submission)
+- 🔄 Language setup screen triggering logic (DEBUGGING: Added extensive console logs)
+- 🔄 User creation flow debugging (IN PROGRESS: Debug logs deployed)
+
+---
+
+## Recent Progress (August 17, 2025 - 11:15 AM)
+
+### Issue #1: Root Cause Identified ✅
+**DISCOVERED:** The application is not actually connecting to Supabase in production. Environment variables are set to placeholder values, causing the app to use localStorage fallback mode.
+
+**Evidence:**
+- `.env.local` contains `VITE_SUPABASE_URL=placeholder`
+- `netlify.toml` has empty environment variables
+- `supabase.ts` detects placeholders and creates mock client
+- This explains why users don't appear in Supabase dashboard
+
+**Solution Required:** Set up real Supabase project and configure environment variables.
+
+### Issue #2: Debugging Deployed ⏳
+**ACTIONS TAKEN:**
+- Added comprehensive console logging to track `showLanguageSetup` state
+- Added logging to check `languages_setup_${user.id}` localStorage flag
+- Added logging to language setup completion flow
+- Debug version deployed to production for testing
+
+**Next:** Test signup flow and check browser console for debug output.
+
+### Issue #3: Password Manager Improved 🔄
+**ACTIONS TAKEN:**
+- Added `autoComplete="on"` to form
+- Added proper `htmlFor` attributes to all labels
+- Added `name` and `id` attributes to all inputs
+- Added hidden form submission technique after successful signup
+- Proper `autoComplete` values for email/password fields
+
+**Technical Approach:** Created hidden form that submits after successful signup to trigger browser's password save detection.
 
 ---
 
