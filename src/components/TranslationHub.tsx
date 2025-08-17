@@ -287,20 +287,36 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-xl font-bold arabic-text rtl">{
                           sourceLanguage === 'darija' ? phrase.darija :
-                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : phrase.translations.lebanese.phrase) :
-                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : phrase.translations.syrian.phrase) :
-                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : phrase.translations.emirati.phrase) :
-                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : phrase.translations.saudi.phrase) :
+                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
+                            (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : 
+                             (phrase.translations.lebanese?.phrase || '')) :
+                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
+                            (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : 
+                             (phrase.translations.syrian?.phrase || '')) :
+                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
+                            (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : 
+                             (phrase.translations.emirati?.phrase || '')) :
+                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
+                            (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : 
+                             (phrase.translations.saudi?.phrase || '')) :
                           phrase.darija
                         }</span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             const textToCopy = sourceLanguage === 'darija' ? phrase.darija :
-                              sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : phrase.translations.lebanese.phrase) :
-                              sourceLanguage === 'syrian' && phrase.translations?.syrian ? (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : phrase.translations.syrian.phrase) :
-                              sourceLanguage === 'emirati' && phrase.translations?.emirati ? (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : phrase.translations.emirati.phrase) :
-                              sourceLanguage === 'saudi' && phrase.translations?.saudi ? (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : phrase.translations.saudi.phrase) :
+                              sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
+                                (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : 
+                                 (phrase.translations.lebanese?.phrase || '')) :
+                              sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
+                                (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : 
+                                 (phrase.translations.syrian?.phrase || '')) :
+                              sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
+                                (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : 
+                                 (phrase.translations.emirati?.phrase || '')) :
+                              sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
+                                (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : 
+                                 (phrase.translations.saudi?.phrase || '')) :
                               phrase.darija;
                             copyToClipboard(textToCopy, `${phrase.id}-ar`);
                           }}
