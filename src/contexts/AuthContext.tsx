@@ -129,24 +129,39 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleUserSession = async (supabaseUser: SupabaseUser) => {
     console.log('[handleUserSession] Starting for user:', supabaseUser.id);
     try {
-      // Get user profile from database
+      // Get user profile from database with timeout
       console.log('[handleUserSession] Fetching user profile...');
-      let { data: profile, error: profileError } = await supabase
+      
+      const profilePromise = supabase
         .from('user_profiles')
         .select('*')
         .eq('id', supabaseUser.id)
         .single();
+        
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Profile fetch timeout')), 5000)
+      );
+      
+      let profile, profileError;
+      try {
+        const result = await Promise.race([profilePromise, timeoutPromise]) as any;
+        profile = result.data;
+        profileError = result.error;
+      } catch (timeoutErr) {
+        console.error('[handleUserSession] Profile fetch timed out, creating basic user');
+        profileError = { code: 'TIMEOUT' };
+      }
 
       console.log('[handleUserSession] Profile fetch result:', { profile, profileError });
       
-      if (profileError && profileError.code !== 'PGRST116') {
+      if (profileError && profileError.code !== 'PGRST116' && profileError.code !== 'TIMEOUT') {
         console.error('[AuthContext] Error fetching profile:', profileError);
         return;
       }
 
-      // If profile doesn't exist, create it
+      // If profile doesn't exist or timed out, create/use a basic one
       if (!profile) {
-        console.log('[AuthContext] No profile found, creating one...');
+        console.log('[AuthContext] No profile found, creating basic profile...');
         const newProfile = {
           id: supabaseUser.id,
           email: supabaseUser.email,
@@ -160,16 +175,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           total_study_time: 0
         };
         
-        const { error: createError } = await supabase
-          .from('user_profiles')
-          .insert(newProfile);
+        // Skip database insert if we had a timeout
+        if (profileError?.code !== 'TIMEOUT') {
+          try {
+            const { error: createError } = await supabase
+              .from('user_profiles')
+              .insert(newProfile);
 
-        if (createError) {
-          console.error('[AuthContext] Error creating profile on login:', createError);
-        } else {
-          console.log('[AuthContext] Profile created successfully on login');
-          profile = newProfile; // Use the newly created profile
+            if (createError) {
+              console.error('[AuthContext] Error creating profile on login:', createError);
+            } else {
+              console.log('[AuthContext] Profile created successfully on login');
+            }
+          } catch (err) {
+            console.error('[AuthContext] Profile creation failed:', err);
+          }
         }
+        
+        profile = newProfile; // Use the newly created profile regardless
       }
 
       // Create user object
@@ -185,7 +208,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('[handleUserSession] Setting user data...');
       setUser(userData);
       console.log('[handleUserSession] Loading user progress...');
-      await loadUserProgress(supabaseUser.id, profile);
+      
+      // Don't wait for progress loading if database is slow
+      loadUserProgress(supabaseUser.id, profile).catch(err => {
+        console.error('[handleUserSession] Failed to load progress:', err);
+      });
+      
       console.log('[handleUserSession] Complete!');
       
     } catch (error) {
