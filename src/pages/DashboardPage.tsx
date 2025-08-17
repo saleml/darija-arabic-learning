@@ -3,7 +3,6 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useUserProgress } from '../hooks/useUserProgress';
-import { getProgressService } from '../services/progressService';
 import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
 import ProgressTracker from '../components/ProgressTracker';

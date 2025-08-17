@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { TrendingUp, Trophy, Target, Clock, Calendar, Award, BarChart3, Flame, BookOpen, Star } from 'lucide-react';
 import { UserProgress } from '../types';
-import SupabaseDebugger from './SupabaseDebugger';
 
 interface Props {
   userProgress: UserProgress | null;
@@ -497,7 +496,7 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
         )}
 
         {view === 'debug' && (
-          <SupabaseDebugger />
+          <div>Debug view removed</div>
         )}
       </div>
     </div>

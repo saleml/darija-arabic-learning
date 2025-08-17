@@ -113,7 +113,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
         // Update public metadata for syncing
         try {
           await result.update({
-            publicMetadata: {
+            unsafeMetadata: {
               sourceLanguage,
               targetLanguage,
               avatarUrl

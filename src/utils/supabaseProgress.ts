@@ -1,6 +1,6 @@
-import { supabase } from './supabaseClient';
 import { UserProgress, QuizScore } from '../types';
 import { logger } from './logger';
+import { supabase } from './supabaseClient';
 
 export interface QuizAttempt {
   id?: string;
@@ -241,8 +241,8 @@ export const supabaseProgress = {
       
       // Calculate stats
       const totalQuizzes = quizHistory.length;
-      const totalScore = quizHistory.reduce((sum, quiz) => sum + quiz.score, 0);
-      const totalQuestions = quizHistory.reduce((sum, quiz) => sum + quiz.total_questions, 0);
+      const totalScore = quizHistory.reduce((sum: number, quiz: any) => sum + quiz.score, 0);
+      const totalQuestions = quizHistory.reduce((sum: number, quiz: any) => sum + quiz.total_questions, 0);
       const averageScore = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
       
       const masteredPhrases = phraseProgress.filter(p => p.is_mastered).length;
@@ -274,7 +274,7 @@ export const supabaseProgress = {
       }
       
       // Calculate study time (sum of all quiz time_spent)
-      const totalStudyTime = quizHistory.reduce((sum, quiz) => sum + (quiz.time_spent || 0), 0);
+      const totalStudyTime = quizHistory.reduce((sum: number, quiz: any) => sum + (quiz.time_spent || 0), 0);
       
       return {
         totalQuizzes,

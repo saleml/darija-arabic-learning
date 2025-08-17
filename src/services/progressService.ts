@@ -30,7 +30,6 @@ export class ProgressService {
   constructor(config: ProgressServiceConfig) {
     this.config = {
       enableSupabase: true,
-      enableLocalStorage: true,
       syncInterval: 30000, // 30 seconds default
       offlineMode: false,
       ...config
@@ -539,7 +538,6 @@ export function getProgressService(config?: ProgressServiceConfig): ProgressServ
   if (!progressServiceInstance) {
     progressServiceInstance = new ProgressService(config || {
       enableSupabase: true,
-      enableLocalStorage: true,
       syncInterval: 30000
     });
   }

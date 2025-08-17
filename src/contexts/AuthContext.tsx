@@ -156,7 +156,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         // Update Clerk user - use unsafeMetadata for client-side updates
         try {
-          const result = await clerkUser.update({
+          await clerkUser.update({
             unsafeMetadata: {
               ...currentUnsafeMetadata,
               ...metadataUpdate

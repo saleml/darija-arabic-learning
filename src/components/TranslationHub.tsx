@@ -13,7 +13,7 @@ interface Props {
   targetLanguage?: string;
 }
 
-export default function TranslationHub({ phrases, userProgress, onUpdateProgress, onMarkAsLearned, onMarkAsInProgress, sourceLanguage = 'darija' }: Props) {
+export default function TranslationHub({ phrases, userProgress, onUpdateProgress, onMarkAsLearned, sourceLanguage = 'darija' }: Props) {
   const [showMastered, setShowMastered] = useState(false);
   const [currentPhrases, setCurrentPhrases] = useState<Phrase[]>([]);
   const [expandedPhrases, setExpandedPhrases] = useState<Set<string>>(new Set());

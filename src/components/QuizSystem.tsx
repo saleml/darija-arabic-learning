@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Brain, Check, X, Trophy, Target, Clock, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame, RefreshCw, Home } from 'lucide-react';
-import { Phrase, UserProgress, QuizScore, SpacedRepetitionItem } from '../types';
+import { Brain, Check, X, Trophy, Target, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame, RefreshCw, Home } from 'lucide-react';
+import { Phrase, UserProgress, SpacedRepetitionItem } from '../types';
 import { getDialectWordBank, getSimilarWords } from '../data/dialectDictionary';
 import { useUserProgress } from '../hooks/useUserProgress';
 import { AnalyticsService } from '../services/analytics';
@@ -25,7 +25,7 @@ interface QuizQuestion {
   isCorrect?: boolean;
 }
 
-export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetLanguage = 'lebanese', onUpdateProgress }: Props) {
+export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetLanguage = 'lebanese' }: Props) {
   const { user } = useUser();
   const { 
     userProgress, 
@@ -80,38 +80,6 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
     });
   }, [phrases, difficulty]);
 
-  const getDueForReview = (): Phrase[] => {
-    
-    if (!userProgress) {
-      return [];
-    }
-    
-    const now = new Date().toISOString();
-    const dueItems = userProgress.spacedRepetition
-      .filter(item => item.nextReviewDate <= now)
-      .map(item => phrases.find(p => p.id === item.phraseId))
-      .filter(Boolean) as Phrase[];
-
-    // If we have due items, return them
-    if (dueItems.length > 0) {
-      return dueItems;
-    }
-    
-    // For new users to spaced repetition, return some starter phrases
-    if (userProgress.spacedRepetition.length === 0) {
-      
-      // Filter phrases based on difficulty if needed
-      const filteredPhrases = difficulty === 'all' 
-        ? phrases 
-        : phrases.filter(p => p.difficulty === difficulty);
-      
-      const starterPhrases = filteredPhrases.slice(0, 10);
-      
-      return starterPhrases;
-    }
-    
-    return [];
-  };
 
   // Build word replacement dictionary combining database words with dialect word bank
   const buildWordReplacementDict = (allPhrases: Phrase[], targetDialectKey: string): Map<string, string[]> => {
@@ -560,7 +528,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
         try {
           await Promise.all(updatePromises);
 
-        } catch (error) {
+        } catch (_error) {
 
         }
       }
@@ -679,9 +647,9 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                     setQuizEndTime(null);
                     // Refresh progress in background, don't wait
                     if (refreshProgress) {
-                      refreshProgress().catch(err => 
-
-                      );
+                      refreshProgress().catch(err => {
+                        console.error('Failed to refresh progress:', err);
+                      });
                     }
                   }}
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all transform hover:scale-105 btn-press flex items-center justify-center gap-2 shadow-lg"

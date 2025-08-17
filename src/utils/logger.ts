@@ -2,21 +2,21 @@
 const isDevelopment = import.meta.env.DEV;
 
 export const logger = {
-  log: (...args: any[]) => {
+  log: (..._args: any[]) => {
     if (isDevelopment) {
 
     }
   },
-  error: (...args: any[]) => {
+  error: (..._args: any[]) => {
     // Always log errors
 
   },
-  warn: (...args: any[]) => {
+  warn: (..._args: any[]) => {
     if (isDevelopment) {
 
     }
   },
-  info: (...args: any[]) => {
+  info: (..._args: any[]) => {
     if (isDevelopment) {
 
     }
