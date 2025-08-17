@@ -96,20 +96,49 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
       
       // Try update with proper error handling
       try {
-        const { data, error } = await supabase
+        console.log('📡 Starting Supabase update call...');
+        const updatePayload = {
+          full_name: name,
+          avatar_url: avatar,
+          source_language: source,
+          target_language: target,
+          updated_at: new Date().toISOString()
+        };
+        console.log('📦 Update payload:', updatePayload);
+        
+        // Create the update query
+        const updateQuery = supabase
           .from('user_profiles')
-          .update({
-            full_name: name,
-            avatar_url: avatar,
-            source_language: source,
-            target_language: target,
-            updated_at: new Date().toISOString()
-          })
+          .update(updatePayload)
           .eq('id', user.id)
           .select()
           .single();
         
-        if (error) throw error;
+        console.log('⏳ Executing update query...');
+        
+        // Add timeout to detect hanging
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => {
+            console.error('⏱️ Update timeout after 5 seconds');
+            reject(new Error('Update operation timed out after 5 seconds'));
+          }, 5000);
+        });
+        
+        // Race between update and timeout
+        const result = await Promise.race([
+          updateQuery.then(result => {
+            console.log('📨 Supabase response received');
+            return result;
+          }),
+          timeoutPromise
+        ]);
+        
+        const { data, error } = result as any;
+        
+        if (error) {
+          console.error('❌ Supabase error:', error);
+          throw error;
+        }
         
         console.log('✅ Profile updated successfully:', data);
         
