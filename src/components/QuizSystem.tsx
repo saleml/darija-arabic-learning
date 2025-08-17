@@ -90,7 +90,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
       const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
       if (translation) {
         const arabicText = typeof translation === 'string' ? translation : translation?.phrase || '';
-        if (arabicText) {
+        if (arabicText && typeof arabicText === 'string') {
           const words = arabicText.split(' ').filter(w => w.length > 0);
           words.forEach(word => {
             const key = word.substring(0, Math.min(2, word.length));
@@ -125,6 +125,10 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
   // Generate distractors by replacing 1-2 words with valid alternatives
   const generateCloseDistractors = (correctAnswer: string, correctPhrase: Phrase, allPhrases: Phrase[], targetDialectKey: string): string[] => {
     const distractors: string[] = [];
+    if (typeof correctAnswer !== 'string') {
+      console.error('generateCloseDistractors: correctAnswer is not a string', correctAnswer);
+      return [];
+    }
     const words = correctAnswer.split(' ').filter(w => w.length > 0);
     
     if (words.length < 2) return []; // Need at least 2 words to modify
@@ -176,7 +180,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
       const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
       if (translation) {
         const otherText = typeof translation === 'string' ? translation : translation?.phrase || '';
-        if (otherText && otherText !== correctAnswer) {
+        if (otherText && typeof otherText === 'string' && otherText !== correctAnswer) {
           const otherWords = otherText.split(' ').filter(w => w.length > 0);
           
           // Check if this phrase shares n-1 or n-2 words with correct answer
@@ -220,7 +224,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
         const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
         if (translation) {
           const semanticText = typeof translation === 'string' ? translation : translation?.phrase || '';
-          if (semanticText && semanticText !== correctAnswer) {
+          if (semanticText && typeof semanticText === 'string' && semanticText !== correctAnswer) {
             const semanticWords = semanticText.split(' ');
             
             // Try replacing one word with a semantic alternative
@@ -328,7 +332,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
           ? translation 
           : translation?.phrase || '';
         
-        if (arabicText) {
+        if (arabicText && typeof arabicText === 'string') {
           // Split the Arabic phrase into words and shuffle them
           const words = arabicText.split(' ').filter(w => w.length > 0);
           const shuffledWords = [...words].sort(() => Math.random() - 0.5);
@@ -1205,13 +1209,13 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                               }
                               
                               // If no exact match, try to find partial matches or similar words
-                              const optionWords = option.split(' ');
+                              const optionWords = typeof option === 'string' ? option.split(' ') : [];
                               for (const p of phrases) {
                                 for (const dialect of dialects) {
                                   const trans = p.translations?.[dialect as keyof typeof p.translations];
                                   if (trans && typeof trans === 'object' && trans.latin) {
                                     const arabicText = trans.phrase || '';
-                                    const arabicWords = arabicText.split(' ');
+                                    const arabicWords = typeof arabicText === 'string' ? arabicText.split(' ') : [];
                                     
                                     // Check if most words match
                                     const matchingWords = optionWords.filter(word => arabicWords.includes(word));
