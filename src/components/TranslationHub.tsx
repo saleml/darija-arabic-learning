@@ -285,22 +285,29 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xl font-bold arabic-text rtl">{
-                          sourceLanguage === 'darija' ? phrase.darija :
-                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
-                            (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : 
-                             (phrase.translations.lebanese?.phrase || '')) :
-                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
-                            (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : 
-                             (phrase.translations.syrian?.phrase || '')) :
-                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
-                            (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : 
-                             (phrase.translations.emirati?.phrase || '')) :
-                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
-                            (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : 
-                             (phrase.translations.saudi?.phrase || '')) :
-                          phrase.darija
-                        }</span>
+                        <span className="text-xl font-bold arabic-text rtl">{(() => {
+                          const value = sourceLanguage === 'darija' ? phrase.darija :
+                            sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
+                              (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : 
+                               (phrase.translations.lebanese?.phrase || '')) :
+                            sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
+                              (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : 
+                               (phrase.translations.syrian?.phrase || '')) :
+                            sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
+                              (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : 
+                               (phrase.translations.emirati?.phrase || '')) :
+                            sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
+                              (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : 
+                               (phrase.translations.saudi?.phrase || '')) :
+                            phrase.darija;
+                          
+                          // Debug check
+                          if (typeof value === 'object') {
+                            console.error('Object being rendered in span:', value, 'for phrase:', phrase.id);
+                            return '';
+                          }
+                          return value || '';
+                        })()}</span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -330,18 +337,25 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                           )}
                         </button>
                         <span className="text-gray-500">•</span>
-                        <span className="text-lg text-gray-700">{
-                          sourceLanguage === 'darija' ? (phrase.darija_latin || '') :
-                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
-                            (typeof phrase.translations.lebanese === 'object' ? (phrase.translations.lebanese.latin || '') : '') :
-                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
-                            (typeof phrase.translations.syrian === 'object' ? (phrase.translations.syrian.latin || '') : '') :
-                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
-                            (typeof phrase.translations.emirati === 'object' ? (phrase.translations.emirati.latin || '') : '') :
-                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
-                            (typeof phrase.translations.saudi === 'object' ? (phrase.translations.saudi.latin || '') : '') :
-                          (phrase.darija_latin || '')
-                        }</span>
+                        <span className="text-lg text-gray-700">{(() => {
+                          const value = sourceLanguage === 'darija' ? (phrase.darija_latin || '') :
+                            sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
+                              (typeof phrase.translations.lebanese === 'object' ? (phrase.translations.lebanese.latin || '') : '') :
+                            sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
+                              (typeof phrase.translations.syrian === 'object' ? (phrase.translations.syrian.latin || '') : '') :
+                            sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
+                              (typeof phrase.translations.emirati === 'object' ? (phrase.translations.emirati.latin || '') : '') :
+                            sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
+                              (typeof phrase.translations.saudi === 'object' ? (phrase.translations.saudi.latin || '') : '') :
+                            (phrase.darija_latin || '');
+                          
+                          // Debug check
+                          if (typeof value === 'object') {
+                            console.error('Object being rendered in latin span:', value, 'for phrase:', phrase.id);
+                            return '';
+                          }
+                          return value || '';
+                        })()}</span>
                         {isLearned && (
                           <div className="flex items-center gap-1" title="Mastered by answering correctly in quiz">
                             <Star className="h-5 w-5 text-yellow-500 fill-current animate-pulse-once" />
