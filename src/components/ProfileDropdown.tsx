@@ -94,54 +94,55 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         id: user.id
       });
       
-      // Create update promise with explicit timeout
-      const updatePromise = supabase
-        .from('user_profiles')
-        .update({
-          full_name: name,
-          avatar_url: avatar,
-          source_language: source,
-          target_language: target,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', user.id)
-        .select()
-        .single();
-      
-      // Add 10-second timeout to prevent hanging
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Profile update timed out after 10 seconds. Please try again.')), 10000)
-      );
-      
-      const result = await Promise.race([updatePromise, timeoutPromise]) as any;
-      const { data, error } = result;
-
-      if (error) {
-        console.error('❌ Error updating profile:', error);
-        console.error('Error details:', JSON.stringify(error, null, 2));
-        alert('Failed to save profile: ' + error.message);
+      // Try update with proper error handling
+      try {
+        const { data, error } = await supabase
+          .from('user_profiles')
+          .update({
+            full_name: name,
+            avatar_url: avatar,
+            source_language: source,
+            target_language: target,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', user.id)
+          .select()
+          .single();
+        
+        if (error) throw error;
+        
+        console.log('✅ Profile updated successfully:', data);
+        
+        // Update auth context if function provided
+        if (onLanguageChange) {
+          await onLanguageChange(source, target);
+        }
+        
+        setSaved(true);
+        setSaving(false);
+        
+        // Close dropdown after short delay
+        setTimeout(() => {
+          setSaved(false);
+          setIsEditing(false);
+          setIsOpen(false);
+          // Reload to apply changes everywhere
+          window.location.reload();
+        }, 1000);
+        
+      } catch (updateError: any) {
+        console.error('❌ Error updating profile:', updateError);
+        console.error('Error details:', JSON.stringify(updateError, null, 2));
+        
+        // Check if it's a timeout or network error
+        if (updateError.message?.includes('fetch')) {
+          alert('Network error. Please check your connection and try again.');
+        } else {
+          alert('Failed to save profile: ' + (updateError.message || 'Unknown error'));
+        }
         setSaving(false);
         return;
       }
-      
-      console.log('✅ Profile updated successfully:', data);
-      
-      // Update auth context if function provided
-      if (onLanguageChange) {
-        await onLanguageChange(source, target);
-      }
-      
-      setSaved(true);
-      setSaving(false);
-      
-      // Close dropdown after short delay
-      setTimeout(() => {
-        setSaved(false);
-        setIsEditing(false);
-        setIsOpen(false);
-        // Reload to apply changes everywhere
-        window.location.reload();
-      }, 1000);
     } catch (error) {
       logger.error('Error saving profile:', error);
       alert('Failed to save profile. Please try again.');
