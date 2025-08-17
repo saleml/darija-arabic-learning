@@ -726,35 +726,50 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const updateLanguagePreferences = async (source: string, target: string): Promise<void> => {
-    if (!user) return;
+    if (!user) {
+      console.warn('[AuthContext] Cannot update language preferences - no user logged in');
+      return;
+    }
     
     try {
-      console.log('[AuthContext] Updating language preferences:', source, target);
+      console.log('[AuthContext] Updating language preferences for user:', user.id);
+      console.log('[AuthContext] New values - source:', source, 'target:', target);
       
       setSourceLanguage(source);
       setTargetLanguage(target);
       
       // Update in database
+      console.log('[AuthContext] Sending update to Supabase...');
       const { data, error } = await supabase
         .from('user_profiles')
         .update({
           source_language: source,
           target_language: target,
-          preferred_dialect: target, // Keep for backward compatibility
           updated_at: new Date().toISOString()
         })
         .eq('id', user.id)
-        .select();
+        .select()
+        .single();
 
       if (error) {
-        if (error.message?.includes('Please set up Supabase')) {
-          console.log('[AuthContext] Using localStorage fallback for language preferences');
+        console.error('[AuthContext] ❌ Error updating language preferences:', error.message);
+        console.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
+        
+        // Try to check if profile exists
+        const { data: profile, error: fetchError } = await supabase
+          .from('user_profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+          
+        if (fetchError) {
+          console.error('[AuthContext] Could not fetch profile:', fetchError);
         } else {
-          console.error('[AuthContext] Error updating language preferences:', error);
-          console.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
+          console.log('[AuthContext] Current profile:', profile);
         }
       } else {
-        console.log('[AuthContext] Language preferences updated successfully:', data);
+        console.log('[AuthContext] ✅ Language preferences updated successfully!');
+        console.log('[AuthContext] Updated profile:', data);
       }
       
       // Update localStorage fallback
