@@ -40,7 +40,7 @@ export default function LoginPage() {
         onLogin={handleLoginSuccess}
         onSignup={handleSignupSuccess}
         onPasswordReset={resetPassword}
-        onClose={() => navigate('/')}
+        // Don't provide onClose - we handle navigation in the success handlers
       />
     </div>
   );

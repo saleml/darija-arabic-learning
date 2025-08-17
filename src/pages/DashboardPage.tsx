@@ -8,6 +8,7 @@ import ProgressTracker from '../components/ProgressTracker';
 import CulturalCards from '../components/CulturalCards';
 import LanguageHeader from '../components/LanguageHeader';
 import { Phrase } from '../types';
+import { logger } from '../utils/logger';
 import beginnerPhrases from '../../database/beginner_phrases.json';
 import intermediatePhrases from '../../database/intermediate_phrases.json';
 import advancedPhrases from '../../database/advanced_phrases.json';
@@ -41,7 +42,7 @@ export default function DashboardPage() {
 
   // Load phrases
   useEffect(() => {
-    console.log('[Dashboard] Loading phrases from database files...');
+    logger.log('[Dashboard] Loading phrases from database files...');
     
     const sentencesAsPhrases = sentencesData.sentences.map((sent: any) => ({
       id: sent.id,
@@ -70,7 +71,7 @@ export default function DashboardPage() {
       ...sentencesAsPhrases
     ] as Phrase[];
     
-    console.log('[Dashboard] Total phrases loaded:', phrases.length);
+    logger.log('[Dashboard] Total phrases loaded:', phrases.length);
     setAllPhrases(phrases);
   }, []);
 

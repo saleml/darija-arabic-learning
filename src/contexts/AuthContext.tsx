@@ -3,6 +3,7 @@ import { User as SupabaseUser } from '@supabase/supabase-js';
 import { supabase, UserProfile } from '../lib/supabase';
 import { UserProgress } from '../types';
 import { getRandomAvatar } from '../components/AvatarSelector';
+import { logger } from '../utils/logger';
 
 interface User {
   id: string;
@@ -59,7 +60,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     // Check for existing session
     const initializeAuth = async () => {
-      console.log('[AuthContext] Initializing authentication...');
+      logger.log('[AuthContext] Initializing authentication...');
       
       
       try {
@@ -81,10 +82,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
 
         if (session?.user) {
-          console.log('[AuthContext] Found existing session for:', session.user.email);
+          logger.log('[AuthContext] Found existing session for:', session.user.email);
           await handleUserSession(session.user);
         } else {
-          console.log('[AuthContext] No existing session found');
+          logger.log('[AuthContext] No existing session found');
         }
       } catch (error) {
         console.error('[AuthContext] Error initializing auth:', error);
@@ -99,17 +100,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Set a timeout to prevent infinite loading
     timeoutId = setTimeout(() => {
       if (!isInitialized) {
-        console.warn('[AuthContext] Authentication timeout - showing landing page');
+        logger.warn('[AuthContext] Authentication timeout - showing landing page');
         setIsLoading(false);
         setUser(null);
       }
-    }, 5000); // 5 second timeout
+    }, 10000); // 10 second timeout for slow connections
 
     initializeAuth();
     
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
-      console.log('[AuthContext] Auth state changed:', event);
+      logger.log('[AuthContext] Auth state changed:', event);
       
       if (event === 'SIGNED_IN' && session?.user) {
         await handleUserSession(session.user);
@@ -127,10 +128,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const handleUserSession = async (supabaseUser: SupabaseUser) => {
-    console.log('[handleUserSession] Starting for user:', supabaseUser.id);
+    logger.log('[handleUserSession] Starting for user:', supabaseUser.id);
     try {
       // Get user profile from database with timeout
-      console.log('[handleUserSession] Fetching user profile...');
+      logger.log('[handleUserSession] Fetching user profile...');
       
       const profilePromise = supabase
         .from('user_profiles')
@@ -148,11 +149,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         profile = result.data;
         profileError = result.error;
       } catch (timeoutErr) {
-        console.error('[handleUserSession] Profile fetch timed out, creating basic user');
+        logger.warn('[handleUserSession] Profile fetch timed out, creating basic user');
         profileError = { code: 'TIMEOUT' };
       }
 
-      console.log('[handleUserSession] Profile fetch result:', { profile, profileError });
+      logger.log('[handleUserSession] Profile fetch result:', { profile, profileError });
       
       if (profileError && profileError.code !== 'PGRST116' && profileError.code !== 'TIMEOUT') {
         console.error('[AuthContext] Error fetching profile:', profileError);
@@ -161,7 +162,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // If profile doesn't exist or timed out, create/use a basic one
       if (!profile) {
-        console.log('[AuthContext] No profile found, creating basic profile...');
+        logger.log('[AuthContext] No profile found, creating basic profile...');
         const newProfile = {
           id: supabaseUser.id,
           email: supabaseUser.email,
@@ -183,9 +184,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               .insert(newProfile);
 
             if (createError) {
-              console.error('[AuthContext] Error creating profile on login:', createError);
+              logger.error('[AuthContext] Error creating profile on login:', createError);
             } else {
-              console.log('[AuthContext] Profile created successfully on login');
+              logger.log('[AuthContext] Profile created successfully on login');
             }
           } catch (err) {
             console.error('[AuthContext] Profile creation failed:', err);
@@ -205,19 +206,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         lastLogin: new Date().toISOString()
       };
 
-      console.log('[handleUserSession] Setting user data...');
+      logger.log('[handleUserSession] Setting user data...');
       setUser(userData);
-      console.log('[handleUserSession] Loading user progress...');
+      logger.log('[handleUserSession] Loading user progress...');
       
       // Don't wait for progress loading if database is slow
       loadUserProgress(supabaseUser.id, profile).catch(err => {
-        console.error('[handleUserSession] Failed to load progress:', err);
+        logger.error('[handleUserSession] Failed to load progress:', err);
       });
       
-      console.log('[handleUserSession] Complete!');
+      logger.log('[handleUserSession] Complete!');
       
     } catch (error) {
-      console.error('[handleUserSession] Error:', error);
+      logger.error('[handleUserSession] Error:', error);
       throw error; // Re-throw to see in login function
     }
   };
@@ -309,41 +310,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    console.log('[AuthContext] Login attempt for:', email);
-    console.log('[AuthContext] Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
+    logger.log('[AuthContext] Login attempt for:', email);
     
     try {
-      console.log('[AuthContext] Calling supabase.auth.signInWithPassword...');
-      const startTime = Date.now();
-      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
-      
-      const elapsed = Date.now() - startTime;
-      console.log(`[AuthContext] Supabase response received after ${elapsed}ms`);
 
       if (error) {
-        console.error('[AuthContext] Login error:', error.message);
-        console.error('[AuthContext] Full error:', error);
+        logger.error('[AuthContext] Login error:', error.message);
         return false;
       }
 
       if (data?.user) {
-        console.log('[AuthContext] Login successful for:', data.user.email);
-        console.log('[AuthContext] User ID:', data.user.id);
+        logger.log('[AuthContext] Login successful for:', data.user.email);
         // Manually handle the user session instead of waiting for auth state change
-        console.log('[AuthContext] Calling handleUserSession...');
         await handleUserSession(data.user);
-        console.log('[AuthContext] handleUserSession completed');
         return true;
       }
 
-      console.log('[AuthContext] No user in response data');
       return false;
     } catch (error) {
-      console.error('[AuthContext] Login exception:', error);
+      logger.error('[AuthContext] Login exception:', error);
       return false;
     }
   };
