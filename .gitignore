@@ -1,25 +1,55 @@
 # Dependencies
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
 
 # Production build
-dist/
-build/
+/dist
+/build
 
-# Environment variables (contains sensitive data)
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.backup
+*.env
 
-# IDE files
-.vscode/
-.idea/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
 *.swp
 *.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
 # OS generated files
 .DS_Store
@@ -29,62 +59,114 @@ build/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Logs
-logs
-*.log
+# Package manager locks (keep one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
 
-# Runtime data
-pids
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+tmp/
+temp/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Testing artifacts
+cypress/videos
+cypress/screenshots
+__snapshots__/
+
+# Build artifacts
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Netlify
+.netlify/
+
+# Vercel
+.vercel/
+
+# Debug
+debug/
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
-coverage/
+# Documentation build
+docs/.vuepress/dist
+docs/.docusaurus
+docs/build
 
-# nyc test coverage
-.nyc_output
+# Misc
+*.pem
+*.key
+*.cert
+*.crt
 
-# Dependency directories
-jspm_packages/
+# Database dumps
+*.sql
+*.sqlite
+*.db
 
-# Optional npm cache directory
-.npm
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
 
-# Optional eslint cache
-.eslintcache
+# Project specific
+/research/raw_data/
+/backups/
+/exports/
+automated-test.html
+test-*.html
+*-test.html
+*.test.html
 
-# Output of 'npm pack'
-*.tgz
+# Local development files
+.env.development
+.env.production
+local-config.json
+dev-notes.md
 
-# Yarn Integrity file
-.yarn-integrity
+# User-specific files
+user-data/
+user-progress/
+*.local.json
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
+# Sensitive data
+secrets/
+credentials/
+private/
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+# Keep these files
+!.gitkeep
+!README.md
+!LICENSE
+!package.json
+!package-lock.json
+!tsconfig.json
+!vite.config.ts
+!index.html
+!DEVELOPMENT_HISTORY.md
+!MAINTENANCE_GUIDE.md

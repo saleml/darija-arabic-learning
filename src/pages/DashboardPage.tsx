@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useUserProgress } from '../hooks/useUserProgress';
+import { getProgressService } from '../services/progressService';
 import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
 import ProgressTracker from '../components/ProgressTracker';
@@ -20,29 +22,14 @@ export default function DashboardPage() {
   const navigate = useNavigate();
   const { tab } = useParams<{ tab?: string }>();
   const { user, sourceLanguage, targetLanguage, signOut } = useAuth();
-  const userProgress = { 
-    userId: user?.id || '',
-    wordsLearned: 0, 
-    streakDays: 0, 
-    totalStudyTime: 0,
-    phrasesLearned: [] as string[],
-    phrasesInProgress: [] as string[],
-    quizScores: [],
-    lastActiveDate: new Date().toISOString(),
-    achievements: [],
-    dailyGoal: 10,
-    spacedRepetition: [],
-    preferences: {
-      dailyGoal: 10,
-      notificationsEnabled: false,
-      soundEnabled: true,
-      targetDialect: (targetLanguage === 'darija' ? 'lebanese' : targetLanguage) as "lebanese" | "syrian" | "emirati" | "saudi" | "all",
-      theme: 'light' as const
-    }
-  }; // Placeholder for now
-  const updateUserProgress = (updates: any) => {
-    console.log('Progress update:', updates);
-  };
+  const { 
+    userProgress, 
+    updateProgress: updateUserProgress,
+    markPhraseAsLearned,
+    markPhraseAsInProgress,
+    isLoading: progressLoading,
+    refreshProgress
+  } = useUserProgress();
   
   const [activeTab, setActiveTab] = useState<TabType>((tab as TabType) || 'hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
@@ -56,6 +43,20 @@ export default function DashboardPage() {
     }
   }, [tab]);
 
+  // Listen for navigation events from quiz completion
+  useEffect(() => {
+    const handleNavigateToHub = () => {
+
+      handleTabChange('hub');
+    };
+
+    window.addEventListener('navigate-to-hub', handleNavigateToHub);
+    
+    return () => {
+      window.removeEventListener('navigate-to-hub', handleNavigateToHub);
+    };
+  }, []);
+
   // Redirect if not logged in
   useEffect(() => {
     if (!user) {
@@ -65,7 +66,7 @@ export default function DashboardPage() {
 
   // Load phrases
   useEffect(() => {
-    logger.log('[Dashboard] Loading phrases from database files...');
+    logger.log('[Dashboard] Loading phrases from database files at', new Date().toISOString());
     
     const sentencesAsPhrases = sentencesData.sentences.map((sent: any) => ({
       id: sent.id,
@@ -75,7 +76,8 @@ export default function DashboardPage() {
       english: sent.english || '',
       transliteration: sent.darija_latin || '',
       translations: sent.translations,
-      category: sent.context || 'daily_conversations',
+      // Always use 'daily_essentials' for sentences to keep them organized
+      category: 'daily_essentials',
       difficulty: sent.difficulty || 'beginner',
       tags: [sent.context || 'conversation'],
       usage: {
@@ -95,6 +97,17 @@ export default function DashboardPage() {
     ] as Phrase[];
     
     logger.log('[Dashboard] Total phrases loaded:', phrases.length);
+    
+    // Check for duplicate IDs
+    const idCounts = {};
+    phrases.forEach(p => {
+      idCounts[p.id] = (idCounts[p.id] || 0) + 1;
+    });
+    const duplicateIds = Object.entries(idCounts).filter(([id, count]) => count > 1);
+    if (duplicateIds.length > 0) {
+      logger.error('[Dashboard] ⚠️ DUPLICATE IDS FOUND:', duplicateIds);
+    }
+    
     setAllPhrases(phrases);
   }, []);
 
@@ -107,15 +120,46 @@ export default function DashboardPage() {
     setActiveTab(newTab);
     navigate(`/dashboard/${newTab}`);
     setMobileMenuOpen(false);
+    
+    // TODO: Add refresh progress when we debug the issue
+    // if (refreshProgress) {
+    //   console.log('[Dashboard] Tab switched to:', newTab, '- refreshing progress...');
+    //   refreshProgress();
+    // }
   };
 
-  const stats = {
-    totalPhrases: allPhrases.length,
-    learned: userProgress?.phrasesLearned?.length || 0,
-    inProgress: userProgress?.phrasesInProgress?.length || 0,
-    seen: (userProgress?.phrasesLearned?.length || 0) + (userProgress?.phrasesInProgress?.length || 0),
-    streak: userProgress?.streakDays || 0
-  };
+  const stats = useMemo(() => {
+    // Count actual mastered phrases that exist in the current phrase list
+    const actualMastered = allPhrases.filter(p => 
+      userProgress?.phrasesLearned?.includes(p.id)
+    ).length;
+    
+    // Clean up orphaned IDs if there's a mismatch
+    if (userProgress && actualMastered !== userProgress.phrasesLearned.length) {
+
+      // Find the orphaned IDs
+      const phraseIds = new Set(allPhrases.map(p => p.id));
+      const orphanedIds = userProgress.phrasesLearned.filter(id => !phraseIds.has(id));
+
+      // Clean up the progress by removing orphaned IDs
+      if (orphanedIds.length > 0) {
+        const cleanedPhrasesLearned = userProgress.phrasesLearned.filter(id => phraseIds.has(id));
+
+        // Update the progress to remove orphaned IDs
+        updateUserProgress({
+          ...userProgress,
+          phrasesLearned: cleanedPhrasesLearned
+        });
+      }
+    }
+    
+    return {
+      totalPhrases: allPhrases.length,
+      learned: actualMastered,
+      notLearned: allPhrases.length - actualMastered,
+      streak: userProgress?.streakDays || 0
+    };
+  }, [allPhrases, userProgress, updateUserProgress]);
 
   if (!user) return null;
 
@@ -271,8 +315,8 @@ export default function DashboardPage() {
               <div className="text-xs text-gray-500">Phrases Learned</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{stats.inProgress}</div>
-              <div className="text-xs text-gray-500">In Progress</div>
+              <div className="text-2xl font-bold text-gray-600">{stats.notLearned}</div>
+              <div className="text-xs text-gray-500">Not Mastered</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">{stats.streak}</div>
@@ -280,7 +324,7 @@ export default function DashboardPage() {
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">
-                {stats.totalPhrases > 0 ? Math.round((stats.seen / stats.totalPhrases) * 100) : 0}%
+                {stats.totalPhrases > 0 ? Math.round((stats.learned / stats.totalPhrases) * 100) : 0}%
               </div>
               <div className="text-xs text-gray-500">Complete</div>
             </div>
@@ -289,31 +333,32 @@ export default function DashboardPage() {
 
         {/* Tab Content */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          {activeTab === 'hub' && (
+          {activeTab === 'hub' && userProgress && (
             <TranslationHub 
               phrases={allPhrases} 
               userProgress={userProgress}
               sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}
               onUpdateProgress={updateUserProgress}
+              onMarkAsLearned={markPhraseAsLearned}
+              onMarkAsInProgress={markPhraseAsInProgress}
             />
           )}
           {activeTab === 'quiz' && (
             <QuizSystem 
               phrases={allPhrases} 
-              userProgress={userProgress}
+              sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}
-              onUpdateProgress={updateUserProgress}
             />
           )}
-          {activeTab === 'progress' && (
+          {activeTab === 'progress' && userProgress && (
             <ProgressTracker 
               userProgress={userProgress}
               totalPhrases={allPhrases.length}
               onUpdateProgress={updateUserProgress}
             />
           )}
-          {activeTab === 'culture' && (
+          {activeTab === 'culture' && userProgress && (
             <CulturalCards 
               phrases={allPhrases}
               userProgress={userProgress}

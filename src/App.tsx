@@ -1,22 +1,27 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { SignIn, SignUp, useUser } from '@clerk/clerk-react';
+import { useUser } from '@clerk/clerk-react';
 import { useAuth } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import LanguageSetup from './components/LanguageSetup';
+import HybridAuthForm from './components/HybridAuthForm';
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
   const { user, sourceLanguage, targetLanguage, updateProfile, isLoading } = useAuth();
-  
-  // console.log('App - isLoaded:', isLoaded, 'isLoading:', isLoading, 'isSignedIn:', isSignedIn, 'user:', user?.id);
-  
+
   // Show loading state while Clerk is initializing
   if (!isLoaded || isLoading) {
-    // console.log('App showing loading screen...');
+
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-center">
+          <div className="text-xl mb-2">Loading...</div>
+          <div className="text-sm text-gray-500">
+            {!isLoaded && 'Initializing authentication...'}
+            {isLoaded && isLoading && 'Loading user profile...'}
+          </div>
+        </div>
       </div>
     );
   }
@@ -40,22 +45,12 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/home" element={<HomePage />} />
       
-      {/* Clerk sign-in/up routes */}
+      {/* Hybrid auth routes with full features and password manager support */}
       <Route 
         path="/login" 
         element={
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-            <SignIn 
-              routing="path" 
-              path="/login"
-              afterSignInUrl="/dashboard"
-              appearance={{
-                elements: {
-                  rootBox: "mx-auto",
-                  card: "shadow-2xl"
-                }
-              }}
-            />
+            <HybridAuthForm mode="signin" />
           </div>
         } 
       />
@@ -63,17 +58,7 @@ function App() {
         path="/signup" 
         element={
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-            <SignUp 
-              routing="path" 
-              path="/signup"
-              afterSignUpUrl="/dashboard"
-              appearance={{
-                elements: {
-                  rootBox: "mx-auto",
-                  card: "shadow-2xl"
-                }
-              }}
-            />
+            <HybridAuthForm mode="signup" />
           </div>
         } 
       />

@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom';
-import { Star, Brain, TrendingUp, Globe, Book, Trophy } from 'lucide-react';
+import { Star, Brain, TrendingUp, Globe, Book, Trophy, LogIn, UserPlus } from 'lucide-react';
+import { useUser } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function HomePage() {
+  const { isSignedIn } = useUser();
+  const navigate = useNavigate();
+  
+  // If already signed in, redirect to dashboard
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate('/dashboard');
+    }
+  }, [isSignedIn, navigate]);
+  
+  if (isSignedIn) {
+    return null; // Don't render the homepage content while redirecting
+  }
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Hero Section */}
@@ -19,25 +36,36 @@ export default function HomePage() {
             {/* Subtitle */}
             <p className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Master all Arabic dialects - <strong>Darija</strong>, <strong>Lebanese</strong>, <strong>Syrian</strong>, <strong>Emirati</strong>, and <strong>Saudi</strong>. 
-              Learn from any dialect to any other with AI-powered spaced repetition and cultural context.
+              Learn from any dialect to any other with interactive quizzes and cultural context.
             </p>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            {/* CTA Buttons - Large and Prominent */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+              <Link
+                to="/signup"
+                className="group px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3 min-w-[250px] justify-center"
+              >
+                <UserPlus className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                Create Free Account
+              </Link>
               <Link
                 to="/login"
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+                className="group px-10 py-5 bg-white text-blue-600 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl border-3 border-blue-600 hover:bg-blue-50 transform hover:scale-105 transition-all duration-200 flex items-center gap-3 min-w-[250px] justify-center"
               >
-                <Star className="h-5 w-5" />
-                Start Learning Free
+                <LogIn className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                Sign In
               </Link>
+            </div>
+            
+            {/* Learn More Button */}
+            <div className="mb-12">
               <button
                 onClick={() => {
                   document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-8 py-4 bg-white text-gray-700 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-blue-300 transform hover:scale-105 transition-all duration-200"
+                className="text-gray-600 hover:text-gray-800 underline underline-offset-4 text-lg transition-colors"
               >
-                Learn More
+                Learn more about our features ↓
               </button>
             </div>
             
@@ -89,9 +117,9 @@ export default function HomePage() {
               <div className="bg-purple-600 p-3 rounded-xl w-fit mb-4">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Spaced Repetition</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Progress Mastery</h3>
               <p className="text-gray-600">
-                Review phrases at optimal intervals for long-term memory retention and fluency
+                Track phrases you've mastered through quiz performance and manual marking
               </p>
             </div>
             
@@ -141,17 +169,29 @@ export default function HomePage() {
           </div>
           
           {/* Final CTA */}
-          <div className="text-center mt-16">
-            <p className="text-xl text-gray-600 mb-6">
+          <div className="text-center mt-16 bg-gradient-to-r from-blue-50 to-purple-50 py-12 rounded-3xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to Master Arabic Dialects?
+            </h3>
+            <p className="text-xl text-gray-600 mb-8">
               Join thousands of learners bridging Arabic dialects
             </p>
-            <Link
-              to="/login"
-              className="px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto w-fit"
-            >
-              Get Started Now
-              <Star className="h-5 w-5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                to="/signup"
+                className="group px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+              >
+                <UserPlus className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                Sign Up Free
+              </Link>
+              <Link
+                to="/login"
+                className="group px-10 py-5 bg-white text-blue-600 text-xl font-bold rounded-2xl shadow-xl hover:shadow-2xl border-2 border-blue-200 hover:border-blue-400 transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+              >
+                <LogIn className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                Sign In
+              </Link>
+            </div>
           </div>
         </div>
       </div>

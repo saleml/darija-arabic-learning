@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { TrendingUp, Trophy, Target, Clock, Calendar, Award, BarChart3, Flame, BookOpen, Star } from 'lucide-react';
 import { UserProgress } from '../types';
+import SupabaseDebugger from './SupabaseDebugger';
 
 interface Props {
   userProgress: UserProgress | null;
@@ -9,13 +10,12 @@ interface Props {
 }
 
 export default function ProgressTracker({ userProgress, totalPhrases, onUpdateProgress }: Props) {
-  const [view, setView] = useState<'overview' | 'achievements' | 'settings'>('overview');
+  const [view, setView] = useState<'overview' | 'achievements' | 'settings' | 'debug'>('overview');
 
   const stats = useMemo(() => {
     if (!userProgress) {
       return {
         learned: 0,
-        inProgress: 0,
         remaining: totalPhrases,
         percentage: 0,
         averageScore: 0,
@@ -28,8 +28,7 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
     }
 
     const learned = userProgress.phrasesLearned.length;
-    const inProgress = userProgress.phrasesInProgress.length;
-    const remaining = totalPhrases - learned - inProgress;
+    const remaining = totalPhrases - learned;
     const percentage = Math.round((learned / totalPhrases) * 100);
     
     const averageScore = userProgress.quizScores.length > 0
@@ -39,7 +38,10 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
         )
       : 0;
     
-    const studyHours = Math.round(userProgress.totalStudyTime / 3600);
+    const studyMinutes = Math.round(userProgress.totalStudyTime / 60);
+    const studyHours = Math.floor(studyMinutes / 60);
+    const remainingMinutes = studyMinutes % 60;
+    const studyTimeDisplay = studyHours > 0 ? `${studyHours}h ${remainingMinutes}m` : `${studyMinutes}m`;
     
     const today = new Date().toDateString();
     const lastActive = new Date(userProgress.lastActiveDate).toDateString();
@@ -52,12 +54,12 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
 
     return {
       learned,
-      inProgress,
       remaining,
       percentage,
       averageScore,
       totalQuizzes: userProgress.quizScores.length,
       studyHours,
+      studyTimeDisplay,
       dailyStreak,
       bestStreak: userProgress.streakDays,
       phrasesPerDay
@@ -172,6 +174,12 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
             >
               Settings
             </button>
+            <button
+              onClick={() => setView('debug')}
+              className={`px-4 py-2 rounded-lg ${view === 'debug' ? 'bg-red-500 text-white' : 'bg-gray-100'}`}
+            >
+              Debug
+            </button>
           </div>
         </div>
 
@@ -188,24 +196,20 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
                   style={{ width: `${stats.percentage}%` }}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div title="Phrases you've successfully mastered by answering correctly in a quiz">
                   <p className="text-2xl font-bold text-green-600">{stats.learned}</p>
-                  <p className="text-sm text-gray-600">Mastered</p>
+                  <p className="text-sm text-gray-600 cursor-help">Mastered</p>
                 </div>
-                <div>
-                  <p className="text-2xl font-bold text-yellow-600">{stats.inProgress}</p>
-                  <p className="text-sm text-gray-600">In Progress</p>
-                </div>
-                <div>
+                <div title="Phrases you haven't mastered yet">
                   <p className="text-2xl font-bold text-gray-400">{stats.remaining}</p>
-                  <p className="text-sm text-gray-600">Remaining</p>
+                  <p className="text-sm text-gray-600 cursor-help">Not Mastered</p>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Your average score across all quizzes you've taken">
                 <div className="flex items-center gap-3 mb-2">
                   <Trophy className="h-5 w-5 text-yellow-500" />
                   <span className="font-semibold">Quiz Performance</span>
@@ -214,7 +218,7 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
                 <p className="text-sm text-gray-600">Average score ({stats.totalQuizzes} quizzes)</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Number of consecutive days you've practiced. Keep it up to maintain your streak!">
                 <div className="flex items-center gap-3 mb-2">
                   <Flame className="h-5 w-5 text-orange-500" />
                   <span className="font-semibold">Current Streak</span>
@@ -223,16 +227,16 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
                 <p className="text-sm text-gray-600">Best: {stats.bestStreak} days</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Total hours you've spent learning and practicing">
                 <div className="flex items-center gap-3 mb-2">
                   <Clock className="h-5 w-5 text-blue-500" />
                   <span className="font-semibold">Study Time</span>
                 </div>
-                <p className="text-2xl font-bold">{stats.studyHours}h</p>
+                <p className="text-2xl font-bold">{stats.studyTimeDisplay}</p>
                 <p className="text-sm text-gray-600">Total time invested</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Your target number of phrases to learn each day">
                 <div className="flex items-center gap-3 mb-2">
                   <Target className="h-5 w-5 text-green-500" />
                   <span className="font-semibold">Daily Goal</span>
@@ -241,7 +245,7 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
                 <p className="text-sm text-gray-600">Phrases per day</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Your average learning speed based on historical data">
                 <div className="flex items-center gap-3 mb-2">
                   <TrendingUp className="h-5 w-5 text-purple-500" />
                   <span className="font-semibold">Learning Rate</span>
@@ -250,7 +254,7 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
                 <p className="text-sm text-gray-600">Phrases per day (avg)</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Estimated days to complete all phrases at your current learning pace">
                 <div className="flex items-center gap-3 mb-2">
                   <Calendar className="h-5 w-5 text-indigo-500" />
                   <span className="font-semibold">Est. Completion</span>
@@ -490,6 +494,10 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
               </div>
             </div>
           </div>
+        )}
+
+        {view === 'debug' && (
+          <SupabaseDebugger />
         )}
       </div>
     </div>

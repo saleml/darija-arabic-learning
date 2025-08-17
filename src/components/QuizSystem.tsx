@@ -1,20 +1,20 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Brain, Check, X, Trophy, Target, Clock, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame } from 'lucide-react';
+import { Brain, Check, X, Trophy, Target, Clock, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame, RefreshCw, Home } from 'lucide-react';
 import { Phrase, UserProgress, QuizScore, SpacedRepetitionItem } from '../types';
 import { getDialectWordBank, getSimilarWords } from '../data/dialectDictionary';
+import { useUserProgress } from '../hooks/useUserProgress';
 import { AnalyticsService } from '../services/analytics';
+import { supabaseProgress } from '../utils/supabaseProgress';
+import { useUser } from '@clerk/clerk-react';
 
 interface Props {
   phrases: Phrase[];
-  userProgress: UserProgress | null;
-  onUpdateProgress: (progress: UserProgress) => void;
   sourceLanguage?: string;
   targetLanguage?: string;
+  onUpdateProgress?: (progress: Partial<UserProgress>) => void;
 }
 
-
-type QuizType = 'multiple-choice' | 'word-order' | 'spaced';
-type QuizMode = 'practice' | 'test';
+type QuizType = 'multiple-choice' | 'word-order';
 
 interface QuizQuestion {
   phrase: Phrase;
@@ -25,17 +25,36 @@ interface QuizQuestion {
   isCorrect?: boolean;
 }
 
-export default function QuizSystem({ phrases, userProgress, onUpdateProgress, sourceLanguage = 'darija', targetLanguage = 'lebanese' }: Props) {
-  // Get user from context (we'll need to pass this or get it from useAuth)
-  const getUserFromAuth = () => {
-    // This is a placeholder - in real implementation, get from useAuth hook
-    return userProgress ? { 
-      id: userProgress.userId, 
-      email: 'user@example.com', 
-      name: 'User' 
-    } : null;
-  };
-  // Early return if no phrases loaded yet
+export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetLanguage = 'lebanese', onUpdateProgress }: Props) {
+  const { user } = useUser();
+  const { 
+    userProgress, 
+    addQuizScore, 
+    markPhraseAsLearned,
+    updateProgress,
+    refreshProgress
+  } = useUserProgress();
+  
+  // ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS
+  const [quizType, setQuizType] = useState<QuizType>('multiple-choice');
+  const [difficulty, setDifficulty] = useState<string>('all');
+  const [quizLength, setQuizLength] = useState<number>(10);
+  const [sourceDialect, setSourceDialect] = useState<string>(sourceLanguage);
+  const [targetDialect, setTargetDialect] = useState<string>(targetLanguage === 'all' ? 'lebanese' : targetLanguage);
+  const [currentQuiz, setCurrentQuiz] = useState<QuizQuestion[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [quizStartTime, setQuizStartTime] = useState<number>(0);
+  const [quizEndTime, setQuizEndTime] = useState<number | null>(null);
+  const [quizComplete, setQuizComplete] = useState(false);
+  const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [perfectScore, setPerfectScore] = useState(false);
+  const [selectedWords, setSelectedWords] = useState<string[]>([]);
+  const [availableWords, setAvailableWords] = useState<string[]>([]);
+  const [isNavigatingToHub, setIsNavigatingToHub] = useState(false);
+  
+  // Early return if no phrases loaded yet - AFTER all hooks
   if (!phrases || phrases.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-lg p-6">
@@ -46,20 +65,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
       </div>
     );
   }
-  const [quizType, setQuizType] = useState<QuizType>('multiple-choice');
-  const [quizMode, setQuizMode] = useState<QuizMode>('practice');
-  const [difficulty, setDifficulty] = useState<string>('all');
-  const [targetDialect, setTargetDialect] = useState<string>(targetLanguage === 'all' ? 'lebanese' : targetLanguage);
-  const [currentQuiz, setCurrentQuiz] = useState<QuizQuestion[]>([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [quizStartTime, setQuizStartTime] = useState<number>(0);
-  const [quizComplete, setQuizComplete] = useState(false);
-  const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [perfectScore, setPerfectScore] = useState(false);
-  const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [availableWords, setAvailableWords] = useState<string[]>([]);
 
   // Update targetDialect when targetLanguage changes from header
   useEffect(() => {
@@ -86,8 +91,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
       .filter(item => item.nextReviewDate <= now)
       .map(item => phrases.find(p => p.id === item.phraseId))
       .filter(Boolean) as Phrase[];
-    
-    
+
     // If we have due items, return them
     if (dueItems.length > 0) {
       return dueItems;
@@ -108,7 +112,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
     
     return [];
   };
-
 
   // Build word replacement dictionary combining database words with dialect word bank
   const buildWordReplacementDict = (allPhrases: Phrase[], targetDialectKey: string): Map<string, string[]> => {
@@ -289,30 +292,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
   const generateQuizQuestions = (count: number = 10): QuizQuestion[] => {
     const questions: QuizQuestion[] = [];
     
-    // For spaced repetition, use a simplified approach
-    let availablePhrases: Phrase[] = [];
-    if (quizType === 'spaced') {
-      // For spaced repetition, just use the first 10 phrases if we're starting fresh
-      const spacedRepetitionHistory = userProgress?.spacedRepetition || [];
-      
-      if (spacedRepetitionHistory.length === 0) {
-        // New user - just use first 10 phrases that match filters
-        availablePhrases = phrases.slice(0, 10);
-      } else {
-        // Check for due items
-        const now = new Date().toISOString();
-        const dueItems = spacedRepetitionHistory
-          .filter(item => item.nextReviewDate <= now)
-          .map(item => phrases.find(p => p.id === item.phraseId))
-          .filter(Boolean) as Phrase[];
-        
-        availablePhrases = dueItems.length > 0 ? dueItems : phrases.slice(0, 10);
-      }
-      
-    } else {
-      availablePhrases = eligiblePhrases;
-    }
-    
+    const availablePhrases = eligiblePhrases;
     
     if (availablePhrases.length === 0) {
       return [];
@@ -324,12 +304,11 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
     selectedPhrases.forEach((phrase) => {
       
       if (quizType === 'multiple-choice') {
-        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
+        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceDialect);
         const targetDialectKey = targetDialect === 'all' 
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
-        
-        
+
         const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
         if (!translation) {
           return;
@@ -363,8 +342,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
         }
         
         const options = [correct, ...distractors].filter(Boolean);
-        
-        
+
         questions.push({
           phrase,
           type: 'multiple-choice',
@@ -372,7 +350,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
           correctAnswer: correct
         });
       } else if (quizType === 'word-order') {
-        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
+        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceDialect);
         const targetDialectKey = targetDialect === 'all' 
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
@@ -420,82 +398,9 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
   };
 
   const startQuiz = () => {
-    
-    // For spaced repetition, check if we have phrases to review
-    if (quizType === 'spaced') {
-      const dueForReview = getDueForReview();
-      if (dueForReview.length === 0 && phrases.length === 0) {
-        alert('No phrases loaded. Please refresh the page.');
-        return;
-      }
-    }
-    
-    const questions = generateQuizQuestions();
+    const questions = generateQuizQuestions(quizLength);
     
     if (questions.length === 0) {
-      // For spaced repetition with no questions, force use the first 10 available phrases
-      if (quizType === 'spaced' && phrases.length > 0) {
-        
-        // Directly create questions from first 10 phrases
-        const forcedQuestions: QuizQuestion[] = [];
-        const phrasesToUse = phrases.slice(0, 10);
-        
-        phrasesToUse.forEach(phrase => {
-          const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
-          const targetDialectKey = targetDialect === 'all' 
-            ? dialects[Math.floor(Math.random() * dialects.length)]
-            : targetDialect;
-          
-          const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
-          if (translation) {
-            // Always use Arabic text (phrase), not latin
-            const correct = typeof translation === 'string' ? translation : translation?.phrase || '';
-            if (correct) {
-              // Use smart distractor generation
-              const distractors = generateSmartDistractors(phrase, targetDialectKey, phrases);
-              
-              // If we don't have enough distractors, add from other phrases
-              if (distractors.length < 3) {
-                const otherPhrases = phrases.filter(p => p.id !== phrase.id);
-                const shuffled = otherPhrases.sort(() => Math.random() - 0.5);
-                
-                for (let i = 0; i < Math.min(3, shuffled.length); i++) {
-                  if (distractors.length >= 3) break;
-                  const wrongPhrase = shuffled[i];
-                  const wrongTranslation = wrongPhrase.translations?.[targetDialectKey as keyof typeof wrongPhrase.translations];
-                  if (wrongTranslation) {
-                    // Get Arabic text, not Latin
-                    const wrongAnswer = typeof wrongTranslation === 'string' 
-                      ? wrongTranslation 
-                      : wrongTranslation?.phrase || '';
-                    if (wrongAnswer && wrongAnswer !== correct && !distractors.includes(wrongAnswer)) {
-                      distractors.push(wrongAnswer);
-                    }
-                  }
-                }
-              }
-              
-              forcedQuestions.push({
-                phrase,
-                type: 'multiple-choice',
-                options: [correct, ...distractors.slice(0, 3)].sort(() => Math.random() - 0.5),
-                correctAnswer: correct
-              });
-            }
-          }
-        });
-        
-        if (forcedQuestions.length > 0) {
-          setCurrentQuiz(forcedQuestions);
-          setCurrentQuestionIndex(0);
-          setScore(0);
-          setQuizComplete(false);
-          setShowAnswer(false);
-          setQuizStartTime(Date.now());
-          return;
-        }
-      }
-      
       alert('No phrases available for quiz. Try adjusting your filters.');
       return;
     }
@@ -506,6 +411,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
     setQuizComplete(false);
     setShowAnswer(false);
     setQuizStartTime(Date.now());
+    setQuizEndTime(null);
     
     // Initialize word order state if first question is word-order
     if (questions[0]?.type === 'word-order') {
@@ -516,20 +422,41 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
   };
 
   const handleAnswer = (answer: string) => {
+
     const currentQuestion = currentQuiz[currentQuestionIndex];
+
     currentQuestion.userAnswer = answer;
     currentQuestion.isCorrect = answer === currentQuestion.correctAnswer;
+
+    // IMMEDIATE UI UPDATE - Show feedback right away
+
+    setShowAnswer(true);
     
     if (currentQuestion.isCorrect) {
+
       setScore(score + 1);
       setStreak(streak + 1);
       updateSpacedRepetition(currentQuestion.phrase.id, true);
+      
+      // BACKGROUND PROGRESS UPDATE - Don't block UI
+      if (user && markPhraseAsLearned) {
+        // Run in background without blocking UI
+        markPhraseAsLearned(currentQuestion.phrase.id)
+          .then(() => {
+
+          })
+          .catch(error => {
+
+          });
+      }
     } else {
+
       setStreak(0);
       updateSpacedRepetition(currentQuestion.phrase.id, false);
+      
+      // Don't update phrase progress for incorrect answers - we only track mastered phrases
+      // Incorrect answers don't affect mastery status
     }
-    
-    setShowAnswer(true);
   };
 
   const updateSpacedRepetition = (phraseId: string, correct: boolean) => {
@@ -564,8 +491,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
         item.phraseId === phraseId ? updatedItem : item
       );
       
-      onUpdateProgress({
-        ...userProgress,
+      updateProgress({
         spacedRepetition: newSpacedRepetition
       });
     } else {
@@ -578,8 +504,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
         lastReviewDate: new Date().toISOString()
       };
       
-      onUpdateProgress({
-        ...userProgress,
+      updateProgress({
         spacedRepetition: [...userProgress.spacedRepetition, newItem]
       });
     }
@@ -602,22 +527,60 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
   };
 
   const finishQuiz = async () => {
+
+    // Stop the timer
+    const endTime = Date.now();
+    setQuizEndTime(endTime);
+    
     setQuizComplete(true);
     setPerfectScore(score === currentQuiz.length);
     
-    if (userProgress) {
-      const timeSpent = Math.round((Date.now() - quizStartTime) / 1000);
-      const quizScore: QuizScore = {
-        date: new Date().toISOString(),
-        score,
-        total: currentQuiz.length,
-        difficulty,
-        timeSpent
-      };
+    if (user && userProgress) {
+      const timeSpent = Math.round((endTime - quizStartTime) / 1000);
       
-      // Track quiz completion in database
-      const user = getUserFromAuth();
-      if (user) {
+      // Collect correct and incorrect phrase IDs
+      const correctPhraseIds: string[] = [];
+      const incorrectPhraseIds: string[] = [];
+      
+      currentQuiz.forEach(question => {
+        if (question.isCorrect) {
+          correctPhraseIds.push(question.phrase.id);
+        } else {
+          incorrectPhraseIds.push(question.phrase.id);
+        }
+      });
+      
+      // Only update phrases that were answered correctly as mastered
+      // We don't track incorrect answers as they don't affect mastery
+      const updatePromises = correctPhraseIds.map(phraseId => 
+        supabaseProgress.updatePhraseProgress(user.id, phraseId, true)
+      );
+      
+      if (updatePromises.length > 0) {
+        try {
+          await Promise.all(updatePromises);
+
+        } catch (error) {
+
+        }
+      }
+      
+      // Add quiz score with all the details
+      await addQuizScore(
+        score,
+        currentQuiz.length,
+        correctPhraseIds,
+        incorrectPhraseIds,
+        {
+          difficulty,
+          quizType,
+          sourceDialect,
+          targetDialect
+        }
+      );
+      
+      // Track in analytics if available
+      if (typeof AnalyticsService !== 'undefined' && AnalyticsService.trackQuizCompletion) {
         await AnalyticsService.trackQuizCompletion(
           user.id,
           quizType,
@@ -634,20 +597,19 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
             is_correct: q.isCorrect
           }))
         );
-
-        // Track study session
-        await AnalyticsService.trackStudySession(
-          user.id,
-          'quiz',
-          Math.round(timeSpent / 60),
-          currentQuiz.length,
-          Math.round((score / currentQuiz.length) * 100)
-        );
       }
       
-      onUpdateProgress({
-        ...userProgress,
-        quizScores: [...userProgress.quizScores, quizScore],
+      // Create the quiz score object
+      const newQuizScore = {
+        date: new Date().toISOString(),
+        score,
+        total: currentQuiz.length,
+        difficulty,
+        timeSpent
+      };
+      
+      updateProgress({
+        quizScores: [...userProgress.quizScores, newQuizScore],
         totalStudyTime: userProgress.totalStudyTime + timeSpent
       });
     }
@@ -694,19 +656,87 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                 </div>
                 <div>
                   <p className="text-gray-600 text-sm">Time</p>
-                  <p className="text-2xl font-bold">{Math.round((Date.now() - quizStartTime) / 1000)}s</p>
+                  <p className="text-2xl font-bold">{quizEndTime ? Math.round((quizEndTime - quizStartTime) / 1000) : 0}s</p>
                 </div>
                 <div>
                   <p className="text-gray-600 text-sm">Streak</p>
                   <p className="text-2xl font-bold">{userProgress?.streakDays || 0} days</p>
                 </div>
               </div>
+              
+              {/* Quiz Completion Action Buttons */}
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => {
+
+                    setCurrentQuiz([]);
+                    setCurrentQuestionIndex(0);
+                    setScore(0);
+                    setQuizComplete(false);
+                    setShowAnswer(false);
+                    setSelectedWords([]);
+                    setAvailableWords([]);
+                    setQuizEndTime(null);
+                    // Refresh progress in background, don't wait
+                    if (refreshProgress) {
+                      refreshProgress().catch(err => 
+
+                      );
+                    }
+                  }}
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all transform hover:scale-105 btn-press flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <RefreshCw className="h-5 w-5" />
+                  Take Another Quiz
+                </button>
+                
+                <button
+                  onClick={async () => {
+
+                    setIsNavigatingToHub(true);
+                    
+                    // Quick refresh with timeout
+                    if (refreshProgress) {
+                      const refreshPromise = refreshProgress();
+                      const timeoutPromise = new Promise(resolve => setTimeout(resolve, 1000));
+                      
+                      try {
+                        // Wait for refresh or timeout after 1 second
+                        await Promise.race([refreshPromise, timeoutPromise]);
+
+                      } catch (err) {
+
+                      }
+                    }
+                    
+                    // Navigate
+                    window.location.href = '/dashboard/hub';
+                  }}
+                  disabled={isNavigatingToHub}
+                  className={`flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg transition-all transform hover:scale-105 btn-press flex items-center justify-center gap-2 shadow-lg ${
+                    isNavigatingToHub ? 'opacity-75 cursor-wait' : 'hover:from-blue-600 hover:to-purple-700'
+                  }`}
+                >
+                  {isNavigatingToHub ? (
+                    <>
+                      <RefreshCw className="h-5 w-5 animate-spin" />
+                      Loading Hub...
+                    </>
+                  ) : (
+                    <>
+                      <Home className="h-5 w-5" />
+                      View Progress in Hub
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Quiz Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Quiz Type</label>
+              <p className="text-xs text-gray-500 mb-3">Choose the type of quiz</p>
               <div className="space-y-2">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -730,37 +760,12 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                   />
                   <span>Word Ordering</span>
                 </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="quizType"
-                    value="spaced"
-                    checked={quizType === 'spaced'}
-                    onChange={(e) => setQuizType(e.target.value as QuizType)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Spaced Repetition (Smart Review)</span>
-                </label>
               </div>
-              {quizType === 'spaced' && userProgress?.spacedRepetition.length === 0 && (
-                <p className="mt-2 text-sm text-blue-600">
-                  ✨ Spaced repetition reviews phrases at optimal intervals for long-term memory!
-                </p>
-              )}
-              {quizType === 'multiple-choice' && (
-                <p className="mt-2 text-sm text-gray-600">
-                  📝 Test your recognition of dialect translations
-                </p>
-              )}
-              {quizType === 'word-order' && (
-                <p className="mt-2 text-sm text-green-600">
-                  🎯 Arrange words in the correct order to form the translation
-                </p>
-              )}
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Difficulty</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty</label>
+              <p className="text-xs text-gray-500 mb-3">Select difficulty level</p>
               <div className="space-y-2">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -808,38 +813,147 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                 </label>
               </div>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Source Dialect</label>
-              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                <span className="font-medium text-gray-900">
-                  {sourceLanguage === 'darija' ? '🇲🇦 Darija' :
-                   sourceLanguage === 'lebanese' ? '🇱🇧 Lebanese' :
-                   sourceLanguage === 'syrian' ? '🇸🇾 Syrian' :
-                   sourceLanguage === 'emirati' ? '🇦🇪 Emirati' :
-                   sourceLanguage === 'saudi' ? '🇸🇦 Saudi' : sourceLanguage}
-                </span>
-                <p className="text-sm text-gray-500 mt-1">Questions will be shown in this dialect</p>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Quiz Length</label>
+              <p className="text-xs text-gray-500 mb-3">Number of questions</p>
+              <div className="space-y-2">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizLength"
+                    value="2"
+                    checked={quizLength === 2}
+                    onChange={(e) => setQuizLength(parseInt(e.target.value))}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Short (2 questions)</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizLength"
+                    value="5"
+                    checked={quizLength === 5}
+                    onChange={(e) => setQuizLength(parseInt(e.target.value))}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Medium (5 questions)</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="quizLength"
+                    value="10"
+                    checked={quizLength === 10}
+                    onChange={(e) => setQuizLength(parseInt(e.target.value))}
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span>Long (10 questions)</span>
+                </label>
               </div>
             </div>
+          </div>
             
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Target Dialect</label>
-              <div className="space-y-2">
-                {targetLanguage === 'all' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Source Dialect Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Source Dialect
+                </label>
+                <p className="text-xs text-gray-500 mb-3">Choose which dialect to translate from</p>
+                <div className="space-y-2">
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
-                      name="targetDialect"
-                      value="all"
-                      checked={targetDialect === 'all'}
-                      onChange={(e) => setTargetDialect(e.target.value)}
+                      name="sourceDialect"
+                      value="darija"
+                      checked={sourceDialect === 'darija'}
+                      onChange={(e) => setSourceDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Random Mix</span>
+                    <span>
+                      Darija 🇲🇦
+                      {sourceLanguage === 'darija' && (
+                        <span className="ml-2 text-xs font-semibold text-green-600">(your source)</span>
+                      )}
+                    </span>
                   </label>
-                )}
-                {sourceLanguage !== 'lebanese' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sourceDialect"
+                      value="lebanese"
+                      checked={sourceDialect === 'lebanese'}
+                      onChange={(e) => setSourceDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>
+                      Lebanese 🇱🇧
+                      {sourceLanguage === 'lebanese' && (
+                        <span className="ml-2 text-xs font-semibold text-green-600">(your source)</span>
+                      )}
+                    </span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sourceDialect"
+                      value="syrian"
+                      checked={sourceDialect === 'syrian'}
+                      onChange={(e) => setSourceDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>
+                      Syrian 🇸🇾
+                      {sourceLanguage === 'syrian' && (
+                        <span className="ml-2 text-xs font-semibold text-green-600">(your source)</span>
+                      )}
+                    </span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sourceDialect"
+                      value="emirati"
+                      checked={sourceDialect === 'emirati'}
+                      onChange={(e) => setSourceDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>
+                      Emirati 🇦🇪
+                      {sourceLanguage === 'emirati' && (
+                        <span className="ml-2 text-xs font-semibold text-green-600">(your source)</span>
+                      )}
+                    </span>
+                  </label>
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sourceDialect"
+                      value="saudi"
+                      checked={sourceDialect === 'saudi'}
+                      onChange={(e) => setSourceDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>
+                      Saudi 🇸🇦
+                      {sourceLanguage === 'saudi' && (
+                        <span className="ml-2 text-xs font-semibold text-green-600">(your source)</span>
+                      )}
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Target Dialect Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Target Dialect
+                </label>
+                <p className="text-xs text-gray-500 mb-3">Choose which dialect to translate to</p>
+                <div className="space-y-2">
+                  {sourceDialect !== 'lebanese' && (
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -849,10 +963,15 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                       onChange={(e) => setTargetDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Lebanese</span>
+                    <span>
+                      Lebanese 🇱🇧
+                      {targetLanguage === 'lebanese' && (
+                        <span className="ml-2 text-xs font-semibold text-blue-600">(your target)</span>
+                      )}
+                    </span>
                   </label>
                 )}
-                {sourceLanguage !== 'syrian' && (
+                {sourceDialect !== 'syrian' && (
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -862,10 +981,15 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                       onChange={(e) => setTargetDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Syrian</span>
+                    <span>
+                      Syrian 🇸🇾
+                      {targetLanguage === 'syrian' && (
+                        <span className="ml-2 text-xs font-semibold text-blue-600">(your target)</span>
+                      )}
+                    </span>
                   </label>
                 )}
-                {sourceLanguage !== 'emirati' && (
+                {sourceDialect !== 'emirati' && (
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -875,10 +999,15 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                       onChange={(e) => setTargetDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Emirati</span>
+                    <span>
+                      Emirati 🇦🇪
+                      {targetLanguage === 'emirati' && (
+                        <span className="ml-2 text-xs font-semibold text-blue-600">(your target)</span>
+                      )}
+                    </span>
                   </label>
                 )}
-                {sourceLanguage !== 'saudi' && (
+                {sourceDialect !== 'saudi' && (
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -888,10 +1017,15 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                       onChange={(e) => setTargetDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Saudi</span>
+                    <span>
+                      Saudi 🇸🇦
+                      {targetLanguage === 'saudi' && (
+                        <span className="ml-2 text-xs font-semibold text-blue-600">(your target)</span>
+                      )}
+                    </span>
                   </label>
                 )}
-                {sourceLanguage !== 'darija' && (
+                {sourceDialect !== 'darija' && (
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -901,43 +1035,14 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                       onChange={(e) => setTargetDialect(e.target.value)}
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                     />
-                    <span>Darija</span>
+                    <span>
+                      Darija 🇲🇦
+                      {targetLanguage === 'darija' && (
+                        <span className="ml-2 text-xs font-semibold text-blue-600">(your target)</span>
+                      )}
+                    </span>
                   </label>
                 )}
-              </div>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Mode</label>
-              <div className="space-y-2">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="quizMode"
-                    value="practice"
-                    checked={quizMode === 'practice'}
-                    onChange={(e) => setQuizMode(e.target.value as QuizMode)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="flex flex-col">
-                    <span className="font-medium">Practice Mode</span>
-                    <span className="text-xs text-gray-500">Shows correct answer immediately, good for learning</span>
-                  </span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="quizMode"
-                    value="test"
-                    checked={quizMode === 'test'}
-                    onChange={(e) => setQuizMode(e.target.value as QuizMode)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="flex flex-col">
-                    <span className="font-medium">Test Mode</span>
-                    <span className="text-xs text-gray-500">Answer all questions first, then see results</span>
-                  </span>
-                </label>
               </div>
             </div>
           </div>
@@ -950,25 +1055,6 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
               <Target className="h-5 w-5" />
               Start Quiz
             </button>
-            
-            
-            {quizType === 'spaced' && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Clock className="h-5 w-5" />
-                <span>
-                  {userProgress?.spacedRepetition.length === 0 
-                    ? `${Math.min(10, phrases.length)} phrases ready to start learning`
-                    : (() => {
-                        const now = new Date().toISOString();
-                        const dueCount = userProgress!.spacedRepetition
-                          .filter(item => item.nextReviewDate <= now).length;
-                        return dueCount > 0 
-                          ? `${dueCount} phrases due for review`
-                          : '10 phrases available for practice';
-                      })()}
-                </span>
-              </div>
-            )}
           </div>
         </div>
       ) : (
@@ -1086,13 +1172,12 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                             {/* Find and show the Latin transliteration for this option */}
                             {(() => {
                               // Try to find transliteration for this option
-                              // First check the current question's phrase
-                              const currentPhrase = currentQuestion.phrase;
-                              const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
+                              // We need to search through all phrases to find which one has this Arabic text
                               
-                              // Check if this option matches the current phrase's translation
-                              for (const dialect of dialects) {
-                                const trans = currentPhrase.translations?.[dialect as keyof typeof currentPhrase.translations];
+                              // Check all phrases for matching Arabic text
+                              for (const p of phrases) {
+                                // Check the target dialect that was used for this quiz
+                                const trans = p.translations?.[targetDialect as keyof typeof p.translations];
                                 if (trans) {
                                   const arabicText = typeof trans === 'string' ? trans : trans?.phrase;
                                   if (arabicText === option && typeof trans === 'object' && trans.latin) {
@@ -1101,9 +1186,11 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress, so
                                 }
                               }
                               
-                              // Check other phrases for matching options (distractors)
+                              // If not found in target dialect, check all dialects (for distractors)
+                              const allDialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'];
+                              const dialects = allDialects; // Define dialects for use below
                               for (const p of phrases) {
-                                for (const dialect of dialects) {
+                                for (const dialect of allDialects) {
                                   const trans = p.translations?.[dialect as keyof typeof p.translations];
                                   if (trans) {
                                     const arabicText = typeof trans === 'string' ? trans : trans?.phrase;

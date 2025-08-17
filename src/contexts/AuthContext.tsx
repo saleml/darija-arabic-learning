@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useUser, useAuth as useClerkAuth } from '@clerk/clerk-react';
-import { supabase } from '../lib/supabase';
 
 interface AuthContextType {
   user: {
@@ -33,78 +32,78 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+
     // Wait for Clerk to load
-    if (!isLoaded) return;
+    if (!isLoaded) {
+
+      return;
+    }
+
+    // Add a timeout to ensure loading completes even if something goes wrong
+    const loadingTimeout = setTimeout(() => {
+      if (isLoading) {
+
+        setIsLoading(false);
+      }
+    }, 5000); // 5 second timeout
 
     if (clerkUser) {
-      // Set user immediately from Clerk data
+
+      // Get metadata from unsafeMetadata (where we store it client-side)
+      const unsafeMetadata = clerkUser.unsafeMetadata as {
+        sourceLanguage?: string;
+        targetLanguage?: string;
+        avatarUrl?: string;
+        fullName?: string;
+        avatarId?: number;
+      } | undefined;
+      
+      // Also check publicMetadata in case it was set server-side
+      const publicMetadata = clerkUser.publicMetadata as {
+        sourceLanguage?: string;
+        targetLanguage?: string;
+        avatarUrl?: string;
+        fullName?: string;
+      } | undefined;
+      
+      // Merge metadata (prefer unsafe over public since that's what we update)
+      const metadata = { ...publicMetadata, ...unsafeMetadata };
+
+      // Set user data from Clerk
       const userData = {
         id: clerkUser.id,
-        name: clerkUser.firstName || clerkUser.username || 'User',
+        name: metadata?.fullName || clerkUser.firstName || clerkUser.username || 'User',
         email: clerkUser.primaryEmailAddress?.emailAddress || '',
-        avatarUrl: clerkUser.imageUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${clerkUser.id}`
+        avatarUrl: metadata?.avatarUrl || clerkUser.imageUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${clerkUser.id}`
       };
+      
+      // Set languages from metadata
+      if (metadata?.sourceLanguage) {
+        setSourceLanguage(metadata.sourceLanguage);
+      }
+      if (metadata?.targetLanguage) {
+        setTargetLanguage(metadata.targetLanguage);
+      }
+
       setUser(userData);
       
-      // Load profile from Supabase in background (non-blocking)
-      loadProfileData(clerkUser.id, userData.email);
+      // Set loading to false immediately
+      setIsLoading(false);
+      clearTimeout(loadingTimeout);
+
     } else {
+
       setUser(null);
       setIsLoading(false);
+      clearTimeout(loadingTimeout);
+      console.log('[AuthContext] Loading complete (no user)');
     }
+
+    return () => clearTimeout(loadingTimeout);
   }, [clerkUser, isLoaded]);
 
-  const loadProfileData = async (userId: string, email: string) => {
-    try {
-      // Try to get existing profile
-      const { data: profile } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .eq('email', email)  // Use email as primary identifier
-        .maybeSingle();
-
-      if (profile) {
-        // Update local state with database values
-        setUser(prev => prev ? {
-          ...prev,
-          name: profile.full_name || prev.name,
-          avatarUrl: profile.avatar_url || prev.avatarUrl
-        } : null);
-        setSourceLanguage(profile.source_language || 'darija');
-        setTargetLanguage(profile.target_language || 'lebanese');
-        
-        // If profile has old ID, update it
-        if (profile.id !== userId) {
-          await supabase
-            .from('user_profiles')
-            .update({ id: userId })
-            .eq('email', email);
-        }
-      } else {
-        // Create profile if doesn't exist
-        await supabase
-          .from('user_profiles')
-          .insert({
-            id: userId,
-            email: email,
-            full_name: clerkUser?.firstName || 'User',
-            avatar_url: clerkUser?.imageUrl,
-            source_language: 'darija',
-            target_language: 'lebanese',
-            daily_goal: 10,
-            streak_days: 0,
-            total_study_time: 0
-          });
-      }
-    } catch (error) {
-      // Silently fail - app works without database
-      console.error('Database sync failed:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const signOut = async () => {
+
     await clerkSignOut();
     setUser(null);
     window.location.href = '/';
@@ -116,36 +115,65 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     sourceLanguage?: string;
     targetLanguage?: string;
   }) => {
-    if (!user) return;
+    if (!user || !clerkUser) {
+
+      return;
+    }
 
     // Update local state immediately for instant feedback
-    if (updates.name || updates.avatarUrl) {
+    if (updates.name !== undefined || updates.avatarUrl !== undefined) {
       setUser(prev => prev ? {
         ...prev,
-        name: updates.name || prev.name,
-        avatarUrl: updates.avatarUrl || prev.avatarUrl
+        name: updates.name !== undefined ? updates.name : prev.name,
+        avatarUrl: updates.avatarUrl !== undefined ? updates.avatarUrl : prev.avatarUrl
       } : null);
     }
     
-    if (updates.sourceLanguage) setSourceLanguage(updates.sourceLanguage);
-    if (updates.targetLanguage) setTargetLanguage(updates.targetLanguage);
+    if (updates.sourceLanguage !== undefined) setSourceLanguage(updates.sourceLanguage);
+    if (updates.targetLanguage !== undefined) setTargetLanguage(updates.targetLanguage);
 
-    // Update database in background (non-blocking)
+    // Update Clerk metadata - THIS IS THE ONLY PLACE DATA IS STORED
     try {
-      const dbUpdate: any = { updated_at: new Date().toISOString() };
+      const metadataUpdate: any = {};
       
-      if (updates.name !== undefined) dbUpdate.full_name = updates.name;
-      if (updates.avatarUrl !== undefined) dbUpdate.avatar_url = updates.avatarUrl;
-      if (updates.sourceLanguage !== undefined) dbUpdate.source_language = updates.sourceLanguage;
-      if (updates.targetLanguage !== undefined) dbUpdate.target_language = updates.targetLanguage;
+      if (updates.name !== undefined) {
+        metadataUpdate.fullName = updates.name;
+      }
+      if (updates.avatarUrl !== undefined) {
+        metadataUpdate.avatarUrl = updates.avatarUrl;
+      }
+      if (updates.sourceLanguage !== undefined) {
+        metadataUpdate.sourceLanguage = updates.sourceLanguage;
+      }
+      if (updates.targetLanguage !== undefined) {
+        metadataUpdate.targetLanguage = updates.targetLanguage;
+      }
+      
+      if (Object.keys(metadataUpdate).length > 0) {
 
-      await supabase
-        .from('user_profiles')
-        .update(dbUpdate)
-        .eq('id', user.id);
+        // Get current metadata to preserve any other fields
+        const currentUnsafeMetadata = clerkUser.unsafeMetadata || {};
+        
+        // Update Clerk user - use unsafeMetadata for client-side updates
+        try {
+          const result = await clerkUser.update({
+            unsafeMetadata: {
+              ...currentUnsafeMetadata,
+              ...metadataUpdate
+            }
+          });
+
+        } catch (updateError: any) {
+
+          throw updateError;
+        }
+
+      }
+      
     } catch (error) {
-      // Silently fail - local state is already updated
-      console.error('Database update failed:', error);
+
+      // Revert local state on error
+      throw error;
     }
   };
 

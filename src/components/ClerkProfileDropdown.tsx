@@ -52,6 +52,8 @@ export default function ClerkProfileDropdown() {
     setSaved(false);
     
     try {
+      console.log('[ClerkProfileDropdown] Saving profile with:', { name, avatar, source, target });
+      
       // Update via Clerk - instant and reliable!
       await updateProfile({
         name,
@@ -60,6 +62,7 @@ export default function ClerkProfileDropdown() {
         targetLanguage: target
       });
       
+      console.log('[ClerkProfileDropdown] Profile saved successfully!');
       setSaved(true);
       setSaving(false);
       
@@ -71,7 +74,11 @@ export default function ClerkProfileDropdown() {
       }, 1000);
       
     } catch (error) {
-      console.error('Error saving profile:', error);
+      console.error('[ClerkProfileDropdown] Error saving profile:', error);
+      console.error('[ClerkProfileDropdown] Error details:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      });
       alert('Failed to save profile. Please try again.');
       setSaving(false);
     }
@@ -166,8 +173,8 @@ export default function ClerkProfileDropdown() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
-                    <div className="grid grid-cols-5 gap-2">
-                      {avatarOptions.slice(0, 5).map((option) => (
+                    <div className="grid grid-cols-6 gap-2">
+                      {avatarOptions.map((option) => (
                         <button
                           key={option}
                           onClick={() => setAvatar(option)}

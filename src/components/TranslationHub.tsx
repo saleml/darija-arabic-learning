@@ -1,54 +1,82 @@
-import { useState, useMemo } from 'react';
-import { Search, Globe, ChevronDown, ChevronUp, Star, Sparkles, TrendingUp, Award, Copy, CheckCircle } from 'lucide-react';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { RefreshCw, Globe, ChevronDown, ChevronUp, Star, Sparkles, Award, Copy, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import { Phrase, UserProgress } from '../types';
 import TranslationDisplay from './TranslationDisplay';
 
 interface Props {
   phrases: Phrase[];
   userProgress: UserProgress | null;
-  onUpdateProgress: (progress: UserProgress) => void;
+  onUpdateProgress: (progress: Partial<UserProgress>) => void;
+  onMarkAsLearned?: (phraseId: string) => void;
+  onMarkAsInProgress?: (phraseId: string) => void;
   sourceLanguage?: string;
   targetLanguage?: string;
 }
 
-export default function TranslationHub({ phrases, userProgress, onUpdateProgress, sourceLanguage = 'darija' }: Props) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
+export default function TranslationHub({ phrases, userProgress, onUpdateProgress, onMarkAsLearned, onMarkAsInProgress, sourceLanguage = 'darija' }: Props) {
+  const [showMastered, setShowMastered] = useState(false);
+  const [currentPhrases, setCurrentPhrases] = useState<Phrase[]>([]);
   const [expandedPhrases, setExpandedPhrases] = useState<Set<string>>(new Set());
   const [copiedPhraseId, setCopiedPhraseId] = useState<string | null>(null);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState<string | null>(null);
+  const timeoutRefs = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
-  const categories = useMemo(() => {
-    const cats = new Set(phrases.map(p => p.category));
-    return ['all', ...Array.from(cats)];
-  }, [phrases]);
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      // Clear all timeouts when component unmounts
+      timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
+      timeoutRefs.current.clear();
+    };
+  }, []);
 
-  const filteredPhrases = useMemo(() => {
-    const filtered = phrases.filter(phrase => {
-      const matchesSearch = searchQuery === '' || (
-        phrase.darija?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        phrase.darija_latin?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        phrase.literal_english?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        phrase.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) || false
-      );
-      
-      const matchesCategory = selectedCategory === 'all' || phrase.category === selectedCategory;
-      const matchesDifficulty = selectedDifficulty === 'all' || phrase.difficulty === selectedDifficulty;
-      
-      return matchesSearch && matchesCategory && matchesDifficulty;
-    });
+  // Get unmastered and mastered phrases
+  const unmasteredPhrases = useMemo(() => {
+    if (!phrases || !userProgress) return [];
+    return phrases.filter(p => !userProgress.phrasesLearned.includes(p.id));
+  }, [phrases, userProgress]);
+
+  const masteredPhrases = useMemo(() => {
+    if (!phrases || !userProgress) return [];
+    // Only return phrases that actually exist in the current phrase list
+    return phrases.filter(p => userProgress.phrasesLearned.includes(p.id));
+  }, [phrases, userProgress]);
+
+  // Function to get 3 random unmastered phrases
+  const getRandomPhrases = () => {
+    if (unmasteredPhrases.length === 0) return [];
     
-    console.log('[TranslationHub] Filtering:', {
-      total: phrases.length,
-      filtered: filtered.length,
-      category: selectedCategory,
-      difficulty: selectedDifficulty,
-      search: searchQuery
-    });
+    // Better randomization using Fisher-Yates shuffle
+    const shuffled = [...unmasteredPhrases];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
     
-    return filtered;
-  }, [phrases, searchQuery, selectedCategory, selectedDifficulty]);
+    return shuffled.slice(0, 3);
+  };
+
+  // Initialize with 3 random phrases
+  useEffect(() => {
+    if (!showMastered && unmasteredPhrases.length > 0) {
+      setCurrentPhrases(getRandomPhrases());
+    }
+  }, [unmasteredPhrases.length]); // Only re-run when unmasteredPhrases changes
+
+  // Update displayed phrases when toggle changes
+  useEffect(() => {
+    if (showMastered) {
+      setCurrentPhrases(masteredPhrases);
+    } else {
+      setCurrentPhrases(getRandomPhrases());
+    }
+  }, [showMastered]);
+
+  const refreshPhrases = () => {
+    if (!showMastered) {
+      setCurrentPhrases(getRandomPhrases());
+    }
+  };
 
   const togglePhrase = (phraseId: string) => {
     const newExpanded = new Set(expandedPhrases);
@@ -56,37 +84,65 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
       newExpanded.delete(phraseId);
     } else {
       newExpanded.add(phraseId);
-      markAsInProgress(phraseId);
     }
     setExpandedPhrases(newExpanded);
   };
 
-  const markAsInProgress = (phraseId: string) => {
-    if (!userProgress) return;
-    
-    if (!userProgress.phrasesInProgress.includes(phraseId) && 
-        !userProgress.phrasesLearned.includes(phraseId)) {
-      const newProgress = {
-        ...userProgress,
-        phrasesInProgress: [...userProgress.phrasesInProgress, phraseId]
-      };
-      onUpdateProgress(newProgress);
-    }
-  };
+  // Removed markAsInProgress - we only track mastered/not mastered
 
-  const markAsLearned = (phraseId: string) => {
-    if (!userProgress) return;
+  const markAsLearned = async (phraseId: string) => {
+    if (!userProgress) {
+
+      return;
+    }
+
+    // Check if already learned to prevent duplicate calls
+    if (userProgress.phrasesLearned.includes(phraseId)) {
+
+      return;
+    }
     
-    const newProgress = {
-      ...userProgress,
-      phrasesLearned: [...userProgress.phrasesLearned, phraseId],
-      phrasesInProgress: userProgress.phrasesInProgress.filter(id => id !== phraseId)
-    };
-    onUpdateProgress(newProgress);
-    
-    // Show success animation
+    // Show success animation immediately
     setShowSuccessAnimation(phraseId);
-    setTimeout(() => setShowSuccessAnimation(null), 1000);
+    
+    // Clear any existing timeout for this phrase
+    const existingTimeout = timeoutRefs.current.get(phraseId);
+    if (existingTimeout) {
+      clearTimeout(existingTimeout);
+    }
+    
+    // Set new timeout and store reference
+    const newTimeout = setTimeout(() => setShowSuccessAnimation(null), 2000);
+    timeoutRefs.current.set(phraseId, newTimeout);
+    
+    try {
+      if (onMarkAsLearned) {
+        // Use the Supabase-connected function
+
+        await onMarkAsLearned(phraseId);
+
+      } else {
+
+        // Fallback to local update
+        const newProgress = {
+          ...userProgress,
+          phrasesLearned: [...userProgress.phrasesLearned, phraseId],
+          phrasesInProgress: userProgress.phrasesInProgress.filter(id => id !== phraseId)
+        };
+        onUpdateProgress(newProgress);
+      }
+    } catch (error) {
+
+      // Clear success animation on error
+      setShowSuccessAnimation(null);
+      // Clear timeout on error
+      const timeout = timeoutRefs.current.get(phraseId);
+      if (timeout) {
+        clearTimeout(timeout);
+        timeoutRefs.current.delete(phraseId);
+      }
+      // TODO: Show error notification to user
+    }
   };
 
   const copyToClipboard = async (text: string, phraseId: string) => {
@@ -95,7 +151,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
       setCopiedPhraseId(phraseId);
       setTimeout(() => setCopiedPhraseId(null), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err);
+
     }
   };
 
@@ -129,21 +185,17 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Award className="h-5 w-5" />
-                <span>{userProgress?.phrasesLearned.length || 0} Mastered</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5" />
-                <span>{userProgress?.phrasesInProgress.length || 0} In Progress</span>
+                <span>{masteredPhrases.length} Mastered</span>
               </div>
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5" />
-                <span>{phrases.length - (userProgress?.phrasesLearned.length || 0)} To Explore</span>
+                <span>{unmasteredPhrases.length} To Explore</span>
               </div>
             </div>
           </div>
           <div className="text-right">
             <div className="text-3xl font-bold">
-              {userProgress ? Math.round((userProgress.phrasesLearned.length / phrases.length) * 100) : 0}%
+              {phrases.length > 0 ? Math.round((masteredPhrases.length / phrases.length) * 100) : 0}%
             </div>
             <div className="text-sm opacity-90">Complete</div>
           </div>
@@ -151,91 +203,71 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
         <div className="mt-4 bg-white/20 rounded-full h-2 overflow-hidden">
           <div 
             className="bg-white h-full transition-all duration-500 ease-out"
-            style={{ width: `${userProgress ? (userProgress.phrasesLearned.length / phrases.length) * 100 : 0}%` }}
+            style={{ width: `${phrases.length > 0 ? (masteredPhrases.length / phrases.length) * 100 : 0}%` }}
           />
         </div>
       </div>
 
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex flex-col lg:flex-row gap-4 mb-6">
-          <div className="flex-1">
-            <div className="relative">
-              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder={`Search ${sourceLanguage === 'darija' ? 'Darija' : sourceLanguage.charAt(0).toUpperCase() + sourceLanguage.slice(1)}, English, or Arabic...`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>
-                  {cat === 'all' ? 'All Categories' : cat.replace('_', ' ')}
-                </option>
-              ))}
-            </select>
-            
-            <select
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="all">All Levels</option>
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
-            
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between mb-4">
+        {/* Controls */}
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-600">
-              Found <span className="font-bold text-lg text-blue-600">{filteredPhrases.length}</span> phrases
-            </div>
-            <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-              Showing in: {sourceLanguage === 'darija' ? '🇲🇦 Darija' :
-                           sourceLanguage === 'lebanese' ? '🇱🇧 Lebanese' :
-                           sourceLanguage === 'syrian' ? '🇸🇾 Syrian' :
-                           sourceLanguage === 'emirati' ? '🇦🇪 Emirati' :
-                           sourceLanguage === 'saudi' ? '🇸🇦 Saudi' : sourceLanguage}
-            </div>
+            <button
+              onClick={() => setShowMastered(!showMastered)}
+              className={`px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                showMastered 
+                  ? 'bg-green-500 text-white hover:bg-green-600' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              {showMastered ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
+              {showMastered ? 'Showing Mastered' : 'Show Mastered'}
+            </button>
+            
+            {!showMastered && unmasteredPhrases.length > 3 && (
+              <button
+                onClick={refreshPhrases}
+                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center gap-2 font-medium"
+              >
+                <RefreshCw className="h-5 w-5" />
+                Show me 3 other phrases I haven't mastered
+              </button>
+            )}
           </div>
-          {filteredPhrases.length > 0 && (
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Sparkles className="h-4 w-4" />
-              <span>Click any card to see translations</span>
-            </div>
-          )}
+
+          <div className="text-sm text-gray-600">
+            {showMastered ? (
+              <span>Showing <span className="font-bold text-green-600">{masteredPhrases.length}</span> mastered phrases</span>
+            ) : (
+              <span>Showing <span className="font-bold text-blue-600">3</span> random unmastered phrases</span>
+            )}
+          </div>
         </div>
 
+        {/* Message when all phrases are mastered */}
+        {unmasteredPhrases.length === 0 && !showMastered && (
+          <div className="text-center py-12 text-gray-500">
+            <Award className="h-16 w-16 mx-auto mb-4 text-gold-500" />
+            <h3 className="text-xl font-bold mb-2">Congratulations! 🎉</h3>
+            <p>You've mastered all phrases! Toggle "Show Mastered" to review them.</p>
+          </div>
+        )}
+
+        {/* Phrase Cards */}
         <div className="space-y-4">
-          {filteredPhrases.map((phrase) => {
+          {currentPhrases.map((phrase, index) => {
             const isExpanded = expandedPhrases.has(phrase.id);
             const isLearned = userProgress?.phrasesLearned.includes(phrase.id);
-            const isInProgress = userProgress?.phrasesInProgress.includes(phrase.id);
             
             return (
               <div
                 key={phrase.id}
                 className={`border rounded-lg transition-all card-hover animate-slide-in ${
-                  isLearned ? 'border-green-300 bg-green-50' : 
-                  isInProgress ? 'border-blue-300 bg-blue-50' : 
-                  'border-gray-200 bg-white'
+                  isLearned ? 'border-green-300 bg-green-50' : 'border-gray-200 bg-white'
                 } ${
                   showSuccessAnimation === phrase.id ? 'animate-pulse-once' : ''
                 }`}
-                style={{ animationDelay: `${filteredPhrases.indexOf(phrase) * 50}ms` }}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div
                   onClick={() => togglePhrase(phrase.id)}
@@ -287,7 +319,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                           (phrase.darija_latin || '')
                         }</span>
                         {isLearned && (
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-1" title="Mastered by answering correctly in quiz">
                             <Star className="h-5 w-5 text-yellow-500 fill-current animate-pulse-once" />
                             <span className="text-xs text-yellow-600 font-semibold">Mastered!</span>
                           </div>
@@ -390,22 +422,23 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         <span>Usage: {phrase.usage.context.join(', ')}</span>
                       </div>
                       
-                      {!isLearned ? (
+                      {isLearned ? (
+                        <div className="flex items-center gap-2 text-green-600" title="You've mastered this phrase!">
+                          <CheckCircle className="h-5 w-5" />
+                          <span className="font-semibold">Mastered</span>
+                        </div>
+                      ) : (
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             markAsLearned(phrase.id);
                           }}
-                          className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 btn-press flex items-center gap-2"
+                          className="px-3 py-1.5 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-sm rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105 btn-press flex items-center gap-2"
+                          title="Click if you already know this phrase from before"
                         >
-                          <CheckCircle className="h-4 w-4" />
-                          Mark as Learned
+                          <Star className="h-4 w-4" />
+                          Mark as Already Mastered - I know this already
                         </button>
-                      ) : (
-                        <div className="flex items-center gap-2 text-green-600">
-                          <CheckCircle className="h-5 w-5" />
-                          <span className="font-semibold">Completed</span>
-                        </div>
                       )}
                     </div>
                   </div>

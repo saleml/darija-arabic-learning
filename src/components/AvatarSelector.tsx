@@ -7,18 +7,20 @@ interface AvatarSelectorProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-// DiceBear API avatars - fun and diverse styles
+// DiceBear API avatars - consistent avataaars style across the app
 export const avatarOptions = [
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Aneka',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Felix',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Milo',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Luna',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Zara',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Maya',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Leo',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Nova',
-  'https://api.dicebear.com/7.x/adventurer/svg?seed=Kai'
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar1',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar2',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar3',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar4',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar5',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar6',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar7',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar8',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar9',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar10',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar11',
+  'https://api.dicebear.com/7.x/avataaars/svg?seed=avatar12'
 ];
 
 export function getRandomAvatar(): string {

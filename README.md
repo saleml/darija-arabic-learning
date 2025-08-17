@@ -1,217 +1,390 @@
-# Darija Arabic Learning Platform 🇲🇦
+# 🌍 Darija Arabic Learning Platform
 
-A comprehensive learning platform for Moroccan Darija speakers to master Levantine and Gulf Arabic dialects.
+A comprehensive web application designed to help Moroccan Darija speakers learn other Arabic dialects including Lebanese, Syrian, Emirati, Saudi, Egyptian, and Modern Standard Arabic (MSA).
 
-## 🚀 **NOW LIVE WITH REAL DATABASE!**
+![React](https://img.shields.io/badge/React-18.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Supabase](https://img.shields.io/badge/Supabase-2.0-green)
+![Clerk](https://img.shields.io/badge/Clerk-Auth-purple)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-✅ **Production Ready** with Supabase authentication and cloud database  
-✅ **Local Development** works offline with localStorage fallback  
-✅ **Smart Quiz System** with intelligent MCQ distractors  
-✅ **Word Ordering** with challenging distractor words  
-✅ **Real User Tracking** and analytics
+## 🎯 Features
 
-## Features
+### Core Learning Features
+- **📚 Translation Hub**: Browse 552+ phrases with instant search across 6 Arabic dialects
+- **🎯 Interactive Quiz System**: Multiple choice and word ordering questions with smart distractors
+- **📈 Progress Tracking**: Personal learning statistics and achievement system
+- **🔄 Spaced Repetition**: Scientifically-backed learning intervals for optimal retention
+- **🌐 Cultural Context**: Detailed usage notes and cultural sensitivities for each phrase
 
-### 📚 Extensive Phrase Database
-- **550+ carefully researched phrases and sentences** (152 phrases + 400 sentences)
-- Three difficulty levels: Beginner, Intermediate, Advanced
-- **5 dialect variations**: Lebanese, Syrian, Emirati, Saudi, and Formal MSA
-- **Rich cultural context** and usage notes for each phrase
-- **Categories**: Greetings, Daily Essentials, Social, Emotions, Shopping, Food, Directions, and more
+### User Experience
+- **🔐 Secure Authentication**: Full user management with Clerk
+- **💾 Cloud Sync**: Progress saved to Supabase with real-time updates
+- **📱 Mobile Responsive**: Optimized for all devices
+- **🎨 Modern UI**: Clean, intuitive interface with TailwindCSS
+- **⚡ Fast Performance**: Optimized loading with Vite
 
-### 🎯 Interactive Learning Tools
-
-#### Translation Hub
-- Smart search with Arabic script and transliteration support
-- Advanced filtering by category, difficulty, and dialect
-- Visual progress tracking for learned phrases
-- Expandable cards with full dialect comparisons
-
-#### Quiz System
-- Multiple choice and fill-in-the-blank exercises
-- Spaced repetition algorithm for optimal retention
-- Progress tracking and performance analytics
-- Customizable difficulty and dialect focus
-
-#### Progress Tracker
-- Comprehensive learning statistics
-- Achievement system with milestones
-- Daily goals and streak tracking
-- Export progress data for backup
-
-#### Cultural Context Cards
-- In-depth cultural insights for 10+ topics
-- Regional differences explained
-- Practical tips for real-world usage
-- Example phrases with context
-
-## User Authentication
-
-### Features
-- User registration and login system
-- Progress tracking per user account
-- Demo account available for testing: **demo@example.com** / **demo123**
-- Secure localStorage persistence
-
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 16+ and npm
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
+- Clerk account
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
 ```bash
-git clone [repository-url]
+git clone https://github.com/yourusername/darija-arabic-app.git
 cd darija-arabic-app
 ```
 
-2. Install dependencies:
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. Start the development server:
+3. **Set up environment variables**
+Create a `.env` file in the root directory:
+```env
+# Clerk Authentication
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+
+# Supabase
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+4. **Run the development server**
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+The app will be available at `http://localhost:5173`
 
-## Usage Guide
+## 📖 User Guide
 
-### For Learners
+### Getting Started
+1. **Sign Up**: Create an account using email/password
+2. **Language Setup**: Choose your source and target dialects
+3. **Start Learning**: Access the Translation Hub to begin
 
-1. **Start with the Translation Hub**: Browse phrases by category or search for specific terms
-2. **Mark phrases as learned**: Track your progress as you master each phrase
-3. **Take quizzes regularly**: Use the spaced repetition system for better retention
-4. **Review cultural cards**: Understand the context behind language differences
-5. **Set daily goals**: Maintain consistency with achievable targets
+### Translation Hub
+- View 3 random unmastered phrases at a time
+- Click "Show me 3 other phrases" for new content
+- Expand phrases to see all dialect translations
+- Mark phrases as "Already Mastered" if you know them
+- Toggle to view all mastered phrases
 
-### Learning Path Recommendations
+### Quiz System
+1. Choose quiz length (2, 5, or 10 questions)
+2. Select quiz type:
+   - **Multiple Choice**: Select correct translation
+   - **Word Ordering**: Arrange words in correct order
+3. Get instant feedback and progress updates
+4. View score and time at completion
 
-#### Beginner (Month 1)
-- Focus on greetings and daily essentials
-- Learn 5-10 phrases per day
-- Take practice quizzes daily
-- Review cultural context for social situations
+### Progress Tracking
+- **Mastered Phrases**: Total phrases you've learned
+- **Quiz History**: All your quiz attempts and scores
+- **Study Time**: Total time spent learning
+- **Streak**: Consecutive days of practice
+- **Achievements**: Unlock badges as you progress
 
-#### Intermediate (Month 2)
-- Expand to practical situations and emotions
-- Increase to 10-15 phrases per day
-- Use spaced repetition for review
-- Focus on dialect-specific variations
+## 🛠️ Technical Architecture
 
-#### Advanced (Month 3+)
-- Master idioms and formal language
-- Practice with mixed dialect quizzes
-- Focus on cultural nuances
-- Aim for conversational fluency
+### Frontend Stack
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **TailwindCSS** - Styling
+- **React Router** - Navigation
+- **Lucide Icons** - Icon library
 
-## Technical Details
-
-### Built With
-- **React 18** with TypeScript
-- **Vite** for fast development
-- **Tailwind CSS** for styling
-- **Local Storage** for progress persistence
+### Backend Services
+- **Clerk** - Authentication & user management
+- **Supabase** - Database & real-time sync
+- **PostgreSQL** - Data storage (via Supabase)
 
 ### Project Structure
 ```
-darija-arabic-app/
-├── src/
-│   ├── components/       # React components
-│   ├── types/            # TypeScript definitions
-│   └── App.tsx          # Main application
-├── database/            # JSON phrase databases
-├── docs/               # Documentation
-└── public/             # Static assets
+src/
+├── components/          # React components
+│   ├── TranslationHub.tsx
+│   ├── QuizSystem.tsx
+│   ├── ProgressTracker.tsx
+│   └── ...
+├── services/           # Business logic
+│   ├── progressService.ts
+│   └── analytics.ts
+├── hooks/             # Custom React hooks
+├── contexts/          # React contexts
+├── types/            # TypeScript definitions
+├── utils/            # Utility functions
+└── database/         # JSON phrase databases
 ```
 
-### Database Schema
-Each phrase includes:
-- Original Darija with transliteration
-- Translations for 5+ Arabic dialects
-- Usage context and formality levels
-- Cultural notes and common mistakes
-- Tags for easy categorization
+## 🔧 Configuration & Maintenance
 
-## Spaced Repetition Algorithm
+### Updating Phrases
 
-The app uses a modified SM-2 algorithm:
-- Initial interval: 1 day
-- Correct answer: interval × ease factor (2.5)
-- Incorrect answer: reset to 1 day
-- Ease factor adjusts based on performance
+#### Adding New Phrases
+1. Navigate to the appropriate database file:
+   - `database/beginner_phrases.json` (A1-A2 level)
+   - `database/intermediate_phrases.json` (B1-B2 level)
+   - `database/advanced_phrases.json` (C1-C2 level)
 
-## Progress Data
+2. Add new phrase following this structure:
+```json
+{
+  "id": "unique_id_here",
+  "darija": "مغربية",
+  "darija_latin": "maghribiya",
+  "literal_english": "Moroccan",
+  "english": "Moroccan",
+  "translations": {
+    "lebanese": {
+      "phrase": "لبنانية",
+      "latin": "libneniyye",
+      "audio": null
+    },
+    "syrian": {
+      "phrase": "سورية",
+      "latin": "suriyye",
+      "audio": null
+    }
+  },
+  "category": "greetings",
+  "difficulty": "beginner",
+  "tags": ["nationality", "identity"],
+  "usage": {
+    "formality": "neutral",
+    "frequency": "high",
+    "context": ["introduction", "identity"]
+  }
+}
+```
 
-Your learning progress is automatically saved to browser local storage:
-- Learned phrases
-- Quiz scores
-- Streak days
-- Study time
-- Personal preferences
+#### Modifying Categories
+Edit the category field in phrase objects. Available categories:
+- `greetings`, `daily_essentials`, `numbers`, `time_date`
+- `family`, `food_dining`, `transportation`, `shopping`
+- `emotions`, `health`, `workplace`, `social`
+- `directions`, `weather`, `technology`, `cultural`
+- `idioms`, `slang`
 
-Export your data anytime from the Progress Tracker settings.
+### Clerk Configuration
 
-## Language Coverage
+1. **Sign in to Clerk Dashboard**: https://dashboard.clerk.com
 
-### Dialects Included
-- 🇲🇦 **Moroccan Darija** (source language)
-- 🇱🇧 **Lebanese Arabic**
-- 🇸🇾 **Syrian Arabic**
-- 🇦🇪 **Emirati Arabic**
-- 🇸🇦 **Saudi Arabic**
-- 📚 **Modern Standard Arabic (MSA)**
+2. **User Metadata Setup**:
+   - Go to Users → User Metadata
+   - Add public metadata fields:
+     - `sourceLanguage` (string)
+     - `targetLanguage` (string)
+     - `onboardingCompleted` (boolean)
 
-### Phrase Categories
-- Greetings & Farewells
-- Daily Essentials
-- Numbers & Time
-- Family & Relationships
-- Food & Dining
-- Shopping & Commerce
-- Directions & Transportation
-- Workplace Communication
-- Health & Emergency
-- Emotions & Feelings
-- Weather & Environment
-- Technology & Modern Life
-- Cultural Expressions
-- Idioms & Proverbs
-- Formal & Professional
+3. **Authentication Methods**:
+   - Enable Email/Password
+   - Configure social logins (optional)
+   - Set up MFA (recommended)
 
-## Contributing
+### Supabase Configuration
 
-This project is open for improvements:
-1. Report issues or suggest features
-2. Add new phrases with proper validation
-3. Improve translations or cultural notes
-4. Enhance the UI/UX
-5. Add audio pronunciations
+1. **Database Setup**:
+```sql
+-- Create user_progress table
+CREATE TABLE user_progress (
+  user_id TEXT PRIMARY KEY,
+  metadata JSONB,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
 
-## Future Enhancements
+-- Create phrase_progress table
+CREATE TABLE phrase_progress (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id TEXT REFERENCES user_progress(user_id),
+  phrase_id TEXT NOT NULL,
+  times_seen INTEGER DEFAULT 0,
+  times_correct INTEGER DEFAULT 0,
+  is_mastered BOOLEAN DEFAULT FALSE,
+  last_seen TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
 
-- [ ] Native speaker audio recordings
-- [ ] Offline PWA support
-- [ ] User accounts with cloud sync
-- [ ] Conversation practice mode
-- [ ] Writing system practice
-- [ ] Community phrase submissions
-- [ ] Mobile app versions
-- [ ] API for third-party integration
+-- Create quiz_attempts table
+CREATE TABLE quiz_attempts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id TEXT REFERENCES user_progress(user_id),
+  score INTEGER NOT NULL,
+  total_questions INTEGER NOT NULL,
+  difficulty TEXT,
+  quiz_type TEXT,
+  correct_phrases TEXT[],
+  phrases_tested TEXT[],
+  time_spent INTEGER,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
 
-## License
+2. **Row Level Security (RLS)**:
+```sql
+-- Enable RLS
+ALTER TABLE user_progress ENABLE ROW LEVEL SECURITY;
+ALTER TABLE phrase_progress ENABLE ROW LEVEL SECURITY;
+ALTER TABLE quiz_attempts ENABLE ROW LEVEL SECURITY;
 
-This project is for educational purposes. Please respect intellectual property when using phrase data.
+-- Create policies
+CREATE POLICY "Users can view own progress" ON user_progress
+  FOR ALL USING (auth.uid()::text = user_id);
 
-## Acknowledgments
+CREATE POLICY "Users can view own phrase progress" ON phrase_progress
+  FOR ALL USING (auth.uid()::text = user_id);
 
-- Linguistic research from various academic sources
-- Cultural insights from native speakers
-- Open-source language learning communities
+CREATE POLICY "Users can view own quiz attempts" ON quiz_attempts
+  FOR ALL USING (auth.uid()::text = user_id);
+```
+
+3. **API Configuration**:
+   - Note your project URL and anon key
+   - Add them to your `.env` file
+   - Enable real-time subscriptions (optional)
+
+## 🚢 Deployment
+
+### Netlify Deployment (Recommended)
+
+1. **Connect GitHub Repository**:
+   - Sign in to Netlify
+   - Click "New site from Git"
+   - Choose your repository (works with private repos)
+
+2. **Configure Build Settings**:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+
+3. **Set Environment Variables**:
+   - Add all variables from `.env` file
+   - Use Netlify's environment variables UI
+
+4. **Deploy**:
+   - Netlify auto-deploys on push to main branch
+   - Manual deploy: `netlify deploy --prod`
+
+### Vercel Deployment
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Run: `vercel`
+3. Follow prompts to configure
+4. Set environment variables in Vercel dashboard
+
+## 📊 Database Content
+
+### Current Statistics
+- **Total Learning Items**: 552
+  - Core Phrases: 152
+  - Conversational Sentences: 400
+- **Categories**: 18
+- **Difficulty Levels**: 3 (Beginner, Intermediate, Advanced)
+- **Dialects Covered**: 6 (Lebanese, Syrian, Emirati, Saudi, Egyptian, MSA)
+
+### Content Organization
+```
+database/
+├── beginner_phrases.json      # 45 phrases (A1-A2)
+├── intermediate_phrases.json  # 63 phrases (B1-B2)
+├── advanced_phrases.json      # 44 phrases (C1-C2)
+└── sentences_daily_conversations.json # 400 sentences
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Authentication Issues**
+- Verify Clerk keys in `.env`
+- Check Clerk dashboard for user status
+- Clear browser cache and cookies
+
+**Database Connection**
+- Verify Supabase URL and keys
+- Check RLS policies are correctly set
+- Ensure tables exist in Supabase
+
+**Progress Not Saving**
+- Check browser console for errors
+- Verify user is authenticated
+- Check Supabase connection
+
+**Quiz Not Loading**
+- Ensure phrase database files exist
+- Check for JavaScript errors
+- Verify quiz configuration
+
+## 📝 Development
+
+### Running Tests
+```bash
+npm run test        # Run tests
+npm run test:watch  # Watch mode
+```
+
+### Building for Production
+```bash
+npm run build      # Create production build
+npm run preview    # Preview production build
+```
+
+### Code Quality
+```bash
+npm run lint       # Run ESLint
+npm run type-check # Run TypeScript compiler
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- All contributors and testers
+- The Arabic-speaking community for linguistic guidance
+- Open source libraries that made this possible
+
+## 📞 Support
+
+For support, please:
+- Open an issue on GitHub
+- Check existing issues for solutions
+- Review the documentation
+
+## 🗺️ Roadmap
+
+### Short Term
+- [ ] Audio pronunciation for all phrases
+- [ ] Dark mode support
+- [ ] Export progress as PDF/CSV
+- [ ] More quiz types
+
+### Long Term
+- [ ] Mobile app (React Native)
+- [ ] AI-powered conversation practice
+- [ ] Community features
+- [ ] Content creator tools
 
 ---
 
-**Made with ❤️ for bridging Arabic dialects**
+**Built with ❤️ for the Arabic learning community**
