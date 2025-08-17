@@ -52,34 +52,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 
 
-  const loadUserProgressLocal = (userId: string) => {
-    const progressKey = `userProgress_${userId}`;
-    const storedProgress = localStorage.getItem(progressKey);
-    
-    if (storedProgress) {
-      setUserProgress(JSON.parse(storedProgress));
-    } else {
-      // Initialize new progress for user
-      const newProgress: UserProgress = {
-        userId,
-        phrasesLearned: [],
-        phrasesInProgress: [],
-        quizScores: [],
-        spacedRepetition: [],
-        streakDays: 0,
-        lastActiveDate: new Date().toISOString(),
-        totalStudyTime: 0,
-        preferences: {
-          targetDialect: 'all',
-          dailyGoal: 10,
-          soundEnabled: true,
-          theme: 'light'
-        }
-      };
-      setUserProgress(newProgress);
-      localStorage.setItem(progressKey, JSON.stringify(newProgress));
-    }
-  };
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -89,27 +61,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const initializeAuth = async () => {
       console.log('[AuthContext] Initializing authentication...');
       
-      // Check localStorage first for local development
-      const storedUser = localStorage.getItem('currentUser');
-      if (storedUser) {
-        try {
-          const userData = JSON.parse(storedUser);
-          console.log('[AuthContext] Found stored user:', userData.email);
-          setUser(userData);
-          loadUserProgressLocal(userData.id);
-          
-          // Load language preferences
-          if (userData.sourceLanguage) setSourceLanguage(userData.sourceLanguage);
-          if (userData.targetLanguage) setTargetLanguage(userData.targetLanguage);
-          
-          isInitialized = true;
-          setIsLoading(false);
-          return;
-        } catch (e) {
-          console.error('[AuthContext] Error parsing stored user:', e);
-          localStorage.removeItem('currentUser'); // Clear corrupted data
-        }
-      }
       
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -469,41 +420,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Since we can't delete auth users from the client side in Supabase
       console.log('[AuthContext] User data deleted, account deletion would need server-side implementation');
 
-      // For localStorage fallback
-      if (profileError?.message?.includes('Please set up Supabase')) {
-        return deleteAccountLocal();
-      }
 
       // Sign out after successful deletion
       await logout();
       return true;
     } catch (error) {
       console.error('[AuthContext] Account deletion error:', error);
-      return deleteAccountLocal();
+      return false;
     }
   };
 
-  const deleteAccountLocal = (): boolean => {
-    if (!user) return false;
-    
-    console.log('[AuthContext] Local account deletion for:', user.email);
-    
-    // Remove user from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const updatedUsers = users.filter((u: any) => u.id !== user.id);
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    
-    // Remove user progress
-    localStorage.removeItem(`userProgress_${user.id}`);
-    localStorage.removeItem('currentUser');
-    
-    // Clear current session
-    setUser(null);
-    setUserProgress(null);
-    
-    console.log('[AuthContext] Local account deletion successful');
-    return true;
-  };
 
   const logout = async (): Promise<void> => {
     try {
@@ -514,7 +440,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUserProgress(null);
       setSourceLanguage('darija');
       setTargetLanguage('lebanese');
-      localStorage.removeItem('currentUser');
       
       // Then sign out from Supabase
       const { error } = await supabase.auth.signOut();
@@ -601,10 +526,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.log('[AuthContext] Supabase not available, using localStorage fallback');
       }
 
-      // Always update localStorage as backup
-      const progressKey = `userProgress_${user.id}`;
-      const updatedProgress = { ...progress, streakDays: newStreakDays };
-      localStorage.setItem(progressKey, JSON.stringify(updatedProgress));
 
     } catch (error) {
       console.error('[AuthContext] Error updating user progress:', error);
@@ -664,15 +585,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       } else {
         console.log('[AuthContext] ✅ Language preferences updated successfully!');
         console.log('[AuthContext] Updated profile:', data);
-      }
-      
-      // Update localStorage fallback
-      const savedUser = localStorage.getItem('currentUser');
-      if (savedUser) {
-        const userData = JSON.parse(savedUser);
-        userData.sourceLanguage = source;
-        userData.targetLanguage = target;
-        localStorage.setItem('currentUser', JSON.stringify(userData));
       }
       
       // Update userProgress preferences

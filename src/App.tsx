@@ -85,41 +85,25 @@ function App() {
   useEffect(() => {
     console.log('[App] User changed:', user?.email);
 
-    if (user) {
-      const savedProgress = localStorage.getItem(`userProgress_${user.id}`);
-      if (savedProgress) {
-        setUserProgress(JSON.parse(savedProgress));
-      } else {
-        const initialProgress: UserProgress = {
-          userId: user.id,
-          phrasesLearned: [],
-          phrasesInProgress: [],
-          quizScores: [],
-          spacedRepetition: [],
-          streakDays: 0,
-          lastActiveDate: new Date().toISOString(),
-          totalStudyTime: 0,
-          preferences: {
-            targetDialect: targetLanguage === 'all' ? 'all' : targetLanguage as any,
-            dailyGoal: 10,
-            soundEnabled: true,
-            theme: 'light'
-          }
-        };
-        setUserProgress(initialProgress);
-        localStorage.setItem(`userProgress_${user.id}`, JSON.stringify(initialProgress));
-        
-        // Check if this is a new user who needs language setup
-        const hasSetupLanguages = localStorage.getItem(`languages_setup_${user.id}`);
-        console.log('[App] Checking language setup for user:', user.id);
-        console.log('[App] hasSetupLanguages:', hasSetupLanguages);
-        if (!hasSetupLanguages) {
-          console.log('[App] Setting showLanguageSetup to true for new user');
-          setShowLanguageSetup(true);
-        } else {
-          console.log('[App] User already has language setup, skipping');
+    if (user && !userProgress) {
+      // Initialize new progress for user if not loaded from auth context
+      const initialProgress: UserProgress = {
+        userId: user.id,
+        phrasesLearned: [],
+        phrasesInProgress: [],
+        quizScores: [],
+        spacedRepetition: [],
+        streakDays: 0,
+        lastActiveDate: new Date().toISOString(),
+        totalStudyTime: 0,
+        preferences: {
+          targetDialect: targetLanguage === 'all' ? 'all' : targetLanguage as any,
+          dailyGoal: 10,
+          soundEnabled: true,
+          theme: 'light'
         }
-      }
+      };
+      setUserProgress(initialProgress);
     }
   }, [user, sourceLanguage, targetLanguage]);
 
@@ -156,7 +140,6 @@ function App() {
       }
       
       setUserProgress(newProgress);
-      localStorage.setItem(`userProgress_${user.id}`, JSON.stringify(newProgress));
     }
   };
 
@@ -477,7 +460,6 @@ function App() {
         onComplete={(source, target) => {
           console.log('[App] Language setup completed:', source, target);
           updateLanguagePreferences(source, target);
-          localStorage.setItem(`languages_setup_${user.id}`, 'true');
           setShowLanguageSetup(false);
         }}
       />
