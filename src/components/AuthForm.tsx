@@ -59,15 +59,27 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
       
       // Login Mode
       if (mode === 'login') {
-        const success = await onLogin(email, password);
-        setIsLoading(false);
-        
-        if (success) {
-          if (onClose) {
-            onClose(); // Remove setTimeout, close immediately
+        try {
+          // Add a timeout to prevent infinite loading
+          const loginPromise = onLogin(email, password);
+          const timeoutPromise = new Promise<boolean>((_, reject) => 
+            setTimeout(() => reject(new Error('Login timeout')), 10000)
+          );
+          
+          const success = await Promise.race([loginPromise, timeoutPromise]);
+          setIsLoading(false);
+          
+          if (success) {
+            if (onClose) {
+              onClose(); // Remove setTimeout, close immediately
+            }
+          } else {
+            setError('Invalid email or password.');
           }
-        } else {
-          setError('Invalid email or password.');
+        } catch (error) {
+          console.error('[AuthForm] Login error:', error);
+          setIsLoading(false);
+          setError('Login failed. Please check your connection and try again.');
         }
         return;
       }
@@ -88,25 +100,42 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           return;
         }
         
-        // Create account
-        const signupSuccess = await onSignup(email, password, name, avatarUrl);
-        
-        if (!signupSuccess) {
-          setError('Email already exists or signup failed.');
+        try {
+          // Create account with timeout
+          const signupPromise = onSignup(email, password, name, avatarUrl);
+          const timeoutPromise = new Promise<boolean>((_, reject) => 
+            setTimeout(() => reject(new Error('Signup timeout')), 10000)
+          );
+          
+          const signupSuccess = await Promise.race([signupPromise, timeoutPromise]);
+          
+          if (!signupSuccess) {
+            setError('Email already exists or signup failed.');
+            setIsLoading(false);
+            return;
+          }
+          
+          // Auto-login after successful signup
+          setSuccess('Account created! Logging you in...');
+          
+          const loginPromise = onLogin(email, password);
+          const loginTimeoutPromise = new Promise<boolean>((_, reject) => 
+            setTimeout(() => reject(new Error('Login timeout')), 10000)
+          );
+          
+          const loginSuccess = await Promise.race([loginPromise, loginTimeoutPromise]);
           setIsLoading(false);
-          return;
-        }
-        
-        // Auto-login after successful signup
-        setSuccess('Account created! Logging you in...');
-        const loginSuccess = await onLogin(email, password);
-        setIsLoading(false);
-        
-        if (loginSuccess && onClose) {
-          onClose(); // Close immediately
-        } else {
-          setMode('login');
-          setSuccess('Account created! Please log in.');
+          
+          if (loginSuccess && onClose) {
+            onClose(); // Close immediately
+          } else {
+            setMode('login');
+            setSuccess('Account created! Please log in.');
+          }
+        } catch (error) {
+          console.error('[AuthForm] Signup/Login error:', error);
+          setIsLoading(false);
+          setError('Operation timed out. Please try again.');
         }
       }
     } catch (err) {

@@ -288,8 +288,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (data?.user) {
         console.log('[AuthContext] Login successful for:', data.user.email);
-        // Wait a bit for the auth state to update
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Manually handle the user session instead of waiting for auth state change
+        await handleUserSession(data.user);
         return true;
       }
 
