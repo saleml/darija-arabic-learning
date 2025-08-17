@@ -5,10 +5,17 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import LanguageSetup from './components/LanguageSetup';
 import HybridAuthForm from './components/HybridAuthForm';
+import { debugEnvironment } from './utils/debug';
+import { useEffect } from 'react';
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
   const { user, sourceLanguage, targetLanguage, updateProfile, isLoading } = useAuth();
+  
+  // Debug environment on mount
+  useEffect(() => {
+    debugEnvironment();
+  }, []);
 
   // Show loading state while Clerk is initializing
   if (!isLoaded || isLoading) {

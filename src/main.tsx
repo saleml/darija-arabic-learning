@@ -10,7 +10,14 @@ import './index.css'
 // Get Clerk publishable key from environment
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+console.log('🔐 Clerk initialization:', {
+  hasKey: !!clerkPubKey,
+  keyPreview: clerkPubKey ? clerkPubKey.substring(0, 20) + '...' : '❌ MISSING KEY',
+  env: import.meta.env.MODE
+});
+
 if (!clerkPubKey) {
+  console.error('❌ Missing VITE_CLERK_PUBLISHABLE_KEY!');
   throw new Error('Missing VITE_CLERK_PUBLISHABLE_KEY in .env file');
 }
 
