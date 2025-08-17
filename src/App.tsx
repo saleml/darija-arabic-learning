@@ -7,7 +7,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import LanguageSetup from './components/LanguageSetup';
 
 function App() {
-  const { user, isLoading, sourceLanguage, targetLanguage, updateLanguagePreferences } = useAuth();
+  const { user, sourceLanguage, targetLanguage, updateLanguagePreferences } = useAuth();
 
   // Don't show loading screen - render immediately
   // The auth will resolve quickly in the background

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import { Book, Brain, Trophy, Globe, Menu, X } from 'lucide-react';
+import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
