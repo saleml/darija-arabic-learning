@@ -51,34 +51,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
 
-  // localStorage fallback for local development
-  const initializeLocalStorage = async () => {
-    console.log('[AuthContext] Initializing localStorage fallback...');
-    
-    // Initialize demo account if it doesn't exist
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (!users.some((u: any) => u.email === 'demo@example.com')) {
-      const demoPassword = await hashPassword('Demo123!');
-      const demoUser = {
-        id: 'demo_user',
-        email: 'demo@example.com',
-        password: demoPassword,
-        name: 'Demo User',
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
-      };
-      users.push(demoUser);
-      localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    // Check for existing session
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setUser(userData);
-      loadUserProgressLocal(userData.id);
-    }
-  };
 
   const loadUserProgressLocal = (userId: string) => {
     const progressKey = `userProgress_${userId}`;
