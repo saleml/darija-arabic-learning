@@ -81,10 +81,36 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         if (success) {
           setSuccess('Account created successfully!');
           setError('');
-          // Close form after successful signup to show language setup
+          
+          // Give browsers time to detect the successful form submission for password manager
+          // Create a hidden form submission to help trigger password save prompt
+          const hiddenForm = document.createElement('form');
+          hiddenForm.style.display = 'none';
+          hiddenForm.method = 'POST';
+          hiddenForm.action = '#';
+          
+          const emailInput = document.createElement('input');
+          emailInput.type = 'email';
+          emailInput.name = 'email';
+          emailInput.value = email;
+          
+          const passwordInput = document.createElement('input');
+          passwordInput.type = 'password';
+          passwordInput.name = 'password';
+          passwordInput.value = password;
+          
+          hiddenForm.appendChild(emailInput);
+          hiddenForm.appendChild(passwordInput);
+          document.body.appendChild(hiddenForm);
+          
+          // Submit and immediately remove the hidden form
           setTimeout(() => {
-            if (onClose) onClose();
-          }, 500);
+            hiddenForm.submit();
+            setTimeout(() => {
+              document.body.removeChild(hiddenForm);
+              if (onClose) onClose();
+            }, 100);
+          }, 200);
         } else {
           setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
         }
@@ -128,20 +154,23 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="#">
+        <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="#" autoComplete="on">
           {mode === 'signup' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                 Name
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
+                  id="name"
+                  name="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Your name"
+                  autoComplete="name"
                   required={mode === 'signup'}
                 />
               </div>
@@ -149,7 +178,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
             <div className="relative">
@@ -170,7 +199,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
 
           {mode !== 'reset' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password
               </label>
               <div className="relative">

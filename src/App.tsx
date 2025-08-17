@@ -38,6 +38,11 @@ function App() {
   const [notification, setNotification] = useState<Notification | null>(null);
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [showLanguageSetup, setShowLanguageSetup] = useState(false);
+  
+  // Debug logging for showLanguageSetup state changes
+  useEffect(() => {
+    console.log('[App] showLanguageSetup state changed to:', showLanguageSetup);
+  }, [showLanguageSetup]);
 
   // Load phrases once on mount, independent of user
   useEffect(() => {
@@ -104,8 +109,13 @@ function App() {
         
         // Check if this is a new user who needs language setup
         const hasSetupLanguages = localStorage.getItem(`languages_setup_${user.id}`);
+        console.log('[App] Checking language setup for user:', user.id);
+        console.log('[App] hasSetupLanguages:', hasSetupLanguages);
         if (!hasSetupLanguages) {
+          console.log('[App] Setting showLanguageSetup to true for new user');
           setShowLanguageSetup(true);
+        } else {
+          console.log('[App] User already has language setup, skipping');
         }
       }
     }
@@ -455,11 +465,13 @@ function App() {
   
   // Show language setup for new users
   if (showLanguageSetup) {
+    console.log('[App] Rendering LanguageSetup screen for user:', user.email);
     return (
       <LanguageSetup
         initialSource={sourceLanguage}
         initialTarget={targetLanguage}
         onComplete={(source, target) => {
+          console.log('[App] Language setup completed:', source, target);
           updateLanguagePreferences(source, target);
           localStorage.setItem(`languages_setup_${user.id}`, 'true');
           setShowLanguageSetup(false);
