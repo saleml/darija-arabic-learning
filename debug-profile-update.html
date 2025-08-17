@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Profile Update</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Debug Profile Update Issue</h1>
+    <div id="output"></div>
+    <button id="testBtn">Test Profile Update</button>
+
+<script>
+const output = document.getElementById('output');
+const log = (message, data = null) => {
+    console.log(message, data);
+    const div = document.createElement('div');
+    div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+    if (data) {
+        div.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    }
+    output.appendChild(div);
+};
+
+// Initialize Supabase
+const supabaseUrl = 'https://xnkokmaccibpwxenxynh.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhua29rbWFjY2licHd4ZW54eW5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzNzc2NzksImV4cCI6MjA3MDk1MzY3OX0.mC30nHqAQ-U6gyE9RCVYCPcizd5Hp1GX2toMskWsREE';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+async function debugProfileUpdate() {
+    try {
+        log('🔄 Starting profile update debug...');
+        
+        // 1. Check authentication status
+        log('1️⃣ Checking authentication status...');
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) {
+            log('❌ Session error:', sessionError);
+            return;
+        }
+        
+        if (!session) {
+            log('❌ No active session found. User needs to log in first.');
+            return;
+        }
+        
+        log('✅ Session found for user:', session.user.email);
+        const userId = session.user.id;
+        
+        // 2. Check current profile
+        log('2️⃣ Fetching current profile...');
+        const { data: currentProfile, error: fetchError } = await supabase
+            .from('user_profiles')
+            .select('*')
+            .eq('id', userId)
+            .single();
+            
+        if (fetchError) {
+            log('❌ Error fetching profile:', fetchError);
+            return;
+        }
+        
+        log('✅ Current profile:', currentProfile);
+        
+        // 3. Test update with minimal change (just timestamp)
+        log('3️⃣ Testing minimal update (timestamp only)...');
+        
+        const updateData = {
+            updated_at: new Date().toISOString()
+        };
+        
+        log('📤 Sending update request with data:', updateData);
+        
+        // Create a promise with timeout to detect hanging
+        const updatePromise = supabase
+            .from('user_profiles')
+            .update(updateData)
+            .eq('id', userId)
+            .select()
+            .single();
+            
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Update operation timed out after 10 seconds')), 10000)
+        );
+        
+        try {
+            const result = await Promise.race([updatePromise, timeoutPromise]);
+            log('✅ Update completed successfully:', result);
+        } catch (timeoutError) {
+            log('❌ Update operation timed out or failed:', timeoutError);
+            
+            // Try to check if the update actually worked despite the timeout
+            log('🔍 Checking if update was applied despite timeout...');
+            const { data: updatedProfile } = await supabase
+                .from('user_profiles')
+                .select('updated_at')
+                .eq('id', userId)
+                .single();
+                
+            if (updatedProfile && updatedProfile.updated_at === updateData.updated_at) {
+                log('✅ Update was actually successful (RLS or client issue)');
+            } else {
+                log('❌ Update failed completely');
+            }
+        }
+        
+        // 4. Test with full profile data (like the app does)
+        log('4️⃣ Testing full profile update...');
+        
+        const fullUpdateData = {
+            full_name: currentProfile.full_name || 'Test User',
+            avatar_url: currentProfile.avatar_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=1',
+            source_language: currentProfile.source_language || 'darija',
+            target_language: currentProfile.target_language || 'lebanese',
+            updated_at: new Date().toISOString()
+        };
+        
+        log('📤 Sending full update request with data:', fullUpdateData);
+        
+        const fullUpdatePromise = supabase
+            .from('user_profiles')
+            .update(fullUpdateData)
+            .eq('id', userId)
+            .select()
+            .single();
+            
+        const fullTimeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Full update timed out after 10 seconds')), 10000)
+        );
+        
+        try {
+            const fullResult = await Promise.race([fullUpdatePromise, fullTimeoutPromise]);
+            log('✅ Full update completed successfully:', fullResult);
+        } catch (fullTimeoutError) {
+            log('❌ Full update timed out or failed:', fullTimeoutError);
+        }
+        
+        // 5. Check RLS policies by testing without user context
+        log('5️⃣ Testing RLS policy effectiveness...');
+        
+        // First sign out temporarily
+        await supabase.auth.signOut();
+        
+        try {
+            const { data: unauthorizedData, error: unauthorizedError } = await supabase
+                .from('user_profiles')
+                .update({ full_name: 'Should not work' })
+                .eq('id', userId);
+                
+            if (unauthorizedError) {
+                log('✅ RLS working correctly - unauthorized update blocked:', unauthorizedError.message);
+            } else {
+                log('❌ RLS issue - unauthorized update succeeded:', unauthorizedData);
+            }
+        } catch (e) {
+            log('✅ RLS working correctly - unauthorized update threw error:', e.message);
+        }
+        
+        log('🔄 Debug session complete. Please sign back in to continue using the app.');
+        
+    } catch (error) {
+        log('❌ Debug script error:', error);
+    }
+}
+
+document.getElementById('testBtn').addEventListener('click', debugProfileUpdate);
+
+log('🚀 Debug script loaded. Make sure you are logged in, then click the test button.');
+</script>
+</body>
+</html>

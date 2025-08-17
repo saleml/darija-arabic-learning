@@ -58,7 +58,34 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
       logger.log('Saving profile for user:', user.id);
       logger.log('Data:', { name, avatar, source, target });
       
-      // Update database directly - no need to fetch first
+      // First verify authentication session
+      console.log('🔐 Verifying authentication session...');
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError) {
+        console.error('❌ Session error:', sessionError);
+        alert('Authentication error. Please log in again.');
+        setSaving(false);
+        return;
+      }
+      
+      if (!session || !session.user) {
+        console.error('❌ No active session found');
+        alert('You are not logged in. Please log in again.');
+        setSaving(false);
+        return;
+      }
+      
+      if (session.user.id !== user.id) {
+        console.error('❌ Session user ID mismatch:', { sessionUserId: session.user.id, propUserId: user.id });
+        alert('Authentication mismatch. Please log in again.');
+        setSaving(false);
+        return;
+      }
+      
+      console.log('✅ Authentication verified for user:', session.user.email);
+      
+      // Update database with timeout protection
       console.log('Attempting to update profile with:', {
         full_name: name,
         avatar_url: avatar,
@@ -67,7 +94,8 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         id: user.id
       });
       
-      const { data, error } = await supabase
+      // Create update promise with explicit timeout
+      const updatePromise = supabase
         .from('user_profiles')
         .update({
           full_name: name,
@@ -79,6 +107,13 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         .eq('id', user.id)
         .select()
         .single();
+      
+      // Add 10-second timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Profile update timed out after 10 seconds. Please try again.')), 10000)
+      );
+      
+      const { data, error } = await Promise.race([updatePromise, timeoutPromise]);
 
       if (error) {
         console.error('❌ Error updating profile:', error);
