@@ -82,6 +82,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       console.log('Supabase response - profile:', profile, 'error:', error);
 
       if (error || !profile) {
+        console.log('No existing profile found, creating new one...');
         // Create new profile if doesn't exist
         const newProfile = {
           id: userId,
@@ -95,16 +96,37 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
           total_study_time: 0
         };
         
-        const { data: created, error: createError } = await supabase
-          .from('user_profiles')
-          .insert(newProfile)
-          .select()
-          .single();
+        console.log('Attempting to create profile:', newProfile);
+        
+        try {
+          // Also add timeout to insert operation
+          const insertPromise = supabase
+            .from('user_profiles')
+            .insert(newProfile)
+            .select()
+            .single();
+            
+          const insertTimeout = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Insert timeout')), 3000);
+          });
           
-        if (createError) {
-          console.error('Error creating profile:', createError);
-        } else {
-          profile = created;
+          const { data: created, error: createError } = await Promise.race([
+            insertPromise,
+            insertTimeout
+          ]).then(r => r as any).catch(e => ({ data: null, error: e }));
+          
+          if (createError) {
+            console.error('Error creating profile:', createError);
+            // Even if Supabase fails, create a local profile so app works
+            profile = newProfile;
+          } else {
+            console.log('Profile created successfully:', created);
+            profile = created;
+          }
+        } catch (err) {
+          console.error('Failed to create profile, using local data:', err);
+          // Use local profile data even if Supabase fails
+          profile = newProfile;
         }
       }
 
@@ -154,6 +176,18 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   }) => {
     if (!user) return;
 
+    // Update local state immediately for instant feedback
+    if (updates.name || updates.avatarUrl) {
+      setUser(prev => prev ? {
+        ...prev,
+        name: updates.name || prev.name,
+        avatarUrl: updates.avatarUrl || prev.avatarUrl
+      } : null);
+    }
+    
+    if (updates.sourceLanguage) setSourceLanguage(updates.sourceLanguage);
+    if (updates.targetLanguage) setTargetLanguage(updates.targetLanguage);
+
     try {
       // Build update object for Supabase
       const supabaseUpdate: any = {
@@ -167,36 +201,33 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
 
       console.log('Updating profile in Supabase:', supabaseUpdate);
 
-      // Update in Supabase
-      const { data, error } = await supabase
+      // Try to update in Supabase with timeout
+      const updatePromise = supabase
         .from('user_profiles')
         .update(supabaseUpdate)
         .eq('id', user.id)
         .select()
         .single();
+        
+      const updateTimeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Update timeout')), 3000);
+      });
+      
+      const { data, error } = await Promise.race([
+        updatePromise,
+        updateTimeout
+      ]).then(r => r as any).catch(e => ({ data: null, error: e }));
 
       if (error) {
-        console.error('Error updating profile:', error);
-        throw error;
+        console.error('Error updating profile in database:', error);
+        // Don't throw - local state is already updated
+      } else {
+        console.log('Profile updated in database:', data);
       }
-
-      console.log('Profile updated successfully:', data);
-
-      // Update local state immediately
-      if (updates.name || updates.avatarUrl) {
-        setUser(prev => prev ? {
-          ...prev,
-          name: updates.name || prev.name,
-          avatarUrl: updates.avatarUrl || prev.avatarUrl
-        } : null);
-      }
-      
-      if (updates.sourceLanguage) setSourceLanguage(updates.sourceLanguage);
-      if (updates.targetLanguage) setTargetLanguage(updates.targetLanguage);
       
     } catch (error) {
-      console.error('Failed to update profile:', error);
-      throw error;
+      console.error('Failed to update profile in database:', error);
+      // Don't throw - local state is already updated
     }
   };
 
