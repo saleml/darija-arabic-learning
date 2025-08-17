@@ -23,6 +23,7 @@ type TabType = 'hub' | 'quiz' | 'progress' | 'culture';
 function App() {
   const { 
     user, 
+    userProgress,
     logout, 
     login, 
     signup, 
@@ -30,11 +31,11 @@ function App() {
     isLoading,
     sourceLanguage,
     targetLanguage,
-    updateLanguagePreferences
+    updateLanguagePreferences,
+    updateUserProgress
   } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
-  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
   const [notification, setNotification] = useState<Notification | null>(null);
@@ -81,31 +82,11 @@ function App() {
     setAllPhrases(phrases);
   }, []); // Empty dependency array - load once
 
-  // Handle user progress separately
+  // Log user changes for debugging
   useEffect(() => {
     console.log('[App] User changed:', user?.email);
-
-    if (user && !userProgress) {
-      // Initialize new progress for user if not loaded from auth context
-      const initialProgress: UserProgress = {
-        userId: user.id,
-        phrasesLearned: [],
-        phrasesInProgress: [],
-        quizScores: [],
-        spacedRepetition: [],
-        streakDays: 0,
-        lastActiveDate: new Date().toISOString(),
-        totalStudyTime: 0,
-        preferences: {
-          targetDialect: targetLanguage === 'all' ? 'all' : targetLanguage as any,
-          dailyGoal: 10,
-          soundEnabled: true,
-          theme: 'light'
-        }
-      };
-      setUserProgress(initialProgress);
-    }
-  }, [user, sourceLanguage, targetLanguage]);
+    console.log('[App] User progress loaded:', userProgress ? 'yes' : 'no');
+  }, [user, userProgress]);
 
   // Keyboard shortcuts (disabled when auth form is open)
   useKeyboardShortcuts(!user && showAuthForm ? {} : {
@@ -139,7 +120,7 @@ function App() {
         });
       }
       
-      setUserProgress(newProgress);
+      updateUserProgress(newProgress);
     }
   };
 
