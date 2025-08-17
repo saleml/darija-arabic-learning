@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth System Comprehensive Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #00ff00; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #333; background: #222; }
+        .test-title { color: #ffff00; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        .test-result { margin: 5px 0; }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .info { color: #00aaff; }
+        button { 
+            background: #333; color: #fff; border: 1px solid #555; 
+            padding: 8px 16px; margin: 5px; cursor: pointer; 
+        }
+        button:hover { background: #555; }
+        input { 
+            background: #333; color: #fff; border: 1px solid #555; 
+            padding: 5px; margin: 5px; 
+        }
+        .progress-data { background: #111; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Auth System Comprehensive Test Suite</h1>
+    
+    <div class="test-section">
+        <div class="test-title">1. Environment Check</div>
+        <div id="env-check"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">2. Account Creation Test</div>
+        <div>
+            <input type="email" id="signup-email" placeholder="test@example.com" value="testuser1@example.com">
+            <input type="password" id="signup-password" placeholder="Password123!" value="TestPass123!">
+            <input type="text" id="signup-name" placeholder="Full Name" value="Test User 1">
+            <button onclick="testSignup()">Create Account</button>
+        </div>
+        <div id="signup-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">3. Login Test</div>
+        <div>
+            <input type="email" id="login-email" placeholder="Email" value="testuser1@example.com">
+            <input type="password" id="login-password" placeholder="Password" value="TestPass123!">
+            <button onclick="testLogin()">Login</button>
+            <button onclick="testLogout()">Logout</button>
+        </div>
+        <div id="login-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">4. Password Reset Test</div>
+        <div>
+            <input type="email" id="reset-email" placeholder="Email" value="testuser1@example.com">
+            <button onclick="testPasswordReset()">Reset Password</button>
+        </div>
+        <div id="reset-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">5. Progress Sync Test</div>
+        <div>
+            <button onclick="addTestProgress()">Add Test Progress</button>
+            <button onclick="checkProgressSync()">Check Progress Sync</button>
+        </div>
+        <div id="progress-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">6. Account Deletion Test</div>
+        <div>
+            <button onclick="testAccountDeletion()">Delete Current Account</button>
+        </div>
+        <div id="deletion-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">7. Create Test Users</div>
+        <div>
+            <button onclick="createTestUsers()">Create Multiple Test Users</button>
+        </div>
+        <div id="test-users-results"></div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">8. Current State</div>
+        <div id="current-state"></div>
+        <button onclick="refreshState()">Refresh State</button>
+    </div>
+
+    <script type="module">
+        // Mock auth functions for testing
+        let currentUser = null;
+        let userProgress = null;
+        
+        // Import the actual Supabase client
+        import { createClient } from 'https://cdn.skypack.dev/@supabase/supabase-js';
+        
+        const supabaseUrl = 'https://xnkokmaccibpwxenxynh.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhua29rbWFjY2licHd4ZW54eW5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzNzc2NzksImV4cCI6MjA3MDk1MzY3OX0.mC30nHqAQ-U6gyE9RCVYCPcizd5Hp1GX2toMskWsREE';
+        
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
+        window.supabase = supabase;
+
+        function log(element, message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            document.getElementById(element).appendChild(div);
+        }
+
+        function clear(element) {
+            document.getElementById(element).innerHTML = '';
+        }
+
+        // Environment Check
+        async function checkEnvironment() {
+            clear('env-check');
+            
+            try {
+                const { data, error } = await supabase.auth.getSession();
+                if (error) {
+                    log('env-check', `❌ Supabase Error: ${error.message}`, 'error');
+                } else {
+                    log('env-check', '✅ Supabase connection successful', 'success');
+                    log('env-check', `📊 Current session: ${data.session ? 'Active' : 'None'}`, 'info');
+                }
+
+                // Check if tables exist
+                const { data: profiles, error: profileError } = await supabase
+                    .from('user_profiles')
+                    .select('count', { count: 'exact', head: true });
+                
+                if (profileError) {
+                    log('env-check', `❌ Database Error: ${profileError.message}`, 'error');
+                } else {
+                    log('env-check', '✅ Database tables accessible', 'success');
+                    log('env-check', `👥 User profiles count: ${profiles.count || 0}`, 'info');
+                }
+            } catch (error) {
+                log('env-check', `❌ Connection Error: ${error.message}`, 'error');
+            }
+        }
+
+        // Test Signup
+        window.testSignup = async function() {
+            clear('signup-results');
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const name = document.getElementById('signup-name').value;
+
+            try {
+                log('signup-results', `🔄 Creating account for ${email}...`, 'info');
+                
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { full_name: name }
+                    }
+                });
+
+                if (error) {
+                    log('signup-results', `❌ Signup failed: ${error.message}`, 'error');
+                    return;
+                }
+
+                if (data.user) {
+                    log('signup-results', '✅ Account created successfully', 'success');
+                    log('signup-results', `👤 User ID: ${data.user.id}`, 'info');
+                    
+                    // Create user profile
+                    const { error: profileError } = await supabase
+                        .from('user_profiles')
+                        .upsert({
+                            id: data.user.id,
+                            email: data.user.email,
+                            full_name: name,
+                            preferred_dialect: 'all',
+                            daily_goal: 10,
+                            streak_days: 0,
+                            total_study_time: 0
+                        });
+
+                    if (profileError) {
+                        log('signup-results', `⚠️ Profile creation error: ${profileError.message}`, 'error');
+                    } else {
+                        log('signup-results', '✅ User profile created', 'success');
+                    }
+                    
+                    currentUser = data.user;
+                }
+            } catch (error) {
+                log('signup-results', `❌ Signup error: ${error.message}`, 'error');
+            }
+        };
+
+        // Test Login
+        window.testLogin = async function() {
+            clear('login-results');
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                log('login-results', `🔄 Logging in ${email}...`, 'info');
+                
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    log('login-results', `❌ Login failed: ${error.message}`, 'error');
+                    return;
+                }
+
+                if (data.user) {
+                    log('login-results', '✅ Login successful', 'success');
+                    log('login-results', `👤 User: ${data.user.email}`, 'info');
+                    
+                    // Check user profile
+                    const { data: profile, error: profileError } = await supabase
+                        .from('user_profiles')
+                        .select('*')
+                        .eq('id', data.user.id)
+                        .single();
+                    
+                    if (profileError) {
+                        log('login-results', `⚠️ Profile fetch error: ${profileError.message}`, 'error');
+                    } else {
+                        log('login-results', '✅ User profile loaded', 'success');
+                        log('login-results', `📊 Profile: ${JSON.stringify(profile)}`, 'info');
+                    }
+                    
+                    currentUser = data.user;
+                }
+            } catch (error) {
+                log('login-results', `❌ Login error: ${error.message}`, 'error');
+            }
+        };
+
+        // Test Logout
+        window.testLogout = async function() {
+            try {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    log('login-results', `❌ Logout failed: ${error.message}`, 'error');
+                } else {
+                    log('login-results', '✅ Logout successful', 'success');
+                    currentUser = null;
+                    userProgress = null;
+                }
+            } catch (error) {
+                log('login-results', `❌ Logout error: ${error.message}`, 'error');
+            }
+        };
+
+        // Test Password Reset
+        window.testPasswordReset = async function() {
+            clear('reset-results');
+            const email = document.getElementById('reset-email').value;
+
+            try {
+                log('reset-results', `🔄 Sending password reset for ${email}...`, 'info');
+                
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin + '/reset-password'
+                });
+
+                if (error) {
+                    log('reset-results', `❌ Reset failed: ${error.message}`, 'error');
+                } else {
+                    log('reset-results', '✅ Password reset email sent', 'success');
+                    log('reset-results', '📧 Check your email for reset instructions', 'info');
+                }
+            } catch (error) {
+                log('reset-results', `❌ Reset error: ${error.message}`, 'error');
+            }
+        };
+
+        // Add Test Progress
+        window.addTestProgress = async function() {
+            if (!currentUser) {
+                log('progress-results', '❌ No user logged in', 'error');
+                return;
+            }
+
+            try {
+                log('progress-results', '🔄 Adding test progress...', 'info');
+                
+                // Add some phrase progress
+                const testPhrases = ['phrase_001', 'phrase_002', 'phrase_003'];
+                for (const phraseId of testPhrases) {
+                    const { error } = await supabase
+                        .from('phrase_progress')
+                        .upsert({
+                            user_id: currentUser.id,
+                            phrase_id: phraseId,
+                            status: 'practicing',
+                            correct_attempts: Math.floor(Math.random() * 10),
+                            total_attempts: Math.floor(Math.random() * 15) + 5,
+                            last_reviewed: new Date().toISOString(),
+                            next_review: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+                            ease_factor: 2.5 + Math.random(),
+                            interval_days: Math.floor(Math.random() * 7) + 1
+                        });
+                    
+                    if (error) {
+                        log('progress-results', `⚠️ Error adding progress for ${phraseId}: ${error.message}`, 'error');
+                    }
+                }
+
+                // Add a quiz attempt
+                const { error: quizError } = await supabase
+                    .from('quiz_attempts')
+                    .insert({
+                        user_id: currentUser.id,
+                        quiz_type: 'multiple-choice',
+                        score: Math.floor(Math.random() * 10) + 5,
+                        total_questions: 10,
+                        difficulty: 'intermediate',
+                        target_dialect: 'lebanese',
+                        time_spent: Math.floor(Math.random() * 300) + 60,
+                        questions: [{ test: 'data' }]
+                    });
+
+                if (quizError) {
+                    log('progress-results', `⚠️ Quiz attempt error: ${quizError.message}`, 'error');
+                } else {
+                    log('progress-results', '✅ Test progress added successfully', 'success');
+                }
+            } catch (error) {
+                log('progress-results', `❌ Progress error: ${error.message}`, 'error');
+            }
+        };
+
+        // Check Progress Sync
+        window.checkProgressSync = async function() {
+            if (!currentUser) {
+                log('progress-results', '❌ No user logged in', 'error');
+                return;
+            }
+
+            try {
+                log('progress-results', '🔄 Checking progress sync...', 'info');
+                
+                // Get phrase progress
+                const { data: phrases, error: phraseError } = await supabase
+                    .from('phrase_progress')
+                    .select('*')
+                    .eq('user_id', currentUser.id);
+
+                // Get quiz attempts
+                const { data: quizzes, error: quizError } = await supabase
+                    .from('quiz_attempts')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+
+                if (phraseError || quizError) {
+                    log('progress-results', `❌ Sync check failed: ${phraseError?.message || quizError?.message}`, 'error');
+                    return;
+                }
+
+                log('progress-results', '✅ Progress sync check completed', 'success');
+                log('progress-results', `📚 Phrases in progress: ${phrases?.length || 0}`, 'info');
+                log('progress-results', `🎯 Quiz attempts: ${quizzes?.length || 0}`, 'info');
+                
+                if (phrases?.length > 0) {
+                    const progressDiv = document.createElement('div');
+                    progressDiv.className = 'progress-data';
+                    progressDiv.innerHTML = `<strong>Sample Progress Data:</strong><br>${JSON.stringify(phrases[0], null, 2)}`;
+                    document.getElementById('progress-results').appendChild(progressDiv);
+                }
+            } catch (error) {
+                log('progress-results', `❌ Sync error: ${error.message}`, 'error');
+            }
+        };
+
+        // Test Account Deletion
+        window.testAccountDeletion = async function() {
+            if (!currentUser) {
+                log('deletion-results', '❌ No user logged in', 'error');
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to delete account for ${currentUser.email}?`)) {
+                return;
+            }
+
+            clear('deletion-results');
+            try {
+                log('deletion-results', `🔄 Deleting account for ${currentUser.email}...`, 'info');
+                
+                // Delete user data (profile will cascade delete other data)
+                const { error } = await supabase
+                    .from('user_profiles')
+                    .delete()
+                    .eq('id', currentUser.id);
+
+                if (error) {
+                    log('deletion-results', `❌ Deletion failed: ${error.message}`, 'error');
+                } else {
+                    log('deletion-results', '✅ User data deleted', 'success');
+                    log('deletion-results', '⚠️ Auth user still exists (requires backend deletion)', 'info');
+                    
+                    // Sign out
+                    await supabase.auth.signOut();
+                    currentUser = null;
+                    userProgress = null;
+                }
+            } catch (error) {
+                log('deletion-results', `❌ Deletion error: ${error.message}`, 'error');
+            }
+        };
+
+        // Create Test Users
+        window.createTestUsers = async function() {
+            clear('test-users-results');
+            
+            const testUsers = [
+                { email: 'beginner@test.com', password: 'TestPass123!', name: 'Beginner User', level: 'beginner' },
+                { email: 'intermediate@test.com', password: 'TestPass123!', name: 'Intermediate User', level: 'intermediate' },
+                { email: 'advanced@test.com', password: 'TestPass123!', name: 'Advanced User', level: 'advanced' }
+            ];
+
+            for (const userData of testUsers) {
+                try {
+                    log('test-users-results', `🔄 Creating ${userData.level} user: ${userData.email}`, 'info');
+                    
+                    const { data, error } = await supabase.auth.signUp({
+                        email: userData.email,
+                        password: userData.password,
+                        options: {
+                            data: { full_name: userData.name }
+                        }
+                    });
+
+                    if (error && !error.message.includes('already registered')) {
+                        log('test-users-results', `❌ Failed to create ${userData.email}: ${error.message}`, 'error');
+                        continue;
+                    }
+
+                    const userId = data.user?.id;
+                    if (userId) {
+                        // Create profile
+                        await supabase.from('user_profiles').upsert({
+                            id: userId,
+                            email: userData.email,
+                            full_name: userData.name,
+                            preferred_dialect: userData.level === 'beginner' ? 'lebanese' : userData.level === 'intermediate' ? 'syrian' : 'all',
+                            daily_goal: userData.level === 'beginner' ? 5 : userData.level === 'intermediate' ? 10 : 20,
+                            streak_days: Math.floor(Math.random() * 30),
+                            total_study_time: Math.floor(Math.random() * 3600)
+                        });
+
+                        // Add sample progress based on level
+                        const progressCount = userData.level === 'beginner' ? 5 : userData.level === 'intermediate' ? 15 : 30;
+                        for (let i = 0; i < progressCount; i++) {
+                            await supabase.from('phrase_progress').upsert({
+                                user_id: userId,
+                                phrase_id: `phrase_${String(i + 1).padStart(3, '0')}`,
+                                status: Math.random() > 0.7 ? 'mastered' : 'practicing',
+                                correct_attempts: Math.floor(Math.random() * 10),
+                                total_attempts: Math.floor(Math.random() * 15) + 5,
+                                last_reviewed: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                                next_review: new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                                ease_factor: 2.5 + Math.random(),
+                                interval_days: Math.floor(Math.random() * 7) + 1
+                            });
+                        }
+
+                        log('test-users-results', `✅ Created ${userData.level} user with sample progress`, 'success');
+                    }
+                } catch (error) {
+                    log('test-users-results', `❌ Error creating ${userData.email}: ${error.message}`, 'error');
+                }
+            }
+        };
+
+        // Refresh Current State
+        window.refreshState = async function() {
+            clear('current-state');
+            
+            try {
+                const { data: session } = await supabase.auth.getSession();
+                currentUser = session.session?.user || null;
+                
+                log('current-state', `👤 Current User: ${currentUser ? currentUser.email : 'None'}`, 'info');
+                
+                if (currentUser) {
+                    // Get user profile
+                    const { data: profile } = await supabase
+                        .from('user_profiles')
+                        .select('*')
+                        .eq('id', currentUser.id)
+                        .single();
+                    
+                    if (profile) {
+                        log('current-state', `📊 Profile: ${profile.full_name} | Streak: ${profile.streak_days} days`, 'info');
+                    }
+                }
+
+                // Get total users count
+                const { count } = await supabase
+                    .from('user_profiles')
+                    .select('*', { count: 'exact', head: true });
+                
+                log('current-state', `👥 Total users in database: ${count || 0}`, 'info');
+            } catch (error) {
+                log('current-state', `❌ State refresh error: ${error.message}`, 'error');
+            }
+        };
+
+        // Initialize
+        checkEnvironment();
+        refreshState();
+    </script>
+</body>
+</html>

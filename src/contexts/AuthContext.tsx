@@ -17,8 +17,10 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   signup: (email: string, password: string, name: string) => Promise<boolean>;
   resetPassword: (email: string) => Promise<boolean>;
+  deleteAccount: () => Promise<boolean>;
   logout: () => Promise<void>;
   updateUserProgress: (progress: UserProgress) => Promise<void>;
+  saveQuizAttempt: (quizData: any) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -519,6 +521,64 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return false;
   };
 
+  const deleteAccount = async (): Promise<boolean> => {
+    if (!user) return false;
+    
+    console.log('[AuthContext] Account deletion request for:', user.email);
+    
+    try {
+      // For real Supabase implementation - delete user data first, then account
+      // Delete user's data (this will cascade due to foreign key constraints)
+      const { error: profileError } = await supabase
+        .from('user_profiles')
+        .delete()
+        .eq('id', user.id);
+
+      if (profileError && !profileError.message?.includes('Please set up Supabase')) {
+        console.error('[AuthContext] Error deleting profile:', profileError);
+        return false;
+      }
+
+      // For real Supabase, you'd need to call a backend function to delete the auth user
+      // Since we can't delete auth users from the client side in Supabase
+      console.log('[AuthContext] User data deleted, account deletion would need server-side implementation');
+
+      // For localStorage fallback
+      if (profileError?.message?.includes('Please set up Supabase')) {
+        return deleteAccountLocal();
+      }
+
+      // Sign out after successful deletion
+      await logout();
+      return true;
+    } catch (error) {
+      console.error('[AuthContext] Account deletion error:', error);
+      return deleteAccountLocal();
+    }
+  };
+
+  const deleteAccountLocal = (): boolean => {
+    if (!user) return false;
+    
+    console.log('[AuthContext] Local account deletion for:', user.email);
+    
+    // Remove user from localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const updatedUsers = users.filter((u: any) => u.id !== user.id);
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    
+    // Remove user progress
+    localStorage.removeItem(`userProgress_${user.id}`);
+    localStorage.removeItem('currentUser');
+    
+    // Clear current session
+    setUser(null);
+    setUserProgress(null);
+    
+    console.log('[AuthContext] Local account deletion successful');
+    return true;
+  };
+
   const logout = async (): Promise<void> => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -610,6 +670,38 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const saveQuizAttempt = async (quizData: any): Promise<void> => {
+    if (!user) {
+      console.log('[AuthContext] No user logged in, cannot save quiz attempt');
+      return;
+    }
+    
+    try {
+      console.log('[AuthContext] Saving quiz attempt for user:', user.email);
+      
+      const { error } = await supabase
+        .from('quiz_attempts')
+        .insert({
+          user_id: user.id,
+          quiz_type: quizData.quizType || 'multiple-choice',
+          score: quizData.score || 0,
+          total_questions: quizData.totalQuestions || 0,
+          difficulty: quizData.difficulty || 'beginner',
+          target_dialect: quizData.targetDialect || 'all',
+          time_spent: quizData.timeSpent || 0,
+          questions: quizData.questions || []
+        });
+
+      if (error && !error.message?.includes('Please set up Supabase')) {
+        console.error('[AuthContext] Error saving quiz attempt:', error);
+      } else {
+        console.log('[AuthContext] Quiz attempt saved successfully');
+      }
+    } catch (error) {
+      console.error('[AuthContext] Error saving quiz attempt:', error);
+    }
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -617,8 +709,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       login,
       signup,
       resetPassword,
+      deleteAccount,
       logout,
       updateUserProgress,
+      saveQuizAttempt,
       isLoading
     }}>
       {children}
