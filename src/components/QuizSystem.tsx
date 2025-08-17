@@ -366,25 +366,47 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
   };
 
   const startQuiz = () => {
-    console.log('Starting quiz with:', {
-      phrasesCount: phrases.length,
-      eligiblePhrasesCount: eligiblePhrases.length,
+    console.log('🎯 Quiz Start Button Clicked!');
+    console.log('📊 Quiz Configuration:', {
+      phrasesCount: phrases?.length || 0,
+      phrasesAvailable: !!phrases,
+      eligiblePhrasesCount: eligiblePhrases?.length || 0,
       difficulty,
-      quizLength
+      quizLength,
+      quizType,
+      sourceDialect,
+      targetDialect
     });
     
-    const questions = generateQuizQuestions(quizLength);
-    
-    if (questions.length === 0) {
-      console.error('No questions generated!', {
-        eligiblePhrases: eligiblePhrases.length,
-        difficulty
-      });
-      alert('No phrases available for quiz. Try adjusting your filters or check if phrases are loaded.');
+    // Extra validation
+    if (!phrases || phrases.length === 0) {
+      console.error('❌ No phrases loaded at all!');
+      alert('Phrases are not loaded. Please refresh the page and try again.');
       return;
     }
     
-    console.log('Quiz started with', questions.length, 'questions');
+    if (eligiblePhrases.length === 0) {
+      console.error('❌ No eligible phrases after filtering!', {
+        totalPhrases: phrases.length,
+        difficulty
+      });
+      alert(`No phrases match your criteria (difficulty: ${difficulty}). Try selecting "All Levels" difficulty.`);
+      return;
+    }
+    
+    const questions = generateQuizQuestions(quizLength);
+    
+    if (!questions || questions.length === 0) {
+      console.error('❌ Failed to generate questions!', {
+        eligiblePhrases: eligiblePhrases.length,
+        difficulty,
+        quizLength
+      });
+      alert('Could not generate quiz questions. Please try again with different settings.');
+      return;
+    }
+    
+    console.log('✅ Quiz successfully started with', questions.length, 'questions');
     
     setCurrentQuiz(questions);
     setCurrentQuestionIndex(0);

@@ -65,7 +65,13 @@ export default function DashboardPage() {
 
   // Load phrases
   useEffect(() => {
-    logger.log('[Dashboard] Loading phrases from database files at', new Date().toISOString());
+    console.log('📚 [Dashboard] Starting to load phrases at', new Date().toISOString());
+    console.log('📊 Database files check:', {
+      beginnerPhrasesCount: beginnerPhrases?.phrases?.length || 0,
+      intermediatePhrasesCount: intermediatePhrases?.phrases?.length || 0,
+      advancedPhrasesCount: advancedPhrases?.phrases?.length || 0,
+      sentencesCount: sentencesData?.sentences?.length || 0
+    });
     
     const sentencesAsPhrases = sentencesData.sentences.map((sent: any) => ({
       id: sent.id,
@@ -103,7 +109,8 @@ export default function DashboardPage() {
       ...sentencesAsPhrases
     ] as Phrase[];
     
-    logger.log('[Dashboard] Total phrases loaded:', phrases.length);
+    console.log('✅ [Dashboard] Total phrases loaded:', phrases.length);
+    console.log('📋 Sample phrase structure:', phrases[0]);
     
     // Check for duplicate IDs
     const idCounts: Record<string, number> = {};
@@ -112,10 +119,11 @@ export default function DashboardPage() {
     });
     const duplicateIds = Object.entries(idCounts).filter(([id, count]: [string, number]) => count > 1);
     if (duplicateIds.length > 0) {
-      logger.error('[Dashboard] ⚠️ DUPLICATE IDS FOUND:', duplicateIds);
+      console.error('⚠️ [Dashboard] DUPLICATE IDS FOUND:', duplicateIds);
     }
     
     setAllPhrases(phrases);
+    console.log('💾 [Dashboard] Phrases stored in state');
   }, []);
 
   const handleLogout = async () => {

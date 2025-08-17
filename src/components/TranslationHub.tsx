@@ -95,14 +95,16 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
   // Removed markAsInProgress - we only track mastered/not mastered
 
   const markAsLearned = async (phraseId: string) => {
+    console.log('🎯 markAsLearned called for:', phraseId);
+    
     if (!userProgress) {
-
+      console.warn('⚠️ No user progress available');
       return;
     }
 
     // Check if already learned to prevent duplicate calls
     if (userProgress.phrasesLearned.includes(phraseId)) {
-
+      console.log('✓ Phrase already marked as learned, skipping:', phraseId);
       return;
     }
     
@@ -122,21 +124,23 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
     try {
       if (onMarkAsLearned) {
         // Use the Supabase-connected function
-        console.log('Marking as learned via onMarkAsLearned:', phraseId);
+        console.log('📤 Marking as learned via Supabase:', phraseId);
         await onMarkAsLearned(phraseId);
-        // Don't call onUpdateProgress here - let onMarkAsLearned handle it
+        // Don't call onUpdateProgress here - let onMarkAsLearned handle the state update
+        console.log('✅ Successfully marked as learned via Supabase');
       } else {
-        console.log('Marking as learned via local update:', phraseId);
-        // Fallback to local update
+        console.log('💾 Marking as learned via local update:', phraseId);
+        // Fallback to local update only if no Supabase handler
         const newProgress = {
           ...userProgress,
           phrasesLearned: [...userProgress.phrasesLearned, phraseId],
           phrasesInProgress: userProgress.phrasesInProgress.filter(id => id !== phraseId)
         };
         onUpdateProgress(newProgress);
+        console.log('✅ Successfully marked as learned locally');
       }
     } catch (error) {
-
+      console.error('❌ Error marking phrase as learned:', error);
       // Clear success animation on error
       setShowSuccessAnimation(null);
       // Clear timeout on error

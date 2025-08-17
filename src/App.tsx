@@ -19,7 +19,12 @@ function App() {
 
   // Show loading state while Clerk is initializing
   if (!isLoaded || isLoading) {
-
+    console.log('🔄 App Loading State:', {
+      isLoaded,
+      isLoading,
+      isSignedIn,
+      hasUser: !!user
+    });
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
