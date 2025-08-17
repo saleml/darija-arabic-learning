@@ -6,8 +6,8 @@ import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
 import ProgressTracker from '../components/ProgressTracker';
 import CulturalCards from '../components/CulturalCards';
-import LanguageSelector from '../components/LanguageSelector';
-import { Phrase, UserProgress } from '../types';
+import LanguageHeader from '../components/LanguageHeader';
+import { Phrase } from '../types';
 import beginnerPhrases from '../../database/beginner_phrases.json';
 import intermediatePhrases from '../../database/intermediate_phrases.json';
 import advancedPhrases from '../../database/advanced_phrases.json';
@@ -157,7 +157,7 @@ export default function DashboardPage() {
 
             {/* User Menu */}
             <div className="flex items-center gap-4">
-              <LanguageSelector
+              <LanguageHeader
                 sourceLanguage={sourceLanguage}
                 targetLanguage={targetLanguage}
                 onLanguageChange={updateLanguagePreferences}
@@ -294,7 +294,7 @@ export default function DashboardPage() {
               userProgress={userProgress}
               sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}
-              onProgressUpdate={updateUserProgress}
+              onUpdateProgress={updateUserProgress}
             />
           )}
           {activeTab === 'quiz' && (
@@ -302,18 +302,22 @@ export default function DashboardPage() {
               phrases={allPhrases} 
               userProgress={userProgress}
               targetLanguage={targetLanguage}
-              onProgressUpdate={updateUserProgress}
+              onUpdateProgress={updateUserProgress}
             />
           )}
           {activeTab === 'progress' && (
             <ProgressTracker 
               userProgress={userProgress}
               totalPhrases={allPhrases.length}
-              phrases={allPhrases}
+              onUpdateProgress={updateUserProgress}
             />
           )}
           {activeTab === 'culture' && (
-            <CulturalCards />
+            <CulturalCards 
+              phrases={allPhrases}
+              userProgress={userProgress}
+              onUpdateProgress={updateUserProgress}
+            />
           )}
         </div>
       </main>
