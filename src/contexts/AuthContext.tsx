@@ -115,9 +115,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error && error.message?.includes('Please set up Supabase')) {
-          // Fallback to localStorage for local development
-          console.log('[AuthContext] Using localStorage fallback for local development');
-          await initializeLocalStorage();
+          // No localStorage fallback - Supabase only
+          console.log('[AuthContext] Supabase not available');
           isInitialized = true;
           setIsLoading(false);
           return;
@@ -138,8 +137,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       } catch (error) {
         console.error('[AuthContext] Error initializing auth:', error);
-        // Fallback to localStorage
-        await initializeLocalStorage();
+        // No localStorage fallback
+        console.log('[AuthContext] Initialization failed');
       } finally {
         isInitialized = true;
         setIsLoading(false);
@@ -335,7 +334,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (data?.user) {
         console.log('[AuthContext] Login successful for:', data.user.email);
-        // Session handling will be done by the auth state change listener
+        // Wait a bit for the auth state to update
+        await new Promise(resolve => setTimeout(resolve, 500));
         return true;
       }
 
@@ -443,25 +443,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const resetPasswordLocal = (email: string): boolean => {
-    console.log('[AuthContext] Local password reset check for:', email);
-    
-    // Get all users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    // Check if user exists
-    const userExists = users.some((u: any) => u.email === email);
-    
-    if (userExists) {
-      console.log('[AuthContext] User found for password reset (localStorage mode)');
-      // In a real app, this would send an email
-      // For demo purposes, we'll just return true
-      return true;
-    }
-    
-    console.log('[AuthContext] User not found for password reset');
-    return false;
-  };
 
   const deleteAccount = async (): Promise<boolean> => {
     if (!user) return false;
@@ -622,11 +603,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('[AuthContext] Updating language preferences for user:', user.id);
       console.log('[AuthContext] New values - source:', source, 'target:', target);
       
+      // Update state immediately for UI responsiveness
       setSourceLanguage(source);
       setTargetLanguage(target);
       
+      // Get the current session to ensure we have the right user ID
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) {
+        console.error('[AuthContext] No active session found');
+        return;
+      }
+      
       // Update in database
-      console.log('[AuthContext] Sending update to Supabase...');
+      console.log('[AuthContext] Sending update to Supabase for user:', session.user.id);
       const { data, error } = await supabase
         .from('user_profiles')
         .update({
@@ -634,7 +623,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           target_language: target,
           updated_at: new Date().toISOString()
         })
-        .eq('id', user.id)
+        .eq('id', session.user.id)
         .select()
         .single();
 
