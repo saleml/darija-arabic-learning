@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Settings, LogOut, X } from 'lucide-react';
-import { useAuth } from '../contexts/SimpleAuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { avatarOptions } from './AvatarSelector';
 
 const languages = [

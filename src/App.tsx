@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SignIn, SignUp, useUser } from '@clerk/clerk-react';
-import { useAuth } from './contexts/SimpleAuthContext';
+import { useAuth } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import LanguageSetup from './components/LanguageSetup';

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 import App from './App.tsx'
-import { SimpleAuthProvider } from './contexts/SimpleAuthContext.tsx'
+import { AuthProvider } from './contexts/AuthContext.tsx'
 import ErrorBoundary from './components/ErrorBoundary.tsx'
 import './index.css'
 
@@ -19,9 +19,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ClerkProvider publishableKey={clerkPubKey}>
       <BrowserRouter>
         <ErrorBoundary>
-          <SimpleAuthProvider>
+          <AuthProvider>
             <App />
-          </SimpleAuthProvider>
+          </AuthProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </ClerkProvider>
