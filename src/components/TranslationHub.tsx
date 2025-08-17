@@ -316,10 +316,14 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         <span className="text-gray-500">•</span>
                         <span className="text-lg text-gray-700">{
                           sourceLanguage === 'darija' ? (phrase.darija_latin || '') :
-                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? phrase.translations.lebanese.latin :
-                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? phrase.translations.syrian.latin :
-                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? phrase.translations.emirati.latin :
-                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? phrase.translations.saudi.latin :
+                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? 
+                            (typeof phrase.translations.lebanese === 'object' ? (phrase.translations.lebanese.latin || '') : '') :
+                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? 
+                            (typeof phrase.translations.syrian === 'object' ? (phrase.translations.syrian.latin || '') : '') :
+                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? 
+                            (typeof phrase.translations.emirati === 'object' ? (phrase.translations.emirati.latin || '') : '') :
+                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? 
+                            (typeof phrase.translations.saudi === 'object' ? (phrase.translations.saudi.latin || '') : '') :
                           (phrase.darija_latin || '')
                         }</span>
                         {isLearned && (

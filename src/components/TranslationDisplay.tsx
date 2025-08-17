@@ -11,7 +11,14 @@ export default function TranslationDisplay({ translation, dialectName, flag }: T
   // Handle both string and object formats
   const getPhrase = () => {
     if (typeof translation === 'string') return translation;
-    return translation.phrase || translation;
+    if (typeof translation === 'object' && translation.phrase) {
+      return translation.phrase;
+    }
+    // If it's an object without phrase property, try arabic property (for some data formats)
+    if (typeof translation === 'object' && translation.arabic) {
+      return translation.arabic;
+    }
+    return '';
   };
 
   const getLatin = () => {
