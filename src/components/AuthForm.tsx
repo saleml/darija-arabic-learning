@@ -52,7 +52,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
       } else if (mode === 'login') {
         success = await onLogin(email, password);
         if (!success) {
-          setError('Invalid email or password. If you just signed up, please check your email for confirmation first.');
+          setError('Invalid email or password.');
         }
       } else {
         if (!name.trim()) {
@@ -71,18 +71,26 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         success = await onSignup(email, password, name, avatarUrl);
         
         if (success) {
-          setSuccess('Account created! Please check your email to confirm your account before logging in.');
+          setSuccess('Account created successfully!');
           setError('');
-          setIsLoading(false);
           
-          // Switch to login mode after successful signup
-          setTimeout(() => {
+          // Auto-login after successful signup (since email confirmation is disabled)
+          const loginSuccess = await onLogin(email, password);
+          
+          if (loginSuccess) {
+            // Close form to show language setup or main app
+            if (onClose) {
+              setTimeout(() => onClose(), 500);
+            }
+          } else {
+            // If auto-login fails, switch to login mode
             setMode('login');
-            setPassword('');
-            setSuccess('');
-          }, 3000);
+            setSuccess('Account created! Please log in.');
+          }
+          
+          setIsLoading(false);
         } else {
-          setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
+          setError('Email already exists or signup failed.');
           setIsLoading(false);
         }
       }
