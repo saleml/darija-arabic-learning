@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Settings, LogOut, Check, X } from 'lucide-react';
+import { Settings, LogOut, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { avatarOptions } from './AvatarSelector';
 
@@ -13,7 +13,7 @@ interface ProfileDropdownProps {
   sourceLanguage: string;
   targetLanguage: string;
   onLogout: () => void;
-  onLanguageChange: (source: string, target: string) => Promise<void>;
+  onLanguageChange?: (source: string, target: string) => Promise<void>;
 }
 
 const languages = [
@@ -54,39 +54,67 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
     setSaved(false);
     
     try {
+      console.log('Saving profile for user:', user.id);
+      console.log('Data:', { name, avatar, source, target });
+      
+      // First check if we can access the profile
+      const { data: existingProfile, error: fetchError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+      
+      if (fetchError) {
+        console.error('Cannot fetch profile:', fetchError);
+        alert('Cannot access profile. Please check permissions.');
+        setSaving(false);
+        return;
+      }
+      
+      console.log('Existing profile:', existingProfile);
+      
       // Update database
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('user_profiles')
         .update({
           full_name: name,
           avatar_url: avatar,
           source_language: source,
           target_language: target,
-          preferred_dialect: target, // For backward compatibility
           updated_at: new Date().toISOString()
         })
-        .eq('id', user.id);
+        .eq('id', user.id)
+        .select()
+        .single();
 
       if (error) {
         console.error('Error updating profile:', error);
-        alert('Failed to save profile. Please try again.');
-      } else {
-        // Update auth context
-        await onLanguageChange(source, target);
-        
-        setSaved(true);
-        setTimeout(() => {
-          setSaved(false);
-          setIsEditing(false);
-        }, 1500);
-        
-        // Reload to apply changes
-        window.location.reload();
+        alert('Failed to save profile: ' + error.message);
+        setSaving(false);
+        return;
       }
+      
+      console.log('Profile updated successfully:', data);
+      
+      // Update auth context if function provided
+      if (onLanguageChange) {
+        await onLanguageChange(source, target);
+      }
+      
+      setSaved(true);
+      setSaving(false);
+      
+      // Close dropdown after short delay
+      setTimeout(() => {
+        setSaved(false);
+        setIsEditing(false);
+        setIsOpen(false);
+        // Reload to apply changes everywhere
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Error saving profile:', error);
       alert('Failed to save profile. Please try again.');
-    } finally {
       setSaving(false);
     }
   };
@@ -228,10 +256,7 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
                       {saving ? (
                         'Saving...'
                       ) : saved ? (
-                        <>
-                          <Check className="h-4 w-4" />
-                          Saved!
-                        </>
+                        '✅ Saved!'
                       ) : (
                         'Save Changes'
                       )}

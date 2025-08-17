@@ -605,40 +605,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setSourceLanguage(source);
       setTargetLanguage(target);
       
-      // Update in database using the user.id directly
-      logger.log('[AuthContext] Sending update to Supabase for user:', user.id);
-      const { data, error } = await supabase
-        .from('user_profiles')
-        .update({
-          source_language: source,
-          target_language: target,
-          preferred_dialect: target, // Keep for backward compatibility
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', user.id)
-        .select()
-        .single();
-
-      if (error) {
-        logger.error('[AuthContext] ❌ Error updating language preferences:', error.message);
-        logger.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
-        
-        // Try to check if profile exists
-        const { data: profile, error: fetchError } = await supabase
-          .from('user_profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
-          
-        if (fetchError) {
-          logger.error('[AuthContext] Could not fetch profile:', fetchError);
-        } else {
-          logger.log('[AuthContext] Current profile:', profile);
-        }
-      } else {
-        logger.log('[AuthContext] ✅ Language preferences updated successfully!');
-        logger.log('[AuthContext] Updated profile:', data);
-      }
+      // Don't update database here - let ProfileDropdown handle it
+      // This function just updates the local state
+      logger.log('[AuthContext] Language preferences updated in state');
       
       // Update userProgress preferences
       if (userProgress) {
