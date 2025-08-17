@@ -71,14 +71,16 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         success = await onSignup(email, password, name, avatarUrl);
         
         if (success) {
-          setSuccess('Account created successfully!');
+          setSuccess('Account created! Please check your email to confirm your account before logging in.');
           setError('');
           setIsLoading(false);
           
-          // Close form after successful signup to show language setup
+          // Switch to login mode after successful signup
           setTimeout(() => {
-            if (onClose) onClose();
-          }, 500);
+            setMode('login');
+            setPassword('');
+            setSuccess('');
+          }, 3000);
         } else {
           setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
           setIsLoading(false);
