@@ -364,10 +364,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('[AuthContext] Login attempt for:', email);
     
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      // Create a promise that rejects after 5 seconds
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Supabase timeout')), 5000)
+      );
+      
+      // Race between the actual request and the timeout
+      const { data, error } = await Promise.race([
+        supabase.auth.signInWithPassword({ email, password }),
+        timeoutPromise
+      ]).catch((err) => {
+        console.log('[AuthContext] Supabase call failed or timed out:', err.message);
+        throw err;
+      }) as any;
 
       if (error && error.message?.includes('Please set up Supabase')) {
         // Fallback to localStorage
@@ -383,7 +392,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return false;
       }
 
-      if (data.user) {
+      if (data?.user) {
         console.log('[AuthContext] Login successful for:', data.user.email);
         // Session handling will be done by the auth state change listener
         return true;
@@ -391,7 +400,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       return false;
     } catch (error) {
-      console.error('[AuthContext] Login error:', error);
+      console.error('[AuthContext] Login error, falling back to localStorage:', error);
       return loginLocal(email, password);
     }
   };
@@ -440,16 +449,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('[AuthContext] Signup attempt for:', email, name);
     
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: name,
-            avatar_url: avatarUrl || getRandomAvatar()
+      // Create a promise that rejects after 5 seconds
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Supabase timeout')), 5000)
+      );
+      
+      // Race between the actual request and the timeout
+      const { data, error } = await Promise.race([
+        supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: name,
+              avatar_url: avatarUrl || getRandomAvatar()
+            }
           }
-        }
-      });
+        }),
+        timeoutPromise
+      ]).catch((err) => {
+        console.log('[AuthContext] Supabase signup call failed or timed out:', err.message);
+        throw err;
+      }) as any;
 
       if (error && error.message?.includes('Please set up Supabase')) {
         // Fallback to localStorage
