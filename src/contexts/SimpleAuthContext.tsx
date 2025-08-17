@@ -53,13 +53,31 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   const loadOrCreateProfile = async (userId: string, email: string) => {
     console.log('loadOrCreateProfile called for:', userId, email);
     try {
-      // Try to load existing profile from Supabase
+      // Try to load existing profile from Supabase with timeout
       console.log('Fetching profile from Supabase...');
-      let { data: profile, error } = await supabase
+      
+      // Create a timeout promise
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Supabase timeout')), 5000);
+      });
+      
+      // First try to find by Clerk ID, then by email
+      const queryPromise = supabase
         .from('user_profiles')
         .select('*')
-        .eq('id', userId)
-        .single();
+        .or(`id.eq.${userId},email.eq.${email}`)
+        .limit(1)
+        .maybeSingle();
+      
+      let profile, error;
+      try {
+        const result = await Promise.race([queryPromise, timeoutPromise]);
+        ({ data: profile, error } = result as any);
+      } catch (timeoutError) {
+        console.log('Supabase query timed out, creating new profile...');
+        error = timeoutError;
+        profile = null;
+      }
       
       console.log('Supabase response - profile:', profile, 'error:', error);
 
@@ -91,6 +109,21 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       }
 
       if (profile) {
+        // If profile exists but with old Supabase ID, update it to use Clerk ID
+        if (profile.id !== userId) {
+          console.log('Updating profile ID from', profile.id, 'to', userId);
+          // Create new profile with Clerk ID
+          const { data: newProfile } = await supabase
+            .from('user_profiles')
+            .upsert({
+              ...profile,
+              id: userId
+            })
+            .select()
+            .single();
+          profile = newProfile || profile;
+        }
+        
         setUser({
           id: userId,
           name: profile.full_name || 'User',
