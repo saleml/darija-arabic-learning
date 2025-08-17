@@ -34,8 +34,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
     setIsLoading(true);
 
     try {
-      let success = false;
-      
+      // Password Reset Mode
       if (mode === 'reset') {
         if (!email.trim()) {
           setError('Email is required');
@@ -43,18 +42,35 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           return;
         }
         
-        success = await onPasswordReset(email);
+        const success = await onPasswordReset(email);
+        setIsLoading(false);
+        
         if (success) {
           setSuccess('Password reset instructions sent to your email');
         } else {
           setError('Email not found');
         }
-      } else if (mode === 'login') {
-        success = await onLogin(email, password);
-        if (!success) {
+        return;
+      }
+      
+      // Login Mode
+      if (mode === 'login') {
+        const success = await onLogin(email, password);
+        setIsLoading(false);
+        
+        if (success) {
+          if (onClose) {
+            setTimeout(() => onClose(), 500);
+          }
+        } else {
           setError('Invalid email or password.');
         }
-      } else {
+        return;
+      }
+      
+      // Signup Mode
+      if (mode === 'signup') {
+        // Validate inputs
         if (!name.trim()) {
           setError('Name is required');
           setIsLoading(false);
@@ -68,55 +84,31 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           return;
         }
         
-        console.log('[AuthForm] Starting signup...');
-        success = await onSignup(email, password, name, avatarUrl);
-        console.log('[AuthForm] Signup result:', success);
+        // Create account
+        const signupSuccess = await onSignup(email, password, name, avatarUrl);
         
-        if (success) {
-          setSuccess('Account created successfully!');
-          setError('');
-          
-          // Auto-login after successful signup (since email confirmation is disabled)
-          console.log('[AuthForm] Attempting auto-login...');
-          const loginSuccess = await onLogin(email, password);
-          console.log('[AuthForm] Auto-login result:', loginSuccess);
-          
-          if (loginSuccess) {
-            // Close form to show language setup or main app
-            console.log('[AuthForm] Login successful, closing form...');
-            if (onClose) {
-              setTimeout(() => onClose(), 500);
-            }
-          } else {
-            // If auto-login fails, switch to login mode
-            console.log('[AuthForm] Auto-login failed, switching to login mode');
-            setMode('login');
-            setSuccess('Account created! Please log in.');
-          }
-          
-          console.log('[AuthForm] Setting isLoading to false after success');
-          setIsLoading(false);
-        } else {
-          console.log('[AuthForm] Signup failed, setting error');
+        if (!signupSuccess) {
           setError('Email already exists or signup failed.');
           setIsLoading(false);
+          return;
         }
-      }
-      
-      // Only handle login/reset loading state here (signup is handled above)
-      if (mode === 'login') {
-        if (success && onClose) {
-          setIsLoading(false);
-          setTimeout(() => onClose(), 500);
-        } else {
-          setIsLoading(false);
-        }
-      } else if (mode === 'reset') {
+        
+        // Auto-login after successful signup
+        setSuccess('Account created! Logging you in...');
+        const loginSuccess = await onLogin(email, password);
         setIsLoading(false);
+        
+        if (loginSuccess) {
+          if (onClose) {
+            setTimeout(() => onClose(), 500);
+          }
+        } else {
+          setMode('login');
+          setSuccess('Account created! Please log in.');
+        }
       }
-      // Note: signup loading state is already handled in the signup block above
     } catch (err) {
-      console.error('[AuthForm] Unexpected error:', err);
+      console.error('[AuthForm] Error:', err);
       setError('An error occurred. Please try again.');
       setIsLoading(false);
     }
