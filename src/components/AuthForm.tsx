@@ -68,43 +68,64 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           return;
         }
         
+        console.log('[AuthForm] Starting signup...');
         success = await onSignup(email, password, name, avatarUrl);
+        console.log('[AuthForm] Signup result:', success);
         
         if (success) {
           setSuccess('Account created successfully!');
           setError('');
           
           // Auto-login after successful signup (since email confirmation is disabled)
+          console.log('[AuthForm] Attempting auto-login...');
           const loginSuccess = await onLogin(email, password);
+          console.log('[AuthForm] Auto-login result:', loginSuccess);
           
           if (loginSuccess) {
             // Close form to show language setup or main app
+            console.log('[AuthForm] Login successful, closing form...');
             if (onClose) {
               setTimeout(() => onClose(), 500);
             }
           } else {
             // If auto-login fails, switch to login mode
+            console.log('[AuthForm] Auto-login failed, switching to login mode');
             setMode('login');
             setSuccess('Account created! Please log in.');
           }
           
+          console.log('[AuthForm] Setting isLoading to false after success');
           setIsLoading(false);
         } else {
+          console.log('[AuthForm] Signup failed, setting error');
           setError('Email already exists or signup failed.');
           setIsLoading(false);
         }
       }
       
-      if (success && onClose && mode === 'login') {
-        setIsLoading(false);
-        setTimeout(() => onClose(), 500);
-      } else if (mode === 'login' || mode === 'reset') {
+      // Only handle login/reset loading state here (signup is handled above)
+      if (mode === 'login') {
+        if (success && onClose) {
+          setIsLoading(false);
+          setTimeout(() => onClose(), 500);
+        } else {
+          setIsLoading(false);
+        }
+      } else if (mode === 'reset') {
         setIsLoading(false);
       }
+      // Note: signup loading state is already handled in the signup block above
     } catch (err) {
       console.error('[AuthForm] Unexpected error:', err);
       setError('An error occurred. Please try again.');
       setIsLoading(false);
+    } finally {
+      // Ensure loading state is cleared no matter what
+      console.log('[AuthForm] Finally block - ensuring loading state is cleared');
+      if (isLoading) {
+        console.log('[AuthForm] Loading was still true in finally, setting to false');
+        setIsLoading(false);
+      }
     }
   };
 
