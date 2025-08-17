@@ -168,9 +168,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: supabaseUser.email,
           full_name: supabaseUser.user_metadata?.full_name || '',
           avatar_url: supabaseUser.user_metadata?.avatar_url || getRandomAvatar(),
-          source_language: 'darija',  // Default source language
-          target_language: 'lebanese', // Default target language
-          preferred_dialect: 'lebanese', // Keep for backward compatibility
+          source_language: supabaseUser.user_metadata?.source_language || 'darija',  // Check metadata first
+          target_language: supabaseUser.user_metadata?.target_language || 'lebanese', // Check metadata first
+          preferred_dialect: supabaseUser.user_metadata?.target_language || 'lebanese', // Keep for backward compatibility
           daily_goal: 10,
           streak_days: 0,
           total_study_time: 0
@@ -208,12 +208,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       logger.log('[handleUserSession] Setting user data...');
       setUser(userData);
-      logger.log('[handleUserSession] Loading user progress...');
       
-      // Don't wait for progress loading if database is slow
-      loadUserProgress(supabaseUser.id, profile).catch(err => {
-        logger.error('[handleUserSession] Failed to load progress:', err);
-      });
+      // Set language preferences immediately from profile
+      if (profile) {
+        setSourceLanguage(profile.source_language || 'darija');
+        setTargetLanguage(profile.target_language || profile.preferred_dialect || 'lebanese');
+      }
+      
+      logger.log('[handleUserSession] Loading user progress in background...');
+      
+      // Load progress in background - don't block login
+      setTimeout(() => {
+        loadUserProgress(supabaseUser.id, profile).catch(err => {
+          logger.error('[handleUserSession] Failed to load progress:', err);
+        });
+      }, 100);
       
       logger.log('[handleUserSession] Complete!');
       
@@ -225,19 +234,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const loadUserProgress = async (userId: string, profile?: UserProfile) => {
     try {
-      // Get phrase progress for spaced repetition
-      const { data: phraseProgressData } = await supabase
-        .from('phrase_progress')
-        .select('*')
-        .eq('user_id', userId);
+      // Run queries in parallel with timeout for better performance
+      const queries = await Promise.allSettled([
+        // Get phrase progress for spaced repetition - with timeout
+        Promise.race([
+          supabase
+            .from('phrase_progress')
+            .select('*')
+            .eq('user_id', userId),
+          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 2000))
+        ]),
+        // Get recent quiz scores - with timeout
+        Promise.race([
+          supabase
+            .from('quiz_attempts')
+            .select('*')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false })
+            .limit(10), // Reduced from 20 for faster loading
+          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 2000))
+        ])
+      ]);
 
-      // Get recent quiz scores
-      const { data: quizScoresData } = await supabase
-        .from('quiz_attempts')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(20);
+      const phraseProgressData = (queries[0].status === 'fulfilled' ? (queries[0].value as any).data : null);
+      const quizScoresData = (queries[1].status === 'fulfilled' ? (queries[1].value as any).data : null);
 
       // Convert to UserProgress format (maintaining compatibility with existing code)
       const spacedRepetition = phraseProgressData?.map((p: any) => ({
@@ -278,11 +298,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       };
 
-      // Set language preferences
-      if (profile) {
-        setSourceLanguage(profile.source_language || 'darija');
-        setTargetLanguage(profile.target_language || profile.preferred_dialect || 'lebanese');
-      }
+      // Language preferences are already set in handleUserSession
+      // No need to set them again here
 
       setUserProgress(userProgress);
     } catch (error) {
@@ -339,7 +356,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 
   const signup = async (email: string, password: string, name: string, avatarUrl?: string): Promise<boolean> => {
-    console.log('[AuthContext] Signup attempt for:', email, name);
+    logger.log('[AuthContext] Signup attempt for:', email, name);
     
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -348,7 +365,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         options: {
           data: {
             full_name: name,
-            avatar_url: avatarUrl || getRandomAvatar()
+            avatar_url: avatarUrl || getRandomAvatar(),
+            source_language: sourceLanguage, // Store current language preferences
+            target_language: targetLanguage
           }
         }
       });
@@ -383,7 +402,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               email: data.user.email,
               full_name: name,
               avatar_url: avatarUrl || getRandomAvatar(),
-              preferred_dialect: 'all',
+              source_language: sourceLanguage,
+              target_language: targetLanguage,
+              preferred_dialect: targetLanguage, // Keep for backward compatibility
               daily_goal: 10,
               streak_days: 0,
               total_study_time: 0
@@ -571,41 +592,35 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const updateLanguagePreferences = async (source: string, target: string): Promise<void> => {
     if (!user) {
-      console.warn('[AuthContext] Cannot update language preferences - no user logged in');
+      logger.warn('[AuthContext] Cannot update language preferences - no user logged in');
       return;
     }
     
     try {
-      console.log('[AuthContext] Updating language preferences for user:', user.id);
-      console.log('[AuthContext] New values - source:', source, 'target:', target);
+      logger.log('[AuthContext] Updating language preferences for user:', user.id);
+      logger.log('[AuthContext] New values - source:', source, 'target:', target);
       
       // Update state immediately for UI responsiveness
       setSourceLanguage(source);
       setTargetLanguage(target);
       
-      // Get the current session to ensure we have the right user ID
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.user) {
-        console.error('[AuthContext] No active session found');
-        return;
-      }
-      
-      // Update in database
-      console.log('[AuthContext] Sending update to Supabase for user:', session.user.id);
+      // Update in database using the user.id directly
+      logger.log('[AuthContext] Sending update to Supabase for user:', user.id);
       const { data, error } = await supabase
         .from('user_profiles')
         .update({
           source_language: source,
           target_language: target,
+          preferred_dialect: target, // Keep for backward compatibility
           updated_at: new Date().toISOString()
         })
-        .eq('id', session.user.id)
+        .eq('id', user.id)
         .select()
         .single();
 
       if (error) {
-        console.error('[AuthContext] ❌ Error updating language preferences:', error.message);
-        console.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
+        logger.error('[AuthContext] ❌ Error updating language preferences:', error.message);
+        logger.error('[AuthContext] Full error details:', JSON.stringify(error, null, 2));
         
         // Try to check if profile exists
         const { data: profile, error: fetchError } = await supabase
@@ -615,13 +630,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           .single();
           
         if (fetchError) {
-          console.error('[AuthContext] Could not fetch profile:', fetchError);
+          logger.error('[AuthContext] Could not fetch profile:', fetchError);
         } else {
-          console.log('[AuthContext] Current profile:', profile);
+          logger.log('[AuthContext] Current profile:', profile);
         }
       } else {
-        console.log('[AuthContext] ✅ Language preferences updated successfully!');
-        console.log('[AuthContext] Updated profile:', data);
+        logger.log('[AuthContext] ✅ Language preferences updated successfully!');
+        logger.log('[AuthContext] Updated profile:', data);
       }
       
       // Update userProgress preferences
@@ -636,7 +651,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUserProgress(updatedProgress);
       }
     } catch (error) {
-      console.error('[AuthContext] Error updating language preferences:', error);
+      logger.error('[AuthContext] Error updating language preferences:', error);
     }
   };
 
