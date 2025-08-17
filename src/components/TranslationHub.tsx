@@ -367,7 +367,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-gray-600">{phrase.literal_english || ''}</span>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(phrase.difficulty)}`}>
-                          {phrase.difficulty}
+                          {typeof phrase.difficulty === 'object' ? JSON.stringify(phrase.difficulty) : (phrase.difficulty || 'beginner')}
                         </span>
                         <span className="text-sm">{getFormalityIcon(phrase.usage?.formality || 'neutral')}</span>
                       </div>
