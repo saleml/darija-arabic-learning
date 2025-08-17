@@ -10,6 +10,8 @@ CREATE TABLE user_profiles (
     email TEXT UNIQUE NOT NULL,
     full_name TEXT,
     avatar_url TEXT,
+    source_language TEXT DEFAULT 'darija' CHECK (source_language IN ('darija', 'lebanese', 'syrian', 'emirati', 'saudi')),
+    target_language TEXT DEFAULT 'lebanese' CHECK (target_language IN ('darija', 'lebanese', 'syrian', 'emirati', 'saudi', 'all')),
     preferred_dialect TEXT DEFAULT 'all' CHECK (preferred_dialect IN ('lebanese', 'syrian', 'emirati', 'saudi', 'all')),
     daily_goal INTEGER DEFAULT 10,
     streak_days INTEGER DEFAULT 0,

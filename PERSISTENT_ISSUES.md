@@ -1,8 +1,8 @@
 # Persistent Issues - Arabic Dialects Hub
 
 **Date Created:** August 17, 2025 - 10:47 AM  
-**Last Updated:** August 17, 2025 - 11:15 AM  
-**Status:** PARTIALLY RESOLVED - Debugging in progress
+**Last Updated:** August 17, 2025 - 11:25 AM  
+**Status:** CRITICAL BUG FIXED - 404 error resolved, debugging continues
 
 ## Overview
 This document tracks persistent issues that remain after deployment, despite multiple attempts to fix them. These issues affect the user experience and need to be addressed.
@@ -124,7 +124,22 @@ After successful signup, new users do not see the welcome screen for selecting s
 
 ---
 
-## Recent Progress (August 17, 2025 - 11:15 AM)
+## Recent Progress (August 17, 2025 - 11:25 AM)
+
+### 🔴 CRITICAL FIX: 404 Error After Signup - RESOLVED ✅
+**Problem:** Hidden form submission was causing page navigation to a non-existent URL, resulting in 404 error after signup.
+
+**Solution Deployed:**
+- Removed hidden form submission code that was breaking navigation
+- Changed form action from `#` to `javascript:void(0)` 
+- Fixed duplicate form closing logic
+- Signup now completes without navigation errors
+
+**Status:** FIXED and deployed to production
+
+---
+
+## Previous Progress (August 17, 2025 - 11:15 AM)
 
 ### Issue #1: Root Cause Identified ✅
 **DISCOVERED:** The application is not actually connecting to Supabase in production. Environment variables are set to placeholder values, causing the app to use localStorage fallback mode.
