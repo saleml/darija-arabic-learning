@@ -497,14 +497,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.log('[AuthContext] Logout successful');
       }
       
-      // Force reload to clear any cached state
-      window.location.href = '/';
+      // Force reload to clear any cached state and go to home page
+      window.location.href = '/home';
     } catch (error) {
       console.error('[AuthContext] Logout error:', error);
       // Even if error, clear local state
       setUser(null);
       setUserProgress(null);
-      window.location.href = '/';
+      window.location.href = '/home';
     }
   };
 
