@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Book, Brain, Trophy, Globe, Star, TrendingUp, Menu, X, LogOut, Keyboard, User } from 'lucide-react';
+import { Book, Brain, Trophy, Globe, Star, TrendingUp, Menu, X, LogOut, Keyboard } from 'lucide-react';
 import TranslationHub from './components/TranslationHub';
 import QuizSystem from './components/QuizSystem';
 import ProgressTracker from './components/ProgressTracker';
