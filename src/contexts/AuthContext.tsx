@@ -14,12 +14,15 @@ interface User {
 interface AuthContextType {
   user: User | null;
   userProgress: UserProgress | null;
+  sourceLanguage: string;
+  targetLanguage: string;
   login: (email: string, password: string) => Promise<boolean>;
   signup: (email: string, password: string, name: string) => Promise<boolean>;
   resetPassword: (email: string) => Promise<boolean>;
   deleteAccount: () => Promise<boolean>;
   logout: () => Promise<void>;
   updateUserProgress: (progress: UserProgress) => Promise<void>;
+  updateLanguagePreferences: (source: string, target: string) => Promise<void>;
   saveQuizAttempt: (quizData: any) => Promise<void>;
   isLoading: boolean;
 }
@@ -41,6 +44,8 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
+  const [sourceLanguage, setSourceLanguage] = useState<string>('darija');
+  const [targetLanguage, setTargetLanguage] = useState<string>('lebanese');
   const [isLoading, setIsLoading] = useState(true);
 
   // Simple hash function for localStorage (not for production use)
@@ -119,6 +124,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Check for existing session
     const initializeAuth = async () => {
       console.log('[AuthContext] Initializing authentication...');
+      
+      // Check localStorage first for local development
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        try {
+          const userData = JSON.parse(storedUser);
+          console.log('[AuthContext] Found stored user:', userData.email);
+          setUser(userData);
+          loadUserProgressLocal(userData.id);
+          
+          // Load language preferences
+          if (userData.sourceLanguage) setSourceLanguage(userData.sourceLanguage);
+          if (userData.targetLanguage) setTargetLanguage(userData.targetLanguage);
+          
+          setIsLoading(false);
+          return;
+        } catch (e) {
+          console.error('[AuthContext] Error parsing stored user:', e);
+        }
+      }
       
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -270,12 +295,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         lastActiveDate: new Date().toISOString(),
         totalStudyTime: profile?.total_study_time || 0,
         preferences: {
-          targetDialect: profile?.preferred_dialect || 'all',
+          targetDialect: (profile?.target_language === 'darija' ? 'all' : profile?.target_language) || profile?.preferred_dialect || 'all',
           dailyGoal: profile?.daily_goal || 10,
           soundEnabled: true,
           theme: 'light'
         }
       };
+
+      // Set language preferences
+      if (profile) {
+        setSourceLanguage(profile.source_language || 'darija');
+        setTargetLanguage(profile.target_language || profile.preferred_dialect || 'lebanese');
+      }
 
       setUserProgress(userProgress);
     } catch (error) {
@@ -394,11 +425,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (error && error.message?.includes('Please set up Supabase')) {
         // Fallback to localStorage
+        console.log('[AuthContext] Supabase not configured, using localStorage');
         return signupLocal(email, password, name);
       }
 
       if (error) {
         console.error('[AuthContext] Signup error:', error.message);
+        console.error('[AuthContext] Full error object:', error);
+        
+        // Check for specific error types
+        if (error.message?.includes('already registered')) {
+          console.log('[AuthContext] User already exists in Supabase');
+        }
         return false;
       }
 
@@ -483,7 +521,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Initialize progress for new user
     loadUserProgressLocal(newUser.id);
     
-    console.log('[AuthContext] Local signup successful');
+    // DON'T set language setup flag for new users - they need to see the setup screen
+    // localStorage.setItem(`languages_setup_${newUser.id}`, 'true'); // <- DON'T DO THIS
+    
+    console.log('[AuthContext] Local signup successful - user needs language setup');
     return true;
   };
 
@@ -682,6 +723,57 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const updateLanguagePreferences = async (source: string, target: string): Promise<void> => {
+    if (!user) return;
+    
+    try {
+      console.log('[AuthContext] Updating language preferences:', source, target);
+      
+      setSourceLanguage(source);
+      setTargetLanguage(target);
+      
+      // Update in database
+      const { error } = await supabase
+        .from('user_profiles')
+        .update({
+          source_language: source,
+          target_language: target,
+          preferred_dialect: target, // Keep for backward compatibility
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', user.id);
+
+      if (error && !error.message?.includes('Please set up Supabase')) {
+        console.error('[AuthContext] Error updating language preferences:', error);
+      } else {
+        console.log('[AuthContext] Language preferences updated successfully');
+      }
+      
+      // Update localStorage fallback
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        const userData = JSON.parse(savedUser);
+        userData.sourceLanguage = source;
+        userData.targetLanguage = target;
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+      }
+      
+      // Update userProgress preferences
+      if (userProgress) {
+        const updatedProgress = {
+          ...userProgress,
+          preferences: {
+            ...userProgress.preferences,
+            targetDialect: target === 'all' ? 'all' : target as any
+          }
+        };
+        setUserProgress(updatedProgress);
+      }
+    } catch (error) {
+      console.error('[AuthContext] Error updating language preferences:', error);
+    }
+  };
+
   const saveQuizAttempt = async (quizData: any): Promise<void> => {
     if (!user) {
       console.log('[AuthContext] No user logged in, cannot save quiz attempt');
@@ -718,12 +810,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider value={{
       user,
       userProgress,
+      sourceLanguage,
+      targetLanguage,
       login,
       signup,
       resetPassword,
       deleteAccount,
       logout,
       updateUserProgress,
+      updateLanguagePreferences,
       saveQuizAttempt,
       isLoading
     }}>

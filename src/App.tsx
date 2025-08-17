@@ -5,6 +5,8 @@ import QuizSystem from './components/QuizSystem';
 import ProgressTracker from './components/ProgressTracker';
 import CulturalCards from './components/CulturalCards';
 import AuthForm from './components/AuthForm';
+import LanguageSetup from './components/LanguageSetup';
+import LanguageSelector from './components/LanguageSelector';
 import { useAuth } from './contexts/AuthContext';
 import { Phrase, UserProgress } from './types';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
@@ -17,7 +19,17 @@ import sentencesData from '../database/sentences_daily_conversations.json';
 type TabType = 'hub' | 'quiz' | 'progress' | 'culture';
 
 function App() {
-  const { user, logout, login, signup, resetPassword, isLoading } = useAuth();
+  const { 
+    user, 
+    logout, 
+    login, 
+    signup, 
+    resetPassword, 
+    isLoading,
+    sourceLanguage,
+    targetLanguage,
+    updateLanguagePreferences
+  } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
@@ -25,6 +37,7 @@ function App() {
   const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
   const [notification, setNotification] = useState<Notification | null>(null);
   const [showAuthForm, setShowAuthForm] = useState(false);
+  const [showLanguageSetup, setShowLanguageSetup] = useState(false);
 
   // Load phrases once on mount, independent of user
   useEffect(() => {
@@ -80,7 +93,7 @@ function App() {
           lastActiveDate: new Date().toISOString(),
           totalStudyTime: 0,
           preferences: {
-            targetDialect: 'all',
+            targetDialect: targetLanguage === 'all' ? 'all' : targetLanguage as any,
             dailyGoal: 10,
             soundEnabled: true,
             theme: 'light'
@@ -88,9 +101,15 @@ function App() {
         };
         setUserProgress(initialProgress);
         localStorage.setItem(`userProgress_${user.id}`, JSON.stringify(initialProgress));
+        
+        // Check if this is a new user who needs language setup
+        const hasSetupLanguages = localStorage.getItem(`languages_setup_${user.id}`);
+        if (!hasSetupLanguages) {
+          setShowLanguageSetup(true);
+        }
       }
     }
-  }, [user]);
+  }, [user, sourceLanguage, targetLanguage]);
 
   // Keyboard shortcuts (disabled when auth form is open)
   useKeyboardShortcuts(!user && showAuthForm ? {} : {
@@ -181,8 +200,8 @@ function App() {
               </h1>
               
               <p className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Transform your Moroccan Darija into fluent <strong>Lebanese</strong>, <strong>Syrian</strong>, <strong>Emirati</strong>, and <strong>Saudi</strong> Arabic. 
-                Learn naturally with AI-powered spaced repetition and cultural context.
+                Master all Arabic dialects - <strong>Darija</strong>, <strong>Lebanese</strong>, <strong>Syrian</strong>, <strong>Emirati</strong>, and <strong>Saudi</strong>. 
+                Learn from any dialect to any other with AI-powered spaced repetition and cultural context.
               </p>
               
               {/* CTA Buttons */}
@@ -231,7 +250,7 @@ function App() {
                 Why Choose Our Platform?
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Built specifically for Moroccan Darija speakers who want to communicate across the Arab world
+                Built for Arabic speakers who want to communicate fluently across all dialects and regions
               </p>
             </div>
             
@@ -394,10 +413,10 @@ function App() {
                   <div className="bg-red-600 p-2 rounded-lg">
                     <Globe className="h-6 w-6 text-white" />
                   </div>
-                  <span className="text-xl font-bold">Darija → Arabic</span>
+                  <span className="text-xl font-bold">Arabic Dialects Hub</span>
                 </div>
                 <p className="text-gray-400">
-                  Empowering Moroccan speakers to communicate across the Arab world with confidence and cultural awareness.
+                  Empowering Arabic speakers to communicate across all dialects with confidence and cultural awareness.
                 </p>
               </div>
               
@@ -433,6 +452,22 @@ function App() {
   }
 
   console.log('[App] Rendering main app for user:', user.email);
+  
+  // Show language setup for new users
+  if (showLanguageSetup) {
+    return (
+      <LanguageSetup
+        initialSource={sourceLanguage}
+        initialTarget={targetLanguage}
+        onComplete={(source, target) => {
+          updateLanguagePreferences(source, target);
+          localStorage.setItem(`languages_setup_${user.id}`, 'true');
+          setShowLanguageSetup(false);
+        }}
+      />
+    );
+  }
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <NotificationToast 
@@ -495,12 +530,32 @@ function App() {
                 <Globe className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Darija → Arabic Learning</h1>
-                <p className="text-sm text-gray-600">Master Levantine & Gulf dialects</p>
+                <h1 className="text-2xl font-bold text-gray-900">Arabic Dialects Hub</h1>
+                <p className="text-sm text-gray-600">Learn & translate between all Arabic dialects</p>
               </div>
             </div>
             
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden md:flex items-center space-x-4">
+              {/* Language Selectors */}
+              <div className="flex items-center gap-3">
+                <LanguageSelector
+                  value={sourceLanguage}
+                  onChange={(lang) => updateLanguagePreferences(lang, targetLanguage)}
+                  label="From"
+                  excludeLanguage={targetLanguage}
+                />
+                <span className="text-gray-400">→</span>
+                <LanguageSelector
+                  value={targetLanguage}
+                  onChange={(lang) => updateLanguagePreferences(sourceLanguage, lang)}
+                  label="To"
+                  excludeLanguage={sourceLanguage}
+                  includeAll={true}
+                />
+              </div>
+              
+              <div className="border-l border-gray-300 h-8"></div>
+              
               <button
                 onClick={() => setShowKeyboardHelp(true)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors tooltip"
@@ -543,6 +598,23 @@ function App() {
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-gray-200">
               <div className="space-y-3">
+                {/* Language Selectors for Mobile */}
+                <div className="flex items-center gap-3 pb-3 border-b border-gray-200">
+                  <LanguageSelector
+                    value={sourceLanguage}
+                    onChange={(lang) => updateLanguagePreferences(lang, targetLanguage)}
+                    label="From"
+                    excludeLanguage={targetLanguage}
+                  />
+                  <span className="text-gray-400">→</span>
+                  <LanguageSelector
+                    value={targetLanguage}
+                    onChange={(lang) => updateLanguagePreferences(sourceLanguage, lang)}
+                    label="To"
+                    excludeLanguage={sourceLanguage}
+                    includeAll={true}
+                  />
+                </div>
                 <div className="flex items-center space-x-2">
                   <Trophy className="h-5 w-5 text-yellow-500" />
                   <span className="font-semibold">{stats.streak} day streak</span>
@@ -621,6 +693,8 @@ function App() {
             phrases={allPhrases} 
             userProgress={userProgress}
             onUpdateProgress={updateProgress}
+            sourceLanguage={sourceLanguage}
+            targetLanguage={targetLanguage}
           />
         )}
         {activeTab === 'quiz' && (
@@ -628,6 +702,8 @@ function App() {
             phrases={allPhrases}
             userProgress={userProgress}
             onUpdateProgress={updateProgress}
+            sourceLanguage={sourceLanguage}
+            targetLanguage={targetLanguage}
           />
         )}
         {activeTab === 'progress' && (
@@ -652,7 +728,7 @@ function App() {
             <div>
               <h3 className="text-lg font-semibold mb-3">About</h3>
               <p className="text-gray-400 text-sm">
-                Comprehensive learning platform for Moroccan Darija speakers to master Levantine and Gulf Arabic dialects.
+                Comprehensive learning platform to master and translate between all Arabic dialects.
               </p>
             </div>
             <div>

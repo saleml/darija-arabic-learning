@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Testing Checklist</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        h2 { 
+            color: #555; 
+            margin-top: 25px; 
+            padding-bottom: 10px; 
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-left: 4px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .checklist li:hover {
+            background: #e9ecef;
+        }
+        .checklist li.checked {
+            background: #d4edda;
+            border-left-color: #28a745;
+            text-decoration: line-through;
+            color: #666;
+        }
+        .checklist li.checked::before {
+            content: "✅ ";
+        }
+        .checklist li:not(.checked)::before {
+            content: "⬜ ";
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .progress {
+            background: #e9ecef;
+            border-radius: 20px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🧪 Complete Feature Testing Checklist</h1>
+        <p>Test all the new language features step by step</p>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progress">0%</div>
+        </div>
+        
+        <button onclick="clearAndStart()">🔄 Start Fresh Test</button>
+        <button onclick="window.location.href='/'">🏠 Go to App</button>
+        <button onclick="resetChecklist()">🔃 Reset Checklist</button>
+    </div>
+
+    <div class="card">
+        <h2>1️⃣ Authentication & Setup</h2>
+        <ul class="checklist" id="auth-checks">
+            <li>Clear all browser data (click Start Fresh Test above)</li>
+            <li>Go to the app and click Sign Up</li>
+            <li>Enter email: test@example.com</li>
+            <li>Enter password: TestPass123!</li>
+            <li>Chrome suggests a strong password</li>
+            <li>Submit the form</li>
+            <li>Chrome offers to save the password</li>
+            <li>Language selection screen appears with nice background</li>
+            <li>Select source language (e.g., Darija)</li>
+            <li>Select target language (e.g., Lebanese)</li>
+            <li>Click "Start Learning"</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>2️⃣ Main App Features</h2>
+        <ul class="checklist" id="app-checks">
+            <li>Website title is "Arabic Dialects Hub" (not Darija → Arabic)</li>
+            <li>Language dropdowns visible in header (From/To)</li>
+            <li>Language dropdowns show current selection</li>
+            <li>Can change source language in header</li>
+            <li>Can change target language in header</li>
+            <li>Mobile menu shows language selectors</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>3️⃣ Translation Hub</h2>
+        <ul class="checklist" id="translation-checks">
+            <li>Phrases show in the selected source language</li>
+            <li>Search placeholder updates with source language name</li>
+            <li>Dialect filter excludes source language</li>
+            <li>Expanded cards don't show source language translation</li>
+            <li>Expanded cards show all other dialects</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>4️⃣ Quiz System</h2>
+        <ul class="checklist" id="quiz-checks">
+            <li>Source Dialect shown in quiz settings (read-only)</li>
+            <li>Target Dialect radio buttons exclude source language</li>
+            <li>Default selection matches header target language</li>
+            <li>Change language in header → quiz radio updates automatically</li>
+            <li>Quiz questions show in source language</li>
+            <li>Quiz answers show in target language(s)</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>5️⃣ Persistence</h2>
+        <ul class="checklist" id="persist-checks">
+            <li>Refresh page - still logged in</li>
+            <li>Language preferences preserved after refresh</li>
+            <li>Quiz settings respect saved preferences</li>
+            <li>Translation Hub uses saved source language</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Load saved checklist state
+        function loadChecklist() {
+            const saved = localStorage.getItem('testChecklist');
+            if (saved) {
+                const checked = JSON.parse(saved);
+                checked.forEach(id => {
+                    const item = document.querySelector(`[data-id="${id}"]`);
+                    if (item) item.classList.add('checked');
+                });
+            }
+            updateProgress();
+        }
+
+        // Save checklist state
+        function saveChecklist() {
+            const checked = [];
+            document.querySelectorAll('.checklist li.checked').forEach(item => {
+                if (item.dataset.id) checked.push(item.dataset.id);
+            });
+            localStorage.setItem('testChecklist', JSON.stringify(checked));
+            updateProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const total = document.querySelectorAll('.checklist li').length;
+            const checked = document.querySelectorAll('.checklist li.checked').length;
+            const percent = Math.round((checked / total) * 100);
+            const bar = document.getElementById('progress');
+            bar.style.width = percent + '%';
+            bar.textContent = percent + '%';
+            
+            const status = document.getElementById('status');
+            if (percent === 100) {
+                status.innerHTML = '<div class="status success">✅ All tests complete! Everything is working!</div>';
+            } else if (percent > 0) {
+                status.innerHTML = `<div class="status info">📊 Progress: ${checked}/${total} tests completed</div>`;
+            }
+        }
+
+        // Initialize checklist items
+        function initChecklist() {
+            let id = 0;
+            document.querySelectorAll('.checklist li').forEach(item => {
+                item.dataset.id = 'check-' + (id++);
+                item.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    saveChecklist();
+                });
+            });
+            loadChecklist();
+        }
+
+        // Clear only app data and start fresh
+        function clearAndStart() {
+            if (confirm('This will clear only the app data (not your other browser data). Continue?')) {
+                // Only clear app-related localStorage items
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && (
+                        key.includes('currentUser') ||
+                        key.includes('userProgress') ||
+                        key.includes('languages_setup') ||
+                        key.includes('users') ||
+                        key.includes('sb-') // Supabase keys
+                    )) {
+                        keysToRemove.push(key);
+                    }
+                }
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+                
+                alert('App data cleared! You can now test as a new user.');
+                window.location.href = '/';
+            }
+        }
+
+        // Reset checklist only
+        function resetChecklist() {
+            localStorage.removeItem('testChecklist');
+            document.querySelectorAll('.checklist li').forEach(item => {
+                item.classList.remove('checked');
+            });
+            updateProgress();
+        }
+
+        // Initialize on load
+        initChecklist();
+    </script>
+</body>
+</html>

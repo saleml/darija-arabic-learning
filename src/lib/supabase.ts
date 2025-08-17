@@ -46,7 +46,9 @@ export interface UserProfile {
   email: string;
   full_name?: string;
   avatar_url?: string;
-  preferred_dialect: 'lebanese' | 'syrian' | 'emirati' | 'saudi' | 'all';
+  source_language: 'darija' | 'lebanese' | 'syrian' | 'emirati' | 'saudi';
+  target_language: 'darija' | 'lebanese' | 'syrian' | 'emirati' | 'saudi' | 'all';
+  preferred_dialect: 'lebanese' | 'syrian' | 'emirati' | 'saudi' | 'all'; // Keep for backward compatibility
   daily_goal: number;
   streak_days: number;
   total_study_time: number;

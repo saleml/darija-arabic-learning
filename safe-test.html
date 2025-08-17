@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Testing - No Deletion</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f0f4f8;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { 
+            color: #2c3e50; 
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        h2 { 
+            color: #34495e; 
+            margin-top: 25px;
+            font-size: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        .safe-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover { 
+            background: #2980b9; 
+        }
+        button.safe {
+            background: #27ae60;
+        }
+        button.safe:hover {
+            background: #229954;
+        }
+        .info {
+            background: #d1f2eb;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        ul {
+            line-height: 1.8;
+            color: #555;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🛡️ Safe Testing Guide <span class="safe-badge">NO DELETION</span></h1>
+        
+        <div class="info">
+            <strong>✅ This page will NOT delete anything from Chrome</strong><br>
+            All actions here are safe and only temporarily modify the current session.
+        </div>
+
+        <h2>Option 1: Test with a Different Email (Recommended)</h2>
+        <p>Simply use a different email address to test signup:</p>
+        <ul>
+            <li>Go to the app: <button class="safe" onclick="window.location.href='/'">Open App</button></li>
+            <li>Click "Sign Up"</li>
+            <li>Use a new email like: <code>test2@example.com</code>, <code>test3@example.com</code>, etc.</li>
+            <li>Password: <code>TestPass123!</code></li>
+            <li>You'll see the language selection screen for new users</li>
+        </ul>
+
+        <h2>Option 2: Just Logout (Keep Everything)</h2>
+        <p>This only logs you out temporarily:</p>
+        <button class="safe" onclick="justLogout()">Safe Logout (No Deletion)</button>
+        <p><small>This only removes the "currentUser" flag, nothing else is deleted.</small></p>
+
+        <h2>Option 3: Test as Guest (Read-Only)</h2>
+        <p>View what new users would see without changing anything:</p>
+        <button class="safe" onclick="viewAsGuest()">View as Guest</button>
+        <p><small>Opens the app in a new incognito/private window where nothing affects your data.</small></p>
+
+        <div class="warning">
+            <strong>Note:</strong> Chrome password manager may not prompt if:
+            <ul style="margin: 5px 0;">
+                <li>You previously declined to save for localhost</li>
+                <li>Password saving is disabled in Chrome settings</li>
+                <li>You're in incognito mode</li>
+            </ul>
+        </div>
+
+        <h2>Current Status</h2>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Check current status
+        function checkStatus() {
+            const currentUser = localStorage.getItem('currentUser');
+            const status = document.getElementById('status');
+            
+            if (currentUser) {
+                try {
+                    const user = JSON.parse(currentUser);
+                    status.innerHTML = `
+                        <div class="info">
+                            <strong>Currently logged in as:</strong> ${user.email}<br>
+                            <strong>User ID:</strong> ${user.id}<br>
+                            <button class="safe" onclick="justLogout()">Logout to Test Signup</button>
+                        </div>
+                    `;
+                } catch (e) {
+                    status.innerHTML = '<div class="info">Logged in (session active)</div>';
+                }
+            } else {
+                status.innerHTML = '<div class="info">Not logged in - Ready to test signup!</div>';
+            }
+        }
+
+        // Safe logout - only removes current user flag
+        function justLogout() {
+            // This is the ONLY thing we change
+            localStorage.removeItem('currentUser');
+            
+            alert('Logged out! You can now test signup with any email.');
+            window.location.href = '/';
+        }
+
+        // Open in incognito (instructions)
+        function viewAsGuest() {
+            alert(
+                'To test as a guest without affecting your data:\n\n' +
+                '1. Copy this URL: ' + window.location.origin + '\n' +
+                '2. Open an Incognito/Private window:\n' +
+                '   • Chrome: Ctrl+Shift+N (Windows) or Cmd+Shift+N (Mac)\n' +
+                '   • Safari: Cmd+Shift+N\n' +
+                '   • Firefox: Ctrl+Shift+P (Windows) or Cmd+Shift+P (Mac)\n' +
+                '3. Paste the URL in the incognito window\n\n' +
+                'Everything you do there won\'t affect your normal browser data!'
+            );
+        }
+
+        // Check on load
+        checkStatus();
+    </script>
+</body>
+</html>

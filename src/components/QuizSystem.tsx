@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Brain, Check, X, Trophy, Target, Clock, TrendingUp, ChevronRight, BookOpen, Star, Award, Flame } from 'lucide-react';
 import { Phrase, UserProgress, QuizScore, SpacedRepetitionItem } from '../types';
 import { getDialectWordBank, getSimilarWords } from '../data/dialectDictionary';
@@ -8,6 +8,8 @@ interface Props {
   phrases: Phrase[];
   userProgress: UserProgress | null;
   onUpdateProgress: (progress: UserProgress) => void;
+  sourceLanguage?: string;
+  targetLanguage?: string;
 }
 
 
@@ -23,7 +25,7 @@ interface QuizQuestion {
   isCorrect?: boolean;
 }
 
-export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: Props) {
+export default function QuizSystem({ phrases, userProgress, onUpdateProgress, sourceLanguage = 'darija', targetLanguage = 'lebanese' }: Props) {
   // Get user from context (we'll need to pass this or get it from useAuth)
   const getUserFromAuth = () => {
     // This is a placeholder - in real implementation, get from useAuth hook
@@ -47,7 +49,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   const [quizType, setQuizType] = useState<QuizType>('multiple-choice');
   const [quizMode, setQuizMode] = useState<QuizMode>('practice');
   const [difficulty, setDifficulty] = useState<string>('all');
-  const [targetDialect, setTargetDialect] = useState<string>('lebanese');
+  const [targetDialect, setTargetDialect] = useState<string>(targetLanguage === 'all' ? 'lebanese' : targetLanguage);
   const [currentQuiz, setCurrentQuiz] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -58,6 +60,13 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
   const [perfectScore, setPerfectScore] = useState(false);
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [availableWords, setAvailableWords] = useState<string[]>([]);
+
+  // Update targetDialect when targetLanguage changes from header
+  useEffect(() => {
+    if (targetLanguage !== 'all' && targetLanguage !== targetDialect) {
+      setTargetDialect(targetLanguage);
+    }
+  }, [targetLanguage]);
 
   const eligiblePhrases = useMemo(() => {
     return phrases.filter(p => {
@@ -315,7 +324,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
     selectedPhrases.forEach((phrase) => {
       
       if (quizType === 'multiple-choice') {
-        const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
+        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
         const targetDialectKey = targetDialect === 'all' 
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
@@ -363,7 +372,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
           correctAnswer: correct
         });
       } else if (quizType === 'word-order') {
-        const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
+        const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
         const targetDialectKey = targetDialect === 'all' 
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
@@ -432,7 +441,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
         const phrasesToUse = phrases.slice(0, 10);
         
         phrasesToUse.forEach(phrase => {
-          const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
+          const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
           const targetDialectKey = targetDialect === 'all' 
             ? dialects[Math.floor(Math.random() * dialects.length)]
             : targetDialect;
@@ -801,63 +810,100 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
             </div>
             
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Source Dialect</label>
+              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <span className="font-medium text-gray-900">
+                  {sourceLanguage === 'darija' ? '🇲🇦 Darija' :
+                   sourceLanguage === 'lebanese' ? '🇱🇧 Lebanese' :
+                   sourceLanguage === 'syrian' ? '🇸🇾 Syrian' :
+                   sourceLanguage === 'emirati' ? '🇦🇪 Emirati' :
+                   sourceLanguage === 'saudi' ? '🇸🇦 Saudi' : sourceLanguage}
+                </span>
+                <p className="text-sm text-gray-500 mt-1">Questions will be shown in this dialect</p>
+              </div>
+            </div>
+            
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">Target Dialect</label>
               <div className="space-y-2">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="targetDialect"
-                    value="all"
-                    checked={targetDialect === 'all'}
-                    onChange={(e) => setTargetDialect(e.target.value)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Random Mix</span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="targetDialect"
-                    value="lebanese"
-                    checked={targetDialect === 'lebanese'}
-                    onChange={(e) => setTargetDialect(e.target.value)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Lebanese</span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="targetDialect"
-                    value="syrian"
-                    checked={targetDialect === 'syrian'}
-                    onChange={(e) => setTargetDialect(e.target.value)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Syrian</span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="targetDialect"
-                    value="emirati"
-                    checked={targetDialect === 'emirati'}
-                    onChange={(e) => setTargetDialect(e.target.value)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Emirati</span>
-                </label>
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="targetDialect"
-                    value="saudi"
-                    checked={targetDialect === 'saudi'}
-                    onChange={(e) => setTargetDialect(e.target.value)}
-                    className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Saudi</span>
-                </label>
+                {targetLanguage === 'all' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="all"
+                      checked={targetDialect === 'all'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Random Mix</span>
+                  </label>
+                )}
+                {sourceLanguage !== 'lebanese' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="lebanese"
+                      checked={targetDialect === 'lebanese'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Lebanese</span>
+                  </label>
+                )}
+                {sourceLanguage !== 'syrian' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="syrian"
+                      checked={targetDialect === 'syrian'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Syrian</span>
+                  </label>
+                )}
+                {sourceLanguage !== 'emirati' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="emirati"
+                      checked={targetDialect === 'emirati'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Emirati</span>
+                  </label>
+                )}
+                {sourceLanguage !== 'saudi' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="saudi"
+                      checked={targetDialect === 'saudi'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Saudi</span>
+                  </label>
+                )}
+                {sourceLanguage !== 'darija' && (
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="targetDialect"
+                      value="darija"
+                      checked={targetDialect === 'darija'}
+                      onChange={(e) => setTargetDialect(e.target.value)}
+                      className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span>Darija</span>
+                  </label>
+                )}
               </div>
             </div>
             
@@ -972,10 +1018,32 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                 <div className="text-center">
                   <p className="text-gray-600 mb-2 flex items-center justify-center gap-2">
                     <BookOpen className="h-4 w-4" />
-                    Translate from Darija:
+                    Translate from {sourceLanguage === 'darija' ? 'Darija' : sourceLanguage.charAt(0).toUpperCase() + sourceLanguage.slice(1)}:
                   </p>
-                  <p className="text-3xl font-bold arabic-text rtl mb-2">{currentQuestion.phrase.darija}</p>
-                  <p className="text-xl text-gray-700">{currentQuestion.phrase.darija_latin}</p>
+                  <p className="text-3xl font-bold arabic-text rtl mb-2">{
+                    sourceLanguage === 'darija' ? currentQuestion.phrase.darija :
+                    sourceLanguage === 'lebanese' && currentQuestion.phrase.translations?.lebanese ? 
+                      (typeof currentQuestion.phrase.translations.lebanese === 'string' ? currentQuestion.phrase.translations.lebanese : currentQuestion.phrase.translations.lebanese.phrase) :
+                    sourceLanguage === 'syrian' && currentQuestion.phrase.translations?.syrian ?
+                      (typeof currentQuestion.phrase.translations.syrian === 'string' ? currentQuestion.phrase.translations.syrian : currentQuestion.phrase.translations.syrian.phrase) :
+                    sourceLanguage === 'emirati' && currentQuestion.phrase.translations?.emirati ?
+                      (typeof currentQuestion.phrase.translations.emirati === 'string' ? currentQuestion.phrase.translations.emirati : currentQuestion.phrase.translations.emirati.phrase) :
+                    sourceLanguage === 'saudi' && currentQuestion.phrase.translations?.saudi ?
+                      (typeof currentQuestion.phrase.translations.saudi === 'string' ? currentQuestion.phrase.translations.saudi : currentQuestion.phrase.translations.saudi.phrase) :
+                    currentQuestion.phrase.darija
+                  }</p>
+                  <p className="text-xl text-gray-700">{
+                    sourceLanguage === 'darija' ? currentQuestion.phrase.darija_latin :
+                    sourceLanguage === 'lebanese' && currentQuestion.phrase.translations?.lebanese && typeof currentQuestion.phrase.translations.lebanese === 'object' ? 
+                      currentQuestion.phrase.translations.lebanese.latin :
+                    sourceLanguage === 'syrian' && currentQuestion.phrase.translations?.syrian && typeof currentQuestion.phrase.translations.syrian === 'object' ?
+                      currentQuestion.phrase.translations.syrian.latin :
+                    sourceLanguage === 'emirati' && currentQuestion.phrase.translations?.emirati && typeof currentQuestion.phrase.translations.emirati === 'object' ?
+                      currentQuestion.phrase.translations.emirati.latin :
+                    sourceLanguage === 'saudi' && currentQuestion.phrase.translations?.saudi && typeof currentQuestion.phrase.translations.saudi === 'object' ?
+                      currentQuestion.phrase.translations.saudi.latin :
+                    currentQuestion.phrase.darija_latin
+                  }</p>
                   <p className="text-gray-500 mt-2">"{currentQuestion.phrase.literal_english}"</p>
                   <div className="mt-4 flex justify-center gap-2">
                     {currentQuestion.phrase.tags?.slice(0, 3).map(tag => (
@@ -1014,7 +1082,7 @@ export default function QuizSystem({ phrases, userProgress, onUpdateProgress }: 
                               // Try to find transliteration for this option
                               // First check the current question's phrase
                               const currentPhrase = currentQuestion.phrase;
-                              const dialects = ['lebanese', 'syrian', 'emirati', 'saudi'];
+                              const dialects = ['darija', 'lebanese', 'syrian', 'emirati', 'saudi'].filter(d => d !== sourceLanguage);
                               
                               // Check if this option matches the current phrase's translation
                               for (const dialect of dialects) {

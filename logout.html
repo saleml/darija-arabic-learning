@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+        }
+        h1 { color: #333; margin-bottom: 20px; }
+        p { color: #666; margin-bottom: 30px; }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.05); }
+        button.secondary {
+            background: #6c757d;
+        }
+        .success {
+            color: #28a745;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>👋 Quick Logout</h1>
+        <p>Use this to logout and test signup/login again without clearing all data.</p>
+        
+        <button onclick="logoutUser()">Logout Current User</button>
+        <button onclick="logoutAndClear()">Logout & Clear App Data</button>
+        <button class="secondary" onclick="window.location.href='/'">Cancel</button>
+        
+        <div id="status"></div>
+    </div>
+    
+    <script>
+        function logoutUser() {
+            // Just remove current user, keep other app data
+            localStorage.removeItem('currentUser');
+            
+            // Remove Supabase session if exists
+            const supabaseKeys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('sb-') && key.includes('auth-token')) {
+                    supabaseKeys.push(key);
+                }
+            }
+            supabaseKeys.forEach(key => localStorage.removeItem(key));
+            
+            document.getElementById('status').innerHTML = '<div class="success">✅ Logged out successfully!</div>';
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }
+        
+        function logoutAndClear() {
+            // Clear all app-related data
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && (
+                    key.includes('currentUser') ||
+                    key.includes('userProgress') ||
+                    key.includes('languages_setup') ||
+                    key.includes('users') ||
+                    key.includes('sb-')
+                )) {
+                    keysToRemove.push(key);
+                }
+            }
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+            
+            document.getElementById('status').innerHTML = '<div class="success">✅ Logged out and cleared app data!</div>';
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

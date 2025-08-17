@@ -79,16 +79,19 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
         
         success = await onSignup(email, password, name);
         if (success) {
-          setSuccess('Account created! Please check your email to confirm your account before logging in.');
+          setSuccess('Account created successfully!');
           setError('');
-          // Don't close the form, show success message
+          // Close form after successful signup to show language setup
+          setTimeout(() => {
+            if (onClose) onClose();
+          }, 500);
         } else {
           setError('Email already exists or signup failed. If you already signed up, please check your email for confirmation.');
         }
       }
       
-      if (success && onClose && mode === 'login') {
-        onClose();
+      if (success && onClose && (mode === 'login' || mode === 'signup')) {
+        setTimeout(() => onClose(), 500);
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -125,7 +128,7 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" method="POST" action="#">
           {mode === 'signup' && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">

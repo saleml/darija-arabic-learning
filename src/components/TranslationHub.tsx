@@ -7,13 +7,14 @@ interface Props {
   phrases: Phrase[];
   userProgress: UserProgress | null;
   onUpdateProgress: (progress: UserProgress) => void;
+  sourceLanguage?: string;
+  targetLanguage?: string;
 }
 
-export default function TranslationHub({ phrases, userProgress, onUpdateProgress }: Props) {
+export default function TranslationHub({ phrases, userProgress, onUpdateProgress, sourceLanguage = 'darija' }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
-  const [selectedDialect, setSelectedDialect] = useState<string>('all');
   const [expandedPhrases, setExpandedPhrases] = useState<Set<string>>(new Set());
   const [copiedPhraseId, setCopiedPhraseId] = useState<string | null>(null);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState<string | null>(null);
@@ -162,7 +163,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
               <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search Darija, English, or Arabic..."
+                placeholder={`Search ${sourceLanguage === 'darija' ? 'Darija' : sourceLanguage.charAt(0).toUpperCase() + sourceLanguage.slice(1)}, English, or Arabic...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -194,29 +195,26 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
               <option value="advanced">Advanced</option>
             </select>
             
-            <select
-              value={selectedDialect}
-              onChange={(e) => setSelectedDialect(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="all">All Dialects</option>
-              <option value="lebanese">Lebanese</option>
-              <option value="syrian">Syrian</option>
-              <option value="emirati">Emirati</option>
-              <option value="saudi">Saudi</option>
-              <option value="msa">Formal MSA</option>
-            </select>
           </div>
         </div>
 
         <div className="flex items-center justify-between mb-4">
-          <div className="text-sm text-gray-600">
-            Found <span className="font-bold text-lg text-blue-600">{filteredPhrases.length}</span> phrases
+          <div className="flex items-center gap-4">
+            <div className="text-sm text-gray-600">
+              Found <span className="font-bold text-lg text-blue-600">{filteredPhrases.length}</span> phrases
+            </div>
+            <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+              Showing in: {sourceLanguage === 'darija' ? '🇲🇦 Darija' :
+                           sourceLanguage === 'lebanese' ? '🇱🇧 Lebanese' :
+                           sourceLanguage === 'syrian' ? '🇸🇾 Syrian' :
+                           sourceLanguage === 'emirati' ? '🇦🇪 Emirati' :
+                           sourceLanguage === 'saudi' ? '🇸🇦 Saudi' : sourceLanguage}
+            </div>
           </div>
           {filteredPhrases.length > 0 && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Sparkles className="h-4 w-4" />
-              <span>Click any card to start learning</span>
+              <span>Click any card to see translations</span>
             </div>
           )}
         </div>
@@ -251,11 +249,24 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xl font-bold arabic-text rtl">{phrase.darija}</span>
+                        <span className="text-xl font-bold arabic-text rtl">{
+                          sourceLanguage === 'darija' ? phrase.darija :
+                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : phrase.translations.lebanese.phrase) :
+                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : phrase.translations.syrian.phrase) :
+                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : phrase.translations.emirati.phrase) :
+                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : phrase.translations.saudi.phrase) :
+                          phrase.darija
+                        }</span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            copyToClipboard(phrase.darija, `${phrase.id}-ar`);
+                            const textToCopy = sourceLanguage === 'darija' ? phrase.darija :
+                              sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? (typeof phrase.translations.lebanese === 'string' ? phrase.translations.lebanese : phrase.translations.lebanese.phrase) :
+                              sourceLanguage === 'syrian' && phrase.translations?.syrian ? (typeof phrase.translations.syrian === 'string' ? phrase.translations.syrian : phrase.translations.syrian.phrase) :
+                              sourceLanguage === 'emirati' && phrase.translations?.emirati ? (typeof phrase.translations.emirati === 'string' ? phrase.translations.emirati : phrase.translations.emirati.phrase) :
+                              sourceLanguage === 'saudi' && phrase.translations?.saudi ? (typeof phrase.translations.saudi === 'string' ? phrase.translations.saudi : phrase.translations.saudi.phrase) :
+                              phrase.darija;
+                            copyToClipboard(textToCopy, `${phrase.id}-ar`);
                           }}
                           className="p-1 hover:bg-gray-100 rounded transition-colors tooltip"
                           data-tooltip="Copy Arabic"
@@ -267,7 +278,14 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                           )}
                         </button>
                         <span className="text-gray-500">•</span>
-                        <span className="text-lg text-gray-700">{phrase.darija_latin || ''}</span>
+                        <span className="text-lg text-gray-700">{
+                          sourceLanguage === 'darija' ? (phrase.darija_latin || '') :
+                          sourceLanguage === 'lebanese' && phrase.translations?.lebanese ? phrase.translations.lebanese.latin :
+                          sourceLanguage === 'syrian' && phrase.translations?.syrian ? phrase.translations.syrian.latin :
+                          sourceLanguage === 'emirati' && phrase.translations?.emirati ? phrase.translations.emirati.latin :
+                          sourceLanguage === 'saudi' && phrase.translations?.saudi ? phrase.translations.saudi.latin :
+                          (phrase.darija_latin || '')
+                        }</span>
                         {isLearned && (
                           <div className="flex items-center gap-1">
                             <Star className="h-5 w-5 text-yellow-500 fill-current animate-pulse-once" />
@@ -306,7 +324,15 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                 {isExpanded && (
                   <div className="border-t border-gray-200 p-4 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {(selectedDialect === 'all' || selectedDialect === 'lebanese') && phrase.translations?.lebanese && (
+                      {sourceLanguage !== 'darija' && (
+                        <TranslationDisplay 
+                          translation={{ arabic: phrase.darija, latin: phrase.darija_latin || '' }}
+                          dialectName="Darija"
+                          flag="🇲🇦"
+                        />
+                      )}
+                      
+                      {sourceLanguage !== 'lebanese' && phrase.translations?.lebanese && (
                         <TranslationDisplay 
                           translation={phrase.translations.lebanese}
                           dialectName="Lebanese"
@@ -314,7 +340,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         />
                       )}
                       
-                      {(selectedDialect === 'all' || selectedDialect === 'syrian') && phrase.translations?.syrian && (
+                      {sourceLanguage !== 'syrian' && phrase.translations?.syrian && (
                         <TranslationDisplay 
                           translation={phrase.translations.syrian}
                           dialectName="Syrian"
@@ -322,7 +348,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         />
                       )}
                       
-                      {(selectedDialect === 'all' || selectedDialect === 'emirati') && phrase.translations?.emirati && (
+                      {sourceLanguage !== 'emirati' && phrase.translations?.emirati && (
                         <TranslationDisplay 
                           translation={phrase.translations.emirati}
                           dialectName="Emirati"
@@ -330,7 +356,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         />
                       )}
                       
-                      {(selectedDialect === 'all' || selectedDialect === 'saudi') && phrase.translations?.saudi && (
+                      {sourceLanguage !== 'saudi' && phrase.translations?.saudi && (
                         <TranslationDisplay 
                           translation={phrase.translations.saudi}
                           dialectName="Saudi"
@@ -338,7 +364,7 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
                         />
                       )}
                       
-                      {(selectedDialect === 'all' || selectedDialect === 'msa') && phrase.translations?.formal_msa && (
+                      {phrase.translations?.formal_msa && (
                         <TranslationDisplay 
                           translation={phrase.translations.formal_msa}
                           dialectName="Formal MSA"
