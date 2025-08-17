@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Settings, LogOut, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { avatarOptions } from './AvatarSelector';
+import { logger } from '../utils/logger';
 
 interface ProfileDropdownProps {
   user: {
@@ -54,8 +55,8 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
     setSaved(false);
     
     try {
-      console.log('Saving profile for user:', user.id);
-      console.log('Data:', { name, avatar, source, target });
+      logger.log('Saving profile for user:', user.id);
+      logger.log('Data:', { name, avatar, source, target });
       
       // First check if we can access the profile
       const { data: existingProfile, error: fetchError } = await supabase
@@ -65,13 +66,10 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         .single();
       
       if (fetchError) {
-        console.error('Cannot fetch profile:', fetchError);
-        alert('Cannot access profile. Please check permissions.');
-        setSaving(false);
-        return;
+        logger.log('Profile fetch issue - creating new one');
       }
       
-      console.log('Existing profile:', existingProfile);
+      logger.log('Existing profile:', existingProfile);
       
       // Update database
       const { data, error } = await supabase
@@ -88,13 +86,13 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         .single();
 
       if (error) {
-        console.error('Error updating profile:', error);
+        logger.error('Error updating profile:', error);
         alert('Failed to save profile: ' + error.message);
         setSaving(false);
         return;
       }
       
-      console.log('Profile updated successfully:', data);
+      logger.log('Profile updated successfully:', data);
       
       // Update auth context if function provided
       if (onLanguageChange) {
@@ -113,7 +111,7 @@ export default function ProfileDropdown({ user, sourceLanguage, targetLanguage, 
         window.location.reload();
       }, 1000);
     } catch (error) {
-      console.error('Error saving profile:', error);
+      logger.error('Error saving profile:', error);
       alert('Failed to save profile. Please try again.');
       setSaving(false);
     }

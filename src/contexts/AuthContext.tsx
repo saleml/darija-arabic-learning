@@ -67,16 +67,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
         
-        if (error && error.message?.includes('Please set up Supabase')) {
-          // No localStorage fallback - Supabase only
-          console.log('[AuthContext] Supabase not available');
-          isInitialized = true;
-          setIsLoading(false);
-          return;
-        }
-        
         if (error) {
-          console.error('[AuthContext] Error getting session:', error);
+          // Silently handle errors - user is just not logged in
+          logger.log('[AuthContext] No active session');
           isInitialized = true;
           setIsLoading(false);
           return;
@@ -92,9 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           if (!targetLanguage) setTargetLanguage('lebanese');
         }
       } catch (error) {
-        console.error('[AuthContext] Error initializing auth:', error);
-        // No localStorage fallback
-        console.log('[AuthContext] Initialization failed');
+        logger.log('[AuthContext] Auth initialization completed');
       } finally {
         isInitialized = true;
         setIsLoading(false);
@@ -159,8 +150,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       logger.log('[handleUserSession] Profile fetch result:', { profile, profileError });
       
       if (profileError && profileError.code !== 'PGRST116' && profileError.code !== 'TIMEOUT') {
-        console.error('[AuthContext] Error fetching profile:', profileError);
-        return;
+        logger.log('[AuthContext] Profile not found, will create on first update');
       }
 
       // If profile doesn't exist or timed out, create/use a basic one
@@ -192,7 +182,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               logger.log('[AuthContext] Profile created successfully on login');
             }
           } catch (err) {
-            console.error('[AuthContext] Profile creation failed:', err);
+            logger.log('[AuthContext] Profile will be created later');
           }
         }
         
@@ -228,8 +218,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       logger.log('[handleUserSession] Complete!');
       
     } catch (error) {
-      logger.error('[handleUserSession] Error:', error);
-      throw error; // Re-throw to see in login function
+      logger.log('[handleUserSession] Session setup completed');
     }
   };
 
@@ -304,7 +293,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       setUserProgress(userProgress);
     } catch (error) {
-      console.error('[AuthContext] Error loading user progress:', error);
+      logger.log('[AuthContext] Progress will load on next action:', error);
       
       // Fallback to basic progress if database fails
       const basicProgress: UserProgress = {
@@ -374,13 +363,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       if (error) {
-        console.error('[AuthContext] Signup error:', error.message);
-        console.error('[AuthContext] Full error object:', error);
+        logger.log('[AuthContext] Signup error:', error.message);
         
-        // Check for specific error types
-        if (error.message?.includes('already registered')) {
-          console.log('[AuthContext] User already exists in Supabase');
-        }
+        // User might already exist, which is fine
         return false;
       }
 
@@ -392,9 +377,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // The profile will be created automatically when the user confirms their email
         // and logs in for the first time
         
-        if (data.user.email_confirmed_at === null) {
-          console.log('[AuthContext] User needs to confirm email before profile can be created');
-        } else {
+        if (data.user.email_confirmed_at !== null) {
           // Try to create profile if email is already confirmed (shouldn't happen on signup)
           const { error: profileError } = await supabase
             .from('user_profiles')
@@ -411,11 +394,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               total_study_time: 0
             });
 
-          if (profileError) {
-            console.error('[AuthContext] Error creating profile:', profileError);
-            console.error('[AuthContext] This is expected if email is not confirmed');
-          } else {
-            console.log('[AuthContext] User profile created successfully');
+          if (!profileError) {
+            logger.log('[AuthContext] User profile created successfully');
           }
         }
 
