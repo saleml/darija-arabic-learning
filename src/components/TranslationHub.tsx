@@ -122,11 +122,11 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
     try {
       if (onMarkAsLearned) {
         // Use the Supabase-connected function
-
+        console.log('Marking as learned via onMarkAsLearned:', phraseId);
         await onMarkAsLearned(phraseId);
-
+        // Don't call onUpdateProgress here - let onMarkAsLearned handle it
       } else {
-
+        console.log('Marking as learned via local update:', phraseId);
         // Fallback to local update
         const newProgress = {
           ...userProgress,

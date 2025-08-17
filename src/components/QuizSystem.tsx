@@ -366,12 +366,25 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
   };
 
   const startQuiz = () => {
+    console.log('Starting quiz with:', {
+      phrasesCount: phrases.length,
+      eligiblePhrasesCount: eligiblePhrases.length,
+      difficulty,
+      quizLength
+    });
+    
     const questions = generateQuizQuestions(quizLength);
     
     if (questions.length === 0) {
-      alert('No phrases available for quiz. Try adjusting your filters.');
+      console.error('No questions generated!', {
+        eligiblePhrases: eligiblePhrases.length,
+        difficulty
+      });
+      alert('No phrases available for quiz. Try adjusting your filters or check if phrases are loaded.');
       return;
     }
+    
+    console.log('Quiz started with', questions.length, 'questions');
     
     setCurrentQuiz(questions);
     setCurrentQuestionIndex(0);
