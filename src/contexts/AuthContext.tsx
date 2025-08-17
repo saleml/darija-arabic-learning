@@ -121,6 +121,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    let isInitialized = false;
+    
     // Check for existing session
     const initializeAuth = async () => {
       console.log('[AuthContext] Initializing authentication...');
@@ -138,10 +141,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           if (userData.sourceLanguage) setSourceLanguage(userData.sourceLanguage);
           if (userData.targetLanguage) setTargetLanguage(userData.targetLanguage);
           
+          isInitialized = true;
           setIsLoading(false);
           return;
         } catch (e) {
           console.error('[AuthContext] Error parsing stored user:', e);
+          localStorage.removeItem('currentUser'); // Clear corrupted data
         }
       }
       
@@ -152,12 +157,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           // Fallback to localStorage for local development
           console.log('[AuthContext] Using localStorage fallback for local development');
           await initializeLocalStorage();
+          isInitialized = true;
           setIsLoading(false);
           return;
         }
         
         if (error) {
           console.error('[AuthContext] Error getting session:', error);
+          isInitialized = true;
           setIsLoading(false);
           return;
         }
@@ -173,12 +180,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Fallback to localStorage
         await initializeLocalStorage();
       } finally {
+        isInitialized = true;
         setIsLoading(false);
       }
     };
 
-    initializeAuth();
+    // Set a timeout to prevent infinite loading
+    timeoutId = setTimeout(() => {
+      if (!isInitialized) {
+        console.warn('[AuthContext] Authentication timeout - showing landing page');
+        setIsLoading(false);
+        setUser(null);
+      }
+    }, 5000); // 5 second timeout
 
+    initializeAuth();
+    
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
       console.log('[AuthContext] Auth state changed:', event);
@@ -190,8 +207,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUserProgress(null);
       }
     });
-
-    return () => subscription.unsubscribe();
+    
+    // Cleanup function
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleUserSession = async (supabaseUser: SupabaseUser) => {
