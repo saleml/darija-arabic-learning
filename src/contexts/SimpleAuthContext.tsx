@@ -37,7 +37,13 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
     
     if (!isLoaded) {
       console.log('Clerk not loaded yet...');
-      return;
+      // Set a max timeout even if Clerk doesn't load
+      const timeout = setTimeout(() => {
+        console.log('Clerk loading timeout - forcing app to continue');
+        setIsLoading(false);
+      }, 10000); // 10 second max wait
+      
+      return () => clearTimeout(timeout);
     }
 
     if (clerkUser) {
@@ -154,10 +160,30 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
         });
         setSourceLanguage(profile.source_language || 'darija');
         setTargetLanguage(profile.target_language || 'lebanese');
+      } else {
+        console.log('No profile available, using defaults');
+        setUser({
+          id: userId,
+          name: 'User',
+          email: email,
+          avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`
+        });
+        setSourceLanguage('darija');
+        setTargetLanguage('lebanese');
       }
     } catch (error) {
       console.error('Error loading profile:', error);
+      // Even on error, set default user
+      setUser({
+        id: userId,
+        name: 'User',
+        email: email,
+        avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`
+      });
+      setSourceLanguage('darija');
+      setTargetLanguage('lebanese');
     } finally {
+      console.log('Setting isLoading to false');
       setIsLoading(false);
     }
   };
