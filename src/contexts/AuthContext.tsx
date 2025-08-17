@@ -127,14 +127,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const handleUserSession = async (supabaseUser: SupabaseUser) => {
+    console.log('[handleUserSession] Starting for user:', supabaseUser.id);
     try {
       // Get user profile from database
+      console.log('[handleUserSession] Fetching user profile...');
       let { data: profile, error: profileError } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', supabaseUser.id)
         .single();
 
+      console.log('[handleUserSession] Profile fetch result:', { profile, profileError });
+      
       if (profileError && profileError.code !== 'PGRST116') {
         console.error('[AuthContext] Error fetching profile:', profileError);
         return;
@@ -178,11 +182,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         lastLogin: new Date().toISOString()
       };
 
+      console.log('[handleUserSession] Setting user data...');
       setUser(userData);
+      console.log('[handleUserSession] Loading user progress...');
       await loadUserProgress(supabaseUser.id, profile);
+      console.log('[handleUserSession] Complete!');
       
     } catch (error) {
-      console.error('[AuthContext] Error handling user session:', error);
+      console.error('[handleUserSession] Error:', error);
+      throw error; // Re-throw to see in login function
     }
   };
 
@@ -274,28 +282,40 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     console.log('[AuthContext] Login attempt for:', email);
+    console.log('[AuthContext] Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
     
     try {
+      console.log('[AuthContext] Calling supabase.auth.signInWithPassword...');
+      const startTime = Date.now();
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
+      
+      const elapsed = Date.now() - startTime;
+      console.log(`[AuthContext] Supabase response received after ${elapsed}ms`);
 
       if (error) {
         console.error('[AuthContext] Login error:', error.message);
+        console.error('[AuthContext] Full error:', error);
         return false;
       }
 
       if (data?.user) {
         console.log('[AuthContext] Login successful for:', data.user.email);
+        console.log('[AuthContext] User ID:', data.user.id);
         // Manually handle the user session instead of waiting for auth state change
+        console.log('[AuthContext] Calling handleUserSession...');
         await handleUserSession(data.user);
+        console.log('[AuthContext] handleUserSession completed');
         return true;
       }
 
+      console.log('[AuthContext] No user in response data');
       return false;
     } catch (error) {
-      console.error('[AuthContext] Login error:', error);
+      console.error('[AuthContext] Login exception:', error);
       return false;
     }
   };
