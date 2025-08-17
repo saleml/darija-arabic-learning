@@ -1,44 +1,18 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
-// Check if we have real Supabase credentials or placeholder values
-const isPlaceholder = !supabaseUrl || 
-                     !supabaseAnonKey || 
-                     supabaseUrl.includes('placeholder') || 
-                     supabaseAnonKey.includes('placeholder');
-
-// Create mock or real Supabase client
-let supabaseClient: any;
-
-if (isPlaceholder) {
-  console.warn('⚠️ Using placeholder Supabase credentials. Set up real Supabase project for full functionality.');
-  
-  // Create a mock Supabase client for local development
-  supabaseClient = {
-    auth: {
-      getSession: () => Promise.resolve({ data: { session: null }, error: null }),
-      signInWithPassword: () => Promise.resolve({ data: { user: null }, error: { message: 'Please set up Supabase credentials' } }),
-      signUp: () => Promise.resolve({ data: { user: null }, error: { message: 'Please set up Supabase credentials' } }),
-      signOut: () => Promise.resolve({ error: null }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } })
-    },
-    from: () => ({
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: { code: 'MOCK' } }) }) }),
-      insert: () => Promise.resolve({ error: null }),
-      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
-      upsert: () => Promise.resolve({ error: null })
-    })
-  };
-} else {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Missing Supabase environment variables. Please check your .env file.');
-  }
-  supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing Supabase environment variables!');
+  console.error('VITE_SUPABASE_URL:', supabaseUrl ? 'Set' : 'Missing');
+  console.error('VITE_SUPABASE_ANON_KEY:', supabaseAnonKey ? 'Set' : 'Missing');
+  throw new Error('Missing Supabase credentials. Please check your .env file.');
 }
 
-export const supabase = supabaseClient;
+console.log('Initializing Supabase with URL:', supabaseUrl);
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Database types
 export interface UserProfile {

@@ -50,19 +50,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [targetLanguage, setTargetLanguage] = useState<string>('lebanese');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simple hash function for localStorage (not for production use)
-  const hashPassword = async (password: string): Promise<string> => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password + 'darija_salt_2025');
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  };
-
-  const verifyPassword = async (password: string, hash: string): Promise<boolean> => {
-    const passwordHash = await hashPassword(password);
-    return passwordHash === hash;
-  };
 
   // localStorage fallback for local development
   const initializeLocalStorage = async () => {
@@ -364,31 +351,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('[AuthContext] Login attempt for:', email);
     
     try {
-      // Create a promise that rejects after 5 seconds
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Supabase timeout')), 5000)
-      );
-      
-      // Race between the actual request and the timeout
-      const { data, error } = await Promise.race([
-        supabase.auth.signInWithPassword({ email, password }),
-        timeoutPromise
-      ]).catch((err) => {
-        console.log('[AuthContext] Supabase call failed or timed out:', err.message);
-        throw err;
-      }) as any;
-
-      if (error && error.message?.includes('Please set up Supabase')) {
-        // Fallback to localStorage
-        return loginLocal(email, password);
-      }
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
       if (error) {
         console.error('[AuthContext] Login error:', error.message);
-        // Check if it's an email confirmation issue
-        if (error.message?.includes('Email not confirmed')) {
-          console.log('[AuthContext] User needs to confirm email before logging in');
-        }
         return false;
       }
 
@@ -400,83 +369,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       return false;
     } catch (error) {
-      console.error('[AuthContext] Login error, falling back to localStorage:', error);
-      return loginLocal(email, password);
+      console.error('[AuthContext] Login error:', error);
+      return false;
     }
   };
 
-  const loginLocal = async (email: string, password: string): Promise<boolean> => {
-    console.log('[AuthContext] Local login attempt for:', email);
-    
-    // Get all users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    // Find user with matching email
-    const user = users.find((u: any) => u.email === email);
-    
-    if (user) {
-      // Verify password
-      const isValidPassword = await verifyPassword(password, user.password);
-      
-      if (isValidPassword) {
-        console.log('[AuthContext] User found and password verified:', user.email);
-        const { password: _, ...userWithoutPassword } = user;
-        userWithoutPassword.lastLogin = new Date().toISOString();
-        
-        // Update user in storage
-        const updatedUsers = users.map((u: any) => 
-          u.id === user.id ? { ...u, lastLogin: userWithoutPassword.lastLogin } : u
-        );
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
-        
-        // Set current user
-        setUser(userWithoutPassword);
-        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-        
-        // Load user's progress
-        loadUserProgressLocal(user.id);
-        
-        console.log('[AuthContext] Local login successful');
-        return true;
-      }
-    }
-    
-    console.log('[AuthContext] Local login failed - user not found or invalid password');
-    return false;
-  };
 
   const signup = async (email: string, password: string, name: string, avatarUrl?: string): Promise<boolean> => {
     console.log('[AuthContext] Signup attempt for:', email, name);
     
     try {
-      // Create a promise that rejects after 5 seconds
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Supabase timeout')), 5000)
-      );
-      
-      // Race between the actual request and the timeout
-      const { data, error } = await Promise.race([
-        supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              full_name: name,
-              avatar_url: avatarUrl || getRandomAvatar()
-            }
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+            avatar_url: avatarUrl || getRandomAvatar()
           }
-        }),
-        timeoutPromise
-      ]).catch((err) => {
-        console.log('[AuthContext] Supabase signup call failed or timed out:', err.message);
-        throw err;
-      }) as any;
-
-      if (error && error.message?.includes('Please set up Supabase')) {
-        // Fallback to localStorage
-        console.log('[AuthContext] Supabase not configured, using localStorage');
-        return signupLocal(email, password, name, avatarUrl);
-      }
+        }
+      });
 
       if (error) {
         console.error('[AuthContext] Signup error:', error.message);
@@ -528,56 +440,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return false;
     } catch (error) {
       console.error('[AuthContext] Signup error:', error);
-      return signupLocal(email, password, name, avatarUrl);
+      return false;
     }
   };
 
-  const signupLocal = async (email: string, password: string, name: string, avatarUrl?: string): Promise<boolean> => {
-    console.log('[AuthContext] Local signup attempt for:', email, name);
-    
-    // Get existing users
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    // Check if email already exists
-    if (users.some((u: any) => u.email === email)) {
-      console.log('[AuthContext] Local signup failed - email already exists');
-      return false;
-    }
-    
-    // Hash password
-    const hashedPassword = await hashPassword(password);
-    
-    // Create new user
-    const newUser = {
-      id: `user_${Date.now()}`,
-      email,
-      password: hashedPassword,
-      name,
-      avatarUrl: avatarUrl || getRandomAvatar(),
-      createdAt: new Date().toISOString(),
-      lastLogin: new Date().toISOString()
-    };
-    
-    console.log('[AuthContext] Creating new user:', newUser.email);
-    
-    // Save user
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    
-    // Set current user (without password)
-    const { password: _, ...userWithoutPassword } = newUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-    
-    // Initialize progress for new user
-    loadUserProgressLocal(newUser.id);
-    
-    // DON'T set language setup flag for new users - they need to see the setup screen
-    // localStorage.setItem(`languages_setup_${newUser.id}`, 'true'); // <- DON'T DO THIS
-    
-    console.log('[AuthContext] Local signup successful - user needs language setup');
-    return true;
-  };
 
   const resetPassword = async (email: string): Promise<boolean> => {
     console.log('[AuthContext] Password reset request for:', email);
@@ -589,7 +455,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (error && error.message?.includes('Please set up Supabase')) {
         // Fallback to localStorage - just check if email exists
-        return resetPasswordLocal(email);
+        return false;
       }
 
       if (error) {
@@ -601,7 +467,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return true;
     } catch (error) {
       console.error('[AuthContext] Password reset error:', error);
-      return resetPasswordLocal(email);
+      return false;
     }
   };
 
