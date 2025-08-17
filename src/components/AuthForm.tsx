@@ -119,13 +119,6 @@ export default function AuthForm({ onLogin, onSignup, onPasswordReset, onClose }
       console.error('[AuthForm] Unexpected error:', err);
       setError('An error occurred. Please try again.');
       setIsLoading(false);
-    } finally {
-      // Ensure loading state is cleared no matter what
-      console.log('[AuthForm] Finally block - ensuring loading state is cleared');
-      if (isLoading) {
-        console.log('[AuthForm] Loading was still true in finally, setting to false');
-        setIsLoading(false);
-      }
     }
   };
 

@@ -244,7 +244,7 @@ function App() {
                   <div className="text-gray-600">Authentic Phrases</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600 mb-2">4</div>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">5</div>
                   <div className="text-gray-600">Arabic Dialects</div>
                 </div>
                 <div className="text-center">
