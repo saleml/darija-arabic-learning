@@ -74,7 +74,15 @@ export default function DashboardPage() {
       literal_english: sent.english || sent.literal_english || '',
       english: sent.english || '',
       transliteration: sent.darija_latin || '',
-      translations: sent.translations,
+      // Convert string translations to object format
+      translations: {
+        lebanese: sent.translations?.lebanese ? { phrase: sent.translations.lebanese, latin: '', audio: null } : undefined,
+        syrian: sent.translations?.syrian ? { phrase: sent.translations.syrian, latin: '', audio: null } : undefined,
+        emirati: sent.translations?.emirati ? { phrase: sent.translations.emirati, latin: '', audio: null } : undefined,
+        saudi: sent.translations?.saudi ? { phrase: sent.translations.saudi, latin: '', audio: null } : undefined,
+        egyptian: sent.translations?.egyptian ? { phrase: sent.translations.egyptian, latin: '', audio: null } : undefined,
+        formal_msa: sent.translations?.msa ? { phrase: sent.translations.msa, latin: '', audio: null } : undefined
+      },
       // Always use 'daily_essentials' for sentences to keep them organized
       category: 'daily_essentials',
       difficulty: sent.difficulty || 'beginner',
