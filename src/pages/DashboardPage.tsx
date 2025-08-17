@@ -109,62 +109,65 @@ export default function DashboardPage() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex gap-6">
+            <nav className="hidden lg:flex gap-2 xl:gap-4">
               <button
                 onClick={() => handleTabChange('hub')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-2 xl:px-3 py-2 rounded-lg transition-colors text-sm ${
                   activeTab === 'hub'
                     ? 'bg-blue-100 text-blue-700 font-semibold'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
-                <Book className="inline h-4 w-4 mr-2" />
-                Translation Hub
+                <Book className="inline h-4 w-4 mr-1" />
+                <span className="hidden xl:inline">Translation Hub</span>
+                <span className="xl:hidden">Hub</span>
               </button>
               <button
                 onClick={() => handleTabChange('quiz')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-2 xl:px-3 py-2 rounded-lg transition-colors text-sm ${
                   activeTab === 'quiz'
                     ? 'bg-blue-100 text-blue-700 font-semibold'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
-                <Brain className="inline h-4 w-4 mr-2" />
+                <Brain className="inline h-4 w-4 mr-1" />
                 Quiz
               </button>
               <button
                 onClick={() => handleTabChange('progress')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-2 xl:px-3 py-2 rounded-lg transition-colors text-sm ${
                   activeTab === 'progress'
                     ? 'bg-blue-100 text-blue-700 font-semibold'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
-                <Trophy className="inline h-4 w-4 mr-2" />
+                <Trophy className="inline h-4 w-4 mr-1" />
                 Progress
               </button>
               <button
                 onClick={() => handleTabChange('culture')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-2 xl:px-3 py-2 rounded-lg transition-colors text-sm ${
                   activeTab === 'culture'
                     ? 'bg-blue-100 text-blue-700 font-semibold'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
-                <Globe className="inline h-4 w-4 mr-2" />
+                <Globe className="inline h-4 w-4 mr-1" />
                 Culture
               </button>
             </nav>
 
             {/* User Menu */}
-            <div className="flex items-center gap-4">
-              <LanguageHeader
-                sourceLanguage={sourceLanguage}
-                targetLanguage={targetLanguage}
-                onLanguageChange={updateLanguagePreferences}
-              />
+            <div className="flex items-center gap-2">
+              <div className="hidden sm:block">
+                <LanguageHeader
+                  sourceLanguage={sourceLanguage || 'darija'}
+                  targetLanguage={targetLanguage || 'lebanese'}
+                  onLanguageChange={updateLanguagePreferences}
+                />
+              </div>
               
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 {user.avatarUrl && (
                   <img 
                     src={user.avatarUrl} 
@@ -187,7 +190,7 @@ export default function DashboardPage() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
               >
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -197,8 +200,15 @@ export default function DashboardPage() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
+          <div className="lg:hidden bg-white border-t">
             <div className="px-4 py-2 space-y-2">
+              <div className="sm:hidden pb-2 border-b">
+                <LanguageHeader
+                  sourceLanguage={sourceLanguage || 'darija'}
+                  targetLanguage={targetLanguage || 'lebanese'}
+                  onLanguageChange={updateLanguagePreferences}
+                />
+              </div>
               <button
                 onClick={() => handleTabChange('hub')}
                 className={`w-full text-left px-4 py-2 rounded-lg ${

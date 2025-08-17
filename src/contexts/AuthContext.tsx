@@ -47,8 +47,9 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
-  const [sourceLanguage, setSourceLanguage] = useState<string>('darija');
-  const [targetLanguage, setTargetLanguage] = useState<string>('lebanese');
+  // Don't set default values yet - wait for profile to load
+  const [sourceLanguage, setSourceLanguage] = useState<string>('');
+  const [targetLanguage, setTargetLanguage] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -86,6 +87,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           await handleUserSession(session.user);
         } else {
           logger.log('[AuthContext] No existing session found');
+          // Set default languages if no session
+          if (!sourceLanguage) setSourceLanguage('darija');
+          if (!targetLanguage) setTargetLanguage('lebanese');
         }
       } catch (error) {
         console.error('[AuthContext] Error initializing auth:', error);
@@ -104,7 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsLoading(false);
         setUser(null);
       }
-    }, 10000); // 10 second timeout for slow connections
+    }, 3000); // 3 second timeout - faster loading
 
     initializeAuth();
     
@@ -222,7 +226,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         loadUserProgress(supabaseUser.id, profile).catch(err => {
           logger.error('[handleUserSession] Failed to load progress:', err);
         });
-      }, 100);
+      }, 50);
       
       logger.log('[handleUserSession] Complete!');
       
@@ -242,7 +246,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             .from('phrase_progress')
             .select('*')
             .eq('user_id', userId),
-          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 2000))
+          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 1000))
         ]),
         // Get recent quiz scores - with timeout
         Promise.race([
@@ -252,7 +256,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             .eq('user_id', userId)
             .order('created_at', { ascending: false })
             .limit(10), // Reduced from 20 for faster loading
-          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 2000))
+          new Promise((resolve) => setTimeout(() => resolve({ data: null }), 1000))
         ])
       ]);
 
