@@ -9,11 +9,11 @@ function App() {
   const { isLoaded, isSignedIn } = useUser();
   const { user, sourceLanguage, targetLanguage, updateProfile, isLoading } = useAuth();
   
-  console.log('App - isLoaded:', isLoaded, 'isLoading:', isLoading, 'isSignedIn:', isSignedIn, 'user:', user?.id);
+  // console.log('App - isLoaded:', isLoaded, 'isLoading:', isLoading, 'isSignedIn:', isSignedIn, 'user:', user?.id);
   
   // Show loading state while Clerk is initializing
   if (!isLoaded || isLoading) {
-    console.log('App showing loading screen...');
+    // console.log('App showing loading screen...');
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-xl">Loading...</div>

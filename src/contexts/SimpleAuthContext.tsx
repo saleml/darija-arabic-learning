@@ -33,13 +33,13 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('SimpleAuthContext - isLoaded:', isLoaded, 'clerkUser:', clerkUser?.id);
+    // console.log('SimpleAuthContext - isLoaded:', isLoaded, 'clerkUser:', clerkUser?.id);
     
     if (!isLoaded) {
-      console.log('Clerk not loaded yet...');
+      // console.log('Clerk not loaded yet...');
       // Set a max timeout even if Clerk doesn't load
       const timeout = setTimeout(() => {
-        console.log('Clerk loading timeout - forcing app to continue');
+        // console.log('Clerk loading timeout - forcing app to continue');
         setIsLoading(false);
       }, 10000); // 10 second max wait
       
@@ -47,20 +47,20 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
     }
 
     if (clerkUser) {
-      console.log('User signed in, loading profile...');
+      // console.log('User signed in, loading profile...');
       loadOrCreateProfile(clerkUser.id, clerkUser.primaryEmailAddress?.emailAddress || '');
     } else {
-      console.log('No user signed in');
+      // console.log('No user signed in');
       setUser(null);
       setIsLoading(false);
     }
   }, [clerkUser, isLoaded]);
 
   const loadOrCreateProfile = async (userId: string, email: string) => {
-    console.log('loadOrCreateProfile called for:', userId, email);
+    // console.log('loadOrCreateProfile called for:', userId, email);
     try {
       // Try to load existing profile from Supabase with timeout
-      console.log('Fetching profile from Supabase...');
+      // console.log('Fetching profile from Supabase...');
       
       // Create a timeout promise
       const timeoutPromise = new Promise((_, reject) => {
@@ -80,15 +80,15 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
         const result = await Promise.race([queryPromise, timeoutPromise]);
         ({ data: profile, error } = result as any);
       } catch (timeoutError) {
-        console.log('Supabase query timed out, creating new profile...');
+        // console.log('Supabase query timed out, creating new profile...');
         error = timeoutError;
         profile = null;
       }
       
-      console.log('Supabase response - profile:', profile, 'error:', error);
+      // console.log('Supabase response - profile:', profile, 'error:', error);
 
       if (error || !profile) {
-        console.log('No existing profile found, creating new one...');
+        // console.log('No existing profile found, creating new one...');
         // Create new profile if doesn't exist
         const newProfile = {
           id: userId,
@@ -102,7 +102,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
           total_study_time: 0
         };
         
-        console.log('Attempting to create profile:', newProfile);
+        // console.log('Attempting to create profile:', newProfile);
         
         try {
           // Also add timeout to insert operation
@@ -126,7 +126,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
             // Even if Supabase fails, create a local profile so app works
             profile = newProfile;
           } else {
-            console.log('Profile created successfully:', created);
+            // console.log('Profile created successfully:', created);
             profile = created;
           }
         } catch (err) {
@@ -139,7 +139,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       if (profile) {
         // If profile exists but with old Supabase ID, update it to use Clerk ID
         if (profile.id !== userId) {
-          console.log('Updating profile ID from', profile.id, 'to', userId);
+          // console.log('Updating profile ID from', profile.id, 'to', userId);
           // Create new profile with Clerk ID
           const { data: newProfile } = await supabase
             .from('user_profiles')
@@ -161,7 +161,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
         setSourceLanguage(profile.source_language || 'darija');
         setTargetLanguage(profile.target_language || 'lebanese');
       } else {
-        console.log('No profile available, using defaults');
+        // console.log('No profile available, using defaults');
         setUser({
           id: userId,
           name: 'User',
@@ -183,7 +183,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       setSourceLanguage('darija');
       setTargetLanguage('lebanese');
     } finally {
-      console.log('Setting isLoading to false');
+      // console.log('Setting isLoading to false');
       setIsLoading(false);
     }
   };
@@ -225,7 +225,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
       if (updates.sourceLanguage !== undefined) supabaseUpdate.source_language = updates.sourceLanguage;
       if (updates.targetLanguage !== undefined) supabaseUpdate.target_language = updates.targetLanguage;
 
-      console.log('Updating profile in Supabase:', supabaseUpdate);
+      // console.log('Updating profile in Supabase:', supabaseUpdate);
 
       // Try to update in Supabase with timeout
       const updatePromise = supabase
@@ -248,7 +248,7 @@ export function SimpleAuthProvider({ children }: { children: React.ReactNode }) 
         console.error('Error updating profile in database:', error);
         // Don't throw - local state is already updated
       } else {
-        console.log('Profile updated in database:', data);
+        // console.log('Profile updated in database:', data);
       }
       
     } catch (error) {
