@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
+import { Book, Brain, Trophy, Globe, Menu, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import TranslationHub from '../components/TranslationHub';
 import QuizSystem from '../components/QuizSystem';
 import ProgressTracker from '../components/ProgressTracker';
 import CulturalCards from '../components/CulturalCards';
-import LanguageHeader from '../components/LanguageHeader';
+import ProfileDropdown from '../components/ProfileDropdown';
 import { Phrase } from '../types';
 import { logger } from '../utils/logger';
 import beginnerPhrases from '../../database/beginner_phrases.json';
@@ -159,33 +159,13 @@ export default function DashboardPage() {
 
             {/* User Menu */}
             <div className="flex items-center gap-2">
-              <div className="hidden sm:block">
-                <LanguageHeader
-                  sourceLanguage={sourceLanguage || 'darija'}
-                  targetLanguage={targetLanguage || 'lebanese'}
-                  onLanguageChange={updateLanguagePreferences}
-                />
-              </div>
-              
-              <div className="hidden lg:flex items-center gap-2">
-                {user.avatarUrl && (
-                  <img 
-                    src={user.avatarUrl} 
-                    alt={user.name} 
-                    className="h-8 w-8 rounded-full"
-                  />
-                )}
-                <span className="text-sm font-medium text-gray-700">
-                  {user.name}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-                  title="Logout"
-                >
-                  <LogOut className="h-5 w-5" />
-                </button>
-              </div>
+              <ProfileDropdown
+                user={user}
+                sourceLanguage={sourceLanguage}
+                targetLanguage={targetLanguage}
+                onLogout={handleLogout}
+                onLanguageChange={updateLanguagePreferences}
+              />
 
               {/* Mobile menu button */}
               <button
@@ -202,13 +182,6 @@ export default function DashboardPage() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t">
             <div className="px-4 py-2 space-y-2">
-              <div className="sm:hidden pb-2 border-b">
-                <LanguageHeader
-                  sourceLanguage={sourceLanguage || 'darija'}
-                  targetLanguage={targetLanguage || 'lebanese'}
-                  onLanguageChange={updateLanguagePreferences}
-                />
-              </div>
               <button
                 onClick={() => handleTabChange('hub')}
                 className={`w-full text-left px-4 py-2 rounded-lg ${

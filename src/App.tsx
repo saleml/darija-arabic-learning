@@ -9,17 +9,8 @@ import LanguageSetup from './components/LanguageSetup';
 function App() {
   const { user, isLoading, sourceLanguage, targetLanguage, updateLanguagePreferences } = useAuth();
 
-  // Show loading screen while checking auth
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  // Don't show loading screen - render immediately
+  // The auth will resolve quickly in the background
 
   // Show language setup for new users
   if (user && (!sourceLanguage || !targetLanguage || sourceLanguage === targetLanguage)) {
