@@ -260,14 +260,15 @@ export default function CulturalCards({ phrases }: Props) {
   const Icon = currentCard.icon;
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Globe className="h-6 w-6 text-blue-500" />
-            Cultural Context & Tips
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-2xl font-bold flex items-center gap-2">
+            <Globe className="h-5 sm:h-6 w-5 sm:w-6 text-blue-500" />
+            <span className="hidden sm:inline">Cultural Context & Tips</span>
+            <span className="sm:hidden">Cultural Tips</span>
           </h2>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2 w-full sm:w-auto">
             {categories.map(cat => (
               <button
                 key={cat}
@@ -275,7 +276,7 @@ export default function CulturalCards({ phrases }: Props) {
                   setFilter(cat);
                   setCurrentCardIndex(0);
                 }}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base flex-1 sm:flex-initial ${
                   filter === cat ? 'bg-blue-500 text-white' : 'bg-gray-100'
                 }`}
               >
@@ -285,33 +286,33 @@ export default function CulturalCards({ phrases }: Props) {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-3 sm:p-6">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <button
               onClick={prevCard}
-              className="p-2 rounded-lg bg-white shadow hover:shadow-lg transition-shadow"
+              className="p-1.5 sm:p-2 rounded-lg bg-white shadow hover:shadow-lg transition-shadow"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 sm:h-5 w-4 sm:w-5" />
             </button>
             
-            <div className="flex-1 mx-4">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="p-3 bg-white rounded-lg shadow">
-                  <Icon className="h-8 w-8 text-indigo-500" />
+            <div className="flex-1 mx-2 sm:mx-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+                <div className="p-2 sm:p-3 bg-white rounded-lg shadow">
+                  <Icon className="h-6 sm:h-8 w-6 sm:w-8 text-indigo-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">{currentCard.title}</h3>
+                <h3 className="text-base sm:text-2xl font-bold text-gray-800 text-center">{currentCard.title}</h3>
               </div>
               
-              <p className="text-gray-700 leading-relaxed text-center">
+              <p className="text-xs sm:text-base text-gray-700 leading-relaxed text-center">
                 {currentCard.content}
               </p>
             </div>
             
             <button
               onClick={nextCard}
-              className="p-2 rounded-lg bg-white shadow hover:shadow-lg transition-shadow"
+              className="p-1.5 sm:p-2 rounded-lg bg-white shadow hover:shadow-lg transition-shadow"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 sm:h-5 w-4 sm:w-5" />
             </button>
           </div>
 
@@ -328,19 +329,19 @@ export default function CulturalCards({ phrases }: Props) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
           <div>
-            <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-blue-500" />
+            <h4 className="font-semibold text-sm sm:text-lg mb-2 sm:mb-3 flex items-center gap-1 sm:gap-2">
+              <MapPin className="h-4 sm:h-5 w-4 sm:w-5 text-blue-500" />
               Regional Differences
             </h4>
-            <div className="space-y-2">
+            <div className="space-y-1 sm:space-y-2">
               {currentCard.regionalDifferences.map((diff, idx) => (
-                <div key={idx} className="flex gap-3 p-3 bg-gray-50 rounded-lg">
-                  <span className="font-semibold text-blue-600 min-w-[80px]">
+                <div key={idx} className="flex flex-col sm:flex-row gap-1 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  <span className="font-semibold text-blue-600 text-xs sm:text-base sm:min-w-[80px]">
                     {diff.region}:
                   </span>
-                  <span className="text-gray-700">{diff.note}</span>
+                  <span className="text-gray-700 text-xs sm:text-base">{diff.note}</span>
                 </div>
               ))}
             </div>

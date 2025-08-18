@@ -147,35 +147,35 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
   };
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <BarChart3 className="h-6 w-6 text-blue-500" />
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-2xl font-bold flex items-center gap-2">
+            <BarChart3 className="h-5 sm:h-6 w-5 sm:w-6 text-blue-500" />
             Your Progress
           </h2>
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-2 w-full sm:w-auto overflow-x-auto">
             <button
               onClick={() => setView('overview')}
-              className={`px-4 py-2 rounded-lg ${view === 'overview' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base whitespace-nowrap ${view === 'overview' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
             >
               Overview
             </button>
             <button
               onClick={() => setView('achievements')}
-              className={`px-4 py-2 rounded-lg ${view === 'achievements' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base whitespace-nowrap ${view === 'achievements' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
             >
               Achievements
             </button>
             <button
               onClick={() => setView('settings')}
-              className={`px-4 py-2 rounded-lg ${view === 'settings' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base whitespace-nowrap ${view === 'settings' ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
             >
               Settings
             </button>
             <button
               onClick={() => setView('debug')}
-              className={`px-4 py-2 rounded-lg ${view === 'debug' ? 'bg-red-500 text-white' : 'bg-gray-100'}`}
+              className={`px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base whitespace-nowrap ${view === 'debug' ? 'bg-red-500 text-white' : 'bg-gray-100'}`}
             >
               Debug
             </button>
@@ -183,11 +183,11 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
         </div>
 
         {view === 'overview' && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Overall Progress</h3>
-                <span className="text-3xl font-bold text-blue-600">{stats.percentage}%</span>
+          <div className="space-y-4 sm:space-y-6">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 sm:p-6">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-sm sm:text-lg font-semibold">Overall Progress</h3>
+                <span className="text-2xl sm:text-3xl font-bold text-blue-600">{stats.percentage}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
                 <div 
@@ -197,33 +197,33 @@ export default function ProgressTracker({ userProgress, totalPhrases, onUpdatePr
               </div>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div title="Phrases you've successfully mastered by answering correctly in a quiz">
-                  <p className="text-2xl font-bold text-green-600">{stats.learned}</p>
-                  <p className="text-sm text-gray-600 cursor-help">Mastered</p>
+                  <p className="text-xl sm:text-2xl font-bold text-green-600">{stats.learned}</p>
+                  <p className="text-xs sm:text-sm text-gray-600 cursor-help">Mastered</p>
                 </div>
                 <div title="Phrases you haven't mastered yet">
-                  <p className="text-2xl font-bold text-gray-400">{stats.remaining}</p>
-                  <p className="text-sm text-gray-600 cursor-help">Not Mastered</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-400">{stats.remaining}</p>
+                  <p className="text-xs sm:text-sm text-gray-600 cursor-help">Not Mastered</p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Your average score across all quizzes you've taken">
-                <div className="flex items-center gap-3 mb-2">
-                  <Trophy className="h-5 w-5 text-yellow-500" />
-                  <span className="font-semibold">Quiz Performance</span>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
+              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 cursor-help" title="Your average score across all quizzes you've taken">
+                <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                  <Trophy className="h-4 sm:h-5 w-4 sm:w-5 text-yellow-500" />
+                  <span className="text-xs sm:text-base font-semibold">Quiz Score</span>
                 </div>
-                <p className="text-2xl font-bold">{stats.averageScore}%</p>
-                <p className="text-sm text-gray-600">Average score ({stats.totalQuizzes} quizzes)</p>
+                <p className="text-lg sm:text-2xl font-bold">{stats.averageScore}%</p>
+                <p className="text-[10px] sm:text-sm text-gray-600">Avg ({stats.totalQuizzes} quiz)</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Number of consecutive days you've practiced. Keep it up to maintain your streak!">
-                <div className="flex items-center gap-3 mb-2">
-                  <Flame className="h-5 w-5 text-orange-500" />
-                  <span className="font-semibold">Current Streak</span>
+              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 cursor-help" title="Number of consecutive days you've practiced. Keep it up to maintain your streak!">
+                <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                  <Flame className="h-4 sm:h-5 w-4 sm:w-5 text-orange-500" />
+                  <span className="text-xs sm:text-base font-semibold">Streak</span>
                 </div>
-                <p className="text-2xl font-bold">{stats.dailyStreak} days</p>
-                <p className="text-sm text-gray-600">Best: {stats.bestStreak} days</p>
+                <p className="text-lg sm:text-2xl font-bold">{stats.dailyStreak} days</p>
+                <p className="text-[10px] sm:text-sm text-gray-600">Best: {stats.bestStreak}d</p>
               </div>
 
               <div className="bg-gray-50 rounded-lg p-4 cursor-help" title="Total hours you've spent learning and practicing">

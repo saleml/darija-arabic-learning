@@ -1099,15 +1099,15 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-4">
-              <h2 className="text-xl font-bold">Question {currentQuestionIndex + 1} of {currentQuiz.length}</h2>
-              <div className="flex gap-1">
+        <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6 h-[calc(100vh-120px)] sm:h-auto overflow-y-auto">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-6 gap-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full">
+              <h2 className="text-base sm:text-xl font-bold">Q{currentQuestionIndex + 1}/{currentQuiz.length}</h2>
+              <div className="flex gap-0.5 sm:gap-1">
                 {currentQuiz.map((q, idx) => (
                   <div
                     key={idx}
-                    className={`w-8 h-2 rounded-full transition-all ${
+                    className={`w-6 sm:w-8 h-1.5 sm:h-2 rounded-full transition-all ${
                       idx < currentQuestionIndex 
                         ? (q.isCorrect ? 'bg-green-500' : 'bg-red-500')
                         : idx === currentQuestionIndex 
@@ -1118,42 +1118,26 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                 ))}
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => {
-                  if (confirm('Are you sure you want to restart the quiz? Your current progress will be lost.')) {
-                    setCurrentQuiz([]);
-                    setCurrentQuestionIndex(0);
-                    setScore(0);
-                    setQuizComplete(false);
-                    setShowAnswer(false);
-                    setSelectedWords([]);
-                    setAvailableWords([]);
-                  }
-                }}
-                className="px-3 py-1 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
-              >
-                Restart Quiz
-              </button>
+            <div className="flex items-center gap-2 sm:gap-4">
               {streak > 2 && (
                 <div className="flex items-center gap-1 text-orange-500">
-                  <Flame className="h-5 w-5 animate-pulse" />
-                  <span className="font-bold">{streak} streak!</span>
+                  <Flame className="h-4 sm:h-5 w-4 sm:w-5 animate-pulse" />
+                  <span className="text-sm sm:text-base font-bold">{streak}</span>
                 </div>
               )}
-              <div className="text-lg font-semibold">Score: {score}/{currentQuestionIndex}</div>
+              <div className="text-sm sm:text-lg font-semibold whitespace-nowrap">Score: {score}/{currentQuestionIndex}</div>
             </div>
           </div>
           
           {currentQuestion && (
-            <div className="space-y-6">
-              <div className="p-6 bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg animate-fade-in">
+            <div className="space-y-3 sm:space-y-6">
+              <div className="p-3 sm:p-6 bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg animate-fade-in">
                 <div className="text-center">
-                  <p className="text-gray-600 mb-2 flex items-center justify-center gap-2">
-                    <BookOpen className="h-4 w-4" />
+                  <p className="text-xs sm:text-base text-gray-600 mb-1 sm:mb-2 flex items-center justify-center gap-1 sm:gap-2">
+                    <BookOpen className="h-3 sm:h-4 w-3 sm:w-4" />
                     Translate from {sourceDialect === 'darija' ? 'Darija' : sourceDialect.charAt(0).toUpperCase() + sourceDialect.slice(1)}:
                   </p>
-                  <p className="text-3xl font-bold arabic-text rtl mb-2">{
+                  <p className="text-xl sm:text-3xl font-bold arabic-text rtl mb-1 sm:mb-2">{
                     sourceDialect === 'darija' ? currentQuestion.phrase.darija :
                     sourceDialect === 'lebanese' && currentQuestion.phrase.translations?.lebanese ? 
                       (typeof currentQuestion.phrase.translations.lebanese === 'string' ? currentQuestion.phrase.translations.lebanese : currentQuestion.phrase.translations.lebanese.phrase) :
@@ -1165,7 +1149,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                       (typeof currentQuestion.phrase.translations.saudi === 'string' ? currentQuestion.phrase.translations.saudi : currentQuestion.phrase.translations.saudi.phrase) :
                     currentQuestion.phrase.darija
                   }</p>
-                  <p className="text-xl text-gray-700">{
+                  <p className="text-sm sm:text-xl text-gray-700">{
                     sourceDialect === 'darija' ? currentQuestion.phrase.darija_latin :
                     sourceDialect === 'lebanese' && currentQuestion.phrase.translations?.lebanese && typeof currentQuestion.phrase.translations.lebanese === 'object' ? 
                       currentQuestion.phrase.translations.lebanese.latin :
@@ -1177,10 +1161,10 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                       currentQuestion.phrase.translations.saudi.latin :
                     currentQuestion.phrase.darija_latin
                   }</p>
-                  <p className="text-gray-500 mt-2">"{currentQuestion.phrase.literal_english}"</p>
-                  <div className="mt-4 flex justify-center gap-2">
+                  <p className="text-xs sm:text-base text-gray-500 mt-1 sm:mt-2">"{currentQuestion.phrase.literal_english}"</p>
+                  <div className="mt-2 sm:mt-4 flex justify-center gap-1 sm:gap-2">
                     {currentQuestion.phrase.tags?.slice(0, 3).map(tag => (
-                      <span key={tag} className="px-2 py-1 bg-white/80 text-gray-600 rounded-full text-xs">
+                      <span key={tag} className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-white/80 text-gray-600 rounded-full text-[10px] sm:text-xs">
                         #{tag}
                       </span>
                     ))}
@@ -1189,7 +1173,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
               </div>
               
               {currentQuestion.type === 'multiple-choice' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-h-[30vh] sm:max-h-none overflow-y-auto">
                   {currentQuestion.options?.map((option, idx) => {
                     const isSelected = currentQuestion.userAnswer === option;
                     const isCorrect = option === currentQuestion.correctAnswer;
@@ -1200,7 +1184,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                         key={idx}
                         onClick={() => !showAnswer && handleAnswer(option)}
                         disabled={showAnswer}
-                        className={`p-4 border-2 rounded-lg transition-all transform hover:scale-102 btn-press ${
+                        className={`p-2 sm:p-4 border-2 rounded-lg transition-all btn-press text-sm sm:text-base ${
                           showResult && isCorrect ? 'border-green-500 bg-green-50 animate-pulse-once' :
                           showResult && isSelected && !isCorrect ? 'border-red-500 bg-red-50 animate-shake' :
                           isSelected ? 'border-blue-500 bg-blue-50' :
@@ -1209,7 +1193,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                       >
                         <div className="flex items-center justify-between">
                           <div className="text-left flex-1">
-                            <span className="text-xl arabic-text rtl block">{option}</span>
+                            <span className="text-base sm:text-xl arabic-text rtl block">{option}</span>
                             {/* Find and show the Latin transliteration for this option */}
                             {(() => {
                               // Try to find transliteration for this option
@@ -1346,26 +1330,26 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
               )}
               
               {showAnswer && (
-                <div className={`p-4 rounded-lg animate-slide-in ${
+                <div className={`p-2 sm:p-4 rounded-lg animate-slide-in ${
                   currentQuestion.isCorrect 
                     ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200' 
                     : 'bg-gradient-to-r from-red-50 to-pink-50 border border-red-200'
                 }`}>
-                  <div className="flex items-start gap-2">
+                  <div className="flex items-start gap-1 sm:gap-2">
                     {currentQuestion.isCorrect ? (
-                      <Check className="h-6 w-6 text-green-500 mt-0.5 animate-success" />
+                      <Check className="h-4 sm:h-6 w-4 sm:w-6 text-green-500 mt-0.5 animate-success flex-shrink-0" />
                     ) : (
-                      <X className="h-6 w-6 text-red-500 mt-0.5" />
+                      <X className="h-4 sm:h-6 w-4 sm:w-6 text-red-500 mt-0.5 flex-shrink-0" />
                     )}
-                    <div>
-                      <p className="font-semibold text-lg">
+                    <div className="min-w-0">
+                      <p className="font-semibold text-sm sm:text-lg">
                         {currentQuestion.isCorrect 
                           ? ['Excellent!', 'Perfect!', 'Great job!', 'Fantastic!'][Math.floor(Math.random() * 4)]
-                          : 'Not quite, but keep trying!'}
+                          : 'Not quite!'}
                       </p>
                       {!currentQuestion.isCorrect && (
-                        <p className="text-gray-700 mt-1">
-                          Correct answer: <span className="font-semibold">{currentQuestion.correctAnswer}</span>
+                        <p className="text-xs sm:text-base text-gray-700 mt-0.5 sm:mt-1 break-all">
+                          Answer: <span className="font-semibold">{currentQuestion.correctAnswer}</span>
                         </p>
                       )}
                       {currentQuestion.isCorrect && streak > 2 && (
@@ -1380,13 +1364,13 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
               )}
               
               {showAnswer && (
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-2 sm:mt-4">
                   <button
                     onClick={nextQuestion}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 btn-press flex items-center gap-2 shadow-lg"
+                    className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all btn-press flex items-center gap-1 sm:gap-2 shadow-lg text-sm sm:text-base"
                   >
-                    {currentQuestionIndex < currentQuiz.length - 1 ? 'Next Question' : 'Finish Quiz'}
-                    <ChevronRight className="h-5 w-5" />
+                    {currentQuestionIndex < currentQuiz.length - 1 ? 'Next' : 'Finish'}
+                    <ChevronRight className="h-4 sm:h-5 w-4 sm:w-5" />
                   </button>
                 </div>
               )}
