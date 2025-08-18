@@ -177,20 +177,26 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
     allPhrases.forEach(phrase => {
       if (distractors.length >= 3) return;
       
-      const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
-      if (translation) {
-        const otherText = typeof translation === 'string' ? translation : translation?.phrase || '';
-        if (otherText && typeof otherText === 'string' && otherText !== correctAnswer) {
-          const otherWords = otherText.split(' ').filter(w => w.length > 0);
+      let otherText = '';
+      if (targetDialectKey === 'darija') {
+        otherText = phrase.darija;
+      } else {
+        const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
+        if (translation) {
+          otherText = typeof translation === 'string' ? translation : translation?.phrase || '';
+        }
+      }
+      
+      if (otherText && typeof otherText === 'string' && otherText !== correctAnswer) {
+        const otherWords = otherText.split(' ').filter(w => w.length > 0);
+        
+        // Check if this phrase shares n-1 or n-2 words with correct answer
+        if (Math.abs(otherWords.length - words.length) <= 1) {
+          const sharedWords = words.filter(w => otherWords.includes(w));
+          const minShared = Math.max(1, words.length - 2); // At least n-2 words shared
           
-          // Check if this phrase shares n-1 or n-2 words with correct answer
-          if (Math.abs(otherWords.length - words.length) <= 1) {
-            const sharedWords = words.filter(w => otherWords.includes(w));
-            const minShared = Math.max(1, words.length - 2); // At least n-2 words shared
-            
-            if (sharedWords.length >= minShared && !distractors.includes(otherText)) {
-              distractors.push(otherText);
-            }
+          if (sharedWords.length >= minShared && !distractors.includes(otherText)) {
+            distractors.push(otherText);
           }
         }
       }
@@ -221,22 +227,28 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
       semanticPhrases.forEach(phrase => {
         if (distractors.length >= 3) return;
         
-        const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
-        if (translation) {
-          const semanticText = typeof translation === 'string' ? translation : translation?.phrase || '';
-          if (semanticText && typeof semanticText === 'string' && semanticText !== correctAnswer) {
-            const semanticWords = semanticText.split(' ');
-            
-            // Try replacing one word with a semantic alternative
-            for (let i = 0; i < words.length; i++) {
-              if (semanticWords.length > i && semanticWords[i] !== words[i]) {
-                const newWords = [...words];
-                newWords[i] = semanticWords[i];
-                const distractor = newWords.join(' ');
-                if (!distractors.includes(distractor) && distractor !== correctAnswer) {
-                  distractors.push(distractor);
-                  break;
-                }
+        let semanticText = '';
+        if (targetDialectKey === 'darija') {
+          semanticText = phrase.darija;
+        } else {
+          const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
+          if (translation) {
+            semanticText = typeof translation === 'string' ? translation : translation?.phrase || '';
+          }
+        }
+        
+        if (semanticText && typeof semanticText === 'string' && semanticText !== correctAnswer) {
+          const semanticWords = semanticText.split(' ');
+          
+          // Try replacing one word with a semantic alternative
+          for (let i = 0; i < words.length; i++) {
+            if (semanticWords.length > i && semanticWords[i] !== words[i]) {
+              const newWords = [...words];
+              newWords[i] = semanticWords[i];
+              const distractor = newWords.join(' ');
+              if (!distractors.includes(distractor) && distractor !== correctAnswer) {
+                distractors.push(distractor);
+                break;
               }
             }
           }
@@ -249,12 +261,18 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
   
   // Main smart distractor function using the new close distractor approach
   const generateSmartDistractors = (correctPhrase: Phrase, targetDialectKey: string, allPhrases: Phrase[]): string[] => {
-    const translation = correctPhrase.translations?.[targetDialectKey as keyof typeof correctPhrase.translations];
-    if (!translation) {
-      return [];
+    let correct = '';
+    
+    if (targetDialectKey === 'darija') {
+      correct = correctPhrase.darija;
+    } else {
+      const translation = correctPhrase.translations?.[targetDialectKey as keyof typeof correctPhrase.translations];
+      if (!translation) {
+        return [];
+      }
+      correct = typeof translation === 'string' ? translation : translation?.phrase || '';
     }
     
-    const correct = typeof translation === 'string' ? translation : translation?.phrase || '';
     if (!correct) return [];
     
     // Use the new close distractor generation
@@ -281,13 +299,18 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
 
-        const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
-        if (!translation) {
-          return;
+        // Handle Darija as target (it's not in translations, it's the main field)
+        let correct = '';
+        if (targetDialectKey === 'darija') {
+          correct = phrase.darija;
+        } else {
+          const translation = phrase.translations?.[targetDialectKey as keyof typeof phrase.translations];
+          if (!translation) {
+            return;
+          }
+          // Always use Arabic text (phrase), not latin
+          correct = typeof translation === 'string' ? translation : translation?.phrase || '';
         }
-        
-        // Always use Arabic text (phrase), not latin
-        const correct = typeof translation === 'string' ? translation : translation?.phrase || '';
         if (!correct) {
           return;
         }
@@ -303,12 +326,17 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
           for (const otherPhrase of shuffled) {
             if (distractors.length >= 3) break;
             
-            const otherTrans = otherPhrase.translations?.[targetDialectKey as keyof typeof otherPhrase.translations];
-            if (otherTrans) {
-              const otherArabic = typeof otherTrans === 'string' ? otherTrans : otherTrans?.phrase || '';
-              if (otherArabic && otherArabic !== correct && !distractors.includes(otherArabic)) {
-                distractors.push(otherArabic);
+            let otherArabic = '';
+            if (targetDialectKey === 'darija') {
+              otherArabic = otherPhrase.darija;
+            } else {
+              const otherTrans = otherPhrase.translations?.[targetDialectKey as keyof typeof otherPhrase.translations];
+              if (otherTrans) {
+                otherArabic = typeof otherTrans === 'string' ? otherTrans : otherTrans?.phrase || '';
               }
+            }
+            if (otherArabic && otherArabic !== correct && !distractors.includes(otherArabic)) {
+              distractors.push(otherArabic);
             }
           }
         }
@@ -327,10 +355,16 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
           ? dialects[Math.floor(Math.random() * dialects.length)]
           : targetDialect;
         
-        const translation = phrase.translations[targetDialectKey as keyof typeof phrase.translations];
-        const arabicText = typeof translation === 'string' 
-          ? translation 
-          : translation?.phrase || '';
+        // Handle Darija as target (it's not in translations, it's the main field)
+        let arabicText = '';
+        if (targetDialectKey === 'darija') {
+          arabicText = phrase.darija;
+        } else {
+          const translation = phrase.translations[targetDialectKey as keyof typeof phrase.translations];
+          arabicText = typeof translation === 'string' 
+            ? translation 
+            : translation?.phrase || '';
+        }
         
         if (arabicText && typeof arabicText === 'string') {
           // Split the Arabic phrase into words and shuffle them
@@ -1117,29 +1151,29 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                 <div className="text-center">
                   <p className="text-gray-600 mb-2 flex items-center justify-center gap-2">
                     <BookOpen className="h-4 w-4" />
-                    Translate from {sourceLanguage === 'darija' ? 'Darija' : sourceLanguage.charAt(0).toUpperCase() + sourceLanguage.slice(1)}:
+                    Translate from {sourceDialect === 'darija' ? 'Darija' : sourceDialect.charAt(0).toUpperCase() + sourceDialect.slice(1)}:
                   </p>
                   <p className="text-3xl font-bold arabic-text rtl mb-2">{
-                    sourceLanguage === 'darija' ? currentQuestion.phrase.darija :
-                    sourceLanguage === 'lebanese' && currentQuestion.phrase.translations?.lebanese ? 
+                    sourceDialect === 'darija' ? currentQuestion.phrase.darija :
+                    sourceDialect === 'lebanese' && currentQuestion.phrase.translations?.lebanese ? 
                       (typeof currentQuestion.phrase.translations.lebanese === 'string' ? currentQuestion.phrase.translations.lebanese : currentQuestion.phrase.translations.lebanese.phrase) :
-                    sourceLanguage === 'syrian' && currentQuestion.phrase.translations?.syrian ?
+                    sourceDialect === 'syrian' && currentQuestion.phrase.translations?.syrian ?
                       (typeof currentQuestion.phrase.translations.syrian === 'string' ? currentQuestion.phrase.translations.syrian : currentQuestion.phrase.translations.syrian.phrase) :
-                    sourceLanguage === 'emirati' && currentQuestion.phrase.translations?.emirati ?
+                    sourceDialect === 'emirati' && currentQuestion.phrase.translations?.emirati ?
                       (typeof currentQuestion.phrase.translations.emirati === 'string' ? currentQuestion.phrase.translations.emirati : currentQuestion.phrase.translations.emirati.phrase) :
-                    sourceLanguage === 'saudi' && currentQuestion.phrase.translations?.saudi ?
+                    sourceDialect === 'saudi' && currentQuestion.phrase.translations?.saudi ?
                       (typeof currentQuestion.phrase.translations.saudi === 'string' ? currentQuestion.phrase.translations.saudi : currentQuestion.phrase.translations.saudi.phrase) :
                     currentQuestion.phrase.darija
                   }</p>
                   <p className="text-xl text-gray-700">{
-                    sourceLanguage === 'darija' ? currentQuestion.phrase.darija_latin :
-                    sourceLanguage === 'lebanese' && currentQuestion.phrase.translations?.lebanese && typeof currentQuestion.phrase.translations.lebanese === 'object' ? 
+                    sourceDialect === 'darija' ? currentQuestion.phrase.darija_latin :
+                    sourceDialect === 'lebanese' && currentQuestion.phrase.translations?.lebanese && typeof currentQuestion.phrase.translations.lebanese === 'object' ? 
                       currentQuestion.phrase.translations.lebanese.latin :
-                    sourceLanguage === 'syrian' && currentQuestion.phrase.translations?.syrian && typeof currentQuestion.phrase.translations.syrian === 'object' ?
+                    sourceDialect === 'syrian' && currentQuestion.phrase.translations?.syrian && typeof currentQuestion.phrase.translations.syrian === 'object' ?
                       currentQuestion.phrase.translations.syrian.latin :
-                    sourceLanguage === 'emirati' && currentQuestion.phrase.translations?.emirati && typeof currentQuestion.phrase.translations.emirati === 'object' ?
+                    sourceDialect === 'emirati' && currentQuestion.phrase.translations?.emirati && typeof currentQuestion.phrase.translations.emirati === 'object' ?
                       currentQuestion.phrase.translations.emirati.latin :
-                    sourceLanguage === 'saudi' && currentQuestion.phrase.translations?.saudi && typeof currentQuestion.phrase.translations.saudi === 'object' ?
+                    sourceDialect === 'saudi' && currentQuestion.phrase.translations?.saudi && typeof currentQuestion.phrase.translations.saudi === 'object' ?
                       currentQuestion.phrase.translations.saudi.latin :
                     currentQuestion.phrase.darija_latin
                   }</p>
