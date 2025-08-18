@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useAuth } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
@@ -7,6 +7,14 @@ import LanguageSetup from './components/LanguageSetup';
 import HybridAuthForm from './components/HybridAuthForm';
 import { debugEnvironment } from './utils/debug';
 import { useEffect } from 'react';
+
+// Component to handle legacy dashboard routes
+function DashboardRedirect() {
+  const { tab } = useParams<{ tab: string }>();
+  const validTabs = ['hub', 'quiz', 'progress', 'culture'];
+  const redirectTab = validTabs.includes(tab || '') ? tab : 'hub';
+  return <Navigate to={`/${redirectTab}`} replace />;
+}
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
@@ -75,26 +83,32 @@ function App() {
         } 
       />
       
-      {/* Protected routes */}
+      {/* Protected routes - simplified direct paths */}
       <Route 
-        path="/dashboard" 
-        element={isSignedIn ? <DashboardPage /> : <Navigate to="/login" replace />} 
-      />
-      <Route 
-        path="/dashboard/:tab" 
-        element={isSignedIn ? <DashboardPage /> : <Navigate to="/login" replace />} 
+        path="/hub" 
+        element={isSignedIn ? <DashboardPage defaultTab="hub" /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/quiz" 
-        element={isSignedIn ? <Navigate to="/dashboard/quiz" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <DashboardPage defaultTab="quiz" /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/progress" 
-        element={isSignedIn ? <Navigate to="/dashboard/progress" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <DashboardPage defaultTab="progress" /> : <Navigate to="/login" replace />} 
       />
       <Route 
         path="/culture" 
-        element={isSignedIn ? <Navigate to="/dashboard/culture" replace /> : <Navigate to="/login" replace />} 
+        element={isSignedIn ? <DashboardPage defaultTab="culture" /> : <Navigate to="/login" replace />} 
+      />
+      
+      {/* Legacy dashboard routes - redirect to new simplified routes */}
+      <Route 
+        path="/dashboard" 
+        element={isSignedIn ? <Navigate to="/hub" replace /> : <Navigate to="/login" replace />} 
+      />
+      <Route 
+        path="/dashboard/:tab" 
+        element={isSignedIn ? <DashboardRedirect /> : <Navigate to="/login" replace />} 
       />
       
       {/* Catch all - redirect to home */}

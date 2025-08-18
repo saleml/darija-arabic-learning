@@ -717,7 +717,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                     }
                     
                     // Navigate
-                    window.location.href = '/dashboard/hub';
+                    window.location.href = '/hub';
                   }}
                   disabled={isNavigatingToHub}
                   className={`flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg transition-all transform hover:scale-105 btn-press flex items-center justify-center gap-2 shadow-lg ${

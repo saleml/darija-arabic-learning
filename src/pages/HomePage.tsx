@@ -11,7 +11,7 @@ export default function HomePage() {
   // If already signed in, redirect to dashboard
   useEffect(() => {
     if (isSignedIn) {
-      navigate('/dashboard');
+      navigate('/hub');
     }
   }, [isSignedIn, navigate]);
   

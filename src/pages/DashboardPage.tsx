@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Book, Brain, Trophy, Globe, Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useUserProgress } from '../hooks/useUserProgress';
@@ -17,9 +17,12 @@ import sentencesData from '../../database/sentences_daily_conversations.json';
 
 type TabType = 'hub' | 'quiz' | 'progress' | 'culture';
 
-export default function DashboardPage() {
+interface DashboardPageProps {
+  defaultTab?: TabType;
+}
+
+export default function DashboardPage({ defaultTab }: DashboardPageProps) {
   const navigate = useNavigate();
-  const { tab } = useParams<{ tab?: string }>();
   const { user, sourceLanguage, targetLanguage, signOut } = useAuth();
   const { 
     userProgress, 
@@ -30,17 +33,16 @@ export default function DashboardPage() {
     refreshProgress
   } = useUserProgress();
   
-  const [activeTab, setActiveTab] = useState<TabType>((tab as TabType) || 'hub');
+  const [activeTab, setActiveTab] = useState<TabType>(defaultTab || 'hub');
   const [allPhrases, setAllPhrases] = useState<Phrase[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Update URL when tab changes
+  // Update active tab when defaultTab prop changes
   useEffect(() => {
-    const validTabs = ['hub', 'quiz', 'progress', 'culture'];
-    if (tab && validTabs.includes(tab)) {
-      setActiveTab(tab as TabType);
+    if (defaultTab) {
+      setActiveTab(defaultTab);
     }
-  }, [tab]);
+  }, [defaultTab]);
 
   // Listen for navigation events from quiz completion
   useEffect(() => {
@@ -157,7 +159,7 @@ export default function DashboardPage() {
 
   const handleTabChange = (newTab: TabType) => {
     setActiveTab(newTab);
-    navigate(`/dashboard/${newTab}`);
+    navigate(`/${newTab}`);
     setMobileMenuOpen(false);
     
     // TODO: Add refresh progress when we debug the issue

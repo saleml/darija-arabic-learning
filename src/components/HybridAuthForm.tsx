@@ -51,7 +51,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
       
       if (result.status === 'complete') {
         await signInSetActive({ session: result.createdSessionId });
-        navigate('/dashboard');
+        navigate('/hub');
       }
     } catch (err: any) {
       console.error('[Auth] Sign in error:', err);
@@ -124,7 +124,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
         }
         
         await signUpSetActive({ session: result.createdSessionId });
-        navigate('/dashboard');
+        navigate('/hub');
       } else if (result.status === 'missing_requirements') {
         // Check what's missing
         console.log('[Auth] Missing requirements:', result.requiredFields);
@@ -138,7 +138,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
             // First try to set active session directly
             if (result.createdSessionId) {
               await signUpSetActive({ session: result.createdSessionId });
-              navigate('/dashboard');
+              navigate('/hub');
               return;
             }
           } catch (err) {
@@ -183,7 +183,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
       
       if (result.status === 'complete') {
         await signUpSetActive({ session: result.createdSessionId });
-        navigate('/dashboard');
+        navigate('/hub');
       }
     } catch (err: any) {
       console.error('[Auth] Verification error:', err);
@@ -200,7 +200,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
       await signIn.authenticateWithRedirect({
         strategy: provider,
         redirectUrl: '/sso-callback',
-        redirectUrlComplete: '/dashboard'
+        redirectUrlComplete: '/hub'
       });
     } catch (err: any) {
       console.error('[Auth] OAuth error:', err);
