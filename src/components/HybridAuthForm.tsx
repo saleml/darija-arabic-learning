@@ -202,14 +202,13 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
     try {
       console.log('[OAuth] Starting authentication with:', provider);
       
-      // Use Clerk's OAuth redirect with proper callback
-      const result = await signIn.authenticateWithRedirect({
+      // Use Clerk's OAuth redirect - let Clerk handle the URLs
+      await signIn.authenticateWithRedirect({
         strategy: provider,
-        redirectUrl: window.location.origin + '/sso-callback',
-        redirectUrlComplete: window.location.origin + '/hub'
+        redirectUrl: '/sso-callback',
+        redirectUrlComplete: '/hub'
       });
       
-      console.log('[OAuth] Redirect initiated:', result);
     } catch (err: any) {
       console.error('[OAuth] Error details:', err);
       setIsLoading(false);
