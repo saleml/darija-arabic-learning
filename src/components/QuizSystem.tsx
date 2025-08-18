@@ -54,6 +54,21 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
   const [availableWords, setAvailableWords] = useState<string[]>([]);
   const [isNavigatingToHub, setIsNavigatingToHub] = useState(false);
   
+  // Update targetDialect when targetLanguage changes from header
+  useEffect(() => {
+    if (targetLanguage !== 'all' && targetLanguage !== targetDialect) {
+      setTargetDialect(targetLanguage);
+    }
+  }, [targetLanguage]);
+  
+  const eligiblePhrases = useMemo(() => {
+    if (!phrases || phrases.length === 0) return [];
+    return phrases.filter(p => {
+      const matchesDifficulty = difficulty === 'all' || p.difficulty === difficulty;
+      return matchesDifficulty;
+    });
+  }, [phrases, difficulty]);
+  
   // Early return if no phrases loaded yet - AFTER all hooks
   if (!phrases || phrases.length === 0) {
     return (
@@ -65,20 +80,6 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
       </div>
     );
   }
-
-  // Update targetDialect when targetLanguage changes from header
-  useEffect(() => {
-    if (targetLanguage !== 'all' && targetLanguage !== targetDialect) {
-      setTargetDialect(targetLanguage);
-    }
-  }, [targetLanguage]);
-
-  const eligiblePhrases = useMemo(() => {
-    return phrases.filter(p => {
-      const matchesDifficulty = difficulty === 'all' || p.difficulty === difficulty;
-      return matchesDifficulty;
-    });
-  }, [phrases, difficulty]);
 
 
   // Build word replacement dictionary combining database words with dialect word bank
