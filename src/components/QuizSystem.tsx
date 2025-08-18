@@ -1344,7 +1344,7 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
                     <div className="min-w-0">
                       <p className="font-semibold text-sm sm:text-lg">
                         {currentQuestion.isCorrect 
-                          ? ['Excellent!', 'Perfect!', 'Great job!', 'Fantastic!'][Math.floor(Math.random() * 4)]
+                          ? 'Excellent!'
                           : 'Not quite!'}
                       </p>
                       {!currentQuestion.isCorrect && (
