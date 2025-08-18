@@ -60,12 +60,12 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
     return shuffled.slice(0, 3);
   };
 
-  // Initialize with 3 random phrases
+  // Initialize with 3 random phrases when unmastered phrases become available
   useEffect(() => {
-    if (!showMastered && unmasteredPhrases.length > 0) {
+    if (!showMastered && unmasteredPhrases.length > 0 && currentPhrases.length === 0) {
       setCurrentPhrases(getRandomPhrases());
     }
-  }, [unmasteredPhrases.length]); // Only re-run when unmasteredPhrases changes
+  }, [unmasteredPhrases.length]); // Run when unmasteredPhrases changes, but only if currentPhrases is empty
 
   // Update displayed phrases when toggle changes
   useEffect(() => {
@@ -118,7 +118,34 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
     }
     
     // Set new timeout and store reference
-    const newTimeout = setTimeout(() => setShowSuccessAnimation(null), 2000);
+    const newTimeout = setTimeout(() => {
+      setShowSuccessAnimation(null);
+      
+      // Replace only the mastered card with a new unmastered phrase
+      if (!showMastered) {
+        const newPhrases = [...currentPhrases];
+        const cardIndex = currentPhrases.findIndex(p => p.id === phraseId);
+        
+        if (cardIndex !== -1) {
+          // Get remaining unmastered phrases (excluding currently displayed ones)
+          const displayedIds = currentPhrases.map(p => p.id);
+          const availablePhrases = unmasteredPhrases.filter(p => 
+            !displayedIds.includes(p.id) && p.id !== phraseId
+          );
+          
+          if (availablePhrases.length > 0) {
+            // Pick a random replacement phrase
+            const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+            newPhrases[cardIndex] = availablePhrases[randomIndex];
+            setCurrentPhrases(newPhrases);
+          } else {
+            // No more unmastered phrases available, remove the card
+            newPhrases.splice(cardIndex, 1);
+            setCurrentPhrases(newPhrases);
+          }
+        }
+      }
+    }, 2000);
     timeoutRefs.current.set(phraseId, newTimeout);
     
     try {
