@@ -21,9 +21,9 @@ export interface PhraseProgress {
   id?: string;
   user_id: string;
   phrase_id: string;
-  times_seen: number;
-  times_correct: number;
-  last_seen: string;
+  correct_count: number;
+  incorrect_count: number;
+  last_reviewed: string;
   is_mastered: boolean;
   created_at?: string;
   updated_at?: string;
@@ -98,22 +98,22 @@ export const supabaseProgress = {
 
       if (existing) {
         // Update existing progress
-        const newTimesCorrect = existing.times_correct + (correct ? 1 : 0);
-        const newTimesSeen = existing.times_seen + 1;
+        const newCorrectCount = existing.correct_count + (correct ? 1 : 0);
+        const newIncorrectCount = existing.incorrect_count + (correct ? 0 : 1);
         
         logger.log('[supabaseProgress] Updating existing progress', { 
           id: existing.id,
-          newTimesSeen,
-          newTimesCorrect,
+          newCorrectCount,
+          newIncorrectCount,
           is_mastered: correct || existing.is_mastered
         });
         
         const { data, error } = await supabase
           .from('phrase_progress')
           .update({
-            times_seen: newTimesSeen,
-            times_correct: newTimesCorrect,
-            last_seen: new Date().toISOString(),
+            correct_count: newCorrectCount,
+            incorrect_count: newIncorrectCount,
+            last_reviewed: new Date().toISOString(),
             is_mastered: correct || existing.is_mastered, // Mark as mastered if answered correctly
             updated_at: new Date().toISOString()
           })
@@ -141,9 +141,9 @@ export const supabaseProgress = {
           .insert({
             user_id: userId,
             phrase_id: phraseId,
-            times_seen: 1,
-            times_correct: correct ? 1 : 0,
-            last_seen: new Date().toISOString(),
+            correct_count: correct ? 1 : 0,
+            incorrect_count: correct ? 0 : 1,
+            last_reviewed: new Date().toISOString(),
             is_mastered: correct, // Mark as mastered if answered correctly on first try
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
