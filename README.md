@@ -24,10 +24,12 @@ A comprehensive web application designed to help Moroccan Darija speakers learn 
 ### User Experience
 - **🔐 Secure Authentication**: Email/password and GitHub OAuth authentication
 - **💾 Cloud Sync**: All progress saved to Supabase with real-time updates
-- **📱 Mobile Responsive**: Fully optimized for all devices
+- **📱 Mobile Responsive**: Fully optimized for all devices with adaptive layouts
 - **🎨 Modern UI**: Clean, intuitive interface with TailwindCSS
 - **⚡ Fast Performance**: Optimized loading with Vite
 - **🔗 Clean URLs**: Simple navigation (`/hub`, `/quiz`, `/progress`, `/culture`)
+- **👆 Touch Optimized**: Proper touch targets and gestures for mobile users
+- **📐 Responsive Design**: Seamless experience from 320px to 4K displays
 
 ## 🚀 Quick Start
 
