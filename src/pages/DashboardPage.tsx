@@ -80,14 +80,38 @@ export default function DashboardPage() {
       literal_english: sent.english || sent.literal_english || '',
       english: sent.english || '',
       transliteration: sent.darija_latin || '',
-      // Convert string translations to object format
+      // Convert string translations to object format, but keep objects as-is
       translations: {
-        lebanese: sent.translations?.lebanese ? { phrase: sent.translations.lebanese, latin: '', audio: null } : undefined,
-        syrian: sent.translations?.syrian ? { phrase: sent.translations.syrian, latin: '', audio: null } : undefined,
-        emirati: sent.translations?.emirati ? { phrase: sent.translations.emirati, latin: '', audio: null } : undefined,
-        saudi: sent.translations?.saudi ? { phrase: sent.translations.saudi, latin: '', audio: null } : undefined,
-        egyptian: sent.translations?.egyptian ? { phrase: sent.translations.egyptian, latin: '', audio: null } : undefined,
-        formal_msa: sent.translations?.msa ? { phrase: sent.translations.msa, latin: '', audio: null } : undefined
+        lebanese: sent.translations?.lebanese ? 
+          (typeof sent.translations.lebanese === 'string' 
+            ? { phrase: sent.translations.lebanese, latin: '', audio: null }
+            : sent.translations.lebanese) 
+          : undefined,
+        syrian: sent.translations?.syrian ? 
+          (typeof sent.translations.syrian === 'string'
+            ? { phrase: sent.translations.syrian, latin: '', audio: null }
+            : sent.translations.syrian)
+          : undefined,
+        emirati: sent.translations?.emirati ? 
+          (typeof sent.translations.emirati === 'string'
+            ? { phrase: sent.translations.emirati, latin: '', audio: null }
+            : sent.translations.emirati)
+          : undefined,
+        saudi: sent.translations?.saudi ? 
+          (typeof sent.translations.saudi === 'string'
+            ? { phrase: sent.translations.saudi, latin: '', audio: null }
+            : sent.translations.saudi)
+          : undefined,
+        egyptian: sent.translations?.egyptian ? 
+          (typeof sent.translations.egyptian === 'string'
+            ? { phrase: sent.translations.egyptian, latin: '', audio: null }
+            : sent.translations.egyptian)
+          : undefined,
+        formal_msa: sent.translations?.msa ? 
+          (typeof sent.translations.msa === 'string'
+            ? { phrase: sent.translations.msa, latin: '', audio: null }
+            : sent.translations.msa)
+          : undefined
       },
       // Always use 'daily_essentials' for sentences to keep them organized
       category: 'daily_essentials',
