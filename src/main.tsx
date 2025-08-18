@@ -25,11 +25,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ClerkProvider 
       publishableKey={clerkPubKey}
-      navigate={(to) => window.location.href = to}
-      afterSignInUrl="/hub"
-      afterSignUpUrl="/hub"
       signInUrl="/login"
       signUpUrl="/signup"
+      signInFallbackRedirectUrl="/hub"
+      signUpFallbackRedirectUrl="/hub"
     >
       <BrowserRouter>
         <ErrorBoundary>

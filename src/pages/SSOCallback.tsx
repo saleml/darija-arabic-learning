@@ -33,11 +33,10 @@ export default function SSOCallback() {
       <AuthenticateWithRedirectCallback 
         signInUrl="/login"
         signUpUrl="/signup"
-        afterSignInUrl="/hub"
-        afterSignUpUrl="/hub"
-        redirectUrl="/hub"
-        signInFallbackRedirectUrl="/login"
-        signUpFallbackRedirectUrl="/signup"
+        signInForceRedirectUrl="/hub"
+        signUpForceRedirectUrl="/hub"
+        signInFallbackRedirectUrl="/hub"
+        signUpFallbackRedirectUrl="/hub"
       />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="text-center">
