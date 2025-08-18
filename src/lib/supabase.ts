@@ -54,11 +54,11 @@ export interface PhraseProgress {
   id: string;
   user_id: string;
   phrase_id: string;
-  status: 'learning' | 'practicing' | 'mastered';
-  correct_attempts: number;
-  total_attempts: number;
+  is_mastered: boolean;
+  correct_count: number;
+  incorrect_count: number;
   last_reviewed: string;
-  next_review: string;
+  next_review: string | null;
   ease_factor: number;
   interval_days: number;
   created_at: string;
