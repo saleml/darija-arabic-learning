@@ -196,15 +196,32 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
   const handleOAuthSignIn = async (provider: 'oauth_google' | 'oauth_github') => {
     if (!signInLoaded || !signIn) return;
     
+    setError('');
+    setIsLoading(true);
+    
     try {
-      await signIn.authenticateWithRedirect({
+      console.log('[OAuth] Starting authentication with:', provider);
+      
+      // Use Clerk's OAuth redirect with proper callback
+      const result = await signIn.authenticateWithRedirect({
         strategy: provider,
-        redirectUrl: '/sso-callback',
-        redirectUrlComplete: '/hub'
+        redirectUrl: window.location.origin + '/sso-callback',
+        redirectUrlComplete: window.location.origin + '/hub'
       });
+      
+      console.log('[OAuth] Redirect initiated:', result);
     } catch (err: any) {
-      console.error('[Auth] OAuth error:', err);
-      setError('Failed to connect with ' + provider.replace('oauth_', ''));
+      console.error('[OAuth] Error details:', err);
+      setIsLoading(false);
+      
+      // Check for specific error types
+      if (err.errors?.[0]?.code === 'strategy_not_enabled') {
+        setError(`${provider.replace('oauth_', '')} authentication is not enabled. Please contact support.`);
+      } else if (err.errors?.[0]?.code === 'oauth_access_denied') {
+        setError('Authentication was cancelled');
+      } else {
+        setError(err.errors?.[0]?.message || `Failed to connect with ${provider.replace('oauth_', '')}`);
+      }
     }
   };
   

@@ -3,6 +3,7 @@ import { useUser } from '@clerk/clerk-react';
 import { useAuth } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+import SSOCallback from './pages/SSOCallback';
 import LanguageSetup from './components/LanguageSetup';
 import HybridAuthForm from './components/HybridAuthForm';
 import { debugEnvironment } from './utils/debug';
@@ -64,6 +65,9 @@ function App() {
       {/* Public routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/home" element={<HomePage />} />
+      
+      {/* OAuth callback route */}
+      <Route path="/sso-callback" element={<SSOCallback />} />
       
       {/* Hybrid auth routes with full features and password manager support */}
       <Route 
