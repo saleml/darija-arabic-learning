@@ -213,26 +213,26 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Progress Summary Card */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">Your Learning Journey</h2>
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Award className="h-5 w-5" />
-                <span>{masteredPhrases.length} Mastered</span>
+      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-4 sm:p-6 text-white">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="w-full sm:w-auto">
+            <h2 className="text-lg sm:text-2xl font-bold mb-2">Your Learning Journey</h2>
+            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-2 xs:gap-4 sm:gap-6">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Award className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0" />
+                <span className="text-sm sm:text-base whitespace-nowrap">{masteredPhrases.length} Mastered</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5" />
-                <span>{unmasteredPhrases.length} To Explore</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Sparkles className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0" />
+                <span className="text-sm sm:text-base whitespace-nowrap">{unmasteredPhrases.length} To Explore</span>
               </div>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold">
+            <div className="text-2xl sm:text-3xl font-bold">
               {phrases.length > 0 ? Math.round((masteredPhrases.length / phrases.length) * 100) : 0}%
             </div>
-            <div className="text-sm opacity-90">Complete</div>
+            <div className="text-xs sm:text-sm opacity-90">Complete</div>
           </div>
         </div>
         <div className="mt-4 bg-white/20 rounded-full h-2 overflow-hidden">
@@ -243,34 +243,35 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6">
         {/* Controls */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-3 mb-4 sm:mb-6">
+          <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2 sm:gap-4">
             <button
               onClick={() => setShowMastered(!showMastered)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 ${
+              className={`w-full xs:w-auto px-3 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-all flex items-center justify-center xs:justify-start gap-2 text-sm sm:text-base ${
                 showMastered 
                   ? 'bg-green-500 text-white hover:bg-green-600' 
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
-              {showMastered ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
+              {showMastered ? <Eye className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0" /> : <EyeOff className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0" />}
               {showMastered ? 'Showing Mastered' : 'Show Mastered'}
             </button>
             
             {!showMastered && unmasteredPhrases.length > 3 && (
               <button
                 onClick={refreshPhrases}
-                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center gap-2 font-medium"
+                className="w-full xs:w-auto px-3 sm:px-6 py-2.5 sm:py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center justify-center xs:justify-start gap-2 font-medium text-sm sm:text-base"
               >
-                <RefreshCw className="h-5 w-5" />
-                Show me 3 other phrases I haven't mastered
+                <RefreshCw className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0" />
+                <span className="hidden sm:inline">Show me 3 other phrases I haven't mastered</span>
+                <span className="sm:hidden">Show 3 other phrases</span>
               </button>
             )}
           </div>
 
-          <div className="text-sm text-gray-600">
+          <div className="text-xs sm:text-sm text-gray-600 text-center xs:text-left">
             {showMastered ? (
               <span>Showing <span className="font-bold text-green-600">{masteredPhrases.length}</span> mastered phrases</span>
             ) : (
