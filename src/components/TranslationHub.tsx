@@ -19,10 +19,12 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
   const [expandedPhrases, setExpandedPhrases] = useState<Set<string>>(new Set());
   const [copiedPhraseId, setCopiedPhraseId] = useState<string | null>(null);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const timeoutRefs = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
-  // Cleanup timeouts on unmount
+  // Track mount status and cleanup timeouts on unmount
   useEffect(() => {
+    setIsMounted(true);
     return () => {
       // Clear all timeouts when component unmounts
       timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
@@ -60,21 +62,25 @@ export default function TranslationHub({ phrases, userProgress, onUpdateProgress
     return shuffled.slice(0, 3);
   };
 
-  // Initialize with 3 random phrases when unmastered phrases become available
+  // Initialize with first 3 phrases (deterministic) when unmastered phrases become available
   useEffect(() => {
+    if (!isMounted) return; // Only run after mount
     if (!showMastered && unmasteredPhrases.length > 0 && currentPhrases.length === 0) {
-      setCurrentPhrases(getRandomPhrases());
+      // Use first 3 phrases instead of random to avoid hydration mismatch
+      setCurrentPhrases(unmasteredPhrases.slice(0, 3));
     }
-  }, [unmasteredPhrases.length]); // Run when unmasteredPhrases changes, but only if currentPhrases is empty
+  }, [isMounted, unmasteredPhrases.length]); // Run when unmasteredPhrases changes, but only if currentPhrases is empty
 
   // Update displayed phrases when toggle changes
   useEffect(() => {
+    if (!isMounted) return; // Only run after mount
     if (showMastered) {
       setCurrentPhrases(masteredPhrases);
     } else {
-      setCurrentPhrases(getRandomPhrases());
+      // Use first 3 phrases on initial load to avoid hydration issues
+      setCurrentPhrases(unmasteredPhrases.slice(0, 3));
     }
-  }, [showMastered]);
+  }, [isMounted, showMastered]);
 
   const refreshPhrases = () => {
     if (!showMastered) {

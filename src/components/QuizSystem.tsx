@@ -656,11 +656,11 @@ export default function QuizSystem({ phrases, sourceLanguage = 'darija', targetL
     }
   };
 
-  const currentQuestion = currentQuiz[currentQuestionIndex];
+  const currentQuestion = currentQuiz?.[currentQuestionIndex];
 
   return (
     <div className="space-y-6">
-      {!currentQuiz.length || quizComplete ? (
+      {!currentQuiz || !currentQuiz.length || quizComplete ? (
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <Brain className="h-6 w-6 text-blue-500" />
