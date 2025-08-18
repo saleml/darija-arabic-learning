@@ -13,6 +13,7 @@
 [context.production.environment]
   VITE_SUPABASE_URL = "https://xnkokmaccibpwxenxynh.supabase.co"
   VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhua29rbWFjY2licHd4ZW54eW5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzNzc2NzksImV4cCI6MjA3MDk1MzY3OX0.mC30nHqAQ-U6gyE9RCVYCPcizd5Hp1GX2toMskWsREE"
+  # Note: VITE_CLERK_PUBLISHABLE_KEY should be set in Netlify dashboard environment variables
 
 [context.deploy-preview.environment]
   VITE_SUPABASE_URL = "https://xnkokmaccibpwxenxynh.supabase.co"
