@@ -196,13 +196,19 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
   const handleOAuthSignIn = async (provider: 'oauth_google' | 'oauth_github') => {
     if (!signInLoaded || !signIn) return;
     
+    // Google OAuth requires custom credentials setup, so we'll disable it for now
+    if (provider === 'oauth_google') {
+      setError('Google sign-in is temporarily unavailable. Please use GitHub or email/password instead.');
+      return;
+    }
+    
     setError('');
     setIsLoading(true);
     
     try {
       console.log('[OAuth] Starting authentication with:', provider);
       
-      // Use Clerk's OAuth redirect - let Clerk handle the URLs
+      // Use Clerk's OAuth redirect for GitHub (which works)
       await signIn.authenticateWithRedirect({
         strategy: provider,
         redirectUrl: '/sso-callback',
@@ -219,7 +225,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
       } else if (err.errors?.[0]?.code === 'oauth_access_denied') {
         setError('Authentication was cancelled');
       } else {
-        setError(err.errors?.[0]?.message || `Failed to connect with ${provider.replace('oauth_', '')}`);
+        setError(err.errors?.[0]?.message || `Failed to connect with ${provider.replace('oauth_', '')}`)
       }
     }
   };
@@ -326,6 +332,8 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
 
       {/* OAuth Buttons */}
       <div className="space-y-3 mb-6">
+        {/* Google OAuth is disabled - requires custom credentials setup */}
+        {/* Uncomment when Google OAuth is properly configured
         <button
           type="button"
           onClick={() => handleOAuthSignIn('oauth_google')}
@@ -339,6 +347,7 @@ export default function HybridAuthForm({ mode }: HybridAuthFormProps) {
           </svg>
           <span>Continue with Google</span>
         </button>
+        */}
 
         <button
           type="button"
